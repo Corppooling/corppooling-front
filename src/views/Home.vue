@@ -3,6 +3,6 @@
 <template>
   <div class="bg-blue-300">
     <font-awesome-icon icon="fa-solid fa-phone" />
-    Hello world !
+    {{ $t("global.hello") }}
   </div>
 </template>
