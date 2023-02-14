@@ -4,7 +4,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import PrimeVue from "primevue/config";
-import "./assets/index.css";
+import "@/assets/index.css";
 import { createI18n, useI18n } from "vue-i18n";
 import fr from "@/lang/fr.json";
 import en from "@/lang/en.json";
