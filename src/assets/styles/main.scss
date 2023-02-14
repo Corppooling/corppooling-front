@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;500;600;700');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: Lato, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h5, header {
+    font-family: Oswald, sans-serif;
+  }
+
+  :root {
+    --color-white: 255 255 255; // #FFFFFF
+
+    //black
+    --color-black-base: 26 26 26; // #1A1A1A
+
+    //gold
+    --color-main-base: 246 178 107; // #F6B26B
+
+    //purple
+    --color-content-base: 32 18 77; // #20124D
+    --color-content-light: 53 28 117; // #351C75
+    --color-content-xlight: 142 124 195; // #8E7CC3
+    --color-content-glight: 180 167 214; // #B4A7D6
+    --color-content-flight: 217 210 233; // #D9D2E9
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
