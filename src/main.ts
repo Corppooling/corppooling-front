@@ -15,7 +15,7 @@ import en from "@/lang/en.json";
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: "fr",
   globalInjection: true,
   messages: {
     fr,
