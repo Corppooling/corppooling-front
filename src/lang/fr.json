@@ -1,5 +1,7 @@
 {
   "global": {
-    "hello": "Bonjour monde !"
+    "header": {
+      "newTrip": "Nouveau trajet"
+    }
   }
 }
