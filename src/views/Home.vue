@@ -10,7 +10,7 @@ const user: User = {
   lastName: "Didier",
   email: "maxime.didier@aol.com",
   profile_image:
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.linkedin.com%2Fin%2Fmaxime-didier-8b25751ba&psig=AOvVaw0IJelvHtNEhLdPF0unLVh6&ust=1678189002082000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJCskK-bx_0CFQAAAAAdAAAAABAE",
+    "https://media.licdn.com/dms/image/C4E03AQFChS5oChTUeg/profile-displayphoto-shrink_400_400/0/1634940221677?e=1683763200&v=beta&t=l8TB14fChpB1l2Pr6ZcdmAlwR5UB2Ugj4IjihKMNUxQ",
 };
 
 const trips: Array<Trip> = [
@@ -51,7 +51,7 @@ const trips: Array<Trip> = [
     </section>
     <section class="p-14">
       <Title class="mt-8" logoColor="base" content="Trajets à la une !" />
-      <div class="flex">
+      <div class="flex gap-6 mt-10 mb-24">
         <template v-for="trip in trips" :key="trip.id">
           <TripCard :trip="trip" />
         </template>
