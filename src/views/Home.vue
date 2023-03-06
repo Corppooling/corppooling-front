@@ -13,6 +13,13 @@
         </h1>
         <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
       </div>
+      <div>
+        <div>
+          <div>
+            <img src="@/assets/images/logos/logo.svg" alt="" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
