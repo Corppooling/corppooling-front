@@ -1,5 +1,9 @@
 <script lang="ts" setup>
+import { ref } from "vue";
 import Button from "@/components/molecules/Button.vue";
+import Sidebar from "primevue/sidebar";
+
+const displaySidebar = ref<boolean>(false);
 </script>
 
 <template>
@@ -31,7 +35,38 @@ import Button from "@/components/molecules/Button.vue";
       </div>
     </div>
     <div class="md:hidden">
-      <Button class="mx-2" icon="fa-bars" icon-size="2xl" />
+      <Button
+        class="mx-2"
+        icon="fa-bars"
+        icon-size="2xl"
+        @click="displaySidebar = !displaySidebar"
+      />
     </div>
   </div>
+  <Sidebar
+    v-model:visible="displaySidebar"
+    position="right"
+    class="p-sidebar-lg"
+  >
+    <div>
+      <Button
+        class="mx-2 my-4"
+        icon="fa-search"
+        text="Rechercher"
+        icon-size="2xl"
+      />
+      <Button
+        class="mx-2 my-4"
+        icon="fa-plus"
+        :text="$t('global.header.newTrip')"
+        icon-size="2xl"
+      />
+      <Button
+        class="mx-2 my-4"
+        icon="fa-regular fa-bell"
+        text="Notifications"
+        icon-size="2xl"
+      />
+    </div>
+  </Sidebar>
 </template>

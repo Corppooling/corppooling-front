@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primevue/resources/primevue.css";
+@import "primevue/resources/themes/tailwind-light/theme.css";
+@import 'primeicons/primeicons.css';
+
 @layer base {
   html {
     font-family: Lato, sans-serif;

@@ -86,7 +86,7 @@ const textSizeClass = computed(() => {
 
 <template>
   <div
-    class="flex p-3 justify-center items-center shadow-md rounded-2xl cursor-pointer hover:saturate-150 transition-all duration-200 hover:drop-shadow-md"
+    class="flex p-3 justify-center items-center shadow-md rounded-2xl cursor-pointer hover:saturate-150 transition-all duration-200 hover:drop-shadow-md whitespace-nowrap"
     :class="[bgColorClass, textColorClass]"
   >
     <font-awesome-icon :class="iconSizeClass" :icon="props.icon" />
