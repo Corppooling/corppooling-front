@@ -20,7 +20,7 @@ const trips: Array<Trip> = [
     arrival_location: "Marseille",
     departure_time: "2023-03-10T10:00:00",
     announcer: user,
-    available_seats: 2,
+    available_seats: 1,
     type: TripType.DRIVER,
   },
   {
@@ -44,19 +44,19 @@ const trips: Array<Trip> = [
         <h1
           class="text-content-base text-5xl md:text-6xl text-center mb-16 font-medium"
         >
-          Trouvez votre trajet
+          {{ $t("home.find") }}
         </h1>
         <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
       </div>
     </section>
     <section class="p-14">
-      <Title class="mt-8" logoColor="base" content="Trajets à la une !" />
+      <Title class="mt-8" logoColor="base" :content="$t('home.popularTrips')" />
       <div class="flex gap-6 mt-10 mb-24">
         <template v-for="trip in trips" :key="trip.id">
           <TripCard :trip="trip" />
         </template>
       </div>
-      <Title class="mt-8" logoColor="base" content="Comment ça marche ?" />
+      <Title class="mt-8" logoColor="base" :content="$t('home.howTo')" />
     </section>
   </div>
 </template>

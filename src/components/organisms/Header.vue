@@ -20,7 +20,7 @@ const displaySidebar = ref<boolean>(false);
       <Button
         class="mx-2"
         icon="fa-plus"
-        :text="$t('global.header.newTrip')"
+        :text="$t('header.newTrip')"
         icon-size="2xl"
       />
       <Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />
@@ -43,28 +43,24 @@ const displaySidebar = ref<boolean>(false);
       />
     </div>
   </div>
-  <Sidebar
-    v-model:visible="displaySidebar"
-    position="right"
-    class="p-sidebar-lg"
-  >
+  <Sidebar v-model:visible="displaySidebar" position="right">
     <div>
       <Button
         class="mx-2 my-4"
         icon="fa-search"
-        text="Rechercher"
+        :text="$t('header.search')"
         icon-size="2xl"
       />
       <Button
         class="mx-2 my-4"
         icon="fa-plus"
-        :text="$t('global.header.newTrip')"
+        :text="$t('header.newTrip')"
         icon-size="2xl"
       />
       <Button
         class="mx-2 my-4"
         icon="fa-regular fa-bell"
-        text="Notifications"
+        :text="$t('header.notifications')"
         icon-size="2xl"
       />
     </div>

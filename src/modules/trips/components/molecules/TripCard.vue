@@ -28,8 +28,8 @@ const bgTypeColor = computed((): string => {
       <p
         v-html="
           props.trip.type === TripType.DRIVER
-            ? 'Je recherche des <b>passagers</b>'
-            : 'Je recherche un <b>conducteur</b>'
+            ? $t('trip.searchPassengers')
+            : $t('trip.searchDriver')
         "
       />
       <font-awesome-icon
@@ -61,7 +61,13 @@ const bgTypeColor = computed((): string => {
           </div>
           <div class="py-1">
             <font-awesome-icon class="w-4" icon="fa-users" />
-            <span class="ml-1">{{ props.trip.available_seats }} passagers</span>
+            <span class="ml-1">
+              {{
+                $t("trip.passenger", {
+                  count: props.trip.available_seats,
+                })
+              }}</span
+            >
           </div>
         </div>
         <div class="flex flex-col justify-center items-center ml-4">
@@ -87,7 +93,7 @@ const bgTypeColor = computed((): string => {
         <div
           class="bg-content-base text-white flex items-center w-fit mx-auto rounded-2xl py-2 px-10 cursor-pointer hover:drop-shadow-md"
         >
-          <span class="mr-2">Rejoindre</span>
+          <span class="mr-2">{{ $t("trip.join") }}</span>
           <font-awesome-icon icon="fa-location-arrow" class="rotate-45" />
         </div>
       </div>
