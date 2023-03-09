@@ -32,10 +32,12 @@ const logo = computed((): string => {
 
 <template>
   <div class="flex items-center">
-    <div class="w-16">
+    <div class="w-12 sm:w-16">
       <img :src="logo" alt="" />
     </div>
-    <h2 class="text-3xl font-light text-content-base ml-2 whitespace-nowrap">
+    <h2
+      class="text-2xl sm:text-3xl font-light text-content-base ml-2 whitespace-nowrap"
+    >
       {{ props.content }}
     </h2>
   </div>

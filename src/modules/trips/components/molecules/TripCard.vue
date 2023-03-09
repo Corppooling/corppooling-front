@@ -21,7 +21,7 @@ const bgTypeColor = computed((): string => {
 
 <template>
   <div
-    class="flex flex-col p-1 rounded-2xl shadow-md hover:shadow-lg"
+    class="flex flex-col p-1 rounded-2xl shadow-md hover:shadow-lg w-fit"
     :class="bgTypeColor"
   >
     <div class="w-full h-14 flex justify-between items-center justify-end px-4">
@@ -34,10 +34,11 @@ const bgTypeColor = computed((): string => {
       />
       <font-awesome-icon
         :icon="props.trip.type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
+        class="ml-2"
         size="2xl"
       />
     </div>
-    <div class="bg-white flex-col p-6 rounded-2xl w-[350px]">
+    <div class="bg-white flex-col p-6 rounded-2xl max-w-[350px] sm:w-[350px]">
       <div class="flex justify-around">
         <div class="flex flex-col">
           <div class="py-1">
@@ -66,11 +67,11 @@ const bgTypeColor = computed((): string => {
                 $t("trip.passenger", {
                   count: props.trip.available_seats,
                 })
-              }}</span
-            >
+              }}
+            </span>
           </div>
         </div>
-        <div class="flex flex-col justify-center items-center ml-4">
+        <div class="hidden sm:flex flex-col justify-center items-center ml-4">
           <div
             class="rounded-full w-16 h-16 overflow-hidden p-1 mb-2"
             :class="bgTypeColor"
