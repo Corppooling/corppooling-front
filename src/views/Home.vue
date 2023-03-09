@@ -70,19 +70,21 @@ const tutorialTexts = computed((): Array<string> => {
             : $t("trip.searchDriver")
         }}
       </p>
-      <div class="flex justify-evenly w-full mt-14">
+      <div class="flex flex-col md:flex-row justify-evenly w-full mt-14">
         <template v-for="(image, index) in tutorialImages" :key="index">
-          <div class="flex flex-col h-52 w-80 flex justify-center items-center">
-            <div class="h-full my-auto">
+          <div
+            class="flex flex-col w-full md:w-80 flex justify-center items-center"
+          >
+            <div class="h-52 max-h-52 my-auto">
               <img class="h-full" :src="image" alt="" />
             </div>
-            <div class="mt-4">
+            <div class="mt-6 h-24 mb-14 md:mb-0 text-justify">
               <p>{{ tutorialTexts[index] }}</p>
             </div>
           </div>
           <hr
             v-if="index < tutorialImages.length - 1"
-            class="border-none h-1 rounded-full w-24 my-auto mx-4"
+            class="hidden md:block border-none h-1 rounded-full w-24 my-auto mx-4"
             :class="
               type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'
             "
