@@ -18,28 +18,19 @@ const type = ref<TripType>(TripType.DRIVER);
 
 const { t } = useI18n();
 
-const tutorialImages = computed((): Array<string> => {
-  switch (type.value) {
-    case TripType.PASSENGER:
-      return [search_passenger, talk_passenger, car_passenger];
-    default:
-      return [search_driver, talk_driver, car_driver];
-  }
-});
-
-const tutorialTexts = computed((): Array<string> => {
+const tutorialElements = computed((): Array<Record<string, string>> => {
   switch (type.value) {
     case TripType.PASSENGER:
       return [
-        t("home.tutorial.searchPassenger"),
-        t("home.tutorial.talkPassenger"),
-        t("home.tutorial.carPassenger"),
+        { image: search_passenger, text: t("home.tutorial.searchPassenger") },
+        { image: talk_passenger, text: t("home.tutorial.talkPassenger") },
+        { image: car_passenger, text: t("home.tutorial.carPassenger") },
       ];
     default:
       return [
-        t("home.tutorial.searchDriver"),
-        t("home.tutorial.talkDriver"),
-        t("home.tutorial.carDriver"),
+        { image: search_driver, text: t("home.tutorial.searchDriver") },
+        { image: talk_driver, text: t("home.tutorial.talkDriver") },
+        { image: car_driver, text: t("home.tutorial.carDriver") },
       ];
   }
 });
@@ -48,7 +39,7 @@ const tutorialTexts = computed((): Array<string> => {
 <template>
   <div>
     <HomeHeader />
-    <section class="pt-6 sm:pt-8 pb-28 px-6 md:px-12 max-w-screen-2xl mx-auto">
+    <section class="pt-6 sm:pt-8 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
       <div class="flex flex-wrap justify-between items-center">
@@ -71,19 +62,19 @@ const tutorialTexts = computed((): Array<string> => {
         }}
       </p>
       <div class="flex flex-col md:flex-row justify-evenly w-full mt-14">
-        <template v-for="(image, index) in tutorialImages" :key="index">
+        <template v-for="(element, index) in tutorialElements" :key="index">
           <div
             class="flex flex-col w-full md:w-80 flex justify-center items-center"
           >
             <div class="h-52 max-h-52 my-auto">
-              <img class="h-full" :src="image" alt="" />
+              <img class="h-full" :src="element.image" alt="" />
             </div>
             <div class="mt-6 h-24 mb-14 md:mb-0 text-justify">
-              <p>{{ tutorialTexts[index] }}</p>
+              <p>{{ element.text }}</p>
             </div>
           </div>
           <hr
-            v-if="index < tutorialImages.length - 1"
+            v-if="index < tutorialElements.length - 1"
             class="hidden md:block border-none h-1 rounded-full w-24 my-auto mx-4"
             :class="
               type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'

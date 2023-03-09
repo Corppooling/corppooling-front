@@ -103,7 +103,7 @@ const swiperOptions = ref<SwiperOptions>({
     :breakpoints="swiperOptions.breakpoints"
   >
     <SwiperSlide
-      class="my-8 mx-auto sm:mx-0 max-w-full flex justify-center sm:max-w-fit"
+      class="my-10 mx-auto sm:mx-0 max-w-full flex justify-center sm:max-w-fit"
       v-for="trip in trips"
       :key="trip.id"
     >
