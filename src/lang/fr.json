@@ -14,7 +14,15 @@
   "home": {
     "find": "Trouvez votre trajet",
     "popularTrips": "Trajets à la une !",
-    "howTo": "Comment ça marche ?"
+    "howTo": "Comment ça marche ?",
+    "tutorial": {
+      "searchPassenger": "Recherchez un passager",
+      "searchDriver": "Recherchez un conducteur",
+      "talkPassenger": "Parlez avec le passager",
+      "talkDriver": "Parlez avec le conducteur",
+      "carPassenger": "Montez dans la voiture",
+      "carDriver": "Montez dans la voiture"
+    }
   },
   "trip": {
     "searchPassengers": "Je recherche des passagers",
