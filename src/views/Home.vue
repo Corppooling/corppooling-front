@@ -1,26 +1,20 @@
 <script lang="ts" setup>
 import Title from "@/components/atoms/Title.vue";
 import TripsSlider from "@/modules/trips/components/molecules/TripsSlider.vue";
+import HomeHeader from "@/components/molecules/HomeHeader.vue";
+import TripTypeSwitch from "@/modules/trips/components/molecules/TripTypeSwitch.vue";
 </script>
 
 <template>
   <div>
-    <section class="w-full h-80 bg-content-flight">
-      <div
-        class="w-5/6 h-full mx-auto flex justify-center items-center flex flex-col"
-      >
-        <h1
-          class="text-content-base text-5xl sm:text-6xl text-center mb-16 font-medium"
-        >
-          {{ $t("home.find") }}
-        </h1>
-        <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
-      </div>
-    </section>
-    <section class="pt-8 pb-28 px-6 md:px-12">
+    <HomeHeader />
+    <section class="pt-8 pb-28 px-6 md:px-12 max-w-screen-2xl mx-auto">
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
-      <Title logoColor="base" :content="$t('home.howTo')" />
+      <div class="flex justify-between items-center">
+        <Title logoColor="base" :content="$t('home.howTo')" />
+        <TripTypeSwitch />
+      </div>
     </section>
   </div>
 </template>
