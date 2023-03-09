@@ -17,7 +17,7 @@ import TripsSlider from "@/modules/trips/components/molecules/TripsSlider.vue";
         <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
       </div>
     </section>
-    <section class="py-8 px-6 md:px-12">
+    <section class="pt-8 pb-28 px-6 md:px-12">
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
       <Title logoColor="base" :content="$t('home.howTo')" />

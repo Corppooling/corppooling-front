@@ -7,6 +7,10 @@
     "search": "Rechercher",
     "notifications": "Notifications"
   },
+  "footer": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales d'utilisation"
+  },
   "home": {
     "find": "Trouvez votre trajet",
     "popularTrips": "Trajets à la une !",
