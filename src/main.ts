@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import PrimeVue from "primevue/config";
+import Tooltip from "primevue/tooltip";
 import "@/assets/styles/main.scss";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -15,7 +16,7 @@ import en from "@/lang/en.json";
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
+  locale: "fr",
   globalInjection: true,
   messages: {
     fr,
@@ -36,5 +37,6 @@ app.use(createPinia());
 app.use(router);
 app.use(PrimeVue);
 app.use(i18n);
+app.directive("tooltip", Tooltip);
 app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.mount("#app");

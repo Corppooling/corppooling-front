@@ -5,9 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primevue/resources/primevue.css";
+@import "primevue/resources/themes/tailwind-light/theme.css";
+@import 'primeicons/primeicons.css';
+
 @layer base {
   html {
     font-family: Lato, sans-serif;
+    color: theme('colors.content.base');
   }
 
   h1, h2, h3, h4, h5, h5, header {
@@ -33,6 +38,17 @@
 }
 
 @layer utilities {
+  .custom-tooltip {
+    .p-tooltip-text {
+      @apply bg-white text-content-base rounded-2xl p-2 text-center drop-shadow-md;
+    }
+
+    &.p-tooltip-top {
+      .p-tooltip-arrow {
+        border-top-color: #FFFFFF !important;
+      }
+    }
+  }
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;

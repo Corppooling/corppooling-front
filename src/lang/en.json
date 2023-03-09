@@ -1,5 +1,33 @@
 {
   "global": {
-    "hello": "Hello world !"
+
+  },
+  "header": {
+    "newTrip": "New trip",
+    "search": "Search",
+    "notifications": "Notifications"
+  },
+  "footer": {
+    "privacy": "Privacy policy",
+    "terms": "Terms and conditions"
+  },
+  "home": {
+    "find": "Find your trip",
+    "popularTrips": "Popular trips!",
+    "howTo": "How it works?",
+    "tutorial": {
+      "searchPassenger": "Search for a passenger",
+      "searchDriver": "Search for a driver",
+      "talkPassenger": "Talk to the passenger",
+      "talkDriver": "Talk to the driver",
+      "carPassenger": "Get in the car",
+      "carDriver": "Get in the car"
+    }
+  },
+  "trip": {
+    "searchPassengers": "I'm looking for passengers",
+    "searchDriver": "I'm looking for a driver",
+    "passenger": "1 passenger | {count} passengers",
+    "join": "Join"
   }
 }
