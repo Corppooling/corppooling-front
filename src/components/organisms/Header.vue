@@ -8,7 +8,7 @@ const displaySidebar = ref<boolean>(false);
 
 <template>
   <div
-    class="sticky top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between"
+    class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between"
   >
     <div class="w-52">
       <img

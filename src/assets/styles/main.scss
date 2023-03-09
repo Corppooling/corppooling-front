@@ -38,6 +38,17 @@
 }
 
 @layer utilities {
+  .custom-tooltip {
+    .p-tooltip-text {
+      @apply bg-white text-content-base rounded-2xl p-2 text-center drop-shadow-md;
+    }
+
+    &.p-tooltip-top {
+      .p-tooltip-arrow {
+        border-top-color: #FFFFFF !important;
+      }
+    }
+  }
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;

@@ -17,8 +17,8 @@
     "howTo": "Comment ça marche ?"
   },
   "trip": {
-    "searchPassengers": "Je recherche des <b>passagers</b>",
-    "searchDriver": "Je recherche un <b>conducteur</b>",
+    "searchPassengers": "Je recherche des passagers",
+    "searchDriver": "Je recherche un conducteur",
     "passenger": "1 passager | {count} passagers",
     "join": "Rejoindre"
   }
