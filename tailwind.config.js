@@ -28,7 +28,26 @@ module.exports = {
         flight: "rgb(var(--color-content-flight) / <alpha-value>)",
       },
     },
-    extend: {},
+
+    extend: {
+      animation: {
+        floating: "floating 6s ease-in-out infinite alternate",
+      },
+
+      keyframes: {
+        floating: {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+          "100%": {
+            transform: "translateY(0px)",
+          },
+        },
+      },
+    },
   },
   // eslint-disable-next-line no-undef
   plugins: [require("@tailwindcss/line-clamp")],
