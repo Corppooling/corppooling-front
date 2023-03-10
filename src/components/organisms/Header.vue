@@ -76,6 +76,6 @@ const displaySidebar = ref<boolean>(false);
 
 <style lang="scss">
 .p-sidebar-header {
-  @apply flex justify-between;
+  justify-content: space-between !important;
 }
 </style>

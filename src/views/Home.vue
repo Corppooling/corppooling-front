@@ -69,7 +69,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
             <div class="h-52 max-h-52 my-auto">
               <img class="h-full" :src="element.image" alt="" />
             </div>
-            <div class="mt-6 h-24 mb-14 md:mb-0 text-justify">
+            <div class="my-6 h-24 md:mb-0 text-justify">
               <p>{{ element.text }}</p>
             </div>
           </div>
