@@ -38,9 +38,8 @@ const departureDate = ref<Date | null>(null);
         />
         <Calendar
           v-model="departureDate"
-          dateFormat="DD/mm/yy"
+          dateFormat="dd/mm/yy"
           placeholder="Aujourd'hui"
-          [locale]="calendar_fr"
         />
       </span>
     </div>
