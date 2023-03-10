@@ -75,7 +75,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
           </div>
           <hr
             v-if="index < tutorialElements.length - 1"
-            class="hidden md:block border-none h-1 rounded-full w-24 my-auto mx-4"
+            class="rotate-90 md:rotate-0 border-none h-1 rounded-full w-24 mb-20 md:my-auto mx-auto md:mx-4"
             :class="
               type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'
             "
