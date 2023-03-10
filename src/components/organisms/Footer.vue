@@ -38,7 +38,7 @@ watch(
 
 <template>
   <div
-    class="w-full bg-content-base text-main-base pt-2 relative overflow-hidden"
+    class="w-full bg-content-base text-main-base py-2 relative overflow-hidden"
   >
     <div class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10">
       <div class="flex flex-wrap justify-between py-2">
