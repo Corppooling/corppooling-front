@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 @import "primevue/resources/primevue.css";
-@import "primevue/resources/themes/tailwind-light/theme.css";
+@import "_theme.scss";
 @import 'primeicons/primeicons.css';
 
 @layer base {

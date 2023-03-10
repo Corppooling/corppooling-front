@@ -39,7 +39,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
 <template>
   <div>
     <HomeHeader />
-    <section class="pt-6 sm:pt-8 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
+    <section class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto">
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
       <div class="flex flex-wrap justify-between items-center">
@@ -50,7 +50,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
         />
         <TripTypeSwitch :type="type" @update:type="type = $event" />
       </div>
-      <p class="mt-4 text-xl">
+      <p class="mt-4 text-lg md:text-xl">
         <font-awesome-icon
           :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
           class="mr-2"
@@ -69,13 +69,13 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
             <div class="h-52 max-h-52 my-auto">
               <img class="h-full" :src="element.image" alt="" />
             </div>
-            <div class="mt-6 h-24 mb-14 md:mb-0 text-justify">
+            <div class="my-6 h-24 md:mb-0 text-justify">
               <p>{{ element.text }}</p>
             </div>
           </div>
           <hr
             v-if="index < tutorialElements.length - 1"
-            class="hidden md:block border-none h-1 rounded-full w-24 my-auto mx-4"
+            class="rotate-90 md:rotate-0 border-none h-1 rounded-full w-24 mb-20 md:my-auto mx-auto md:mx-4"
             :class="
               type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'
             "

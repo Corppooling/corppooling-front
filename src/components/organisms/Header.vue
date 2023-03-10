@@ -47,8 +47,8 @@ const displaySidebar = ref<boolean>(false);
   </div>
   <Sidebar v-model:visible="displaySidebar" position="right">
     <template #header>
-      <div class="w-14">
-        <img class="w-full" src="@/assets/images/logos/logo_base.svg" alt="" />
+      <div class="w-32">
+        <img class="w-full" src="@/assets/images/logos/logo_full.svg" alt="" />
       </div>
     </template>
     <div>
@@ -76,6 +76,6 @@ const displaySidebar = ref<boolean>(false);
 
 <style lang="scss">
 .p-sidebar-header {
-  @apply flex justify-between;
+  justify-content: space-between !important;
 }
 </style>
