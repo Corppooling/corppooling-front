@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
+</script>
 
 <template>
   <section class="w-full h-80 bg-content-flight relative overflow-hidden">
@@ -10,7 +12,7 @@
       >
         {{ $t("home.find") }}
       </h1>
-      <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
+      <Searchbar />
     </div>
     <div>
       <img
