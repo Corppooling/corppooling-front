@@ -39,7 +39,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
 <template>
   <div>
     <HomeHeader />
-    <section class="pt-6 sm:pt-8 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
+    <section class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto">
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
       <div class="flex flex-wrap justify-between items-center">
@@ -50,7 +50,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
         />
         <TripTypeSwitch :type="type" @update:type="type = $event" />
       </div>
-      <p class="mt-4 text-xl">
+      <p class="mt-4 text-lg md:text-xl">
         <font-awesome-icon
           :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
           class="mr-2"

@@ -37,8 +37,10 @@ watch(
 </script>
 
 <template>
-  <div class="w-full bg-content-base text-main-base pt-2">
-    <div class="max-w-screen-sm mx-auto flex flex-col justify-end">
+  <div
+    class="w-full bg-content-base text-main-base pt-2 relative overflow-hidden"
+  >
+    <div class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10">
       <div class="flex flex-wrap justify-between py-2">
         <div class="p-2 mx-auto sm:mx-0">
           <SelectButton
@@ -82,6 +84,38 @@ watch(
           </a>
         </div>
       </div>
+    </div>
+    <div>
+      <img
+        class="hidden lg:block absolute z-0 top-20 right-10 w-24 animate-floating"
+        style="animation-delay: 4s"
+        src="@/assets/images/shapes/shape_2.svg"
+        alt=""
+      />
+      <img
+        class="absolute z-0 top-5 left-1/4 w-16 animate-floating"
+        style="animation-delay: 3s"
+        src="@/assets/images/shapes/shape_2.svg"
+        alt=""
+      />
+      <img
+        class="absolute z-0 bottom-0 left-2/3 w-64 animate-floating"
+        style="animation-delay: 2s"
+        src="@/assets/images/shapes/shape_4.svg"
+        alt=""
+      />
+      <img
+        class="hidden lg:block absolute z-0 bottom-0 left-10 w-64 animate-floating"
+        style="animation-delay: 5s"
+        src="@/assets/images/shapes/shape_3.svg"
+        alt=""
+      />
+      <img
+        class="hidden sm:block absolute z-0 bottom-0 left-1/3 w-32 animate-floating rotate-6"
+        style="animation-delay: 0s"
+        src="@/assets/images/shapes/shape_1.svg"
+        alt=""
+      />
     </div>
   </div>
 </template>
