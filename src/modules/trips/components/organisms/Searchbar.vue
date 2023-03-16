@@ -5,7 +5,7 @@ import Calendar from "primevue/calendar";
 
 const departureLocation = ref<string>("");
 const arrivalLocation = ref<string>("");
-const departureDate = ref<Date | null>(null);
+const departureDate = ref<Date>();
 </script>
 
 <template>
