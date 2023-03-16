@@ -39,7 +39,9 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
 <template>
   <div>
     <HomeHeader />
-    <section class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto">
+    <section
+      class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto mt-28 lg:mt-0"
+    >
       <Title logoColor="base" :content="$t('home.popularTrips')" />
       <TripsSlider />
       <div class="flex flex-wrap justify-between items-center">

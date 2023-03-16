@@ -14,6 +14,7 @@ module.exports = {
       // black shades
       black: {
         base: "rgb(var(--color-black-base) / <alpha-value>)",
+        light: "rgb(var(--color-black-light) / <alpha-value>)",
       },
 
       main: {

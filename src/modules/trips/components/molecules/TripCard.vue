@@ -53,11 +53,11 @@ const bgTypeColor = computed((): string => {
             }}</span>
           </div>
           <div class="py-1">
-            <font-awesome-icon class="w-4" icon="fa-map-marker-alt" />
+            <font-awesome-icon class="w-4" icon="fa-flag-checkered" />
             <span class="ml-1">{{ props.trip.departure_location }}</span>
           </div>
           <div class="py-1">
-            <font-awesome-icon class="w-4" icon="fa-flag-checkered" />
+            <font-awesome-icon class="w-4" icon="fa-map-marker-alt" />
             <span class="ml-1">{{ props.trip.arrival_location }}</span>
           </div>
           <div class="py-1">

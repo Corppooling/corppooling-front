@@ -1,7 +1,9 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
+</script>
 
 <template>
-  <section class="w-full h-80 bg-content-flight relative overflow-hidden">
+  <section class="w-full h-80 bg-content-flight relative">
     <div
       class="w-5/6 h-full mx-auto flex justify-center items-center flex flex-col relative z-10"
     >
@@ -10,9 +12,9 @@
       >
         {{ $t("home.find") }}
       </h1>
-      <div class="bg-white w-full h-14 rounded-2xl shadow-md max-w-4xl"></div>
+      <Searchbar class="absolute lg:static -bottom-28" />
     </div>
-    <div>
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <img
         class="hidden lg:block absolute z-0 top-24 right-10 w-24 animate-floating"
         style="animation-delay: 4s"

@@ -5,6 +5,7 @@
   "header": {
     "newTrip": "Nouveau trajet",
     "search": "Rechercher",
+    "whereDoYouGo" : "Où souhaitez-vous aller ?",
     "notifications": "Notifications"
   },
   "footer": {
