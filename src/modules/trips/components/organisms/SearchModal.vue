@@ -20,7 +20,7 @@ const emit = defineEmits<{
     <div
       class="w-full h-full px-10 py-14 flex flex-col items-center justify-center"
     >
-      <h2 class="font-bold text-3xl pb-14">Où souhaitez-vous aller ?</h2>
+      <h2 class="font-bold text-3xl pb-14">{{ $t("header.whereDoYouGo") }}</h2>
       <Searchbar />
     </div>
   </Modal>

@@ -60,7 +60,7 @@ const departureDate = ref<Date | null>(null);
     <div
       class="bg-content-light flex grow justify-center items-center cursor-pointer py-4 min-w-[200px]"
     >
-      <span class="text-white text-base">Rechercher</span>
+      <span class="text-white text-base">{{ $t("header.search") }}</span>
     </div>
   </div>
 </template>
