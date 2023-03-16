@@ -2,8 +2,10 @@
 import { ref } from "vue";
 import Button from "@/components/molecules/Button.vue";
 import Sidebar from "primevue/sidebar";
+import SearchModal from "@/modules/trips/components/organisms/SearchModal.vue";
 
 const displaySidebar = ref<boolean>(false);
+const modalIsOpen = ref<boolean>(false);
 </script>
 
 <template>
@@ -18,7 +20,12 @@ const displaySidebar = ref<boolean>(false);
       />
     </div>
     <div class="hidden md:flex">
-      <Button class="mx-2" icon="fa-search" icon-size="2xl" />
+      <Button
+        class="mx-2"
+        icon="fa-search"
+        icon-size="2xl"
+        @click="modalIsOpen = true"
+      />
       <Button
         class="mx-2"
         icon="fa-plus"
@@ -57,6 +64,12 @@ const displaySidebar = ref<boolean>(false);
         icon="fa-search"
         :text="$t('header.search')"
         icon-size="2xl"
+        @click="
+          () => {
+            displaySidebar = false;
+            modalIsOpen = true;
+          }
+        "
       />
       <Button
         class="mx-2 my-4"
@@ -72,6 +85,7 @@ const displaySidebar = ref<boolean>(false);
       />
     </div>
   </Sidebar>
+  <SearchModal :isOpen="modalIsOpen" @update:isOpen="modalIsOpen = $event" />
 </template>
 
 <style lang="scss">

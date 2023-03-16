@@ -58,7 +58,7 @@ const departureDate = ref<Date | null>(null);
       </span>
     </div>
     <div
-      class="bg-content-light flex grow justify-center items-center cursor-pointer py-4"
+      class="bg-content-light flex grow justify-center items-center cursor-pointer py-4 min-w-[200px]"
     >
       <span class="text-white text-base">Rechercher</span>
     </div>
