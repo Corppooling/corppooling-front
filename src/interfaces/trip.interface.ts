@@ -4,7 +4,7 @@ export interface Trip {
   id: number;
   departure_location: string;
   arrival_location: string;
-  departure_time: string;
+  departure_date: string;
   announcer: User;
   available_seats: number;
   type: TripType;
