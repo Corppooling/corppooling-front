@@ -40,7 +40,9 @@ watch(
   <div
     class="w-full bg-content-base text-main-base py-2 relative overflow-hidden"
   >
-    <div class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10">
+    <div
+      class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10"
+    >
       <div class="flex flex-wrap justify-between py-2">
         <div class="p-2 mx-auto sm:mx-0">
           <SelectButton

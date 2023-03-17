@@ -44,7 +44,7 @@ const bgTypeColor = computed((): string => {
           <div class="py-1">
             <font-awesome-icon class="w-4" icon="fa-calendar" />
             <span class="ml-1">{{
-              DateTime.fromISO(props.trip.departure_time).toLocaleString({
+              DateTime.fromISO(props.trip.departure_date).toLocaleString({
                 month: "long",
                 day: "2-digit",
                 hour: "2-digit",
