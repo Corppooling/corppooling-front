@@ -3,6 +3,7 @@ import { ref } from "vue";
 import Button from "@/components/molecules/Button.vue";
 import Sidebar from "primevue/sidebar";
 import SearchModal from "@/modules/trips/components/organisms/SearchModal.vue";
+import UserButton from "@/components/molecules/UserButton.vue";
 
 const displaySidebar = ref<boolean>(false);
 const modalIsOpen = ref<boolean>(false);
@@ -33,15 +34,7 @@ const modalIsOpen = ref<boolean>(false);
         icon-size="2xl"
       />
       <Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />
-      <div
-        class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md cursor-pointer flex justify-center items-center"
-      >
-        <font-awesome-icon
-          size="xl"
-          class="text-white"
-          icon="fa-regular fa-user"
-        />
-      </div>
+      <UserButton />
     </div>
     <div class="md:hidden">
       <Button
