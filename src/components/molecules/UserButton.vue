@@ -20,21 +20,21 @@ import { MenuButton, MenuItem } from "@headlessui/vue";
       <MenuItem v-slot="{ active }">
         <button
           :class="[
-            active ? 'bg-content-glight text-white' : 'text-content-base',
+            active ? 'bg-main-base text-white' : 'text-content-base',
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
         >
-          Connexion
+          {{ $t("header.login") }}
         </button>
       </MenuItem>
       <MenuItem v-slot="{ active }">
         <button
           :class="[
-            active ? 'bg-content-glight text-white' : 'text-content-base',
+            active ? 'bg-main-base text-white' : 'text-content-base',
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
         >
-          Inscription
+          {{ $t("header.register") }}
         </button>
       </MenuItem>
     </template>

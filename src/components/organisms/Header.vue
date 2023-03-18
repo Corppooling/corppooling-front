@@ -76,6 +76,20 @@ const modalIsOpen = ref<boolean>(false);
         :text="$t('header.notifications')"
         icon-size="2xl"
       />
+      <Button
+        class="mx-2 mt-10 mb-4"
+        icon="fa-lock"
+        :text="$t('header.login')"
+        icon-size="2xl"
+        bg-color="main-base"
+      />
+      <Button
+        class="mx-2 my-4"
+        icon="fa-regular fa-pen-to-square"
+        :text="$t('header.register')"
+        icon-size="2xl"
+        bg-color="main-base"
+      />
     </div>
   </Sidebar>
   <SearchModal :isOpen="modalIsOpen" @update:isOpen="modalIsOpen = $event" />
