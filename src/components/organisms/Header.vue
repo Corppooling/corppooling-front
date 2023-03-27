@@ -77,6 +77,7 @@ const modalIsOpen = ref<boolean>(false);
         icon-size="2xl"
       />-->
       <Button
+        :to="{ name: 'login' }"
         class="mx-2 mt-10 mb-4"
         icon="fa-lock"
         :text="$t('auth.login')"
@@ -84,6 +85,7 @@ const modalIsOpen = ref<boolean>(false);
         bg-color="main-base"
       />
       <Button
+        :to="{ name: 'register' }"
         class="mx-2 my-4"
         icon="fa-regular fa-pen-to-square"
         :text="$t('auth.register')"
