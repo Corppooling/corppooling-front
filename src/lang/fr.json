@@ -1,14 +1,16 @@
 {
   "global": {
-
+  },
+  "auth": {
+    "login": "Connexion",
+    "password": "Mot de passe",
+    "loggingIn": "Se connecter"
   },
   "header": {
     "newTrip": "Nouveau trajet",
     "search": "Rechercher",
-    "whereDoYouGo" : "Où souhaitez-vous aller ?",
-    "notifications": "Notifications",
-    "login": "Connexion",
-    "register": "Inscription"
+    "whereDoYouGo": "Où souhaitez-vous aller ?",
+    "notifications": "Notifications"
   },
   "footer": {
     "privacy": "Politique de confidentialité",

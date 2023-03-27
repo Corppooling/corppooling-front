@@ -9,33 +9,24 @@ import { MenuButton, MenuItem } from "@headlessui/vue";
       <MenuButton
         class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md flex justify-center items-center"
       >
-        <font-awesome-icon
-          size="xl"
-          class="text-white"
-          icon="fa-regular fa-user"
+        <img
+          class="w-full p-2"
+          src="@/assets/images/logos/logo_white.svg"
+          alt="icon"
         />
       </MenuButton>
     </template>
     <template #content>
       <MenuItem v-slot="{ active }">
-        <button
+        <RouterLink
+          :to="{ name: 'login' }"
           :class="[
-            active ? 'bg-main-base text-white' : 'text-content-base',
+            active ? 'bg-content-base text-white' : 'text-content-base',
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
         >
-          {{ $t("header.login") }}
-        </button>
-      </MenuItem>
-      <MenuItem v-slot="{ active }">
-        <button
-          :class="[
-            active ? 'bg-main-base text-white' : 'text-content-base',
-            'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
-          ]"
-        >
-          {{ $t("header.register") }}
-        </button>
+          {{ $t("auth.login") }}
+        </RouterLink>
       </MenuItem>
     </template>
   </Dropdown>

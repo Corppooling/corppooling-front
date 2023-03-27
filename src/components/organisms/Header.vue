@@ -13,13 +13,13 @@ const modalIsOpen = ref<boolean>(false);
   <div
     class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between"
   >
-    <div class="w-52">
+    <RouterLink :to="{ name: 'home' }" class="w-52">
       <img
         class="w-full h-full"
         src="@/assets/images/logos/logo_full.svg"
         alt=""
       />
-    </div>
+    </RouterLink>
     <div class="hidden md:flex">
       <Button
         class="mx-2"
