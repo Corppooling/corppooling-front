@@ -35,7 +35,6 @@ const modalIsOpen = ref<boolean>(false);
       />
       <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
       <UserButton />
-      </div>
     </div>
     <div class="md:hidden">
       <Button
