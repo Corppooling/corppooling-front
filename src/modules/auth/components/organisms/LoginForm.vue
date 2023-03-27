@@ -4,9 +4,17 @@ import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import Button from "@/components/molecules/Button.vue";
 import PrimeInput from "@/components/atoms/PrimeInput.vue";
+import { useAuthStore } from "@/stores/auth";
 
+const authStore = useAuthStore();
 const email = ref<string>("");
 const password = ref<string>("");
+
+const onSubmit = () => {
+  if (email.value && password.value) {
+    authStore.login(email.value, password.value);
+  }
+};
 </script>
 
 <template>
@@ -31,7 +39,11 @@ const password = ref<string>("");
           toggleMask
         />
       </PrimeInput>
-      <Button bg-color="content-base" :text="$t('auth.loggingIn')" />
+      <Button
+        @click="onSubmit"
+        bg-color="content-base"
+        :text="$t('auth.loggingIn')"
+      />
       <RouterLink
         :to="{ name: 'register' }"
         class="block mt-10 text-center hover:underline"
