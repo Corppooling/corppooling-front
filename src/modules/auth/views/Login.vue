@@ -4,9 +4,9 @@ import LoginForm from "@/modules/auth/components/organisms/LoginForm.vue";
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex min-h-[calc(100vh-5rem)]">
     <AuthBanner />
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2">
       <LoginForm />
     </div>
   </div>

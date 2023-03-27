@@ -17,7 +17,7 @@ const modalIsOpen = ref<boolean>(false);
       <img
         class="w-full h-full"
         src="@/assets/images/logos/logo_full.svg"
-        alt=""
+        alt="logo"
       />
     </RouterLink>
     <div class="hidden md:flex">
@@ -79,14 +79,14 @@ const modalIsOpen = ref<boolean>(false);
       <Button
         class="mx-2 mt-10 mb-4"
         icon="fa-lock"
-        :text="$t('header.login')"
+        :text="$t('auth.login')"
         icon-size="2xl"
         bg-color="main-base"
       />
       <Button
         class="mx-2 my-4"
         icon="fa-regular fa-pen-to-square"
-        :text="$t('header.register')"
+        :text="$t('auth.register')"
         icon-size="2xl"
         bg-color="main-base"
       />

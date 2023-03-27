@@ -4,7 +4,9 @@
   "auth": {
     "login": "Connexion",
     "password": "Mot de passe",
-    "loggingIn": "Se connecter"
+    "loggingIn": "Se connecter",
+    "register": "Inscription",
+    "registerMyCompany": "Je souhaite inscrire mon entreprise"
   },
   "header": {
     "newTrip": "Nouveau trajet",

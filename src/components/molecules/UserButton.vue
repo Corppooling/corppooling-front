@@ -28,6 +28,17 @@ import { MenuButton, MenuItem } from "@headlessui/vue";
           {{ $t("auth.login") }}
         </RouterLink>
       </MenuItem>
+      <MenuItem v-slot="{ active }">
+        <RouterLink
+          :to="{ name: 'register' }"
+          :class="[
+            active ? 'bg-content-base text-white' : 'text-content-base',
+            'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
+          ]"
+        >
+          {{ $t("auth.register") }}
+        </RouterLink>
+      </MenuItem>
     </template>
   </Dropdown>
 </template>
