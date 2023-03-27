@@ -32,7 +32,7 @@ const modalIsOpen = ref<boolean>(false);
         :text="$t('header.newTrip')"
         icon-size="2xl"
       />
-      <Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />
+      <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
       <div
         class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md cursor-pointer flex justify-center items-center"
       >
@@ -77,12 +77,12 @@ const modalIsOpen = ref<boolean>(false);
         :text="$t('header.newTrip')"
         icon-size="2xl"
       />
-      <Button
+      <!--<Button
         class="mx-2 my-4"
         icon="fa-regular fa-bell"
         :text="$t('header.notifications')"
         icon-size="2xl"
-      />
+      />-->
     </div>
   </Sidebar>
   <SearchModal :isOpen="modalIsOpen" @update:isOpen="modalIsOpen = $event" />
