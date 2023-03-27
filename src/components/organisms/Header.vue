@@ -33,8 +33,9 @@ const modalIsOpen = ref<boolean>(false);
         :text="$t('header.newTrip')"
         icon-size="2xl"
       />
-      <Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />
+      <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
       <UserButton />
+      </div>
     </div>
     <div class="md:hidden">
       <Button
@@ -70,12 +71,12 @@ const modalIsOpen = ref<boolean>(false);
         :text="$t('header.newTrip')"
         icon-size="2xl"
       />
-      <Button
+      <!--<Button
         class="mx-2 my-4"
         icon="fa-regular fa-bell"
         :text="$t('header.notifications')"
         icon-size="2xl"
-      />
+      />-->
       <Button
         class="mx-2 mt-10 mb-4"
         icon="fa-lock"
