@@ -73,6 +73,7 @@ const bgTypeColor = computed((): string => {
         </div>
         <div class="hidden sm:flex flex-col justify-center items-center ml-4">
           <div
+            v-if="props.trip.announcer.profile_image"
             class="rounded-full w-16 h-16 overflow-hidden p-1 mb-2"
             :class="bgTypeColor"
           >
@@ -84,8 +85,8 @@ const bgTypeColor = computed((): string => {
           </div>
           <div>
             <span>
-              {{ props.trip.announcer.firstName }}
-              {{ props.trip.announcer.lastName }}
+              {{ props.trip.announcer.firstname }}
+              {{ props.trip.announcer.lastname }}
             </span>
           </div>
         </div>
