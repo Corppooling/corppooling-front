@@ -9,7 +9,10 @@ axiosClient.interceptors.request.use((config: AxiosRequestConfig) => {
   if (config.headers === undefined) {
     config.headers = {};
   }
-  config.headers.Authorization = `Bearer ${localStorage.getItem("user") ?? ""}`;
+
+  if (localStorage.getItem("token")) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  }
 
   return config;
 });
