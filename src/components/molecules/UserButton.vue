@@ -10,7 +10,7 @@ const authStore = useAuthStore();
   <Dropdown>
     <template #cta>
       <MenuButton
-        class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md flex justify-center items-center"
+        class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md flex justify-center items-center w-12"
       >
         <img
           class="w-full p-2"

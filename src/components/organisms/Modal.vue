@@ -38,7 +38,7 @@ const emit = defineEmits<{
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div class="fixed inset-0 bg-black-base bg-opacity-25" />
+        <div class="fixed inset-0 bg-black-base bg-opacity-50" />
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
@@ -55,7 +55,7 @@ const emit = defineEmits<{
             leaveTo="opacity-0 scale-95"
           >
             <DialogPanel
-              class="min-w-full lg:min-w-fit rounded-t-3xl rounded-b-0 lg:rounded-2xl overflow-hidden flex flex-col bg-[rgba(255,255,255,0.4)] backdrop-blur"
+              class="min-w-full lg:min-w-fit rounded-t-3xl rounded-b-0 lg:rounded-2xl overflow-hidden flex flex-col bg-content-flight ring-1 ring-content-base"
               :class="props.size"
             >
               <div class="w-full flex justify-end bg-black-base">
