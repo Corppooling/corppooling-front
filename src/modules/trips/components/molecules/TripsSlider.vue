@@ -11,8 +11,8 @@ import { type Trip, TripType } from "@/interfaces/trip.interface";
 
 const user: User = {
   id: 1,
-  firstName: "Maxime",
-  lastName: "Didier",
+  firstname: "Maxime",
+  lastname: "Didier",
   email: "maxime.didier@aol.com",
   profile_image:
     "https://media.licdn.com/dms/image/C4E03AQFChS5oChTUeg/profile-displayphoto-shrink_400_400/0/1634940221677?e=1683763200&v=beta&t=l8TB14fChpB1l2Pr6ZcdmAlwR5UB2Ugj4IjihKMNUxQ",

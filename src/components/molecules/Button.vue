@@ -2,6 +2,7 @@
 import { computed } from "vue";
 
 const props = defineProps<{
+  to?: Record<string, string>;
   text?: string;
   icon?: string;
   textSize?:
@@ -85,13 +86,19 @@ const textSizeClass = computed(() => {
 </script>
 
 <template>
-  <div
+  <component
+    :is="to ? 'router-link' : 'div'"
+    :to="to"
     class="flex p-3 justify-center items-center shadow-md rounded-2xl cursor-pointer hover:saturate-150 transition-all duration-200 hover:drop-shadow-md whitespace-nowrap"
     :class="[bgColorClass, textColorClass]"
   >
-    <font-awesome-icon :class="iconSizeClass" :icon="props.icon" />
+    <font-awesome-icon
+      v-if="props.icon"
+      :class="iconSizeClass"
+      :icon="props.icon"
+    />
     <span :class="[textSizeClass, icon && text && 'ml-2']">{{
       props.text
     }}</span>
-  </div>
+  </component>
 </template>

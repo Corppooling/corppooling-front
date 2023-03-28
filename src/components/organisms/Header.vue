@@ -4,6 +4,12 @@ import Button from "@/components/molecules/Button.vue";
 import Sidebar from "primevue/sidebar";
 import SearchModal from "@/modules/trips/components/organisms/SearchModal.vue";
 import UserButton from "@/components/molecules/UserButton.vue";
+import { useUserStore } from "@/stores/user";
+import { useAuthStore } from "@/stores/auth";
+
+const userStore = useUserStore();
+const authStore = useAuthStore();
+userStore.setUser();
 
 const displaySidebar = ref<boolean>(false);
 const modalIsOpen = ref<boolean>(false);
@@ -13,29 +19,46 @@ const modalIsOpen = ref<boolean>(false);
   <div
     class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between"
   >
-    <div class="w-52">
+    <RouterLink :to="{ name: 'home' }" class="w-52">
       <img
         class="w-full h-full"
         src="@/assets/images/logos/logo_full.svg"
-        alt=""
+        alt="logo"
       />
-    </div>
+    </RouterLink>
     <div class="hidden md:flex">
-      <Button
-        class="mx-2"
-        icon="fa-search"
-        icon-size="2xl"
-        @click="modalIsOpen = true"
-      />
-      <Button
-        class="mx-2"
-        icon="fa-plus"
-        :text="$t('header.newTrip')"
-        icon-size="2xl"
-      />
-      <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
-      <UserButton />
-      </div>
+      <template v-if="userStore.isAuth">
+        <Button
+          class="mx-2"
+          icon="fa-search"
+          icon-size="2xl"
+          @click="modalIsOpen = true"
+        />
+        <Button
+          class="mx-2"
+          icon="fa-plus"
+          :text="$t('header.newTrip')"
+          icon-size="2xl"
+        />
+        <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
+        <UserButton />
+      </template>
+      <template v-else>
+        <Button
+          :to="{ name: 'login' }"
+          class="mx-2"
+          icon="fa-lock"
+          :text="$t('auth.login')"
+          icon-size="2xl"
+        />
+        <Button
+          :to="{ name: 'register' }"
+          class="mx-2"
+          icon="fa-user-plus"
+          :text="$t('auth.register')"
+          icon-size="2xl"
+        />
+      </template>
     </div>
     <div class="md:hidden">
       <Button
@@ -53,44 +76,69 @@ const modalIsOpen = ref<boolean>(false);
       </div>
     </template>
     <div>
-      <Button
-        class="mx-2 my-4"
-        icon="fa-search"
-        :text="$t('header.search')"
-        icon-size="2xl"
-        @click="
-          () => {
-            displaySidebar = false;
-            modalIsOpen = true;
-          }
-        "
-      />
-      <Button
-        class="mx-2 my-4"
-        icon="fa-plus"
-        :text="$t('header.newTrip')"
-        icon-size="2xl"
-      />
-      <!--<Button
+      <template v-if="userStore.isAuth">
+        <Button
+          class="mx-2 my-4"
+          icon="fa-search"
+          :text="$t('header.search')"
+          icon-size="2xl"
+          @click="
+            () => {
+              displaySidebar = false;
+              modalIsOpen = true;
+            }
+          "
+        />
+        <Button
+          class="mx-2 my-4"
+          icon="fa-plus"
+          :text="$t('header.newTrip')"
+          icon-size="2xl"
+        />
+        <!--<Button
         class="mx-2 my-4"
         icon="fa-regular fa-bell"
         :text="$t('header.notifications')"
         icon-size="2xl"
       />-->
-      <Button
-        class="mx-2 mt-10 mb-4"
-        icon="fa-lock"
-        :text="$t('header.login')"
-        icon-size="2xl"
-        bg-color="main-base"
-      />
-      <Button
-        class="mx-2 my-4"
-        icon="fa-regular fa-pen-to-square"
-        :text="$t('header.register')"
-        icon-size="2xl"
-        bg-color="main-base"
-      />
+        <Button
+          :to="{ name: '' }"
+          class="mx-2 my-4"
+          icon="fa-user"
+          :text="$t('header.profile')"
+          icon-size="2xl"
+        />
+        <Button
+          class="mx-2 my-4"
+          icon="fa-sign-out-alt"
+          :text="$t('auth.logout')"
+          icon-size="2xl"
+          @click="
+            () => {
+              authStore.logout();
+              displaySidebar = false;
+            }
+          "
+        />
+      </template>
+      <template v-else>
+        <Button
+          @click="displaySidebar = false"
+          :to="{ name: 'login' }"
+          class="mx-2 mt-10 mb-4"
+          icon="fa-lock"
+          :text="$t('auth.login')"
+          icon-size="2xl"
+        />
+        <Button
+          @click="displaySidebar = false"
+          :to="{ name: 'register' }"
+          class="mx-2 my-4"
+          icon="fa-regular fa-pen-to-square"
+          :text="$t('auth.register')"
+          icon-size="2xl"
+        />
+      </template>
     </div>
   </Sidebar>
   <SearchModal :isOpen="modalIsOpen" @update:isOpen="modalIsOpen = $event" />
