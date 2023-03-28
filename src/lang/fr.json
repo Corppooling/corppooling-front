@@ -1,12 +1,24 @@
 {
   "global": {
-
+    "appName": "Corppooling"
+  },
+  "auth": {
+    "login": "Connexion",
+    "password": "Mot de passe",
+    "loggingIn": "Se connecter",
+    "register": "Inscription",
+    "registerMyCompany": "Je souhaite inscrire mon entreprise",
+    "recontactDesc": "Vous êtes une entreprise ? Transmettez-nous votre email, nous vous recontacterons dans les plus brefs délais pour vous accompagner dans la création de votre espace Corppooling.",
+    "recontact": "Je souhaite être recontacté",
+    "toLogin": "J'ai déjà un compte",
+    "logout": "Déconnexion"
   },
   "header": {
     "newTrip": "Nouveau trajet",
     "search": "Rechercher",
-    "whereDoYouGo" : "Où souhaitez-vous aller ?",
-    "notifications": "Notifications"
+    "whereDoYouGo": "Où souhaitez-vous aller ?",
+    "notifications": "Notifications",
+    "profile": "Mon profil"
   },
   "footer": {
     "privacy": "Politique de confidentialité",
@@ -16,6 +28,8 @@
     "find": "Trouvez votre trajet",
     "popularTrips": "Trajets à la une !",
     "howTo": "Comment ça marche ?",
+    "welcome": "Bienvenue sur Corppooling",
+    "description": "L'application de covoiturage dédiée aux entreprises",
     "tutorial": {
       "searchPassenger": "Partagez l'endroit où vous voulez aller. Peut-être que quelqu'un souhaite y aller aussi !",
       "searchDriver": "Inscrivez votre trajet sur l'application pour permettre à vos collègues de partir avec vous.",
