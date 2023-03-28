@@ -45,7 +45,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
     <section
       class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto mt-28 lg:mt-0"
     >
-      <template v-if="userStore.user">
+      <template v-if="userStore.isAuth">
         <Title logoColor="base" :content="$t('home.popularTrips')" />
         <TripsSlider />
       </template>

@@ -48,7 +48,7 @@ router.beforeEach(async (to) => {
   if (to?.meta?.authRequired) {
     await userStore.setUser();
   } else if (
-    userStore.user &&
+    userStore.isAuth &&
     (to.name === "login" || to.name === "register")
   ) {
     await router.push({ name: "home" });

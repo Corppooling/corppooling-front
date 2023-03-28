@@ -27,7 +27,7 @@ const modalIsOpen = ref<boolean>(false);
       />
     </RouterLink>
     <div class="hidden md:flex">
-      <template v-if="userStore.user">
+      <template v-if="userStore.isAuth">
         <Button
           class="mx-2"
           icon="fa-search"
@@ -76,7 +76,7 @@ const modalIsOpen = ref<boolean>(false);
       </div>
     </template>
     <div>
-      <template v-if="userStore.user">
+      <template v-if="userStore.isAuth">
         <Button
           class="mx-2 my-4"
           icon="fa-search"

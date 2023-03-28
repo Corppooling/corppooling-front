@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore();
+userStore.setUser();
 </script>
 
 <template>
@@ -10,9 +14,15 @@ import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
       <h1
         class="text-content-base text-5xl sm:text-6xl text-center mb-16 font-medium"
       >
-        {{ $t("home.find") }}
+        {{ userStore.isAuth ? $t("home.find") : $t("home.welcome") }}
       </h1>
-      <Searchbar class="absolute lg:static -bottom-28" />
+      <Searchbar
+        v-if="userStore.isAuth"
+        class="absolute lg:static -bottom-28"
+      />
+      <h2 v-else class="text-4xl py-1 px-5 rounded-md">
+        {{ $t("home.description") }}
+      </h2>
     </div>
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
       <img

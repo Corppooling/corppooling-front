@@ -9,7 +9,7 @@ export const useUserStore = defineStore({
   }),
   actions: {
     async setUser(): Promise<void> {
-      if (useAuthStore().token !== null && this.user === null) {
+      if (useAuthStore().token !== null && !this.isAuth) {
         try {
           await axiosClient.get("/api/user/me").then((res) => {
             this.user = res.data;
@@ -24,6 +24,9 @@ export const useUserStore = defineStore({
     },
   },
   getters: {
+    isAuth(): boolean {
+      return this.user !== null;
+    },
     getUser(): User | null {
       return this.user;
     },
