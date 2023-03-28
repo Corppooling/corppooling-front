@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import type { User } from "@/interfaces/user.interface";
 import { useAuthStore } from "@/stores/auth";
 import axiosClient from "@/support/axiosClient";
-export const useSessionStore = defineStore({
-  id: "session",
+export const useUserStore = defineStore({
+  id: "user",
   state: () => ({
     user: null as User | null,
   }),
@@ -21,6 +21,14 @@ export const useSessionStore = defineStore({
     },
     unsetUser(): void {
       this.user = null;
+    },
+  },
+  getters: {
+    getUser(): User | null {
+      return this.user;
+    },
+    getFullName(): string {
+      return this.user?.firstname + " " + this.user?.lastname;
     },
   },
 });

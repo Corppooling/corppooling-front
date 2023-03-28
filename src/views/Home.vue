@@ -13,11 +13,11 @@ import talk_passenger from "@/assets/images/tutorial/talk_passenger.svg";
 import car_driver from "@/assets/images/tutorial/car_driver.svg";
 import car_passenger from "@/assets/images/tutorial/car_passenger.svg";
 import { useI18n } from "vue-i18n";
-import { useSessionStore } from "@/stores/session";
+import { useUserStore } from "@/stores/user";
 
 const type = ref<TripType>(TripType.DRIVER);
-const sessionStore = useSessionStore();
-sessionStore.setUser();
+const userStore = useUserStore();
+userStore.setUser();
 
 const { t } = useI18n();
 
@@ -45,7 +45,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
     <section
       class="pt-6 sm:py-8 px-6 md:px-12 max-w-screen-2xl mx-auto mt-28 lg:mt-0"
     >
-      <template v-if="sessionStore.user">
+      <template v-if="userStore.user">
         <Title logoColor="base" :content="$t('home.popularTrips')" />
         <TripsSlider />
       </template>

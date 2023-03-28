@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import Dropdown from "@/components/organisms/Dropdown.vue";
 import { MenuButton, MenuItem } from "@headlessui/vue";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -19,25 +22,25 @@ import { MenuButton, MenuItem } from "@headlessui/vue";
     <template #content>
       <MenuItem v-slot="{ active }">
         <RouterLink
-          :to="{ name: 'login' }"
+          :to="{ name: '' }"
           :class="[
             active ? 'bg-content-base text-white' : 'text-content-base',
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
         >
-          {{ $t("auth.login") }}
+          {{ $t("header.profile") }}
         </RouterLink>
       </MenuItem>
       <MenuItem v-slot="{ active }">
-        <RouterLink
-          :to="{ name: 'register' }"
+        <div
+          @click="authStore.logout()"
           :class="[
-            active ? 'bg-content-base text-white' : 'text-content-base',
-            'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
+            active ? 'bg-main-base text-white' : 'text-content-base',
+            'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out cursor-pointer',
           ]"
         >
-          {{ $t("auth.register") }}
-        </RouterLink>
+          {{ $t("auth.logout") }}
+        </div>
       </MenuItem>
     </template>
   </Dropdown>

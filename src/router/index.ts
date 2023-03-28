@@ -4,7 +4,7 @@ import {
   type RouteRecordRaw,
 } from "vue-router";
 import HomeView from "@/views/Home.vue";
-import { useSessionStore } from "@/stores/session";
+import { useUserStore } from "@/stores/user";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,10 +42,16 @@ export const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const sessionStore = useSessionStore();
+  const userStore = useUserStore();
+  await userStore.setUser();
 
   if (to?.meta?.authRequired) {
-    await sessionStore.setUser();
+    await userStore.setUser();
+  } else if (
+    userStore.user &&
+    (to.name === "login" || to.name === "register")
+  ) {
+    await router.push({ name: "home" });
   }
 });
 

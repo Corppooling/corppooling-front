@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import type { AxiosResponse } from "axios";
 import { router } from "@/router";
 import axiosClient from "@/support/axiosClient";
-import { useSessionStore } from "@/stores/session";
+import { useUserStore } from "@/stores/user";
 
 export const useAuthStore = defineStore({
   id: "auth",
@@ -44,14 +44,14 @@ export const useAuthStore = defineStore({
       this.refresh_token = refresh_token;
       localStorage.setItem("token", token);
       localStorage.setItem("refreshToken", refresh_token);
-      await useSessionStore().setUser();
+      await useUserStore().setUser();
     },
     unsetAllAuthItems(): void {
       this.token = null;
       this.refresh_token = null;
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
-      useSessionStore().unsetUser();
+      useUserStore().unsetUser();
     },
   },
 });
