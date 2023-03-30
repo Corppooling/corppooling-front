@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const props = defineProps<{
   to?: Record<string, string>;
@@ -34,6 +34,7 @@ const props = defineProps<{
   bgColor?: string;
   textColor?: string;
   fn?: () => void;
+  loading?: boolean;
 }>();
 
 const bgColorClass = computed(() => {
@@ -85,15 +86,9 @@ const textSizeClass = computed(() => {
   return generateSizeClass(props.textSize);
 });
 
-const loading = ref<boolean>(false);
-
 const handleClick = () => {
   if (props.fn) {
-    loading.value = true;
     props.fn();
-    setTimeout(() => {
-      loading.value = false;
-    }, 2000);
   }
 };
 </script>
@@ -107,7 +102,7 @@ const handleClick = () => {
     @click="handleClick"
   >
     <svg
-      v-if="loading"
+      v-if="props.loading"
       class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"

@@ -12,10 +12,13 @@ const { t } = i18n.global;
 const authStore = useAuthStore();
 const email = ref<string>("");
 const password = ref<string>("");
+const loading = ref<boolean>(false);
 
-const onSubmit = () => {
+const onSubmit = async () => {
   if (!!email.value.trim() && !!password.value.trim()) {
-    authStore.login(email.value, password.value);
+    loading.value = true;
+    await authStore.login(email.value, password.value);
+    loading.value = false;
   } else {
     warning(t("form.empties"));
   }
@@ -46,6 +49,7 @@ const onSubmit = () => {
       </PrimeInput>
       <Button
         :fn="onSubmit"
+        :loading="loading"
         bg-color="content-base"
         :text="$t('auth.loggingIn')"
       />
