@@ -3,7 +3,7 @@ import type { AxiosResponse } from "axios";
 import { router } from "@/router";
 import axiosClient from "@/support/axiosClient";
 import { useUserStore } from "@/stores/user";
-import { error } from "@/support/toast";
+import { error } from "@/composables/toast";
 import type { AxiosError } from "axios";
 import { i18n } from "@/support/i18n";
 import StatusCode from "status-code-enum";

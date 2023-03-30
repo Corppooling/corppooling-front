@@ -52,5 +52,8 @@
     "warning": "Attention",
     "error": "Une erreur s'est produite",
     "errorBody": "Veuillez réessayer"
+  },
+  "form": {
+    "empties": "Veuillez remplir tous les champs"
   }
 }

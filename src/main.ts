@@ -24,7 +24,7 @@ const app = createApp(App, {
 
 app.use(createPinia());
 app.use(router);
-app.use(PrimeVue);
+app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 app.use(i18n);
 app.directive("tooltip", Tooltip);

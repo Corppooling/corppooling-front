@@ -5,14 +5,19 @@ import Password from "primevue/password";
 import Button from "@/components/molecules/Button.vue";
 import PrimeInput from "@/components/atoms/PrimeInput.vue";
 import { useAuthStore } from "@/stores/auth";
+import { warning } from "@/composables/toast";
+import { i18n } from "@/support/i18n";
 
+const { t } = i18n.global;
 const authStore = useAuthStore();
 const email = ref<string>("");
 const password = ref<string>("");
 
 const onSubmit = () => {
-  if (email.value && password.value) {
+  if (!!email.value.trim() && !!password.value.trim()) {
     authStore.login(email.value, password.value);
+  } else {
+    warning(t("form.empties"));
   }
 };
 </script>
