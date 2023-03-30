@@ -3,6 +3,12 @@ import type { AxiosResponse } from "axios";
 import { router } from "@/router";
 import axiosClient from "@/support/axiosClient";
 import { useUserStore } from "@/stores/user";
+import { error } from "@/support/toast";
+import type { AxiosError } from "axios";
+import { i18n } from "@/support/i18n";
+import StatusCode from "status-code-enum";
+
+const { t } = i18n.global;
 
 export const useAuthStore = defineStore({
   id: "auth",
@@ -13,13 +19,20 @@ export const useAuthStore = defineStore({
   actions: {
     async login(username: string, password: string): Promise<void> {
       await axiosClient
-        .post("/api/login_check", {
+        .post("/auth", {
           username: username,
           password: password,
         })
         .then(async (res: AxiosResponse<Record<string, string>>) => {
           await this.setAllAuthItems(res.data.token, res.data.refresh_token);
           await router.push({ name: "home" });
+        })
+        .catch((err: AxiosError) => {
+          if (err.response?.status === StatusCode.ClientErrorUnauthorized) {
+            error(undefined, t("auth.badCredentials"));
+          } else {
+            error();
+          }
         });
     },
     async refreshToken(): Promise<void> {
