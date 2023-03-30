@@ -45,7 +45,7 @@ const onSubmit = () => {
         />
       </PrimeInput>
       <Button
-        @click="onSubmit"
+        :fn="onSubmit"
         bg-color="content-base"
         :text="$t('auth.loggingIn')"
       />
