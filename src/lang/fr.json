@@ -11,7 +11,8 @@
     "recontactDesc": "Vous êtes une entreprise ? Transmettez-nous votre email, nous vous recontacterons dans les plus brefs délais pour vous accompagner dans la création de votre espace Corppooling.",
     "recontact": "Je souhaite être recontacté",
     "toLogin": "J'ai déjà un compte",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "badCredentials": "Identifiants incorrects"
   },
   "header": {
     "newTrip": "Nouveau trajet",
@@ -44,5 +45,15 @@
     "searchDriver": "Je recherche un conducteur",
     "passenger": "1 passager | {count} passagers",
     "join": "Rejoindre"
+  },
+  "toast": {
+    "info": "Info",
+    "success": "Succès",
+    "warning": "Attention",
+    "error": "Une erreur s'est produite",
+    "errorBody": "Veuillez réessayer"
+  },
+  "form": {
+    "empties": "Veuillez remplir tous les champs"
   }
 }
