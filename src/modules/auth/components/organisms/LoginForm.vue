@@ -5,14 +5,22 @@ import Password from "primevue/password";
 import Button from "@/components/molecules/Button.vue";
 import PrimeInput from "@/components/atoms/PrimeInput.vue";
 import { useAuthStore } from "@/stores/auth";
+import { warning } from "@/composables/toast";
+import { i18n } from "@/support/i18n";
 
+const { t } = i18n.global;
 const authStore = useAuthStore();
 const email = ref<string>("");
 const password = ref<string>("");
+const loading = ref<boolean>(false);
 
-const onSubmit = () => {
-  if (email.value && password.value) {
-    authStore.login(email.value, password.value);
+const onSubmit = async () => {
+  if (!!email.value.trim() && !!password.value.trim()) {
+    loading.value = true;
+    await authStore.login(email.value, password.value);
+    loading.value = false;
+  } else {
+    warning(t("form.empties"));
   }
 };
 </script>
@@ -40,7 +48,8 @@ const onSubmit = () => {
         />
       </PrimeInput>
       <Button
-        @click="onSubmit"
+        :fn="onSubmit"
+        :loading="loading"
         bg-color="content-base"
         :text="$t('auth.loggingIn')"
       />

@@ -12,14 +12,14 @@ import talk_driver from "@/assets/images/tutorial/talk_driver.svg";
 import talk_passenger from "@/assets/images/tutorial/talk_passenger.svg";
 import car_driver from "@/assets/images/tutorial/car_driver.svg";
 import car_passenger from "@/assets/images/tutorial/car_passenger.svg";
-import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/stores/user";
+import { i18n } from "@/support/i18n";
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
 userStore.setUser();
 
-const { t } = useI18n();
+const { t } = i18n.global;
 
 const tutorialElements = computed((): Array<Record<string, string>> => {
   switch (type.value) {

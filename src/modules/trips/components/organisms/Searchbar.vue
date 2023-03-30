@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
+import Button from "@/components/molecules/Button.vue";
 
 const departureLocation = ref<string>("");
 const arrivalLocation = ref<string>("");
@@ -57,11 +58,12 @@ const departureDate = ref<Date>();
         />
       </span>
     </div>
-    <div
-      class="bg-content-light flex grow justify-center items-center cursor-pointer py-4 min-w-[200px]"
-    >
-      <span class="text-white text-base">{{ $t("header.search") }}</span>
-    </div>
+    <Button
+      :fn="() => {}"
+      bg-color="content-light"
+      class="grow min-w-[200px] rounded-l-none bg-content-light"
+      :text="$t('header.search')"
+    />
   </div>
 </template>
 
