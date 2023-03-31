@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Button from "@/components/molecules/Button.vue";
 import { DateTime } from "luxon";
 import { computed } from "vue";
+import defaultProfileImage from "@/assets/images/logos/logo_white.svg";
 
 const props = defineProps<{
   trip: Trip;
@@ -45,7 +46,7 @@ const bgTypeColor = computed((): string => {
           <div class="py-1">
             <font-awesome-icon class="w-4" icon="fa-calendar" />
             <span class="ml-1">{{
-              DateTime.fromISO(props.trip.departure_date).toLocaleString({
+              DateTime.fromISO(props.trip.departure_time).toLocaleString({
                 month: "long",
                 day: "2-digit",
                 hour: "2-digit",
@@ -74,13 +75,12 @@ const bgTypeColor = computed((): string => {
         </div>
         <div class="hidden sm:flex flex-col justify-center items-center ml-4">
           <div
-            v-if="props.trip.announcer.profile_image"
-            class="rounded-full w-16 h-16 overflow-hidden p-1 mb-2"
+            class="rounded-full w-16 h-16 overflow-hidden p-1 mb-2 flex justify-center items-center"
             :class="bgTypeColor"
           >
             <img
-              class="w-full rounded-full"
-              :src="props.trip.announcer.profile_image"
+              class="w-full"
+              :src="props.trip.announcer.profile_image ?? defaultProfileImage"
               alt=""
             />
           </div>
