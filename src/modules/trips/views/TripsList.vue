@@ -44,9 +44,9 @@ onMounted(async () => {
       <div class="flex flex-col items-center py-10 px-6 bg-content-flight">
         <Searchbar />
       </div>
-      <div class="flex p-10 max-w-[1246px] mx-auto">
+      <div class="flex flex-col lg:flex-row p-10 max-w-[1246px] mx-auto">
         <Filters />
-        <div class="flex flex-col px-10">
+        <div class="flex flex-col px-0 lg:px-10">
           <div class="pb-10 flex justify-between items-center">
             <h2 class="text-3xl">Voyages</h2>
             <DataViewLayoutOptions v-model="layout" />
