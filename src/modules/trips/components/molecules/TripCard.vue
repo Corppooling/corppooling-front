@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { type Trip, TripType } from "@/interfaces/trip.interface";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Button from "@/components/molecules/Button.vue";
 import { DateTime } from "luxon";
 import { computed } from "vue";
 
@@ -92,12 +93,13 @@ const bgTypeColor = computed((): string => {
         </div>
       </div>
       <div class="pt-6">
-        <div
-          class="bg-content-base text-white flex items-center w-fit mx-auto rounded-2xl py-2 px-10 cursor-pointer hover:drop-shadow-md"
-        >
-          <span class="mr-2">{{ $t("trip.join") }}</span>
-          <font-awesome-icon icon="fa-location-arrow" class="rotate-45" />
-        </div>
+        <Button
+          :text="$t('trip.join')"
+          icon="fa-location-arrow"
+          iconClass="rotate-45"
+          bgColor="content-base"
+          iconPosition="right"
+        />
       </div>
     </div>
   </div>

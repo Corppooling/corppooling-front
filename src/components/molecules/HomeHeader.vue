@@ -20,7 +20,7 @@ userStore.setUser();
         v-if="userStore.isAuth"
         class="absolute lg:static -bottom-28"
       />
-      <h2 v-else class="text-4xl py-1 px-5 rounded-md">
+      <h2 v-else class="text-4xl py-1 px-5 rounded-md text-center">
         {{ $t("home.description") }}
       </h2>
     </div>

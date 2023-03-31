@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
+import { computed } from "vue";
 
 const props = defineProps<{
   to?: Record<string, string>;
@@ -31,6 +31,8 @@ const props = defineProps<{
     | "7xl"
     | "8xl"
     | "9xl";
+  iconClass?: string;
+  iconPosition?: "left" | "right";
   bgColor?: string;
   textColor?: string;
   fn?: () => void;
@@ -123,12 +125,21 @@ const handleClick = () => {
       ></path>
     </svg>
     <font-awesome-icon
-      v-if="props.icon && !loading"
-      :class="iconSizeClass"
+      v-if="
+        props.icon &&
+        !props.loading &&
+        (props.iconPosition === 'left' || !props.iconPosition)
+      "
+      :class="[iconSizeClass, props.iconClass]"
       :icon="props.icon"
     />
-    <span :class="[textSizeClass, icon && text && 'ml-2']">{{
+    <span :class="[textSizeClass, props.icon && props.text && 'mx-2']">{{
       props.text
     }}</span>
+    <font-awesome-icon
+      v-if="props.icon && !props.loading && props.iconPosition === 'right'"
+      :class="[iconSizeClass, props.iconClass]"
+      :icon="props.icon"
+    />
   </component>
 </template>
