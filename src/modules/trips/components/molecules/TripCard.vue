@@ -14,10 +14,9 @@ const bgTypeColor = computed((): string => {
   switch (props.trip.type) {
     case TripType.DRIVER:
       return "bg-main-base";
-    case TripType.PASSENGER:
+    default:
       return "bg-content-flight";
   }
-  return "";
 });
 </script>
 

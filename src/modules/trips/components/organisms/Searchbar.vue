@@ -61,7 +61,7 @@ const departureDate = ref<Date>();
     <Button
       :fn="() => {}"
       bg-color="content-light"
-      class="grow min-w-[200px] rounded-l-none bg-content-light"
+      class="grow min-w-[200px] rounded-tr-none rounded-l-none bg-content-light"
       :text="$t('header.search')"
     />
   </div>
