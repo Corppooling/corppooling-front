@@ -39,11 +39,19 @@ const swiperOptions = ref<SwiperOptions>({
 
 <template>
   <div>
-    <Title
-      v-if="trips.length > 0"
-      logoColor="base"
-      :content="$t('home.popularTrips')"
-    />
+    <div class="flex flex-wrap justify-between items-center">
+      <Title
+        v-if="trips.length > 0"
+        logoColor="base"
+        :content="$t('home.popularTrips')"
+      />
+      <RouterLink
+        :to="{ name: 'trips' }"
+        class="hover:underline p-2 text-lg block"
+      >
+        {{ $t("home.seeAll") }}
+      </RouterLink>
+    </div>
     <Swiper
       class="w-full"
       :options="swiperOptions"

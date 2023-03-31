@@ -31,6 +31,7 @@
     "howTo": "Comment ça marche ?",
     "welcome": "Bienvenue sur Corppooling",
     "description": "L'application de covoiturage dédiée aux entreprises",
+    "seeAll": "Voir tous les trajets",
     "tutorial": {
       "searchPassenger": "Partagez l'endroit où vous voulez aller. Peut-être que quelqu'un souhaite y aller aussi !",
       "searchDriver": "Inscrivez votre trajet sur l'application pour permettre à vos collègues de partir avec vous.",

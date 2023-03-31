@@ -8,6 +8,14 @@ import { useUserStore } from "@/stores/user";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/NotFound.vue"),
+    meta: {
+      authRequired: false,
+    },
+  },
+  {
     path: "/",
     name: "home",
     component: HomeView,
@@ -29,6 +37,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/modules/auth/views/Register.vue"),
     meta: {
       authRequired: false,
+    },
+  },
+  {
+    path: "/trips",
+    name: "trips",
+    component: () => import("@/modules/trips/views/TripsList.vue"),
+    meta: {
+      authRequired: true,
     },
   },
 ];
