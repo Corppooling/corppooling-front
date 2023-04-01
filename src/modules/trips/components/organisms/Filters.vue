@@ -42,7 +42,9 @@ window.addEventListener("resize", () => {
             name="price"
             :value="Order.ASC"
           />
-          <label for="priceASC" class="ml-2">Prix croissant</label>
+          <label for="priceASC" class="ml-2 cursor-pointer">
+            Prix croissant
+          </label>
         </div>
         <div class="flex items-center p-2">
           <RadioButton
@@ -51,7 +53,9 @@ window.addEventListener("resize", () => {
             name="price"
             :value="Order.DESC"
           />
-          <label for="priceDESC" class="ml-2">Prix décroissant</label>
+          <label for="priceDESC" class="ml-2 cursor-pointer">
+            Prix décroissant
+          </label>
         </div>
       </div>
     </div>

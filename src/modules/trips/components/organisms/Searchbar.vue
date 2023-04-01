@@ -3,10 +3,47 @@ import { ref } from "vue";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
 import Button from "@/components/molecules/Button.vue";
+import { useTripStore } from "@/stores/trip";
+import { useRoute, useRouter } from "vue-router";
+import { DateTime } from "luxon";
 
-const departureLocation = ref<string>("");
-const arrivalLocation = ref<string>("");
-const departureDate = ref<Date>();
+const route = useRoute();
+const router = useRouter();
+const departureLocation = ref<string>(route.query["departure"] as string);
+const arrivalLocation = ref<string>(route.query["arrival"] as string);
+const departureTime = ref<Date | undefined>(
+  route.query["departure_time"]
+    ? new Date(route.query["departure_time"] as string)
+    : undefined
+);
+const tripStore = useTripStore();
+const loading = ref<boolean>(false);
+
+const search = async () => {
+  loading.value = true;
+  await tripStore.setTrips(
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    departureLocation.value,
+    arrivalLocation.value,
+    departureTime.value
+      ? DateTime.fromJSDate(departureTime.value).toISO()
+      : undefined
+  );
+  await router.push({
+    name: "trips",
+    query: {
+      departure: departureLocation.value,
+      arrival: arrivalLocation.value,
+      departure_time: departureTime.value
+        ? DateTime.fromJSDate(departureTime.value).toISO()
+        : undefined,
+    },
+  });
+  loading.value = false;
+};
 </script>
 
 <template>
@@ -50,16 +87,20 @@ const departureDate = ref<Date>();
           icon="calendar"
         />
         <Calendar
-          class="w-full lg:w-36"
-          v-model="departureDate"
-          dateFormat="dd/mm/yy"
-          placeholder="Date"
-          :min-date="new Date(Date.now())"
+          class="w-full lg:w-48"
+          v-model="departureTime"
+          hourFormat="24"
+          dateFormat="dd/mm/yy à"
+          placeholder="Aujourd'hui"
+          :min-date="DateTime.now().toJSDate()"
+          showTime
+          showButtonBar
         />
       </span>
     </div>
     <Button
-      :fn="() => {}"
+      :fn="search"
+      :loading="loading"
       bg-color="content-light"
       class="grow min-w-[200px] rounded-tr-none rounded-l-none bg-content-light"
       :text="$t('header.search')"

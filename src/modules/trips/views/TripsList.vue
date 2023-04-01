@@ -2,11 +2,11 @@
 import { type Component, onMounted, ref, watch } from "vue";
 import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
 import Filters from "@/modules/trips/components/organisms/Filters.vue";
-import type { Trip } from "@/interfaces/trip.interface";
 import { useTripStore } from "@/stores/trip";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import TripCard from "@/modules/trips/components/molecules/TripCard.vue";
 import TripInline from "@/modules/trips/components/molecules/TripInline.vue";
+import { useRoute } from "vue-router";
 
 const enum Layout {
   GRID = "grid",
@@ -14,8 +14,8 @@ const enum Layout {
 }
 const tripComponent = ref<Component>(TripCard);
 const tripStore = useTripStore();
-const trips = ref<Array<Trip>>([]);
 const layout = ref<Layout>(Layout.GRID);
+const route = useRoute();
 
 watch(
   layout,
@@ -32,9 +32,16 @@ watch(
   { immediate: true }
 );
 
-onMounted(async () => {
-  await tripStore.setLatestTrips();
-  trips.value = tripStore.lastTrips;
+onMounted(() => {
+  tripStore.setTrips(
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    route.query["departure"] as string,
+    route.query["arrival"] as string,
+    route.query["departure_time"] as string
+  );
 });
 </script>
 
@@ -55,7 +62,7 @@ onMounted(async () => {
             :class="layout === Layout.GRID ? 'flex-wrap' : 'flex-col'"
             class="flex justify-center gap-5"
           >
-            <template v-for="trip in trips" :key="trip.id">
+            <template v-for="trip in tripStore.trips" :key="trip.id">
               <component :is="tripComponent" :trip="trip" />
             </template>
           </div>
