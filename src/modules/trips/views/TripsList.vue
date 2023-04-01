@@ -53,14 +53,14 @@ onMounted(() => {
       </div>
       <div class="flex flex-col lg:flex-row p-10 max-w-[1246px] mx-auto">
         <Filters />
-        <div class="flex flex-col px-0 lg:px-10">
+        <div class="flex flex-col px-0 lg:px-10 w-full">
           <div class="pb-10 flex justify-between items-center">
             <h2 class="text-3xl">Voyages</h2>
             <DataViewLayoutOptions v-model="layout" />
           </div>
           <div
             :class="layout === Layout.GRID ? 'flex-wrap' : 'flex-col'"
-            class="flex justify-center gap-5"
+            class="flex justify-center lg:justify-start gap-5"
           >
             <template v-for="trip in tripStore.trips" :key="trip.id">
               <component :is="tripComponent" :trip="trip" />

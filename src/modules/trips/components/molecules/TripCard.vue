@@ -39,7 +39,7 @@ const bgTypeColor = computed((): string => {
         size="2xl"
       />
     </div>
-    <div class="bg-white flex-col p-6 rounded-2xl max-w-[350px] sm:w-[350px]">
+    <div class="bg-white p-6 rounded-2xl max-w-[350px] sm:w-[350px]">
       <div class="flex justify-around">
         <div class="flex flex-col">
           <div class="py-1 whitespace-nowrap">
@@ -84,7 +84,7 @@ const bgTypeColor = computed((): string => {
               alt=""
             />
           </div>
-          <div>
+          <div class="flex text-center">
             <span>
               {{ props.trip.announcer.firstname }}
               {{ props.trip.announcer.lastname }}
