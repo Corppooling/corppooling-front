@@ -19,7 +19,7 @@ const departureTime = ref<Date | undefined>(
 const tripStore = useTripStore();
 const loading = ref<boolean>(false);
 
-const search = async () => {
+const search = async (): Promise<void> => {
   loading.value = true;
   await tripStore.setTrips(
     departureLocation.value,

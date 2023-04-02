@@ -27,13 +27,13 @@ watch(
   { deep: true }
 );
 
-const resetFilters = () => {
+const resetFilters = (): void => {
   sorts.value.orderSort = "order[departure_time]=asc";
   sorts.value.typeSort = "";
   tripStore.resetExtraSorts();
 };
 
-window.addEventListener("resize", () => {
+window.addEventListener("resize", (): void => {
   displayFilters.value = window.innerWidth > 1024;
 });
 </script>
