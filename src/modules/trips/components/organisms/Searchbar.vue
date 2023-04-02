@@ -82,7 +82,6 @@ const reverseLocations = (): void => {
           v-if="canReverseLocations()"
           @click="reverseLocations"
           class="absolute right-3 top-4 text-content-base opacity-60 hover:opacity-100 cursor-pointer rotate-90 lg:rotate-0"
-          size="md"
           icon="arrow-right-arrow-left"
         />
       </span>

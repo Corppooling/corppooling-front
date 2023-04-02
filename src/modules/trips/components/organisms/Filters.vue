@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
 import { TripType } from "@/interfaces/trip.interface";
+import {info} from "@/composables/toast";
 
 const tripStore = useTripStore();
 const route = useRoute();
@@ -31,6 +32,7 @@ const resetFilters = (): void => {
   sorts.value.orderSort = "order[departure_time]=asc";
   sorts.value.typeSort = "";
   tripStore.resetExtraSorts();
+  info("Tri réinitialisés");
 };
 
 window.addEventListener("resize", (): void => {
