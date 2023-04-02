@@ -24,6 +24,10 @@ const departureTime = ref<Date | undefined>(
 const tripStore = useTripStore();
 const loading = ref<boolean>(false);
 
+const emit = defineEmits<{
+  (e: "closeModal", value: boolean): void;
+}>();
+
 const search = async (): Promise<void> => {
   loading.value = true;
   await tripStore.setTrips(
@@ -44,6 +48,7 @@ const search = async (): Promise<void> => {
     },
   });
   loading.value = false;
+  emit("closeModal", false);
 };
 
 const canReverseLocations = (): boolean => {
