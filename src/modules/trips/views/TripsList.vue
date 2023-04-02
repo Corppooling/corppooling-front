@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Component, onMounted, ref, shallowRef, watch } from "vue";
+import { type Component, onBeforeMount, ref, shallowRef, watch } from "vue";
 import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
 import Filters from "@/modules/trips/components/organisms/Filters.vue";
 import { useTripStore } from "@/stores/trip";
@@ -7,6 +7,7 @@ import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import TripCard from "@/modules/trips/components/molecules/TripCard.vue";
 import TripInline from "@/modules/trips/components/molecules/TripInline.vue";
 import { useRoute } from "vue-router";
+import Spinner from "@/components/atoms/Spinner.vue";
 
 const enum Layout {
   GRID = "grid",
@@ -32,9 +33,9 @@ watch(
   { immediate: true }
 );
 
-onMounted(() => {
+onBeforeMount(async () => {
   tripStore.resetExtraSorts();
-  tripStore.setTrips(
+  await tripStore.setTrips(
     route.query["departure"] as string,
     route.query["arrival"] as string,
     route.query["departure_time"] as string
@@ -55,8 +56,13 @@ onMounted(() => {
             <h2 class="text-3xl">Voyages</h2>
             <DataViewLayoutOptions v-model="layout" />
           </div>
+          <div v-if="tripStore.requestLoading">
+            <div class="flex justify-center items-center my-8">
+              <Spinner :size="6" color="content-base" />
+            </div>
+          </div>
           <div
-            v-if="tripStore.trips.length > 0"
+            v-else-if="tripStore.trips.length > 0"
             :class="layout === Layout.GRID ? 'flex-wrap' : 'flex-col'"
             class="flex justify-center lg:justify-start gap-5"
           >

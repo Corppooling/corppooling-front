@@ -8,6 +8,7 @@ export const useTripStore = defineStore({
     trips: [] as Array<Trip>,
     lastTrips: [] as Array<Trip>,
     extraSorts: [] as Array<string>,
+    loading: false,
   }),
   actions: {
     async setTrips(
@@ -17,6 +18,8 @@ export const useTripStore = defineStore({
       page?: number,
       itemsPerPage?: number
     ) {
+      this.loading = true;
+
       const endOfDay: string | undefined = date
         ? DateTime.fromISO(date).endOf("day").toISO()
         : undefined;
@@ -42,6 +45,8 @@ export const useTripStore = defineStore({
         .then((res) => {
           this.trips = res.data["hydra:member"];
         });
+
+      this.loading = false;
     },
     async setLatestTrips() {
       await axiosClient
@@ -68,6 +73,9 @@ export const useTripStore = defineStore({
     },
     getLastTrips(): Array<Trip> {
       return this.lastTrips;
+    },
+    requestLoading(): boolean {
+      return this.loading;
     },
   },
 });
