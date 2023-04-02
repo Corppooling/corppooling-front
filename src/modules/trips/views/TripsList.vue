@@ -14,7 +14,7 @@ const enum Layout {
 }
 const tripComponent = ref<Component>(TripCard);
 const tripStore = useTripStore();
-const layout = ref<Layout>(Layout.GRID);
+const layout = ref<Layout>(Layout.LIST);
 const route = useRoute();
 
 watch(

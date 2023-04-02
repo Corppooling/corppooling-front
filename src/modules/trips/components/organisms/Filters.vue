@@ -4,23 +4,32 @@ import RadioButton from "primevue/radiobutton";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
+import {TripType} from "@/interfaces/trip.interface";
 
 const tripStore = useTripStore();
 const route = useRoute();
-const orderSort = ref<string>();
+const sorts = ref<Record<string, string>>({
+  orderSort: "",
+  typeSort: "",
+});
 const displayFilters = ref<boolean>(true);
 
-watch(orderSort, () => {
-  tripStore.setExtraSorts([orderSort.value ?? ""]);
-  tripStore.setTrips(
-    route.query["departure"] as string,
-    route.query["arrival"] as string,
-    route.query["departure_time"] as string
-  );
-});
+watch(
+  sorts,
+  () => {
+    tripStore.setExtraSorts([sorts.value.orderSort, sorts.value.typeSort]);
+    tripStore.setTrips(
+      route.query["departure"] as string,
+      route.query["arrival"] as string,
+      route.query["departure_time"] as string
+    );
+  },
+  { deep: true }
+);
 
 const resetFilters = () => {
-  orderSort.value = undefined;
+  sorts.value.orderSort = "";
+  sorts.value.typeSort = "";
   tripStore.resetExtraSorts();
 };
 
@@ -52,7 +61,7 @@ window.addEventListener("resize", () => {
       <div class="flex flex-col mt-4">
         <div class="flex items-center p-2">
           <RadioButton
-            v-model="orderSort"
+            v-model="sorts.orderSort"
             inputId="departureTimeASC"
             name="orderSort"
             value="order[departure_time]=asc"
@@ -63,13 +72,39 @@ window.addEventListener("resize", () => {
         </div>
         <div class="flex items-center p-2">
           <RadioButton
-            v-model="orderSort"
+            v-model="sorts.orderSort"
             inputId="priceASC"
             name="orderSort"
             value="order[price]=asc"
           />
           <label for="priceASC" class="ml-2 cursor-pointer">
             Prix le plus bas
+          </label>
+        </div>
+      </div>
+      <hr class="border-b-2 opacity-10 my-4" />
+      <h3 class="text-xl">Je suis</h3>
+      <div class="flex flex-col mt-4">
+        <div class="flex items-center p-2">
+          <RadioButton
+            v-model="sorts.typeSort"
+            inputId="typeSortPassenger"
+            name="typeSort"
+            :value="`type=${TripType.PASSENGER}`"
+          />
+          <label for="typeSortPassenger" class="ml-2 cursor-pointer">
+            Conducteur
+          </label>
+        </div>
+        <div class="flex items-center p-2">
+          <RadioButton
+            v-model="sorts.typeSort"
+            inputId="typeSortDriver"
+            name="typeSort"
+            :value="`type=${TripType.DRIVER}`"
+          />
+          <label for="typeSortDriver" class="ml-2 cursor-pointer">
+            Passager
           </label>
         </div>
       </div>
