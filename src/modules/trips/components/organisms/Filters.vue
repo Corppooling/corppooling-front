@@ -51,7 +51,7 @@ window.addEventListener("resize", (): void => {
             <font-awesome-icon
               size="lg"
               icon="trash-can"
-              class="text-content-base opacity-40"
+              class="text-content-base opacity-40 hover:opacity-100"
             />
           </span>
           <font-awesome-icon

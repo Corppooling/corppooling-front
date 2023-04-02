@@ -6,11 +6,16 @@ import Button from "@/components/molecules/Button.vue";
 import { useTripStore } from "@/stores/trip";
 import { useRoute, useRouter } from "vue-router";
 import { DateTime } from "luxon";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const route = useRoute();
 const router = useRouter();
-const departureLocation = ref<string>(route.query["departure"] as string);
-const arrivalLocation = ref<string>(route.query["arrival"] as string);
+const departureLocation = ref<string | undefined>(
+  route.query["departure"] as string
+);
+const arrivalLocation = ref<string | undefined>(
+  route.query["arrival"] as string
+);
 const departureTime = ref<Date | undefined>(
   route.query["departure_time"]
     ? new Date(route.query["departure_time"] as string)
@@ -40,6 +45,19 @@ const search = async (): Promise<void> => {
   });
   loading.value = false;
 };
+
+const canReverseLocations = (): boolean => {
+  return (
+    (!!departureLocation.value?.trim() || !!arrivalLocation.value?.trim()) &&
+    departureLocation.value !== arrivalLocation.value
+  );
+};
+
+const reverseLocations = (): void => {
+  const temp: string | undefined = departureLocation.value?.trim();
+  departureLocation.value = arrivalLocation.value?.trim();
+  arrivalLocation.value = temp;
+};
 </script>
 
 <template>
@@ -48,16 +66,24 @@ const search = async (): Promise<void> => {
   >
     <div>
       <span
-        class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light"
+        class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light relative"
       >
         <font-awesome-icon
-          class="text-content-base opacity-40"
+          :class="departureLocation?.trim() ? 'opacity-100' : 'opacity-40'"
+          class="text-content-base"
           icon="fa-flag-checkered"
         />
         <InputText
           class="w-full"
           v-model="departureLocation"
           placeholder="Départ"
+        />
+        <font-awesome-icon
+          v-if="canReverseLocations()"
+          @click="reverseLocations"
+          class="absolute right-3 top-4 text-content-base opacity-60 hover:opacity-100 cursor-pointer rotate-90 lg:rotate-0"
+          size="md"
+          icon="arrow-right-arrow-left"
         />
       </span>
     </div>
@@ -66,7 +92,8 @@ const search = async (): Promise<void> => {
         class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light"
       >
         <font-awesome-icon
-          class="text-content-base opacity-40"
+          :class="arrivalLocation?.trim() ? 'opacity-100' : 'opacity-40'"
+          class="text-content-base"
           icon="fa-map-marker-alt"
         />
         <InputText
@@ -79,7 +106,8 @@ const search = async (): Promise<void> => {
     <div>
       <span class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit">
         <font-awesome-icon
-          class="text-content-base opacity-40"
+          :class="departureTime ? 'opacity-100' : 'opacity-40'"
+          class="text-content-base"
           icon="calendar"
         />
         <Calendar
@@ -87,7 +115,7 @@ const search = async (): Promise<void> => {
           v-model="departureTime"
           hourFormat="24"
           dateFormat="dd/mm/yy à"
-          placeholder="Aujourd'hui"
+          placeholder="Toutes les dates"
           :min-date="DateTime.now().toJSDate()"
           showTime
           showButtonBar

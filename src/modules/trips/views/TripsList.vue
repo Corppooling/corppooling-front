@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Component, onMounted, ref, watch } from "vue";
+import { type Component, onMounted, ref, shallowRef, watch } from "vue";
 import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
 import Filters from "@/modules/trips/components/organisms/Filters.vue";
 import { useTripStore } from "@/stores/trip";
@@ -12,7 +12,7 @@ const enum Layout {
   GRID = "grid",
   LIST = "list",
 }
-const tripComponent = ref<Component>(TripCard);
+const tripComponent = shallowRef<Component>(TripCard);
 const tripStore = useTripStore();
 const layout = ref<Layout>(Layout.LIST);
 const route = useRoute();
