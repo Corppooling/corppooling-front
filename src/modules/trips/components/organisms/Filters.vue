@@ -4,12 +4,12 @@ import RadioButton from "primevue/radiobutton";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
-import {TripType} from "@/interfaces/trip.interface";
+import { TripType } from "@/interfaces/trip.interface";
 
 const tripStore = useTripStore();
 const route = useRoute();
 const sorts = ref<Record<string, string>>({
-  orderSort: "",
+  orderSort: "order[departure_time]=asc",
   typeSort: "",
 });
 const displayFilters = ref<boolean>(true);
@@ -28,7 +28,7 @@ watch(
 );
 
 const resetFilters = () => {
-  sorts.value.orderSort = "";
+  sorts.value.orderSort = "order[departure_time]=asc";
   sorts.value.typeSort = "";
   tripStore.resetExtraSorts();
 };
@@ -48,7 +48,11 @@ window.addEventListener("resize", () => {
         <h3 class="text-xl">Trier par</h3>
         <div class="flex items-center">
           <span @click="resetFilters" class="cursor-pointer p-2">
-            Tout effacer
+            <font-awesome-icon
+              size="lg"
+              icon="trash-can"
+              class="text-content-base opacity-40"
+            />
           </span>
           <font-awesome-icon
             size="xl"
@@ -68,6 +72,17 @@ window.addEventListener("resize", () => {
           />
           <label for="departureTimeASC" class="ml-2 cursor-pointer">
             Départ le plus tôt
+          </label>
+        </div>
+        <div class="flex items-center p-2">
+          <RadioButton
+            v-model="sorts.orderSort"
+            inputId="departureTimeDESC"
+            name="orderSort"
+            value="order[departure_time]=desc"
+          />
+          <label for="departureTimeDESC" class="ml-2 cursor-pointer">
+            Départ le plus tard
           </label>
         </div>
         <div class="flex items-center p-2">

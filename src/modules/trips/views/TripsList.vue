@@ -56,12 +56,22 @@ onMounted(() => {
             <DataViewLayoutOptions v-model="layout" />
           </div>
           <div
+            v-if="tripStore.trips.length > 0"
             :class="layout === Layout.GRID ? 'flex-wrap' : 'flex-col'"
             class="flex justify-center lg:justify-start gap-5"
           >
             <template v-for="trip in tripStore.trips" :key="trip.id">
               <component :is="tripComponent" :trip="trip" />
             </template>
+          </div>
+          <div v-else class="text-xl text-center my-8">
+            <font-awesome-icon
+              class="text-content-base opacity-40"
+              icon="fa-flag-checkered"
+            />
+            <p class="opacity-70">
+              Aucun voyage ne correspond à votre recherche
+            </p>
           </div>
         </div>
       </div>
