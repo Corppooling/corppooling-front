@@ -22,10 +22,6 @@ const loading = ref<boolean>(false);
 const search = async () => {
   loading.value = true;
   await tripStore.setTrips(
-    undefined,
-    undefined,
-    undefined,
-    undefined,
     departureLocation.value,
     arrivalLocation.value,
     departureTime.value

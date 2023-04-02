@@ -7,20 +7,25 @@ export const useTripStore = defineStore({
   state: () => ({
     trips: [] as Array<Trip>,
     lastTrips: [] as Array<Trip>,
+    extraSorts: [] as Array<string>,
   }),
   actions: {
     async setTrips(
-      page?: number,
-      itemsPerPage?: number,
-      order?: string,
-      orderDir?: string,
       departure?: string,
       arrival?: string,
-      date?: string
+      date?: string,
+      page?: number,
+      itemsPerPage?: number
     ) {
-      const endOfDay = date
+      const endOfDay: string | undefined = date
         ? DateTime.fromISO(date).endOf("day").toISO()
         : undefined;
+
+      const extraSortsObject: Record<string, string> = {};
+      for (const extraSort of this.extraSorts) {
+        const [key, value] = extraSort.split("=");
+        extraSortsObject[key] = value;
+      }
 
       await axiosClient
         .get("api/trips", {
@@ -31,6 +36,7 @@ export const useTripStore = defineStore({
             arrival_location: arrival,
             "departure_time[after]": date,
             "departure_time[before]": endOfDay,
+            ...extraSortsObject,
           },
         })
         .then((res) => {
@@ -48,6 +54,12 @@ export const useTripStore = defineStore({
         .then((res) => {
           this.lastTrips = res.data["hydra:member"];
         });
+    },
+    setExtraSorts(extraSorts: Array<string>) {
+      this.extraSorts = extraSorts;
+    },
+    resetExtraSorts() {
+      this.extraSorts = [];
     },
   },
   getters: {

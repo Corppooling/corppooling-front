@@ -33,11 +33,8 @@ watch(
 );
 
 onMounted(() => {
+  tripStore.resetExtraSorts();
   tripStore.setTrips(
-    undefined,
-    undefined,
-    undefined,
-    undefined,
     route.query["departure"] as string,
     route.query["arrival"] as string,
     route.query["departure_time"] as string

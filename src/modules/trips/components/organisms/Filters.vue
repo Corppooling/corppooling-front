@@ -1,15 +1,28 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import RadioButton from "primevue/radiobutton";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useTripStore } from "@/stores/trip";
+import { useRoute } from "vue-router";
 
-const enum Order {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-const priceOrder = ref<Order | null>(null);
+const tripStore = useTripStore();
+const route = useRoute();
+const orderSort = ref<string>();
 const displayFilters = ref<boolean>(true);
+
+watch(orderSort, () => {
+  tripStore.setExtraSorts([orderSort.value ?? ""]);
+  tripStore.setTrips(
+    route.query["departure"] as string,
+    route.query["arrival"] as string,
+    route.query["departure_time"] as string
+  );
+});
+
+const resetFilters = () => {
+  orderSort.value = undefined;
+  tripStore.resetExtraSorts();
+};
 
 window.addEventListener("resize", () => {
   displayFilters.value = window.innerWidth > 1024;
@@ -25,7 +38,9 @@ window.addEventListener("resize", () => {
       <div class="flex justify-between items-center">
         <h3 class="text-xl">Trier par</h3>
         <div class="flex items-center">
-          <span class="cursor-pointer p-2">Tout effacer</span>
+          <span @click="resetFilters" class="cursor-pointer p-2">
+            Tout effacer
+          </span>
           <font-awesome-icon
             size="xl"
             icon="times"
@@ -37,24 +52,24 @@ window.addEventListener("resize", () => {
       <div class="flex flex-col mt-4">
         <div class="flex items-center p-2">
           <RadioButton
-            v-model="priceOrder"
-            inputId="priceASC"
-            name="price"
-            :value="Order.ASC"
+            v-model="orderSort"
+            inputId="departureTimeASC"
+            name="orderSort"
+            value="order[departure_time]=asc"
           />
-          <label for="priceASC" class="ml-2 cursor-pointer">
-            Prix croissant
+          <label for="departureTimeASC" class="ml-2 cursor-pointer">
+            Départ le plus tôt
           </label>
         </div>
         <div class="flex items-center p-2">
           <RadioButton
-            v-model="priceOrder"
-            inputId="priceDESC"
-            name="price"
-            :value="Order.DESC"
+            v-model="orderSort"
+            inputId="priceASC"
+            name="orderSort"
+            value="order[price]=asc"
           />
-          <label for="priceDESC" class="ml-2 cursor-pointer">
-            Prix décroissant
+          <label for="priceASC" class="ml-2 cursor-pointer">
+            Prix le plus bas
           </label>
         </div>
       </div>
