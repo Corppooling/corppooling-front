@@ -29,6 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/modules/auth/views/Login.vue"),
     meta: {
       authRequired: false,
+      hideFooter: true,
     },
   },
   {
@@ -37,6 +38,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/modules/auth/views/Register.vue"),
     meta: {
       authRequired: false,
+      hideFooter: true,
     },
   },
   {
@@ -45,6 +47,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/modules/trips/views/TripsList.vue"),
     meta: {
       authRequired: true,
+      hideFooter: true,
     },
   },
 ];
@@ -61,8 +64,8 @@ router.beforeEach(async (to) => {
   const userStore = useUserStore();
   await userStore.setUser();
 
-  if (to?.meta?.authRequired) {
-    await userStore.setUser();
+  if (to.meta.authRequired && !userStore.isAuth) {
+    await router.push({ name: "login" });
   } else if (
     userStore.isAuth &&
     (to.name === "login" || to.name === "register")

@@ -38,7 +38,9 @@ onBeforeMount(async () => {
   await tripStore.setTrips(
     route.query["departure"] as string,
     route.query["arrival"] as string,
-    route.query["departure_time"] as string
+    route.query["departure_time"] as string,
+    1,
+    7
   );
 });
 </script>
@@ -56,7 +58,7 @@ onBeforeMount(async () => {
             <h2 class="text-3xl">Voyages</h2>
             <DataViewLayoutOptions v-model="layout" />
           </div>
-          <div v-if="tripStore.requestLoading">
+          <div class="h-screen" v-if="tripStore.requestLoading">
             <div class="flex justify-center items-center my-8">
               <Spinner :size="6" color="content-base" />
             </div>

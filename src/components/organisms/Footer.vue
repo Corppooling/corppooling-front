@@ -2,7 +2,9 @@
 import { ref, watch } from "vue";
 import SelectButton from "primevue/selectbutton";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 
+const route = useRoute();
 const { locale } = useI18n();
 const enum Lang {
   FR = "fr",
@@ -38,6 +40,7 @@ watch(
 
 <template>
   <div
+    v-if="!route.meta.hideFooter"
     class="w-full bg-content-base text-main-base py-2 relative overflow-hidden mt-auto"
   >
     <div
