@@ -6,6 +6,8 @@ export const useTripStore = defineStore({
   id: "trip",
   state: () => ({
     trips: [] as Array<Trip>,
+    totalTrips: 1,
+    currentPage: 1,
     lastTrips: [] as Array<Trip>,
     extraSorts: [] as Array<string>,
     loading: false,
@@ -15,8 +17,8 @@ export const useTripStore = defineStore({
       departure?: string,
       arrival?: string,
       date?: string,
-      page?: number,
-      itemsPerPage?: number
+      reset = true,
+      itemsPerPage = 8
     ) {
       this.loading = true;
 
@@ -33,7 +35,7 @@ export const useTripStore = defineStore({
       await axiosClient
         .get("api/trips", {
           params: {
-            page: page,
+            page: this.currentPage,
             itemsPerPage: itemsPerPage,
             departure_location: departure,
             arrival_location: arrival,
@@ -43,7 +45,14 @@ export const useTripStore = defineStore({
           },
         })
         .then((res) => {
-          this.trips = res.data["hydra:member"];
+          if (reset) {
+            this.trips = res.data["hydra:member"];
+            this.currentPage = 1;
+          } else {
+            this.trips = [...this.trips, ...res.data["hydra:member"]];
+            this.currentPage++;
+          }
+          this.totalTrips = res.data["hydra:totalItems"];
         });
 
       this.loading = false;

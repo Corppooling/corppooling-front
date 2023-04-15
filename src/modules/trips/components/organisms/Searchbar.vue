@@ -31,8 +31,10 @@ const emit = defineEmits<{
 const search = async (): Promise<void> => {
   loading.value = true;
   await tripStore.setTrips(
-    departureLocation.value,
-    arrivalLocation.value,
+    departureLocation.value?.trim()
+      ? departureLocation.value?.trim()
+      : undefined,
+    arrivalLocation.value?.trim() ? arrivalLocation.value?.trim() : undefined,
     departureTime.value
       ? DateTime.fromJSDate(departureTime.value).toISO()
       : undefined
@@ -40,8 +42,12 @@ const search = async (): Promise<void> => {
   await router.push({
     name: "trips",
     query: {
-      departure: departureLocation.value,
-      arrival: arrivalLocation.value,
+      departure: departureLocation.value?.trim()
+        ? departureLocation.value?.trim()
+        : undefined,
+      arrival: arrivalLocation.value?.trim()
+        ? arrivalLocation.value?.trim()
+        : undefined,
       departure_time: departureTime.value
         ? DateTime.fromJSDate(departureTime.value).toISO()
         : undefined,

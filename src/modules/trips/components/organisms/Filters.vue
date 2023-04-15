@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
 import { TripType } from "@/interfaces/trip.interface";
-import {info} from "@/composables/toast";
+import { info } from "@/composables/toast";
 
 const tripStore = useTripStore();
 const route = useRoute();
@@ -18,6 +18,10 @@ const displayFilters = ref<boolean>(true);
 watch(
   sorts,
   () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
     tripStore.setExtraSorts([sorts.value.orderSort, sorts.value.typeSort]);
     tripStore.setTrips(
       route.query["departure"] as string,
