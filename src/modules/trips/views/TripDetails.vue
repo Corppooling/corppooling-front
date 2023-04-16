@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
+import { onMounted } from "vue";
 
 const route = useRoute();
 const tripStore = useTripStore();
-await tripStore.setTrip(route.params.id as string);
+
+onMounted(async () => {
+  await tripStore.setTrip(route.params.id as string);
+});
 </script>
 
 <template>
