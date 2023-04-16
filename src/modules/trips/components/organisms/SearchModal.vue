@@ -21,7 +21,7 @@ const emit = defineEmits<{
       class="w-full h-full px-10 py-14 flex flex-col items-center justify-center"
     >
       <h2 class="font-bold text-3xl pb-14">{{ $t("header.whereDoYouGo") }}</h2>
-      <Searchbar />
+      <Searchbar @closeModal="emit('update:isOpen', $event)" />
     </div>
   </Modal>
 </template>

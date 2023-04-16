@@ -31,6 +31,7 @@
     "howTo": "Comment ça marche ?",
     "welcome": "Bienvenue sur Corppooling",
     "description": "L'application de covoiturage dédiée aux entreprises",
+    "seeAll": "Voir tous les trajets",
     "tutorial": {
       "searchPassenger": "Partagez l'endroit où vous voulez aller. Peut-être que quelqu'un souhaite y aller aussi !",
       "searchDriver": "Inscrivez votre trajet sur l'application pour permettre à vos collègues de partir avec vous.",
@@ -41,10 +42,25 @@
     }
   },
   "trip": {
+    "title": "Voyages",
     "searchPassengers": "Je recherche des passagers",
     "searchDriver": "Je recherche un conducteur",
     "passenger": "1 passager | {count} passagers",
-    "join": "Rejoindre"
+    "join": "Rejoindre",
+    "noTrips": "Aucun voyage ne correspond à votre recherche",
+    "filter": {
+      "departure": "Départ",
+      "arrival": "Arrivée",
+      "departureTime": "Toutes les dates",
+      "filterBy": "Filtrer par",
+      "reset": "Tri réinitialisé",
+      "departureTimeASC": "Départ le plus tôt",
+      "departureTimeDESC": "Départ le plus tard",
+      "priceASC": "Prix le plus bas",
+      "iAm": "Je suis",
+      "driver": "Conducteur",
+      "passenger": "Passager"
+    }
   },
   "toast": {
     "info": "Info",
