@@ -88,6 +88,7 @@ const bgTypeColor = computed((): string => {
         class="mt-2"
       />
       <Button
+        :to="{ name: 'trip.show', params: { id: props.trip.id } }"
         icon="fa-location-arrow"
         iconClass="rotate-45"
         bgColor="content-base"

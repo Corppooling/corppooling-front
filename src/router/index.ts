@@ -50,6 +50,14 @@ const routes: Array<RouteRecordRaw> = [
       hideFooter: true,
     },
   },
+  {
+    path: "/trips/:id",
+    name: "trip.show",
+    component: () => import("@/modules/trips/views/TripDetails.vue"),
+    meta: {
+      authRequired: true,
+    },
+  },
 ];
 
 export const router = createRouter({

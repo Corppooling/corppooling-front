@@ -94,6 +94,7 @@ const bgTypeColor = computed((): string => {
       </div>
       <div class="pt-6">
         <Button
+          :to="{ name: 'trip.show', params: { id: props.trip.id } }"
           :text="$t('trip.join')"
           icon="fa-location-arrow"
           iconClass="rotate-45"

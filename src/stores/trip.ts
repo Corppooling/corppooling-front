@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 export const useTripStore = defineStore({
   id: "trip",
   state: () => ({
+    trip: {} as Trip,
     trips: [] as Array<Trip>,
     totalTrips: 1,
     currentPage: 1,
@@ -13,6 +14,13 @@ export const useTripStore = defineStore({
     loading: false,
   }),
   actions: {
+    async setTrip(id: string) {
+      this.loading = true;
+      await axiosClient.get(`api/trips/${id}`).then((res) => {
+        this.trip = res.data;
+        this.loading = false;
+      });
+    },
     async setTrips(
       departure?: string,
       arrival?: string,
