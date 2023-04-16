@@ -7,6 +7,7 @@ import { error } from "@/composables/toast";
 import type { AxiosError } from "axios";
 import { i18nGlobal } from "@/support/i18n";
 import StatusCode from "status-code-enum";
+import axios from "axios";
 
 const { t } = i18nGlobal;
 
@@ -37,7 +38,10 @@ export const useAuthStore = defineStore({
     },
     async refreshToken(): Promise<void> {
       localStorage.removeItem("token");
-      await axiosClient
+      await axios
+        .create({
+          baseURL: import.meta.env.VITE_API_URL,
+        })
         .post("/api/token/refresh", {
           refresh_token: this.refresh_token,
         })
