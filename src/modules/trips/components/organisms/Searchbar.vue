@@ -170,6 +170,7 @@ watch(arrivalLocation, (value) => {
 </template>
 
 <style lang="scss">
+.p-autocomplete,
 .p-autocomplete-input {
   width: 100% !important;
 }
