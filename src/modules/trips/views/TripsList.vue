@@ -84,7 +84,7 @@ const handleScroll = (): void => {
         <Filters />
         <div class="flex flex-col px-0 lg:px-10 w-full">
           <div class="pb-10 flex justify-between items-center">
-            <h2 class="text-3xl">Voyages</h2>
+            <h2 class="text-3xl">{{ $t("trip.title") }}</h2>
             <DataViewLayoutOptions v-model="layout" />
           </div>
           <div
@@ -110,7 +110,7 @@ const handleScroll = (): void => {
               icon="fa-flag-checkered"
             />
             <p class="opacity-70">
-              Aucun voyage ne correspond à votre recherche
+              {{ $t("trip.noTrips") }}
             </p>
           </div>
         </div>

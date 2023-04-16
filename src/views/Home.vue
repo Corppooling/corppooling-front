@@ -13,13 +13,13 @@ import talk_passenger from "@/assets/images/tutorial/talk_passenger.svg";
 import car_driver from "@/assets/images/tutorial/car_driver.svg";
 import car_passenger from "@/assets/images/tutorial/car_passenger.svg";
 import { useUserStore } from "@/stores/user";
-import { i18n } from "@/support/i18n";
+import { i18nGlobal } from "@/support/i18n";
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
 userStore.setUser();
 
-const { t } = i18n.global;
+const { t } = i18nGlobal;
 
 const tutorialElements = computed((): Array<Record<string, string>> => {
   switch (type.value) {

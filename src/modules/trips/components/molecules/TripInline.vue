@@ -22,7 +22,7 @@ const bgTypeColor = computed((): string => {
 
 <template>
   <div
-    class="flex flex p-1 rounded-2xl shadow-md hover:shadow-lg w-full"
+    class="flex p-1 rounded-2xl shadow-md hover:shadow-lg w-full"
     :class="bgTypeColor"
   >
     <div
@@ -81,7 +81,7 @@ const bgTypeColor = computed((): string => {
         </div>
       </div>
     </div>
-    <div class="w-full !w-14 flex flex-col items-center justify-between mx-4">
+    <div class="!w-14 flex flex-col items-center justify-between mx-4">
       <font-awesome-icon
         :icon="props.trip.type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
         size="2xl"

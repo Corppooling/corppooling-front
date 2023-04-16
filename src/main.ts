@@ -15,12 +15,7 @@ import { i18n } from "@/support/i18n";
 
 library.add(fas, far, fab);
 
-const app = createApp(App, {
-  setup() {
-    const { t } = i18n.global;
-    return { t };
-  },
-});
+const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);

@@ -1,8 +1,8 @@
 import { ToastSeverity } from "primevue/api";
 import app from "@/main";
-import { i18n } from "@/support/i18n";
+import { i18nGlobal } from "@/support/i18n";
 
-const { t } = i18n.global;
+const { t } = i18nGlobal;
 const lifeTime = 3000;
 
 export const info = (title: string = t("toast.info"), body?: string): void => {

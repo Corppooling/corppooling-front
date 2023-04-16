@@ -5,10 +5,10 @@ import axiosClient from "@/support/axiosClient";
 import { useUserStore } from "@/stores/user";
 import { error } from "@/composables/toast";
 import type { AxiosError } from "axios";
-import { i18n } from "@/support/i18n";
+import { i18nGlobal } from "@/support/i18n";
 import StatusCode from "status-code-enum";
 
-const { t } = i18n.global;
+const { t } = i18nGlobal;
 
 export const useAuthStore = defineStore({
   id: "auth",

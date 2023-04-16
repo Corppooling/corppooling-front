@@ -113,7 +113,7 @@ watch(arrivalLocation, (value) => {
         <AutoComplete
           v-model="departureLocation"
           :suggestions="townsAutocomplete"
-          placeholder="Départ"
+          :placeholder="$t('trip.filter.departure')"
         />
         <font-awesome-icon
           v-if="canReverseLocations()"
@@ -136,7 +136,7 @@ watch(arrivalLocation, (value) => {
           class="w-full"
           v-model="arrivalLocation"
           :suggestions="townsAutocomplete"
-          placeholder="Arrivée"
+          :placeholder="$t('trip.filter.arrival')"
         />
       </span>
     </div>
@@ -152,7 +152,7 @@ watch(arrivalLocation, (value) => {
           v-model="departureTime"
           hourFormat="24"
           dateFormat="dd/mm/yy à"
-          placeholder="Toutes les dates"
+          :placeholder="$t('trip.filter.departureTime')"
           :min-date="DateTime.now().toJSDate()"
           showTime
           showButtonBar
