@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-import InputText from "primevue/inputtext";
+import { ref, watch } from "vue";
 import Calendar from "primevue/calendar";
+import AutoComplete from "primevue/autocomplete";
 import Button from "@/components/molecules/Button.vue";
 import { useTripStore } from "@/stores/trip";
 import { useRoute, useRouter } from "vue-router";
 import { DateTime } from "luxon";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import type { AxiosResponse } from "axios";
+import axios from "axios";
+import { useDebounceFn } from "@vueuse/core";
 
 const route = useRoute();
 const router = useRouter();
@@ -23,6 +26,7 @@ const departureTime = ref<Date | undefined>(
 );
 const tripStore = useTripStore();
 const loading = ref<boolean>(false);
+const townsAutocomplete = ref<Array<string>>([]);
 
 const emit = defineEmits<{
   (e: "closeModal", value: boolean): void;
@@ -69,6 +73,28 @@ const reverseLocations = (): void => {
   departureLocation.value = arrivalLocation.value?.trim();
   arrivalLocation.value = temp;
 };
+
+const getTowns = useDebounceFn(async (town: string) => {
+  await axios
+    .get(
+      `https://geo.api.gouv.fr/communes?nom=${town}&fields=nom,code&limit=4&boost=population`
+    )
+    .then((res: AxiosResponse<Array<Record<string, string>>>) => {
+      townsAutocomplete.value = res.data.map((town: any) => town.nom);
+    });
+}, 500);
+
+watch(departureLocation, (value) => {
+  if (value?.trim()) {
+    getTowns(value.trim());
+  }
+});
+
+watch(arrivalLocation, (value) => {
+  if (value?.trim()) {
+    getTowns(value.trim());
+  }
+});
 </script>
 
 <template>
@@ -77,16 +103,16 @@ const reverseLocations = (): void => {
   >
     <div>
       <span
-        class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light relative"
+        class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light relative"
       >
         <font-awesome-icon
           :class="departureLocation?.trim() ? 'opacity-100' : 'opacity-40'"
           class="text-content-base"
           icon="fa-flag-checkered"
         />
-        <InputText
-          class="w-full"
+        <AutoComplete
           v-model="departureLocation"
+          :suggestions="townsAutocomplete"
           placeholder="Départ"
         />
         <font-awesome-icon
@@ -99,22 +125,23 @@ const reverseLocations = (): void => {
     </div>
     <div>
       <span
-        class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light"
+        class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light"
       >
         <font-awesome-icon
           :class="arrivalLocation?.trim() ? 'opacity-100' : 'opacity-40'"
           class="text-content-base"
           icon="fa-map-marker-alt"
         />
-        <InputText
+        <AutoComplete
           class="w-full"
           v-model="arrivalLocation"
+          :suggestions="townsAutocomplete"
           placeholder="Arrivée"
         />
       </span>
     </div>
     <div>
-      <span class="flex items-center h-full px-5 mx-6 lg:mx-0 block lg:w-fit">
+      <span class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit">
         <font-awesome-icon
           :class="departureTime ? 'opacity-100' : 'opacity-40'"
           class="text-content-base"
@@ -143,6 +170,14 @@ const reverseLocations = (): void => {
 </template>
 
 <style lang="scss">
+.p-autocomplete-input {
+  width: 100% !important;
+}
+
+.p-autocomplete-panel {
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
 .p-inputtext {
   border: none !important;
   box-shadow: none !important;
