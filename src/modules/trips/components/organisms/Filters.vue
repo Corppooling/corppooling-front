@@ -15,7 +15,7 @@ const sorts = ref<Record<string, string>>({
   orderSort: "order[departure_time]=asc",
   typeSort: "",
 });
-const displayFilters = ref<boolean>(true);
+const displayFilters = ref<boolean>(window.innerWidth > 1024);
 
 watch(
   sorts,
