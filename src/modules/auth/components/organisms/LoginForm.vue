@@ -6,9 +6,9 @@ import Button from "@/components/molecules/Button.vue";
 import PrimeInput from "@/components/atoms/PrimeInput.vue";
 import { useAuthStore } from "@/stores/auth";
 import { warning } from "@/composables/toast";
-import { i18n } from "@/support/i18n";
+import { i18nGlobal } from "@/support/i18n";
 
-const { t } = i18n.global;
+const { t } = i18nGlobal;
 const authStore = useAuthStore();
 const email = ref<string>("");
 const password = ref<string>("");

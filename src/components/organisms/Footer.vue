@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import SelectButton from "primevue/selectbutton";
-import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
+import { i18nGlobal } from "@/support/i18n";
 
-const { locale } = useI18n();
+const route = useRoute();
+const { locale } = i18nGlobal;
 const enum Lang {
   FR = "fr",
   EN = "en",
@@ -38,6 +40,7 @@ watch(
 
 <template>
   <div
+    v-if="!route.meta.hideFooter"
     class="w-full bg-content-base text-main-base py-2 relative overflow-hidden mt-auto"
   >
     <div

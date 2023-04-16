@@ -1,33 +1,75 @@
 {
   "global": {
-
+    "appName": "Corppooling"
+  },
+  "auth": {
+    "login": "Login",
+    "password": "Password",
+    "loggingIn": "Logging in",
+    "register": "Register",
+    "registerMyCompany": "I want to register my company",
+    "recontactDesc": "Are you a company? Send us your email, we will get back to you shortly to help you create your Corppooling account.",
+    "recontact": "I want to be contacted",
+    "toLogin": "Already have an account?",
+    "logout": "Logout",
+    "badCredentials": "Incorrect credentials"
   },
   "header": {
     "newTrip": "New trip",
     "search": "Search",
-    "notifications": "Notifications"
+    "whereDoYouGo": "Where do you want to go?",
+    "notifications": "Notifications",
+    "profile": "My profile"
   },
   "footer": {
     "privacy": "Privacy policy",
-    "terms": "Terms and conditions"
+    "terms": "Terms of service"
   },
   "home": {
     "find": "Find your trip",
     "popularTrips": "Popular trips!",
-    "howTo": "How it works?",
+    "howTo": "How does it work?",
+    "welcome": "Welcome to Corppooling",
+    "description": "The carpooling app dedicated to businesses",
+    "seeAll": "See all trips",
     "tutorial": {
-      "searchPassenger": "Search for a passenger",
-      "searchDriver": "Search for a driver",
-      "talkPassenger": "Talk to the passenger",
-      "talkDriver": "Talk to the driver",
-      "carPassenger": "Get in the car",
-      "carDriver": "Get in the car"
+      "searchPassenger": "Share where you want to go. Maybe someone else wants to go there too!",
+      "searchDriver": "Register your trip on the app to let your colleagues travel with you.",
+      "talkPassenger": "Talk to the driver to agree on a price and meeting point that suits you.",
+      "talkDriver": "Talk to the passenger to agree on the price and meeting point.",
+      "carPassenger": "On the road! You can now enjoy your trip.",
+      "carDriver": "Great! You're traveling at a lower cost and can make new connections."
     }
   },
   "trip": {
+    "title": "Trips",
     "searchPassengers": "I'm looking for passengers",
     "searchDriver": "I'm looking for a driver",
     "passenger": "1 passenger | {count} passengers",
-    "join": "Join"
+    "join": "Join",
+    "noTrips": "No trips match your search",
+    "filter": {
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "departureTime": "All dates",
+      "filterBy": "Filter by",
+      "reset": "Reset filter",
+      "departureTimeASC": "Earliest departure",
+      "departureTimeDESC": "Latest departure",
+      "priceASC": "Lowest price",
+      "iAm": "I am a",
+      "driver": "Driver",
+      "passenger": "Passenger"
+    }
+  },
+  "toast": {
+    "info": "Info",
+    "success": "Success",
+    "warning": "Warning",
+    "error": "An error occurred",
+    "errorBody": "Please try again"
+  },
+  "form": {
+    "empties": "Please fill out all fields"
   }
 }
