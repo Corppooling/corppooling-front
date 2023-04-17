@@ -2,9 +2,9 @@
 import { type Trip, TripType } from "@/interfaces/trip.interface";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Button from "@/components/molecules/Button.vue";
-import { DateTime } from "luxon";
 import { computed } from "vue";
 import defaultProfileImage from "@/assets/images/logos/logo_white.svg";
+import { dateFormated } from "@/support/luxon";
 
 const props = defineProps<{
   trip: Trip;
@@ -45,13 +45,7 @@ const bgTypeColor = computed((): string => {
           <div class="py-1 whitespace-nowrap">
             <font-awesome-icon class="w-4" icon="fa-calendar" />
             <span class="ml-1">{{
-              DateTime.fromISO(props.trip.departure_time).toLocaleString({
-                month: "long",
-                day: "2-digit",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })
+              dateFormated(props.trip.departure_time)
             }}</span>
           </div>
           <div class="py-1">

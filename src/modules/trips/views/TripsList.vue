@@ -45,7 +45,8 @@ onBeforeMount(async () => {
   await tripStore.setTrips(
     route.query["departure"] as string,
     route.query["arrival"] as string,
-    route.query["departure_time"] as string
+    route.query["departure_time"] as string,
+    true
   );
   window.addEventListener("scroll", handleScroll);
 });
