@@ -34,3 +34,9 @@ export const dateFormatedShort = (date: string): string => {
     locale: locale.value,
   });
 };
+
+export const dateFormatedOnlyHours = (date: string): string => {
+  return DateTime.fromISO(date).toFormat("HH:mm", {
+    locale: locale.value,
+  });
+};
