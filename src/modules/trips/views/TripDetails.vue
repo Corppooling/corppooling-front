@@ -1,14 +1,18 @@
 <script lang="ts" setup>
 import { useTripStore } from "@/stores/trip";
 import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import type { Trip } from "@/interfaces/trip.interface";
 import { dateFormatedOnlyHours, dateFormatedShort } from "@/support/luxon";
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
 
 const route = useRoute();
 const tripStore = useTripStore();
 const trip = ref<Trip>({} as Trip);
-const lineLength = ref<number>(400);
+const lineLength = computed((): number =>
+  width.value <= 768 ? width.value - 100 : 450
+);
 
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
@@ -23,11 +27,11 @@ onMounted(async () => {
       {{ dateFormatedShort(trip.departure_time) }}
     </h1>
     <div class="flex flex-col md:flex-row my-10">
-      <div class="flex flex-col justify-center items-end p-4">
+      <div class="flex flex-col md:justify-center md:items-end py-4 md:p-4">
         <span>{{ trip.departure_location }}</span>
         <span>{{ dateFormatedOnlyHours(trip.departure_time) }}</span>
       </div>
-      <div>
+      <div class="mx-auto">
         <img
           class="w-10 car-animate"
           src="@/assets/images/logos/logo_content.svg"
@@ -60,7 +64,9 @@ onMounted(async () => {
           />
         </svg>
       </div>
-      <div class="flex flex-col justify-center items-start p-4">
+      <div
+        class="flex flex-col items-end md:justify-center md:items-start py-4 md:p-4"
+      >
         <span>{{ trip.arrival_location }}</span>
       </div>
     </div>
