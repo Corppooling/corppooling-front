@@ -6,7 +6,6 @@ import type { Trip } from "@/interfaces/trip.interface";
 import { dateFormatedOnlyHours, dateFormatedShort } from "@/support/luxon";
 import { useWindowSize } from "@vueuse/core";
 import ProfileImage from "@/modules/trips/components/atoms/ProfileImage.vue";
-import { bgTypeColor } from "@/composables/typeColor";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const { width } = useWindowSize();
 
@@ -20,19 +19,20 @@ const lineLength = computed((): number =>
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
   trip.value = tripStore.getTrip;
-  console.log(trip.value.announcer);
 });
 </script>
 
 <template>
   <div class="max-w-screen-2xl mx-auto">
-    <h1 class="capitalize text-center p-10 text-4xl">
+    <h1 v-if="trip" class="capitalize text-center p-10 text-4xl">
       {{ dateFormatedShort(trip?.departure_time) }}
     </h1>
     <div class="flex flex-col md:flex-row my-10">
       <div class="flex flex-col md:justify-center md:items-end py-4 md:p-4">
         <span class="font-bold text-lg">{{ trip?.departure_location }}</span>
-        <span>{{ dateFormatedOnlyHours(trip?.departure_time) }}</span>
+        <span v-if="trip">
+          {{ dateFormatedOnlyHours(trip?.departure_time) }}
+        </span>
       </div>
       <div class="mx-auto">
         <img
