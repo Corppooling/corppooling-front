@@ -5,11 +5,14 @@ import { computed, onMounted, ref } from "vue";
 import type { Trip } from "@/interfaces/trip.interface";
 import { dateFormatedOnlyHours, dateFormatedShort } from "@/support/luxon";
 import { useWindowSize } from "@vueuse/core";
+import ProfileImage from "@/modules/trips/components/atoms/ProfileImage.vue";
+import { bgTypeColor } from "@/composables/typeColor";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const { width } = useWindowSize();
 
 const route = useRoute();
 const tripStore = useTripStore();
-const trip = ref<Trip>({} as Trip);
+const trip = ref<Trip | undefined>();
 const lineLength = computed((): number =>
   width.value <= 768 ? width.value - 100 : 450
 );
@@ -17,23 +20,23 @@ const lineLength = computed((): number =>
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
   trip.value = tripStore.getTrip;
-  console.log(trip.value);
+  console.log(trip.value.announcer);
 });
 </script>
 
 <template>
   <div class="max-w-screen-2xl mx-auto">
     <h1 class="capitalize text-center p-10 text-4xl">
-      {{ dateFormatedShort(trip.departure_time) }}
+      {{ dateFormatedShort(trip?.departure_time) }}
     </h1>
     <div class="flex flex-col md:flex-row my-10">
       <div class="flex flex-col md:justify-center md:items-end py-4 md:p-4">
-        <span>{{ trip.departure_location }}</span>
-        <span>{{ dateFormatedOnlyHours(trip.departure_time) }}</span>
+        <span class="font-bold text-lg">{{ trip?.departure_location }}</span>
+        <span>{{ dateFormatedOnlyHours(trip?.departure_time) }}</span>
       </div>
       <div class="mx-auto">
         <img
-          class="w-10 car-animate"
+          class="hidden md:block relative top-4 w-10 car-animate ml-8"
           src="@/assets/images/logos/logo_content.svg"
           alt=""
         />
@@ -67,9 +70,27 @@ onMounted(async () => {
       <div
         class="flex flex-col items-end md:justify-center md:items-start py-4 md:p-4"
       >
-        <span>{{ trip.arrival_location }}</span>
+        <span class="font-bold text-lg">{{ trip?.arrival_location }}</span>
       </div>
     </div>
+    <hr class="opacity-25" />
+    <RouterLink
+      to=""
+      class="flex justify-between my-4 items-center p-4 rounded hover:bg-content-flight hover:bg-opacity-25"
+    >
+      <div class="flex flex-col">
+        <span class="font-bold text-md">
+          {{ `${trip?.announcer.firstname} ${trip?.announcer.lastname}` }}
+        </span>
+        <span class="text-sm">
+          {{ trip?.announcer.department.name }}
+        </span>
+      </div>
+      <div class="flex items-center justify-center">
+        <ProfileImage v-if="trip" :trip="trip" />
+        <font-awesome-icon class="ml-4" icon="chevron-right" />
+      </div>
+    </RouterLink>
   </div>
 </template>
 
@@ -77,16 +98,24 @@ onMounted(async () => {
 .car-animate {
   position: relative;
   animation-name: moveCar;
-  animation-duration: 10s;
+  animation-duration: 6s;
   animation-iteration-count: infinite;
 }
 
 @keyframes moveCar {
   0% {
     left: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
-    left: 90%;
+    left: 79%;
+    opacity: 0;
   }
 }
 </style>

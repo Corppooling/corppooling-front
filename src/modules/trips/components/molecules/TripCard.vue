@@ -2,30 +2,21 @@
 import { type Trip, TripType } from "@/interfaces/trip.interface";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Button from "@/components/molecules/Button.vue";
-import { computed } from "vue";
-import defaultProfileImage from "@/assets/images/logos/logo_white.svg";
 import { dateFormated } from "@/support/luxon";
+import ProfileImage from "@/modules/trips/components/atoms/ProfileImage.vue";
+import { bgTypeColor } from "@/composables/typeColor";
 
 const props = defineProps<{
   trip: Trip;
 }>();
-
-const bgTypeColor = computed((): string => {
-  switch (props.trip.type) {
-    case TripType.DRIVER:
-      return "bg-main-base";
-    default:
-      return "bg-content-flight";
-  }
-});
 </script>
 
 <template>
   <div
     class="flex flex-col p-1 rounded-2xl shadow-md hover:shadow-lg w-fit"
-    :class="bgTypeColor"
+    :class="bgTypeColor(props.trip.type)"
   >
-    <div class="w-full h-14 flex justify-between items-center justify-end px-4">
+    <div class="w-full h-14 flex justify-between items-center px-4">
       <p
         v-html="
           props.trip.type === TripType.DRIVER
@@ -68,16 +59,7 @@ const bgTypeColor = computed((): string => {
           </div>
         </div>
         <div class="hidden sm:flex flex-col justify-center items-center ml-4">
-          <div
-            class="rounded-full w-16 h-16 overflow-hidden p-1 mb-2 flex justify-center items-center"
-            :class="bgTypeColor"
-          >
-            <img
-              class="w-full"
-              :src="props.trip.announcer.profile_image ?? defaultProfileImage"
-              alt=""
-            />
-          </div>
+          <ProfileImage class="mb-2" :trip="props.trip" />
           <div class="flex text-center">
             <span>
               {{ props.trip.announcer.firstname }}
