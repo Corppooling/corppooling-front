@@ -12,11 +12,14 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { formatPrice } from "@/support/format";
 import { bgTypeColor } from "@/composables/typeColor";
 import Spinner from "@/components/atoms/Spinner.vue";
+import ContactModal from "@/modules/trips/components/organisms/ContactModal.vue";
 
 const { width } = useWindowSize();
 const route = useRoute();
 const tripStore = useTripStore();
 const trip = ref<Trip | undefined>();
+const displayContactModal = ref<boolean>(false);
+
 const lineLength = computed((): number =>
   width.value <= 768 ? width.value - 100 : 450
 );
@@ -130,6 +133,7 @@ onMounted(async () => {
         </div>
       </RouterLink>
       <div
+        @click="displayContactModal = true"
         class="flex items-center p-4 mb-4 rounded hover:bg-content-flight hover:bg-opacity-25 cursor-pointer"
       >
         <font-awesome-icon class="mr-4 text-xl" icon="fa-regular fa-comments" />
@@ -151,10 +155,9 @@ onMounted(async () => {
       </div>
       <div class="mt-8 mb-16">
         <Button
-          bg-color="content-base"
           text="Rejoindre ce trajet"
           class="md:w-1/2 mx-auto"
-          bgColor="content-base"
+          bgColor="content-light"
           iconPosition="right"
         />
       </div>
@@ -165,6 +168,10 @@ onMounted(async () => {
       <Spinner :size="8" color="content-base" />
     </div>
   </template>
+  <ContactModal
+    :isOpen="displayContactModal"
+    @update:isOpen="(value) => (displayContactModal = value)"
+  />
 </template>
 
 <style lang="scss" scoped>

@@ -74,7 +74,7 @@ const props = defineProps<{
           :text="$t('trip.join')"
           icon="fa-location-arrow"
           iconClass="rotate-45"
-          bgColor="content-base"
+          bgColor="content-light"
           iconPosition="right"
         />
       </div>

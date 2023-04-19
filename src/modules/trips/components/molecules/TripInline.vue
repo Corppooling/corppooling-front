@@ -67,7 +67,7 @@ const props = defineProps<{
         :to="{ name: 'trip.show', params: { id: props.trip.id } }"
         icon="fa-location-arrow"
         iconClass="rotate-45"
-        bgColor="content-base"
+        bgColor="content-light"
         class="mb-2"
       />
     </div>

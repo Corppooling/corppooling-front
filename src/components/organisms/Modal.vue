@@ -10,11 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 const props = withDefaults(
   defineProps<{
     isOpen: boolean;
-    size?: string;
+    className?: string;
   }>(),
   {
     isOpen: false,
-    size: "max-w-md",
+    className: "max-w-md bg-white",
   }
 );
 
@@ -55,8 +55,8 @@ const emit = defineEmits<{
             leaveTo="opacity-0 scale-95"
           >
             <DialogPanel
-              class="min-w-full lg:min-w-fit rounded-t-3xl rounded-b-0 lg:rounded-2xl overflow-hidden flex flex-col bg-content-flight ring-1 ring-content-base"
-              :class="props.size"
+              class="min-w-full lg:min-w-fit rounded-t-3xl rounded-b-0 lg:rounded-2xl overflow-hidden flex flex-col ring-1 ring-content-base"
+              :class="props.className"
             >
               <div class="w-full flex justify-end bg-black-base">
                 <font-awesome-icon
