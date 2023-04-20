@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import Spinner from "@/components/atoms/Spinner.vue";
+import type { RouteLocationRaw } from "vue-router";
 
 const props = defineProps<{
-  to?: Record<string, string>;
+  to?: RouteLocationRaw;
   text?: string;
   icon?: string;
   textSize?:

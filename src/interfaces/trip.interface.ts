@@ -8,7 +8,7 @@ export interface Trip {
   arrival_location: string;
   departure_time: string;
   available_seats: number;
-  message: string;
+  message?: string;
   price: number;
   car_model: string;
   car_color: string;

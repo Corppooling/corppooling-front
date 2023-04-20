@@ -60,7 +60,15 @@
       "iAm": "I am a",
       "driver": "Driver",
       "passenger": "Passenger"
-    }
+    },
+    "price": "Indicative price for 1 passenger",
+    "contact": "Contact {name}",
+    "availableSeats": "1 seat available | {count} seats available",
+    "joinThisTrip": "Join this trip"
+  },
+  "contact": {
+    "yourMessage": "Your message",
+    "send": "Send"
   },
   "toast": {
     "info": "Info",
