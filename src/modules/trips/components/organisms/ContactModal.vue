@@ -27,11 +27,11 @@ const sendMessage = (): void => {
     >
       <span class="p-float-label w-full my-4">
         <Textarea class="w-full lg:w-[40rem]" rows="5" v-model="message" />
-        <label>Message</label>
+        <label>{{ $t("contact.yourMessage") }}</label>
       </span>
       <Button
         bgColor="content-light"
-        text="Envoyer"
+        :text="$t('contact.send')"
         class="mr-auto px-10"
         @click="sendMessage"
       />

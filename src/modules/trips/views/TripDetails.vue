@@ -38,7 +38,7 @@ onMounted(async () => {
           {{ dateFormatedShort(trip?.departure_time) }}
         </h1>
         <div
-          class="flex items-center py-2 px-4 rounded my-2"
+          class="flex items-center py-2 px-4 rounded-md my-2"
           :class="bgTypeColor(trip?.type)"
         >
           <p
@@ -50,7 +50,7 @@ onMounted(async () => {
           />
           <font-awesome-icon
             :icon="trip?.type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
-            class="ml-2"
+            class="ml-3"
             size="2xl"
           />
         </div>
@@ -104,7 +104,7 @@ onMounted(async () => {
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER">
         <div class="flex justify-between my-4 p-4">
-          <p>Prix indicatif pour 1 passager</p>
+          <p>{{ $t("trip.price") }}</p>
           <span v-if="trip" class="font-bold text-xl">{{
             formatPrice(trip?.price)
           }}</span>
@@ -137,12 +137,16 @@ onMounted(async () => {
         class="flex items-center p-4 mb-4 rounded hover:bg-content-flight hover:bg-opacity-25 cursor-pointer"
       >
         <font-awesome-icon class="mr-4 text-xl" icon="fa-regular fa-comments" />
-        <span>Contacter {{ trip?.announcer.firstname }} </span>
+        <span>
+          {{ $t("trip.contact", { name: trip?.announcer.firstname }) }}
+        </span>
       </div>
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER">
         <div class="p-4 mt-4">
-          <p class="text-md">{{ trip?.available_seats }} places disponibles</p>
+          <p class="text-md">
+            {{ $t("trip.availableSeats", { count: trip?.available_seats }) }}
+          </p>
         </div>
         <div class="p-4 mb-4 flex items-center">
           <font-awesome-icon class="mr-4 text-xl" icon="fa-car-side" />
@@ -155,7 +159,7 @@ onMounted(async () => {
       </div>
       <div class="mt-8 mb-16">
         <Button
-          text="Rejoindre ce trajet"
+          :text="$t('trip.joinThisTrip')"
           class="md:w-1/2 mx-auto"
           bgColor="content-light"
           iconPosition="right"

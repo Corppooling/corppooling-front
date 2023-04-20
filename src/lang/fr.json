@@ -60,7 +60,15 @@
       "iAm": "Je suis",
       "driver": "Conducteur",
       "passenger": "Passager"
-    }
+    },
+    "price": "Prix indicatif pour 1 passager",
+    "contact": "Contacter {name}",
+    "availableSeats": "1 place disponible | {count} places disponibles",
+    "joinThisTrip": "Rejoindre ce trajet"
+  },
+  "contact": {
+    "yourMessage": "Votre message",
+    "send": "Envoyer"
   },
   "toast": {
     "info": "Info",
