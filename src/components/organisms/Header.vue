@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import Button from "@/components/molecules/Button.vue";
 import Sidebar from "primevue/sidebar";
-import SearchModal from "@/modules/trips/components/organisms/SearchModal.vue";
 import UserButton from "@/components/molecules/UserButton.vue";
 import { useUserStore } from "@/stores/user";
 import { useAuthStore } from "@/stores/auth";
@@ -12,7 +11,6 @@ const authStore = useAuthStore();
 userStore.setUser();
 
 const displaySidebar = ref<boolean>(false);
-const modalIsOpen = ref<boolean>(false);
 </script>
 
 <template>
@@ -32,7 +30,7 @@ const modalIsOpen = ref<boolean>(false);
           class="mx-2"
           icon="fa-search"
           icon-size="2xl"
-          @click="modalIsOpen = true"
+          :to="{ name: 'trips' }"
         />
         <Button
           class="mx-2"
@@ -78,6 +76,7 @@ const modalIsOpen = ref<boolean>(false);
     <div>
       <template v-if="userStore.isAuth">
         <Button
+          :to="{ name: 'trips' }"
           class="mx-2 my-4"
           icon="fa-search"
           :text="$t('header.search')"
@@ -85,7 +84,6 @@ const modalIsOpen = ref<boolean>(false);
           @click="
             () => {
               displaySidebar = false;
-              modalIsOpen = true;
             }
           "
         />
@@ -141,7 +139,6 @@ const modalIsOpen = ref<boolean>(false);
       </template>
     </div>
   </Sidebar>
-  <SearchModal :isOpen="modalIsOpen" @update:isOpen="modalIsOpen = $event" />
 </template>
 
 <style lang="scss">

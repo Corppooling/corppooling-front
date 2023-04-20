@@ -1,5 +1,4 @@
 import axios, { type AxiosRequestConfig } from "axios";
-import { useAuthStore } from "@/stores/auth";
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -25,6 +24,7 @@ axiosClient.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
+      const { useAuthStore } = await import("@/stores/auth");
       await useAuthStore().refreshToken();
       return axiosClient(originalRequest);
     }

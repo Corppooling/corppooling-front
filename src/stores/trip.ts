@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 export const useTripStore = defineStore({
   id: "trip",
   state: () => ({
+    trip: {} as Trip,
     trips: [] as Array<Trip>,
     totalTrips: 1,
     currentPage: 1,
@@ -13,6 +14,13 @@ export const useTripStore = defineStore({
     loading: false,
   }),
   actions: {
+    async setTrip(id: string) {
+      this.loading = true;
+      await axiosClient.get(`api/trips/${id}`).then((res) => {
+        this.trip = res.data;
+        this.loading = false;
+      });
+    },
     async setTrips(
       departure?: string,
       arrival?: string,
@@ -22,9 +30,15 @@ export const useTripStore = defineStore({
     ) {
       this.loading = true;
 
+      if (reset) {
+        this.currentPage = 1;
+      }
+
       const endOfDay: string | undefined = date
         ? DateTime.fromISO(date).endOf("day").toISO()
         : undefined;
+
+      date = date ?? DateTime.local().toLocal().toISO();
 
       const extraSortsObject: Record<string, string> = {};
       for (const extraSort of this.extraSorts) {
@@ -47,11 +61,10 @@ export const useTripStore = defineStore({
         .then((res) => {
           if (reset) {
             this.trips = res.data["hydra:member"];
-            this.currentPage = 1;
           } else {
             this.trips = [...this.trips, ...res.data["hydra:member"]];
-            this.currentPage++;
           }
+          this.currentPage++;
           this.totalTrips = res.data["hydra:totalItems"];
         });
 
@@ -77,6 +90,9 @@ export const useTripStore = defineStore({
     },
   },
   getters: {
+    getTrip(): Trip {
+      return this.trip;
+    },
     getTrips(): Array<Trip> {
       return this.trips;
     },
