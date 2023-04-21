@@ -1,11 +1,6 @@
 <script lang="ts" setup>
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-} from "@headlessui/vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel } from '@headlessui/vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const props = withDefaults(
   defineProps<{
@@ -14,21 +9,17 @@ const props = withDefaults(
   }>(),
   {
     isOpen: false,
-    className: "max-w-md bg-white",
+    className: 'max-w-md bg-white',
   }
 );
 
 const emit = defineEmits<{
-  (e: "update:isOpen", value: boolean): void;
+  (e: 'update:isOpen', value: boolean): void;
 }>();
 </script>
 <template>
   <TransitionRoot appear :show="props.isOpen" as="template">
-    <Dialog
-      as="div"
-      @close="emit('update:isOpen', false)"
-      class="relative z-50 text-content-base"
-    >
+    <Dialog as="div" @close="emit('update:isOpen', false)" class="relative z-50 text-content-base">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -42,9 +33,7 @@ const emit = defineEmits<{
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div
-          class="flex min-h-full items-end lg:items-center justify-center lg:p-4"
-        >
+        <div class="flex min-h-full items-end lg:items-center justify-center lg:p-4">
           <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -59,7 +48,7 @@ const emit = defineEmits<{
               :class="props.className"
             >
               <div class="w-full flex justify-end bg-black-base">
-                <font-awesome-icon
+                <FontAwesomeIcon
                   icon="times"
                   class="absolute p-6 text-2xl cursor-pointer"
                   @click="emit('update:isOpen', false)"
