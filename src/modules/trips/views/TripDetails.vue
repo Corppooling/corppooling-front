@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import { useTripStore } from "@/stores/trip";
-import { useRoute } from "vue-router";
-import { computed, onMounted, ref } from "vue";
-import type { Trip } from "@/interfaces/trip.interface";
-import { TripType } from "@/interfaces/trip.interface";
-import { dateFormatedOnlyHours, dateFormatedShort } from "@/support/luxon";
-import { useWindowSize } from "@vueuse/core";
-import ProfileImage from "@/modules/trips/components/atoms/ProfileImage.vue";
-import Button from "@/components/molecules/Button.vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { formatPrice } from "@/support/format";
-import { bgTypeColor } from "@/composables/typeColor";
-import Spinner from "@/components/atoms/Spinner.vue";
-import ContactModal from "@/modules/trips/components/organisms/ContactModal.vue";
+import { useTripStore } from '@/stores/trip';
+import { useRoute } from 'vue-router';
+import { computed, onMounted, ref } from 'vue';
+import type { Trip } from '@/interfaces/trip.interface';
+import { TripType } from '@/interfaces/trip.interface';
+import { dateFormatedOnlyHours, dateFormatedShort } from '@/support/luxon';
+import { useWindowSize } from '@vueuse/core';
+import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
+import Button from '@/components/molecules/Button.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { formatPrice } from '@/support/format';
+import { bgTypeColor } from '@/composables/typeColor';
+import Spinner from '@/components/atoms/Spinner.vue';
+import ContactModal from '@/modules/trips/components/organisms/ContactModal.vue';
 
 const { width } = useWindowSize();
 const route = useRoute();
@@ -20,9 +20,7 @@ const tripStore = useTripStore();
 const trip = ref<Trip | undefined>();
 const displayContactModal = ref<boolean>(false);
 
-const lineLength = computed((): number =>
-  width.value <= 768 ? width.value - 100 : 450
-);
+const lineLength = computed((): number => (width.value <= 768 ? width.value - 100 : 450));
 
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
@@ -37,18 +35,13 @@ onMounted(async () => {
         <h1 v-if="trip" class="capitalize text-4xl mr-4 my-2">
           {{ dateFormatedShort(trip?.departure_time) }}
         </h1>
-        <div
-          class="flex items-center py-2 px-4 rounded-md my-2"
-          :class="bgTypeColor(trip?.type)"
-        >
+        <div class="flex items-center py-2 px-4 rounded-md my-2" :class="bgTypeColor(trip?.type)">
           <p
             v-html="
-              trip?.type === TripType.DRIVER
-                ? $t('trip.searchPassengers')
-                : $t('trip.searchDriver')
+              trip?.type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver')
             "
           />
-          <font-awesome-icon
+          <FontAwesomeIcon
             :icon="trip?.type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
             class="ml-3"
             size="2xl"
@@ -69,22 +62,8 @@ onMounted(async () => {
             alt=""
           />
           <svg :width="lineLength + 30" height="30">
-            <circle
-              cx="20"
-              cy="15"
-              r="10"
-              stroke="#F6B26B"
-              stroke-width="2"
-              fill="none"
-            />
-            <line
-              x1="30"
-              y1="15"
-              y2="15"
-              :x2="lineLength"
-              stroke="#F6B26B"
-              stroke-width="2"
-            />
+            <circle cx="20" cy="15" r="10" stroke="#F6B26B" stroke-width="2" fill="none" />
+            <line x1="30" y1="15" y2="15" :x2="lineLength" stroke="#F6B26B" stroke-width="2" />
             <circle
               :cx="lineLength + 10"
               cy="15"
@@ -95,19 +74,15 @@ onMounted(async () => {
             />
           </svg>
         </div>
-        <div
-          class="flex flex-col items-end md:justify-center md:items-start py-4 md:p-4"
-        >
+        <div class="flex flex-col items-end md:justify-center md:items-start py-4 md:p-4">
           <span class="font-bold text-lg">{{ trip?.arrival_location }}</span>
         </div>
       </div>
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER">
         <div class="flex justify-between my-4 p-4">
-          <p>{{ $t("trip.price") }}</p>
-          <span v-if="trip" class="font-bold text-xl">{{
-            formatPrice(trip?.price)
-          }}</span>
+          <p>{{ $t('trip.price') }}</p>
+          <span v-if="trip" class="font-bold text-xl">{{ formatPrice(trip?.price) }}</span>
         </div>
         <hr class="opacity-25" />
       </div>
@@ -129,27 +104,27 @@ onMounted(async () => {
         </div>
         <div class="flex items-center justify-center">
           <ProfileImage v-if="trip" :trip="trip" />
-          <font-awesome-icon class="ml-4" icon="chevron-right" />
+          <FontAwesomeIcon class="ml-4" icon="chevron-right" />
         </div>
       </RouterLink>
       <div
         @click="displayContactModal = true"
         class="flex items-center p-4 mb-4 rounded hover:bg-content-flight hover:bg-opacity-25 cursor-pointer"
       >
-        <font-awesome-icon class="mr-4 text-xl" icon="fa-regular fa-comments" />
+        <FontAwesomeIcon class="mr-4 text-xl" icon="fa-regular fa-comments" />
         <span>
-          {{ $t("trip.contact", { name: trip?.announcer.firstname }) }}
+          {{ $t('trip.contact', { name: trip?.announcer.firstname }) }}
         </span>
       </div>
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER">
         <div class="p-4 mt-4">
           <p class="text-md">
-            {{ $t("trip.availableSeats", { count: trip?.available_seats }) }}
+            {{ $t('trip.availableSeats', { count: trip?.available_seats }) }}
           </p>
         </div>
         <div class="p-4 mb-4 flex items-center">
-          <font-awesome-icon class="mr-4 text-xl" icon="fa-car-side" />
+          <FontAwesomeIcon class="mr-4 text-xl" icon="fa-car-side" />
           <div class="flex flex-col">
             <span class="text-lg font-bold">{{ trip?.car_model }}</span>
             <span class="opacity-40">{{ trip?.car_color }}</span>

@@ -1,11 +1,11 @@
-import { ToastSeverity } from "primevue/api";
-import app from "@/main";
-import { i18nGlobal } from "@/support/i18n";
+import { ToastSeverity } from 'primevue/api';
+import app from '@/main';
+import { i18nGlobal } from '@/support/i18n';
 
 const { t } = i18nGlobal;
 const lifeTime = 3000;
 
-export const info = (title: string = t("toast.info"), body?: string): void => {
+export const info = (title: string = t('toast.info'), body?: string): void => {
   app.config.globalProperties.$toast.add({
     severity: ToastSeverity.INFO,
     summary: title,
@@ -14,10 +14,7 @@ export const info = (title: string = t("toast.info"), body?: string): void => {
   });
 };
 
-export const success = (
-  title: string = t("toast.success"),
-  body?: string
-): void => {
+export const success = (title: string = t('toast.success'), body?: string): void => {
   app.config.globalProperties.$toast.add({
     severity: ToastSeverity.SUCCESS,
     summary: title,
@@ -26,10 +23,7 @@ export const success = (
   });
 };
 
-export const warning = (
-  title: string = t("toast.warning"),
-  body?: string
-): void => {
+export const warning = (title: string = t('toast.warning'), body?: string): void => {
   app.config.globalProperties.$toast.add({
     severity: ToastSeverity.WARN,
     summary: title,
@@ -39,8 +33,8 @@ export const warning = (
 };
 
 export const error = (
-  title: string = t("toast.error"),
-  body: string = t("toast.errorBody")
+  title: string = t('toast.error'),
+  body: string = t('toast.errorBody')
 ): void => {
   app.config.globalProperties.$toast.add({
     severity: ToastSeverity.ERROR,

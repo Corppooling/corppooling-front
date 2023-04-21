@@ -1,6 +1,6 @@
-import type { User } from "@/interfaces/user.interface";
-import type { Company } from "@/interfaces/company.interface";
-import type { Reservation } from "@/interfaces/reservation.interface";
+import type { User } from '@/interfaces/user.interface';
+import type { Company } from '@/interfaces/company.interface';
+import type { Reservation } from '@/interfaces/reservation.interface';
 
 export interface Trip {
   id: number;
@@ -21,6 +21,6 @@ export interface Trip {
 }
 
 export enum TripType {
-  PASSENGER = "passenger",
-  DRIVER = "driver",
+  PASSENGER = 'passenger',
+  DRIVER = 'driver',
 }
