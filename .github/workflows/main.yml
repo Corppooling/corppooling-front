@@ -5,7 +5,7 @@ on: [push]
 jobs:
   commit:
     name: Commit message
-    runs-on: [self-hosted, testing]
+    runs-on: ubuntu-latest
     steps:
       - name: Validate commit message
         run: |
@@ -30,7 +30,7 @@ jobs:
 
   test:
     name: Unit, Component Tests
-    runs-on: [self-hosted, testing]
+    runs-on: ubuntu-latest
     steps:
       - name: Pull repository
         uses: actions/checkout@v3
