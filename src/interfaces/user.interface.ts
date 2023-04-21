@@ -1,5 +1,5 @@
-import type { Department } from "@/interfaces/department.interface";
-import type { Company } from "@/interfaces/company.interface";
+import type { Department } from '@/interfaces/department.interface';
+import type { Company } from '@/interfaces/company.interface';
 
 export interface User {
   id: number;
@@ -17,7 +17,7 @@ export interface User {
 }
 
 export const enum Role {
-  ADMIN = "admin",
-  MANAGER = "manager",
-  USER = "user",
+  ADMIN = 'admin',
+  MANAGER = 'manager',
+  USER = 'user',
 }

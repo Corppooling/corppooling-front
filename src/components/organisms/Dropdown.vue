@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { Menu, MenuItems } from "@headlessui/vue";
+import { Menu, MenuItems } from '@headlessui/vue';
 
 const props = withDefaults(
   defineProps<{
     class?: string;
   }>(),
   {
-    class: "w-56 p-2",
+    class: 'w-56 p-2',
   }
 );
 </script>
@@ -15,12 +15,12 @@ const props = withDefaults(
   <Menu as="div" class="relative inline-block text-left">
     <slot name="cta" />
     <transition
-      enter-active-class="transition duration-100 ease-out"
-      enter-from-class="transform scale-95 opacity-0"
-      enter-to-class="transform scale-100 opacity-100"
-      leave-active-class="transition duration-75 ease-in"
-      leave-from-class="transform scale-100 opacity-100"
-      leave-to-class="transform scale-95 opacity-0"
+      enterActiveClass="transition duration-100 ease-out"
+      enterFromClass="transform scale-95 opacity-0"
+      enterToClass="transform scale-100 opacity-100"
+      leaveActiveClass="transition duration-75 ease-in"
+      leaveFromClass="transform scale-100 opacity-100"
+      leaveToClass="transform scale-95 opacity-0"
     >
       <MenuItems
         :class="props.class"

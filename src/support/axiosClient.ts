@@ -1,4 +1,4 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig } from 'axios';
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -10,8 +10,8 @@ axiosClient.interceptors.request.use((config: AxiosRequestConfig) => {
     config.headers = {};
   }
 
-  if (localStorage.getItem("token")) {
-    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+  if (localStorage.getItem('token')) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
   return config;
@@ -24,7 +24,7 @@ axiosClient.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const { useAuthStore } = await import("@/stores/auth");
+      const { useAuthStore } = await import('@/stores/auth');
       await useAuthStore().refreshToken();
       return axiosClient(originalRequest);
     }

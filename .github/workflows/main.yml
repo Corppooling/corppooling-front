@@ -1,0 +1,48 @@
+name: CI/CD Workflow
+
+on: [push]
+
+jobs:
+  commit:
+    name: Commit message
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v3
+      - name: Validate commit message
+        run: |
+          # Get the commit message
+          commit_message=$(git log -1 --pretty=%B)
+          # Check if the commit is empty
+          if [ -z "$commit_message" ]; then
+            echo "Error: Your commit is empty. Please provide a descriptive commit message."
+            exit 1
+          fi
+          # Check if the commit message matches the pattern
+          if ! echo "$commit_message" | grep -E '^(feat|enhancement|fix|docs|style|refactor|perf|test|chore|ci|build)\(([A-Za-z0-9_-]+)\) ?: ?.+$' > /dev/null && ! echo "$commit_message" | grep -E '^Merge pull request #[0-9]+ from [A-Za-z0-9_\/-]+$' > /dev/null && ! echo "$commit_message" | grep -E "^Merge (?:remote-tracking )?branch '[A-Za-z0-9_\/-]+' into [A-Za-z0-9_\/-]+$" > /dev/null; then
+            echo "Error: Your commit message does not match the format:"
+            echo "  <type>(<scope>): <short summary>"
+            echo "or"
+            echo "  Merge pull request #<pull request number> from <branch>"
+            echo "or"
+            echo "  Merge branch <branch> into <type>"
+            echo
+            exit 1
+          fi
+
+  test:
+    name: Unit, Component Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Check TypeScript
+        run: npm run type-check
+      - name: Build the app
+        run: npm run build-only
+      - name: Check the code style
+        run: npx eslint --max-warnings=0 --ext=.ts,.vue .
+      - name: Run Unit and Component tests
+        run: npm run test:unit:ci

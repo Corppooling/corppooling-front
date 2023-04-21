@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { type Trip, TripType } from "@/interfaces/trip.interface";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Button from "@/components/molecules/Button.vue";
-import { dateFormated } from "@/support/luxon";
-import ProfileImage from "@/modules/trips/components/atoms/ProfileImage.vue";
-import { bgTypeColor } from "@/composables/typeColor";
+import { type Trip, TripType } from '@/interfaces/trip.interface';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Button from '@/components/molecules/Button.vue';
+import { dateFormated } from '@/support/luxon';
+import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
+import { bgTypeColor } from '@/composables/typeColor';
 
 const props = defineProps<{
   trip: Trip;
@@ -24,7 +24,7 @@ const props = defineProps<{
             : $t('trip.searchDriver')
         "
       />
-      <font-awesome-icon
+      <FontAwesomeIcon
         :icon="props.trip.type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
         class="ml-2"
         size="2xl"
@@ -34,24 +34,22 @@ const props = defineProps<{
       <div class="flex justify-around">
         <div class="flex flex-col">
           <div class="py-1 whitespace-nowrap">
-            <font-awesome-icon class="w-4" icon="fa-calendar" />
-            <span class="ml-1">{{
-              dateFormated(props.trip.departure_time)
-            }}</span>
+            <FontAwesomeIcon class="w-4" icon="fa-calendar" />
+            <span class="ml-1">{{ dateFormated(props.trip.departure_time) }}</span>
           </div>
           <div class="py-1">
-            <font-awesome-icon class="w-4" icon="fa-flag-checkered" />
+            <FontAwesomeIcon class="w-4" icon="fa-flag-checkered" />
             <span class="ml-1">{{ props.trip.departure_location }}</span>
           </div>
           <div class="py-1">
-            <font-awesome-icon class="w-4" icon="fa-map-marker-alt" />
+            <FontAwesomeIcon class="w-4" icon="fa-map-marker-alt" />
             <span class="ml-1">{{ props.trip.arrival_location }}</span>
           </div>
           <div class="py-1">
-            <font-awesome-icon class="w-4" icon="fa-users" />
+            <FontAwesomeIcon class="w-4" icon="fa-users" />
             <span class="ml-1">
               {{
-                $t("trip.passenger", {
+                $t('trip.passenger', {
                   count: props.trip.available_seats,
                 })
               }}

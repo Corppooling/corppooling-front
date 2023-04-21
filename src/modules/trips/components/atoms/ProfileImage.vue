@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import defaultProfileImage from "@/assets/images/logos/logo_white.svg";
-import type { Trip } from "@/interfaces/trip.interface";
-import { bgTypeColor } from "@/composables/typeColor";
+import defaultProfileImage from '@/assets/images/logos/logo_white.svg';
+import type { Trip } from '@/interfaces/trip.interface';
+import { bgTypeColor } from '@/composables/typeColor';
 
 const props = defineProps<{
   trip: Trip;

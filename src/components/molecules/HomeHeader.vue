@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import Searchbar from "@/modules/trips/components/organisms/Searchbar.vue";
-import { useUserStore } from "@/stores/user";
+import Searchbar from '@/modules/trips/components/organisms/Searchbar.vue';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 userStore.setUser();
@@ -8,20 +8,13 @@ userStore.setUser();
 
 <template>
   <section class="w-full h-80 bg-content-flight relative">
-    <div
-      class="w-5/6 h-full mx-auto flex justify-center items-center flex flex-col relative z-10"
-    >
-      <h1
-        class="text-content-base text-5xl sm:text-6xl text-center mb-16 font-medium"
-      >
-        {{ userStore.isAuth ? $t("home.find") : $t("home.welcome") }}
+    <div class="w-5/6 h-full mx-auto flex justify-center items-center flex flex-col relative z-10">
+      <h1 class="text-content-base text-5xl sm:text-6xl text-center mb-16 font-medium">
+        {{ userStore.isAuth ? $t('home.find') : $t('home.welcome') }}
       </h1>
-      <Searchbar
-        v-if="userStore.isAuth"
-        class="absolute lg:static -bottom-28"
-      />
+      <Searchbar v-if="userStore.isAuth" class="absolute lg:static -bottom-28" />
       <h2 v-else class="text-4xl py-1 px-5 rounded-md text-center">
-        {{ $t("home.description") }}
+        {{ $t('home.description') }}
       </h2>
     </div>
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden">

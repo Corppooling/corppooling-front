@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-import Button from "@/components/molecules/Button.vue";
-import Sidebar from "primevue/sidebar";
-import UserButton from "@/components/molecules/UserButton.vue";
-import { useUserStore } from "@/stores/user";
-import { useAuthStore } from "@/stores/auth";
+import { ref } from 'vue';
+import Button from '@/components/molecules/Button.vue';
+import Sidebar from 'primevue/sidebar';
+import UserButton from '@/components/molecules/UserButton.vue';
+import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
 const userStore = useUserStore();
 const authStore = useAuthStore();
@@ -14,30 +14,14 @@ const displaySidebar = ref<boolean>(false);
 </script>
 
 <template>
-  <div
-    class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between"
-  >
+  <div class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between">
     <RouterLink :to="{ name: 'home' }" class="w-52">
-      <img
-        class="w-full h-full"
-        src="@/assets/images/logos/logo_full.svg"
-        alt="logo"
-      />
+      <img class="w-full h-full" src="@/assets/images/logos/logo_full.svg" alt="logo" />
     </RouterLink>
     <div class="hidden md:flex">
       <template v-if="userStore.isAuth">
-        <Button
-          class="mx-2"
-          icon="fa-search"
-          icon-size="2xl"
-          :to="{ name: 'trips' }"
-        />
-        <Button
-          class="mx-2"
-          icon="fa-plus"
-          :text="$t('header.newTrip')"
-          icon-size="2xl"
-        />
+        <Button class="mx-2" icon="fa-search" iconSize="2xl" :to="{ name: 'trips' }" />
+        <Button class="mx-2" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
         <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
         <UserButton />
       </template>
@@ -47,14 +31,14 @@ const displaySidebar = ref<boolean>(false);
           class="mx-2"
           icon="fa-lock"
           :text="$t('auth.login')"
-          icon-size="2xl"
+          iconSize="2xl"
         />
         <Button
           :to="{ name: 'register' }"
           class="mx-2"
           icon="fa-user-plus"
           :text="$t('auth.register')"
-          icon-size="2xl"
+          iconSize="2xl"
         />
       </template>
     </div>
@@ -62,7 +46,7 @@ const displaySidebar = ref<boolean>(false);
       <Button
         class="mx-2"
         icon="fa-bars"
-        icon-size="2xl"
+        iconSize="2xl"
         @click="displaySidebar = !displaySidebar"
       />
     </div>
@@ -80,19 +64,14 @@ const displaySidebar = ref<boolean>(false);
           class="mx-2 my-4"
           icon="fa-search"
           :text="$t('header.search')"
-          icon-size="2xl"
+          iconSize="2xl"
           @click="
             () => {
               displaySidebar = false;
             }
           "
         />
-        <Button
-          class="mx-2 my-4"
-          icon="fa-plus"
-          :text="$t('header.newTrip')"
-          icon-size="2xl"
-        />
+        <Button class="mx-2 my-4" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
         <!--<Button
         class="mx-2 my-4"
         icon="fa-regular fa-bell"
@@ -104,13 +83,13 @@ const displaySidebar = ref<boolean>(false);
           class="mx-2 my-4"
           icon="fa-user"
           :text="$t('header.profile')"
-          icon-size="2xl"
+          iconSize="2xl"
         />
         <Button
           class="mx-2 my-4"
           icon="fa-sign-out-alt"
           :text="$t('auth.logout')"
-          icon-size="2xl"
+          iconSize="2xl"
           @click="
             () => {
               authStore.logout();
@@ -126,7 +105,7 @@ const displaySidebar = ref<boolean>(false);
           class="mx-2 mt-10 mb-4"
           icon="fa-lock"
           :text="$t('auth.login')"
-          icon-size="2xl"
+          iconSize="2xl"
         />
         <Button
           @click="displaySidebar = false"
@@ -134,7 +113,7 @@ const displaySidebar = ref<boolean>(false);
           class="mx-2 my-4"
           icon="fa-regular fa-pen-to-square"
           :text="$t('auth.register')"
-          icon-size="2xl"
+          iconSize="2xl"
         />
       </template>
     </div>

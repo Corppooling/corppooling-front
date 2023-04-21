@@ -1,21 +1,21 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import SelectButton from "primevue/selectbutton";
-import { useRoute } from "vue-router";
-import { i18nGlobal } from "@/support/i18n";
+import { ref, watch } from 'vue';
+import SelectButton from 'primevue/selectbutton';
+import { useRoute } from 'vue-router';
+import { i18nGlobal } from '@/support/i18n';
 
 const route = useRoute();
 const { locale } = i18nGlobal;
 const enum Lang {
-  FR = "fr",
-  EN = "en",
+  FR = 'fr',
+  EN = 'en',
 }
 
 const currentYear: number = new Date(Date.now()).getFullYear();
-const lang = ref<Lang>((localStorage.getItem("lang") as Lang) ?? Lang.FR);
+const lang = ref<Lang>((localStorage.getItem('lang') as Lang) ?? Lang.FR);
 const langOptions = [
-  { name: "Français", value: Lang.FR },
-  { name: "English", value: Lang.EN },
+  { name: 'Français', value: Lang.FR },
+  { name: 'English', value: Lang.EN },
 ] as Array<Record<string, string>>;
 
 watch(
@@ -24,11 +24,11 @@ watch(
     switch (newLang) {
       case Lang.FR:
         locale.value = Lang.FR;
-        localStorage.setItem("lang", Lang.FR);
+        localStorage.setItem('lang', Lang.FR);
         break;
       case Lang.EN:
         locale.value = Lang.EN;
-        localStorage.setItem("lang", Lang.EN);
+        localStorage.setItem('lang', Lang.EN);
         break;
       default:
         lang.value = Lang.FR;
@@ -43,9 +43,7 @@ watch(
     v-if="!route.meta.hideFooter"
     class="w-full bg-content-base text-main-base py-2 relative overflow-hidden mt-auto"
   >
-    <div
-      class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10"
-    >
+    <div class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10">
       <div class="flex flex-wrap justify-between py-2">
         <div class="p-2 mx-auto sm:mx-0">
           <SelectButton
@@ -67,25 +65,20 @@ watch(
             <font-awesome-icon icon="fa-brands fa-youtube" class="fa-2x p-2" />
           </a>
           <a href="#" target="_blank">
-            <font-awesome-icon
-              icon="fa-brands fa-instagram"
-              class="fa-2x p-2"
-            />
+            <font-awesome-icon icon="fa-brands fa-instagram" class="fa-2x p-2" />
           </a>
         </div>
       </div>
-      <div
-        class="flex flex-col md:flex-row justify-center items-center py-1 text-sm"
-      >
+      <div class="flex flex-col md:flex-row justify-center items-center py-1 text-sm">
         <span>Copyright © 2022 - {{ currentYear }} Corppooling</span>
         <span class="mx-1 hidden md:block">|</span>
         <div class="flex flex-wrap justify-center">
           <a class="hover:underline" target="_blank" href="#">
-            {{ $t("footer.privacy") }}
+            {{ $t('footer.privacy') }}
           </a>
           <span class="mx-1">-</span>
           <a class="hover:underline" target="_blank" href="#">
-            {{ $t("footer.terms") }}
+            {{ $t('footer.terms') }}
           </a>
         </div>
       </div>

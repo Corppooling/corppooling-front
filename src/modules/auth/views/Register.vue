@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AuthBanner from "@/modules/auth/components/molecules/AuthBanner.vue";
-import RegisterForm from "@/modules/auth/components/organisms/RegisterForm.vue";
+import AuthBanner from '@/modules/auth/components/molecules/AuthBanner.vue';
+import RegisterForm from '@/modules/auth/components/organisms/RegisterForm.vue';
 </script>
 
 <template>

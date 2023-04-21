@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AuthBanner from "@/modules/auth/components/molecules/AuthBanner.vue";
-import LoginForm from "@/modules/auth/components/organisms/LoginForm.vue";
+import AuthBanner from '@/modules/auth/components/molecules/AuthBanner.vue';
+import LoginForm from '@/modules/auth/components/organisms/LoginForm.vue';
 </script>
 
 <template>

@@ -1,28 +1,28 @@
 <script lang="ts" setup>
-import logo_base from "@/assets/images/logos/logo_base.svg";
-import logo_content from "@/assets/images/logos/logo_content.svg";
-import logo_light from "@/assets/images/logos/logo_light.svg";
-import logo_xlight from "@/assets/images/logos/logo_xlight.svg";
-import logo_glight from "@/assets/images/logos/logo_glight.svg";
-import logo_flight from "@/assets/images/logos/logo_flight.svg";
-import { computed } from "vue";
+import logo_base from '@/assets/images/logos/logo_base.svg';
+import logo_content from '@/assets/images/logos/logo_content.svg';
+import logo_light from '@/assets/images/logos/logo_light.svg';
+import logo_xlight from '@/assets/images/logos/logo_xlight.svg';
+import logo_glight from '@/assets/images/logos/logo_glight.svg';
+import logo_flight from '@/assets/images/logos/logo_flight.svg';
+import { computed } from 'vue';
 
 const props = defineProps<{
   content: string;
-  logoColor?: "base" | "content" | "light" | "xlight" | "glight" | "flight";
+  logoColor?: 'base' | 'content' | 'light' | 'xlight' | 'glight' | 'flight';
 }>();
 
 const logo = computed((): string => {
   switch (props.logoColor) {
-    case "content":
+    case 'content':
       return logo_content;
-    case "light":
+    case 'light':
       return logo_light;
-    case "xlight":
+    case 'xlight':
       return logo_xlight;
-    case "glight":
+    case 'glight':
       return logo_glight;
-    case "flight":
+    case 'flight':
       return logo_flight;
     default:
       return logo_base;
@@ -35,9 +35,7 @@ const logo = computed((): string => {
     <div class="w-12 sm:w-16">
       <img :src="logo" alt="" />
     </div>
-    <h2
-      class="text-2xl sm:text-3xl font-light text-content-base ml-2 whitespace-nowrap"
-    >
+    <h2 class="text-2xl sm:text-3xl font-light text-content-base ml-2 whitespace-nowrap">
       {{ props.content }}
     </h2>
   </div>
