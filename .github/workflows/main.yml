@@ -7,6 +7,8 @@ jobs:
     name: Commit message
     runs-on: ubuntu-latest
     steps:
+      - name: Pull repository
+        uses: actions/checkout@v3
       - name: Validate commit message
         run: |
           # Get the commit message
