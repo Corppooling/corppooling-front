@@ -1,9 +1,6 @@
 import { DateTime, type DateTimeFormatOptions } from 'luxon';
 import { computed } from 'vue';
-
-const locale = computed((): string => {
-  return localStorage?.getItem('lang') ?? 'fr';
-});
+import { localeLang } from '@/support/i18n';
 
 export const dateFormated = (date: string): string => {
   const formatOptions = computed((): DateTimeFormatOptions => {
@@ -25,18 +22,24 @@ export const dateFormated = (date: string): string => {
   });
 
   return DateTime.fromISO(date).toLocaleString(formatOptions.value, {
-    locale: locale.value,
+    locale: localeLang(),
   });
 };
 
 export const dateFormatedShort = (date: string): string => {
   return DateTime.fromISO(date).toFormat('EEEE dd MMMM', {
-    locale: locale.value,
+    locale: localeLang(),
   });
 };
 
 export const dateFormatedOnlyHours = (date: string): string => {
-  return DateTime.fromISO(date).toFormat('HH:mm', {
-    locale: locale.value,
-  });
+  return DateTime.fromISO(date).toLocaleString(
+    {
+      hour: '2-digit',
+      minute: '2-digit',
+    },
+    {
+      locale: localeLang(),
+    }
+  );
 };
