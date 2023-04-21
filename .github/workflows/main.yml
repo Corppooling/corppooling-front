@@ -33,6 +33,8 @@ jobs:
   test:
     name: Unit, Component Tests
     runs-on: ubuntu-latest
+    env:
+      TZ: "Europe/Paris"
     steps:
       - name: Pull repository
         uses: actions/checkout@v3

@@ -2,9 +2,13 @@ import { createI18n } from 'vue-i18n';
 import fr from '@/lang/fr.json';
 import en from '@/lang/en.json';
 
+export const localeLang = (): string => {
+  return localStorage.getItem('lang') ?? 'fr';
+};
+
 export const i18n = createI18n({
   legacy: false,
-  locale: 'fr',
+  locale: localeLang(),
   globalInjection: true,
   messages: {
     fr,
