@@ -14,4 +14,4 @@ updates:
       timezone: "Europe/Paris"
     reviewers:
       - 'CesarWatrin'
-    target-branch: main
+    target-branch: develop
