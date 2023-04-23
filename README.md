@@ -7,9 +7,10 @@ Site : <a href="https://main--polite-torte-f76396.netlify.app" target="_blank">h
 ### Technologies
 
 - Vue 3 (Composition API)
+- Typescript
 - Vite
 - Vite PWA
-- Typescript
+- Vitest
 - Tailwind CSS
 - PrimeVue
 - Pinia
