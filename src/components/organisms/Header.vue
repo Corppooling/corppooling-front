@@ -22,7 +22,6 @@ const displaySidebar = ref<boolean>(false);
       <template v-if="userStore.isAuth">
         <Button class="mx-2" icon="fa-search" iconSize="2xl" :to="{ name: 'trips' }" />
         <Button class="mx-2" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
-        <!--<Button class="mx-2" icon="fa-regular fa-bell" icon-size="2xl" />-->
         <UserButton />
       </template>
       <template v-else>
@@ -72,14 +71,8 @@ const displaySidebar = ref<boolean>(false);
           "
         />
         <Button class="mx-2 my-4" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
-        <!--<Button
-        class="mx-2 my-4"
-        icon="fa-regular fa-bell"
-        :text="$t('header.notifications')"
-        icon-size="2xl"
-      />-->
         <Button
-          :to="{ name: '' }"
+          :to="{ name: 'profile' }"
           class="mx-2 my-4"
           icon="fa-user"
           :text="$t('header.account')"

@@ -18,7 +18,7 @@ const authStore = useAuthStore();
     <template #content>
       <MenuItem v-slot="{ active }">
         <RouterLink
-          :to="{ name: '' }"
+          :to="{ name: 'profile' }"
           :class="[
             active ? 'bg-content-base text-white' : 'text-content-base',
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
