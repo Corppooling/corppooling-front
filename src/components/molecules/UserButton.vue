@@ -24,7 +24,7 @@ const authStore = useAuthStore();
             'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
         >
-          {{ $t('header.profile') }}
+          {{ $t('header.account') }}
         </RouterLink>
       </MenuItem>
       <MenuItem v-slot="{ active }">

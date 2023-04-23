@@ -82,7 +82,7 @@ const displaySidebar = ref<boolean>(false);
           :to="{ name: '' }"
           class="mx-2 my-4"
           icon="fa-user"
-          :text="$t('header.profile')"
+          :text="$t('header.account')"
           iconSize="2xl"
         />
         <Button

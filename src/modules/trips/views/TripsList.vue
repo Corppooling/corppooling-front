@@ -79,7 +79,7 @@ const handleScroll = (): void => {
         <div
           v-if="tripStore.trips.length > 0"
           :class="layout === Layout.GRID ? 'flex-wrap' : 'flex-col'"
-          class="flex justify-center lg:justify-start gap-5"
+          class="flex justify-center gap-5"
         >
           <template v-for="(trip, index) in tripStore.trips" :key="index">
             <component :is="tripComponent" :trip="trip" />
