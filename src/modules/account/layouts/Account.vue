@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <slot></slot>
+    <slot>account</slot>
   </div>
 </template>
