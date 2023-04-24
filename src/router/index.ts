@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import HomeView from '@/views/Home.vue';
 import { useUserStore } from '@/stores/user';
-import { authRoutes } from '@/modules/auth/router';
-import { tripRoutes } from '@/modules/trips/router';
-import { accountRoutes } from '@/modules/account/router';
+import { authRoutes } from '@/modules/auth/auth.routes';
+import { tripRoutes } from '@/modules/trips/trips.routes';
+import { accountRoutes } from '@/modules/account/account.routes';
 
 const routes: Array<RouteRecordRaw> = [
   ...authRoutes,
