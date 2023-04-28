@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
-import { RouteLocationRaw } from 'vue-router';
+import { type RouteLocationRaw, useRoute } from 'vue-router';
+
+const route = useRoute();
 
 interface Tab {
   name: string;
@@ -37,23 +39,28 @@ const tabs: Array<Tab> = [
       <slot />
     </div>
     <div
-      class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-base text-white max-w-fit"
+      class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-flight text-content-base max-w-fit"
     >
       <div class="flex flex-col">
         <template v-for="tab in tabs" :key="tab.name">
-          <RouterLink :to="tab.to" class="flex items-center py-5 px-8 hover:bg-main-base group">
-            <FontAwesomeIcon :icon="tab.icon" class="mr-4 group-hover:text-content-base text-lg" />
-            <span class="">{{ tab.label }}</span>
+          <RouterLink
+            :to="tab.to"
+            class="flex items-center py-5 px-8 hover:bg-content-xlight hover:text-white"
+            :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
+          >
+            <FontAwesomeIcon :icon="tab.icon" class="mr-4 text-lg" />
+            <span>{{ tab.label }}</span>
           </RouterLink>
         </template>
       </div>
     </div>
-    <div class="md:hidden flex order-3 sticky bottom-0 bg-content-base text-white">
+    <div class="md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base">
       <div class="flex justify-between w-full">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
             :to="tab.to"
-            class="text-white hover:bg-main-base w-1/3 py-4 flex justify-center items-center"
+            class="hover:bg-content-xlight hover:text-white w-1/3 py-4 flex justify-center items-center"
+            :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
             <FontAwesomeIcon :icon="tab.icon" class="text-lg" />
           </RouterLink>
