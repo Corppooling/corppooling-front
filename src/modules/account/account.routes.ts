@@ -7,6 +7,7 @@ export const accountRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/modules/account/views/Profile.vue'),
     meta: {
       authRequired: true,
+      hideFooter: true,
     },
   },
 ];
