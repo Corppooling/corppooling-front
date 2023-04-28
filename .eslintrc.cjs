@@ -12,9 +12,13 @@ module.exports = {
   rules: {
     'vue/multi-word-component-names': 0,
     'vue/component-name-in-template-casing': ['warn', 'PascalCase'],
-    'vue/attribute-hyphenation': ['warn', 'never', {
-      'ignore': ['camelCase']
-    }],
+    'vue/attribute-hyphenation': [
+      'warn',
+      'never',
+      {
+        ignore: ['camelCase'],
+      },
+    ],
     'vue/v-on-event-hyphenation': ['warn', 'never'],
 
     'vue/block-lang': [
