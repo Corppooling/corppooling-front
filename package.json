@@ -36,7 +36,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
     "@tailwindcss/line-clamp": "^0.4.2",
-    "@types/luxon": "^3.2.0",
+    "@types/luxon": "^3.3.0",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
