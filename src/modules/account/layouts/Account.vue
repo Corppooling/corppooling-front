@@ -22,13 +22,13 @@ const tabs: Array<Tab> = [
     name: 'bookings',
     label: 'Mes réservations',
     icon: 'fa-calendar-alt',
-    to: '',
+    to: { name: 'bookings' },
   },
   {
     name: 'company',
     label: 'Mon entreprise',
     icon: 'fa-building',
-    to: '',
+    to: { name: 'company' },
   },
 ];
 </script>
@@ -39,7 +39,7 @@ const tabs: Array<Tab> = [
       <slot />
     </div>
     <div
-      class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-flight text-content-base max-w-fit"
+      class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-flight text-content-base max-w-fit shadow-md"
     >
       <div class="flex flex-col">
         <template v-for="tab in tabs" :key="tab.name">
@@ -54,7 +54,9 @@ const tabs: Array<Tab> = [
         </template>
       </div>
     </div>
-    <div class="md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base">
+    <div
+      class="md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base shadow-md -mb-px"
+    >
       <div class="flex justify-between w-full">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
