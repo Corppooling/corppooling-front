@@ -24,7 +24,7 @@ export const useTripStore = defineStore({
     async setTrips(
       departure?: string,
       arrival?: string,
-      date?: string,
+      date?: string | null,
       reset = true,
       itemsPerPage = 8
     ) {
@@ -34,7 +34,7 @@ export const useTripStore = defineStore({
         this.currentPage = 1;
       }
 
-      const endOfDay: string | undefined = date
+      const endOfDay: string | null | undefined = date
         ? DateTime.fromISO(date).endOf('day').toISO()
         : undefined;
 

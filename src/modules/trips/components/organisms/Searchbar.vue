@@ -31,7 +31,7 @@ const search = async (): Promise<void> => {
   await tripStore.setTrips(
     departureLocation.value?.trim() ? departureLocation.value?.trim() : undefined,
     arrivalLocation.value?.trim() ? arrivalLocation.value?.trim() : undefined,
-    departureTime.value ? DateTime.fromJSDate(departureTime.value).toISO() : undefined
+    departureTime.value ? DateTime.fromJSDate(departureTime.value).toISO() ?? undefined : undefined
   );
   await router.push({
     name: 'trips',

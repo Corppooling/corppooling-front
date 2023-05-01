@@ -1,16 +1,14 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import HomeView from '@/views/Home.vue';
 import { useUserStore } from '@/stores/user';
+import { authRoutes } from '@/modules/auth/auth.routes';
+import { tripRoutes } from '@/modules/trips/trips.routes';
+import { accountRoutes } from '@/modules/account/account.routes';
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => import('@/views/NotFound.vue'),
-    meta: {
-      authRequired: false,
-    },
-  },
+  ...authRoutes,
+  ...tripRoutes,
+  ...accountRoutes,
   {
     path: '/',
     name: 'home',
@@ -20,38 +18,11 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/modules/auth/views/Login.vue'),
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/NotFound.vue'),
     meta: {
       authRequired: false,
-      hideFooter: true,
-    },
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/modules/auth/views/Register.vue'),
-    meta: {
-      authRequired: false,
-      hideFooter: true,
-    },
-  },
-  {
-    path: '/trips',
-    name: 'trips',
-    component: () => import('@/modules/trips/views/TripsList.vue'),
-    meta: {
-      authRequired: true,
-      hideFooter: true,
-    },
-  },
-  {
-    path: '/trips/:id',
-    name: 'trip.show',
-    component: () => import('@/modules/trips/views/TripDetails.vue'),
-    meta: {
-      authRequired: true,
     },
   },
 ];
