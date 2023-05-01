@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;500;600;700');
+@import "primevue/resources/primevue.css";
+@import "_theme.scss";
+@import 'primeicons/primeicons.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "primevue/resources/primevue.css";
-@import "_theme.scss";
-@import 'primeicons/primeicons.css';
 
 @layer base {
   html {
