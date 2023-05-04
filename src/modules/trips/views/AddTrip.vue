@@ -66,7 +66,11 @@ const checkStep = (): void => {
         <h2 class="text-2xl mb-6">D’où partez-vous ?</h2>
         <div>
           <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
-            <FontAwesomeIcon class="text-content-base" icon="fa-flag-checkered" />
+            <FontAwesomeIcon
+              :class="departureLocation?.trim() ? 'opacity-100' : 'opacity-40'"
+              class="text-content-base"
+              icon="fa-flag-checkered"
+            />
             <AutoComplete
               v-model="departureLocation"
               :suggestions="townsAutocomplete"
@@ -79,7 +83,11 @@ const checkStep = (): void => {
         <h2 class="text-2xl mb-6">Où allez-vous ?</h2>
         <div>
           <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
-            <FontAwesomeIcon class="text-content-base" icon="fa-flag-checkered" />
+            <FontAwesomeIcon
+              :class="arrivalLocation?.trim() ? 'opacity-100' : 'opacity-40'"
+              class="text-content-base"
+              icon="fa-map-marker-alt"
+            />
             <AutoComplete
               v-model="arrivalLocation"
               :suggestions="townsAutocomplete"
