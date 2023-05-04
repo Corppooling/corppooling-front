@@ -35,22 +35,26 @@ watch(arrivalLocation, (value) => {
   }
 });
 
+const conditions: Array<() => boolean> = [
+  () => !!departureLocation.value?.trim(),
+  () => !!arrivalLocation.value?.trim(),
+];
+
 const checkStep = (): void => {
   stepLoading.value = true;
 
   setTimeout(() => {
-    step.value = 1;
-
-    if (departureLocation.value?.trim()) {
-      step.value = 2;
-
-      if (arrivalLocation.value?.trim()) {
-        step.value = 3;
+    for (let i = 1; i <= conditions.length; i++) {
+      if (conditions[i - 1]()) {
+        step.value = i + 1;
+      } else {
+        step.value = i;
+        break;
       }
     }
 
     stepLoading.value = false;
-  }, 500);
+  }, 400);
 };
 </script>
 
@@ -110,6 +114,7 @@ const checkStep = (): void => {
         :disabled="!departureLocation?.trim() || !arrivalLocation?.trim()"
         @click="checkStep"
         :loading="stepLoading"
+        bgColor="content-light"
         class="w-fit px-20 mx-auto"
         text="Valider"
       />
