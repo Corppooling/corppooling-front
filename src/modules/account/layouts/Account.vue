@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
-import { type RouteLocationRaw, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
+import { i18nGlobal } from '@/support/i18n';
 
 const route = useRoute();
+const { t } = i18nGlobal;
 
 interface Tab {
   name: string;
@@ -13,22 +15,22 @@ interface Tab {
 const tabs: Array<Tab> = [
   {
     name: 'account.profile',
-    label: 'Mon profil',
+    label: t('account.profile'),
     icon: 'fa-user',
   },
   {
     name: 'account.trips',
-    label: 'Mes voyages',
+    label: t('account.trips'),
     icon: 'fa-car',
   },
   {
     name: 'account.bookings',
-    label: 'Mes réservations',
+    label: t('account.bookings'),
     icon: 'fa-calendar-alt',
   },
   {
     name: 'account.company',
-    label: 'Mon entreprise',
+    label: t('account.company'),
     icon: 'fa-building',
   },
 ];

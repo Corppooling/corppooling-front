@@ -6,7 +6,6 @@ import Button from '@/components/molecules/Button.vue';
 import { useTripStore } from '@/stores/trip';
 import { useRoute, useRouter } from 'vue-router';
 import { DateTime } from 'luxon';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import { useDebounceFn } from '@vueuse/core';

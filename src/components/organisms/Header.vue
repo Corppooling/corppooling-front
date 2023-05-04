@@ -70,19 +70,23 @@ const displaySidebar = ref<boolean>(false);
           icon="fa-search"
           :text="$t('header.search')"
           iconSize="2xl"
-          @click="
-            () => {
-              displaySidebar = false;
-            }
-          "
+          @click="displaySidebar = false"
         />
-        <Button class="mx-2 my-4" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
         <Button
-          :to="{ name: 'profile' }"
+          :to="{ name: 'trip.add' }"
+          class="mx-2 my-4"
+          icon="fa-plus"
+          :text="$t('header.newTrip')"
+          iconSize="2xl"
+          @click="displaySidebar = false"
+        />
+        <Button
+          :to="{ name: 'account.profile' }"
           class="mx-2 my-4"
           icon="fa-user"
           :text="$t('header.account')"
           iconSize="2xl"
+          @click="displaySidebar = false"
         />
         <Button
           class="mx-2 my-4"

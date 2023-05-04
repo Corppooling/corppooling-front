@@ -79,5 +79,11 @@
   },
   "form": {
     "empties": "Please fill out all fields"
+  },
+  "account": {
+    "profile": "My profile",
+    "trips": "My trips",
+    "bookings": "My bookings",
+    "company": "My company"
   }
 }
