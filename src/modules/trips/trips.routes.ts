@@ -18,4 +18,12 @@ export const tripRoutes: Array<RouteRecordRaw> = [
       authRequired: true,
     },
   },
+  {
+    path: '/trips/new-trip',
+    name: 'trip.add',
+    component: () => import('@/modules/trips/views/AddTrip.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ];

@@ -11,17 +11,22 @@ export const accountRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'profile',
-        name: 'profile',
+        name: 'account.profile',
         component: () => import('@/modules/account/views/Profile.vue'),
       },
       {
+        path: 'trips',
+        name: 'account.trips',
+        component: () => import('@/modules/account/views/Trips.vue'),
+      },
+      {
         path: 'bookings',
-        name: 'bookings',
+        name: 'account.bookings',
         component: () => import('@/modules/account/views/Bookings.vue'),
       },
       {
         path: 'company',
-        name: 'company',
+        name: 'account.company',
         component: () => import('@/modules/account/views/Company.vue'),
       },
     ],

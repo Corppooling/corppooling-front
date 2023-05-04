@@ -21,7 +21,13 @@ const displaySidebar = ref<boolean>(false);
     <div class="hidden md:flex">
       <template v-if="userStore.isAuth">
         <Button class="mx-2" icon="fa-search" iconSize="2xl" :to="{ name: 'trips' }" />
-        <Button class="mx-2" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
+        <Button
+          class="mx-2"
+          icon="fa-plus"
+          :text="$t('header.newTrip')"
+          iconSize="2xl"
+          :to="{ name: 'trip.add' }"
+        />
         <UserButton />
       </template>
       <template v-else>
