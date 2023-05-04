@@ -8,27 +8,28 @@ interface Tab {
   name: string;
   label: string;
   icon: FontAwesomeIconProps['icon'];
-  to: RouteLocationRaw;
 }
 
 const tabs: Array<Tab> = [
   {
-    name: 'profile',
+    name: 'account.profile',
     label: 'Mon profil',
     icon: 'fa-user',
-    to: { name: 'profile' },
   },
   {
-    name: 'bookings',
+    name: 'account.trips',
+    label: 'Mes voyages',
+    icon: 'fa-car',
+  },
+  {
+    name: 'account.bookings',
     label: 'Mes réservations',
     icon: 'fa-calendar-alt',
-    to: { name: 'bookings' },
   },
   {
-    name: 'company',
+    name: 'account.company',
     label: 'Mon entreprise',
     icon: 'fa-building',
-    to: { name: 'company' },
   },
 ];
 </script>
@@ -44,7 +45,7 @@ const tabs: Array<Tab> = [
       <div class="flex flex-col">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
-            :to="tab.to"
+            :to="{ name: tab.name }"
             class="flex items-center py-5 px-8 hover:bg-content-xlight hover:text-white"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
@@ -60,8 +61,8 @@ const tabs: Array<Tab> = [
       <div class="flex justify-between w-full">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
-            :to="tab.to"
-            class="hover:bg-content-xlight hover:text-white w-1/3 py-4 flex justify-center items-center"
+            :to="{ name: tab.name }"
+            class="hover:bg-content-xlight hover:text-white w-full py-4 flex justify-center items-center"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
             <FontAwesomeIcon :icon="tab.icon" class="text-lg" />
