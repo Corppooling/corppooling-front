@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 import AutoComplete from 'primevue/autocomplete';
-import { useDebounceFn } from '@vueuse/core';
 import Button from '@/components/molecules/Button.vue';
-import axios, { type AxiosResponse } from 'axios';
 import { DateTime } from 'luxon';
 import Calendar from 'primevue/calendar';
+import { useGeoGouvAPI } from '@/composables/geoGouvAPI';
 
+const geoGouvAPI = useGeoGouvAPI();
 const townsAutocomplete = ref<Array<string>>([]);
 const step = ref<number>(1);
 const stepLoading = ref<boolean>(false);
@@ -15,23 +15,15 @@ const departureLocation = ref<string>('');
 const arrivalLocation = ref<string>('');
 const departureTime = ref<Date | undefined>(undefined);
 
-const getTowns = useDebounceFn(async (town: string) => {
-  await axios
-    .get(`https://geo.api.gouv.fr/communes?nom=${town}&fields=nom,code&limit=4&boost=population`)
-    .then((res: AxiosResponse<Array<Record<string, string>>>) => {
-      townsAutocomplete.value = res.data.map((town: any) => town.nom);
-    });
-}, 500);
-
-watch(departureLocation, (value) => {
+watch(departureLocation, async (value) => {
   if (value?.trim()) {
-    getTowns(value.trim());
+    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
   }
 });
 
-watch(arrivalLocation, (value) => {
+watch(arrivalLocation, async (value) => {
   if (value?.trim()) {
-    getTowns(value.trim());
+    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
   }
 });
 

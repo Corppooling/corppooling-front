@@ -6,12 +6,11 @@ import Button from '@/components/molecules/Button.vue';
 import { useTripStore } from '@/stores/trip';
 import { useRoute, useRouter } from 'vue-router';
 import { DateTime } from 'luxon';
-import type { AxiosResponse } from 'axios';
-import axios from 'axios';
-import { useDebounceFn } from '@vueuse/core';
+import { useGeoGouvAPI } from '@/composables/geoGouvAPI';
 
 const route = useRoute();
 const router = useRouter();
+const geoGouvAPI = useGeoGouvAPI();
 const departureLocation = ref<string | undefined>(route.query['departure'] as string);
 const arrivalLocation = ref<string | undefined>(route.query['arrival'] as string);
 const departureTime = ref<Date | undefined>(
@@ -59,23 +58,15 @@ const reverseLocations = (): void => {
   arrivalLocation.value = temp;
 };
 
-const getTowns = useDebounceFn(async (town: string) => {
-  await axios
-    .get(`https://geo.api.gouv.fr/communes?nom=${town}&fields=nom,code&limit=4&boost=population`)
-    .then((res: AxiosResponse<Array<Record<string, string>>>) => {
-      townsAutocomplete.value = res.data.map((town: any) => town.nom);
-    });
-}, 500);
-
-watch(departureLocation, (value) => {
+watch(departureLocation, async (value) => {
   if (value?.trim()) {
-    getTowns(value.trim());
+    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
   }
 });
 
-watch(arrivalLocation, (value) => {
+watch(arrivalLocation, async (value) => {
   if (value?.trim()) {
-    getTowns(value.trim());
+    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
   }
 });
 </script>
