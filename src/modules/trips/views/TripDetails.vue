@@ -82,7 +82,9 @@ onMounted(async () => {
       <div v-if="trip?.type === TripType.DRIVER">
         <div class="flex justify-between my-4 p-4">
           <p>{{ $t('trip.price') }}</p>
-          <span v-if="trip" class="font-bold text-xl">{{ formatPrice(trip?.price) }}</span>
+          <span v-if="trip && trip.price" class="font-bold text-xl">
+            {{ formatPrice(trip?.price) }}
+          </span>
         </div>
         <hr class="opacity-25" />
       </div>
