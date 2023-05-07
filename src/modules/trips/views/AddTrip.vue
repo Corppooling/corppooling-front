@@ -220,7 +220,7 @@ const rightFunction = async (): Promise<void> => {
       </div>
       <template v-if="formData.type === TripType.DRIVER">
         <div v-if="step >= 6">
-          <h3 class="text-2xl mb-6">Combien y a-t-il de places dans votre voiture ?</h3>
+          <h3 class="text-2xl mb-6">Combien y a-t-il de places dans la voiture ?</h3>
         </div>
       </template>
       <Button
