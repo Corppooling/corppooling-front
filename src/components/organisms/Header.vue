@@ -3,12 +3,11 @@ import { ref } from 'vue';
 import Button from '@/components/molecules/Button.vue';
 import Sidebar from 'primevue/sidebar';
 import UserButton from '@/components/molecules/UserButton.vue';
-import { useUserStore } from '@/stores/user';
 import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 
-const userStore = useUserStore();
 const authStore = useAuthStore();
-userStore.setUser();
+const userStore = useUserStore();
 
 const displaySidebar = ref<boolean>(false);
 </script>

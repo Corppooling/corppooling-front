@@ -22,7 +22,8 @@ const user = ref<User>(userStore.getUser as User);
 const toast = useToast();
 
 interface formDataI {
-  announcerId: number;
+  announcer: string;
+  company: string;
   departureLocation?: string;
   arrivalLocation?: string;
   departureTime?: Date;
@@ -32,13 +33,14 @@ interface formDataI {
 }
 
 const formData = reactive<formDataI>({
-  announcerId: user.value.id,
+  announcer: `api/users/${user.value.id}`,
+  company: `api/companies/${user.value.company.id}`,
   departureLocation: 'Marseille',
   arrivalLocation: 'Paris',
   departureTime: DateTime.now().toJSDate(),
-  type: TripType.PASSENGER,
+  type: TripType.DRIVER,
   message: 'test',
-  availableSeats: 0,
+  availableSeats: 1,
 });
 
 onMounted(() => {
@@ -216,6 +218,11 @@ const rightFunction = async (): Promise<void> => {
           />
         </div>
       </div>
+      <template v-if="formData.type === TripType.DRIVER">
+        <div v-if="step >= 6">
+          <h3 class="text-2xl mb-6">Combien y a-t-il de places dans votre voiture ?</h3>
+        </div>
+      </template>
       <Button
         :fn="rightFunction"
         :loading="stepLoading"
