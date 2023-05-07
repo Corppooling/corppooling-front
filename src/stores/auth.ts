@@ -10,7 +10,6 @@ import StatusCode from 'status-code-enum';
 import axios from 'axios';
 
 const { t } = i18nGlobal;
-const toast = useToast();
 
 export const useAuthStore = defineStore({
   id: 'auth',
@@ -20,6 +19,8 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     async login(username: string, password: string): Promise<void> {
+      const toast = useToast();
+
       await axiosClient
         .post('/auth', {
           username: username,
