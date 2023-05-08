@@ -79,10 +79,10 @@ onMounted(async () => {
         </div>
       </div>
       <hr class="opacity-25" />
-      <div v-if="trip?.type === TripType.DRIVER">
+      <div v-if="trip?.type === TripType.DRIVER && trip.price">
         <div class="flex justify-between my-4 p-4">
           <p>{{ $t('trip.price') }}</p>
-          <span v-if="trip && trip.price" class="font-bold text-xl">
+          <span class="font-bold text-xl">
             {{ formatPrice(trip?.price) }}
           </span>
         </div>
@@ -119,7 +119,7 @@ onMounted(async () => {
         </span>
       </div>
       <hr class="opacity-25" />
-      <div v-if="trip?.type === TripType.DRIVER">
+      <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
         <div class="p-4 mt-4">
           <p class="text-md">
             {{ $t('trip.availableSeats', { count: trip?.available_seats }) }}

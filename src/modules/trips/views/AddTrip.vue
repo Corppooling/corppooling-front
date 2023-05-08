@@ -7,6 +7,7 @@ import Calendar from 'primevue/calendar';
 import RadioButton from 'primevue/radiobutton';
 import Textarea from 'primevue/textarea';
 import InputNumber from 'primevue/inputnumber';
+import InputText from 'primevue/inputtext';
 import { useGeoGouvAPI } from '@/composables/geoGouvAPI';
 import { TripType } from '@/interfaces/trip.interface';
 import axiosClient from '@/support/axiosClient';
@@ -31,21 +32,23 @@ interface formDataI {
   type?: TripType;
   message?: string;
   availableSeats: number;
+  carModel?: string;
+  carColor?: string;
+  price?: number;
 }
 
 const formData = reactive<formDataI>({
   announcer: `api/users/${user.value.id}`,
   company: `api/companies/${user.value.company.id}`,
-  departureLocation: 'Marseille',
-  arrivalLocation: 'Paris',
-  departureTime: DateTime.now().toJSDate(),
-  type: TripType.DRIVER,
-  message: 'test',
-  availableSeats: 1,
-});
-
-onMounted(() => {
-  checkStep();
+  departureLocation: undefined,
+  arrivalLocation: undefined,
+  departureTime: undefined,
+  type: undefined,
+  message: undefined,
+  availableSeats: 0,
+  carModel: undefined,
+  carColor: undefined,
+  price: undefined,
 });
 
 watch(
@@ -71,9 +74,14 @@ const commonConditions: Array<() => boolean> = [
   () => !!formData.departureLocation?.trim(),
   () => !!formData.arrivalLocation?.trim(),
   () => !!formData.departureTime,
-  () => step.value >= 5,
+  () => !!formData.message?.trim(),
 ];
-const driverConditions: Array<() => boolean> = [() => formData.availableSeats >= 1];
+const driverConditions: Array<() => boolean> = [
+  () => formData.availableSeats >= 1,
+  () => !!formData.carModel?.trim(),
+  () => !!formData.carColor?.trim(),
+  () => !!formData.price,
+];
 const conditions: Array<() => boolean> = [...commonConditions, ...driverConditions];
 
 const checkStep = (): void => {
@@ -238,6 +246,47 @@ const rightFunction = async (): Promise<void> => {
             />
           </div>
         </div>
+        <div v-if="step >= 7">
+          <h3 class="text-2xl mb-6">Quel est le modèle de votre véhicule ?</h3>
+          <div class="border-b-2 border-black-light">
+            <InputText
+              class="w-full"
+              v-model="formData.carModel"
+              placeholder="Votre modèle de voiture"
+            />
+          </div>
+        </div>
+        <div v-if="step >= 8">
+          <h3 class="text-2xl mb-6">Quelle est la couleur de votre véhicule ?</h3>
+          <div class="border-b-2 border-black-light">
+            <InputText
+              class="w-full"
+              v-model="formData.carColor"
+              placeholder="Votre couleur de voiture"
+            />
+          </div>
+        </div>
+        <div v-if="step >= 9">
+          <h3 class="text-2xl mb-6">Quel tarif souhaitez-vous mettre ?</h3>
+          <div>
+            <InputNumber
+              class="w-full"
+              v-model="formData.price"
+              showButtons
+              allowEmpty
+              buttonLayout="horizontal"
+              :step="1"
+              :min="0"
+              decrementButtonClass="bg-main-base"
+              incrementButtonClass="bg-main-base"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus"
+              mode="currency"
+              currency="EUR"
+              placeholder="Prix indicatif"
+            />
+          </div>
+        </div>
       </template>
       <Button
         :fn="rightFunction"
@@ -253,7 +302,6 @@ const rightFunction = async (): Promise<void> => {
 <style lang="scss">
 .p-inputnumber-input {
   text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 </style>
