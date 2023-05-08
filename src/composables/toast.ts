@@ -3,7 +3,7 @@ import app from '@/main';
 import { i18nGlobal } from '@/support/i18n';
 
 const { t } = i18nGlobal;
-const lifeTime = 3000;
+const lifeTime = 3500;
 
 export const useToast = () => {
   const info = (title: string = t('toast.info'), body?: string): void => {

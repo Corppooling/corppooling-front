@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import AutoComplete from 'primevue/autocomplete';
 import Button from '@/components/molecules/Button.vue';
 import { DateTime } from 'luxon';
@@ -14,7 +14,9 @@ import axiosClient from '@/support/axiosClient';
 import { useUserStore } from '@/stores/user';
 import { User } from '@/interfaces/user.interface';
 import { useToast } from '@/composables/toast';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const userStore = useUserStore();
 const geoGouvAPI = useGeoGouvAPI();
 const townsAutocomplete = ref<Array<string>>([]);
@@ -31,7 +33,7 @@ interface formDataI {
   departureTime?: Date;
   type?: TripType;
   message?: string;
-  availableSeats: number;
+  availableSeats?: number;
   carModel?: string;
   carColor?: string;
   price?: number;
@@ -45,7 +47,7 @@ const formData = reactive<formDataI>({
   departureTime: undefined,
   type: undefined,
   message: undefined,
-  availableSeats: 0,
+  availableSeats: undefined,
   carModel: undefined,
   carColor: undefined,
   price: undefined,
@@ -77,10 +79,10 @@ const commonConditions: Array<() => boolean> = [
   () => !!formData.message?.trim(),
 ];
 const driverConditions: Array<() => boolean> = [
-  () => formData.availableSeats >= 1,
+  () => typeof formData.availableSeats !== 'undefined' && formData.availableSeats >= 0,
   () => !!formData.carModel?.trim(),
   () => !!formData.carColor?.trim(),
-  () => !!formData.price,
+  () => typeof formData.price !== 'undefined' && formData.price >= 0,
 ];
 const conditions: Array<() => boolean> = [...commonConditions, ...driverConditions];
 
@@ -88,11 +90,16 @@ const checkStep = (): void => {
   stepLoading.value = true;
 
   setTimeout(() => {
+    let tempStep = step.value;
+
     for (let i = 1; i <= conditions.length; i++) {
       if (conditions[i - 1]()) {
         step.value = i + 1;
       } else {
         step.value = i;
+        if (tempStep === step.value) {
+          toast.warning('Veuillez remplir tous les champs');
+        }
         break;
       }
     }
@@ -119,7 +126,8 @@ const sendForm = async (): Promise<void> => {
   await axiosClient
     .post('api/trips', formData)
     .then(() => {
-      console.log('ok');
+      router.push({ name: 'account.trips' });
+      toast.success('Votre trajet a bien été publié');
     })
     .catch(() => {
       toast.error();
@@ -273,7 +281,7 @@ const rightFunction = async (): Promise<void> => {
               class="w-full"
               v-model="formData.price"
               showButtons
-              allowEmpty
+              :allowEmpty="false"
               buttonLayout="horizontal"
               :step="1"
               :min="0"
