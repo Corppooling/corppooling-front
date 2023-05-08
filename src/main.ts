@@ -12,8 +12,13 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { i18n } from '@/support/i18n';
+import { registerSW } from 'virtual:pwa-register';
 
 library.add(fas, far, fab);
+
+if ('serviceWorker' in navigator) {
+  registerSW();
+}
 
 const app = createApp(App);
 
