@@ -48,6 +48,7 @@
     "passenger": "1 passenger | {count} passengers",
     "join": "Join",
     "noTrips": "No trips match your search",
+    "noTripsNow": "No trips available for now",
     "filter": {
       "departure": "Departure",
       "arrival": "Arrival",

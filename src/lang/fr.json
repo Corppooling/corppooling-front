@@ -42,12 +42,13 @@
     }
   },
   "trip": {
-    "title": "Voyages",
+    "title": "Trajets",
     "searchPassengers": "Je recherche des passagers",
     "searchDriver": "Je recherche un conducteur",
     "passenger": "1 passager | {count} passagers",
     "join": "Rejoindre",
-    "noTrips": "Aucun voyage ne correspond à votre recherche",
+    "noTrips": "Aucun trajet ne correspond à votre recherche",
+    "noTripsNow": "Il n'y a aucun trajet disponible actuellement",
     "filter": {
       "departure": "Départ",
       "arrival": "Arrivée",
@@ -82,7 +83,7 @@
   },
   "account": {
     "profile": "Mon profil",
-    "trips": "Mes voyages",
+    "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise"
   }
