@@ -104,6 +104,7 @@ const handleClick = (): void => {
 <template>
   <component
     :is="to ? 'router-link' : 'div'"
+    v-ripple
     :to="to"
     class="flex p-3 justify-center items-center shadow-md rounded-2xl cursor-pointer hover:saturate-150 transition-all duration-200 hover:drop-shadow-md whitespace-nowrap select-none"
     :class="[bgColorClass, textColorClass, disabledClass]"

@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 import Calendar from 'primevue/calendar';
 import RadioButton from 'primevue/radiobutton';
 import Textarea from 'primevue/textarea';
+import InputNumber from 'primevue/inputnumber';
 import { useGeoGouvAPI } from '@/composables/geoGouvAPI';
 import { TripType } from '@/interfaces/trip.interface';
 import axiosClient from '@/support/axiosClient';
@@ -221,6 +222,21 @@ const rightFunction = async (): Promise<void> => {
       <template v-if="formData.type === TripType.DRIVER">
         <div v-if="step >= 6">
           <h3 class="text-2xl mb-6">Combien y a-t-il de places dans la voiture ?</h3>
+          <div>
+            <InputNumber
+              class="w-full"
+              v-model="formData.availableSeats"
+              showButtons
+              :allowEmpty="false"
+              buttonLayout="horizontal"
+              :step="1"
+              :min="1"
+              decrementButtonClass="bg-main-base"
+              incrementButtonClass="bg-main-base"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus"
+            />
+          </div>
         </div>
       </template>
       <Button
@@ -233,3 +249,11 @@ const rightFunction = async (): Promise<void> => {
     </form>
   </div>
 </template>
+
+<style lang="scss">
+.p-inputnumber-input {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+</style>

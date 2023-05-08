@@ -5,6 +5,7 @@ import router from './router';
 import PrimeVue from 'primevue/config';
 import Tooltip from 'primevue/tooltip';
 import ToastService from 'primevue/toastservice';
+import { ripple } from '@/directives/ripple';
 import '@/assets/styles/main.scss';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -28,6 +29,7 @@ app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 app.use(i18n);
 app.directive('tooltip', Tooltip);
+app.directive('ripple', ripple);
 app.component('FontAwesomeIcon', FontAwesomeIcon);
 app.mount('#app');
 
