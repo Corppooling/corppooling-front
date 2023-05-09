@@ -28,14 +28,33 @@ module.exports = {
         glight: 'rgb(var(--color-content-glight) / <alpha-value>)',
         flight: 'rgb(var(--color-content-flight) / <alpha-value>)',
       },
+
+      contextual: {
+        1: 'rgb(var(--color-contextual-1) / <alpha-value>)',
+        2: 'rgb(var(--color-contextual-2) / <alpha-value>)',
+        3: 'rgb(var(--color-contextual-3) / <alpha-value>)',
+        4: 'rgb(var(--color-contextual-4) / <alpha-value>)',
+      },
     },
 
     extend: {
       animation: {
+        ripple: 'ripple .4s linear',
         floating: 'floating 6s ease-in-out infinite alternate',
       },
 
       keyframes: {
+        ripple: {
+          '0%': {
+            opacity: '1',
+            transform: 'scale(0)',
+          },
+
+          '100%': {
+            opacity: '0',
+            transform: 'scale(2.5)',
+          },
+        },
         floating: {
           '0%': {
             transform: 'translateY(0px)',
@@ -55,5 +74,5 @@ module.exports = {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [],
 };

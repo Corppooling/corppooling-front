@@ -4,6 +4,7 @@ export const accountRoutes: Array<RouteRecordRaw> = [
   {
     path: '/account',
     name: 'account',
+    component: () => import('@/modules/account/layouts/Account.vue'),
     meta: {
       authRequired: true,
       hideFooter: true,

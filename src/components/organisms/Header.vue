@@ -3,12 +3,11 @@ import { ref } from 'vue';
 import Button from '@/components/molecules/Button.vue';
 import Sidebar from 'primevue/sidebar';
 import UserButton from '@/components/molecules/UserButton.vue';
-import { useUserStore } from '@/stores/user';
 import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
 
-const userStore = useUserStore();
 const authStore = useAuthStore();
-userStore.setUser();
+const userStore = useUserStore();
 
 const displaySidebar = ref<boolean>(false);
 </script>
@@ -70,19 +69,23 @@ const displaySidebar = ref<boolean>(false);
           icon="fa-search"
           :text="$t('header.search')"
           iconSize="2xl"
-          @click="
-            () => {
-              displaySidebar = false;
-            }
-          "
+          @click="displaySidebar = false"
         />
-        <Button class="mx-2 my-4" icon="fa-plus" :text="$t('header.newTrip')" iconSize="2xl" />
         <Button
-          :to="{ name: 'profile' }"
+          :to="{ name: 'trip.add' }"
+          class="mx-2 my-4"
+          icon="fa-plus"
+          :text="$t('header.newTrip')"
+          iconSize="2xl"
+          @click="displaySidebar = false"
+        />
+        <Button
+          :to="{ name: 'account.profile' }"
           class="mx-2 my-4"
           icon="fa-user"
           :text="$t('header.account')"
           iconSize="2xl"
+          @click="displaySidebar = false"
         />
         <Button
           class="mx-2 my-4"

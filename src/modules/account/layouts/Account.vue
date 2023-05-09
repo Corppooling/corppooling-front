@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/vue-fontawesome';
-import { type RouteLocationRaw, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
+import { i18nGlobal } from '@/support/i18n';
 
 const route = useRoute();
+const { t } = i18nGlobal;
 
 interface Tab {
   name: string;
@@ -13,22 +15,22 @@ interface Tab {
 const tabs: Array<Tab> = [
   {
     name: 'account.profile',
-    label: 'Mon profil',
+    label: t('account.profile'),
     icon: 'fa-user',
   },
   {
     name: 'account.trips',
-    label: 'Mes voyages',
+    label: t('account.trips'),
     icon: 'fa-car',
   },
   {
     name: 'account.bookings',
-    label: 'Mes réservations',
+    label: t('account.bookings'),
     icon: 'fa-calendar-alt',
   },
   {
     name: 'account.company',
-    label: 'Mon entreprise',
+    label: t('account.company'),
     icon: 'fa-building',
   },
 ];
@@ -37,7 +39,7 @@ const tabs: Array<Tab> = [
 <template>
   <div class="flex flex-col md:flex-row flex-1">
     <div class="order-2 flex-1">
-      <slot />
+      <RouterView />
     </div>
     <div
       class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-flight text-content-base max-w-fit shadow-md"
@@ -45,6 +47,7 @@ const tabs: Array<Tab> = [
       <div class="flex flex-col">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
+            v-ripple
             :to="{ name: tab.name }"
             class="flex items-center py-5 px-8 hover:bg-content-xlight hover:text-white"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
@@ -56,11 +59,12 @@ const tabs: Array<Tab> = [
       </div>
     </div>
     <div
-      class="md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base shadow-md -mb-px"
+      class="mobile-footer md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base shadow-md -mb-px"
     >
       <div class="flex justify-between w-full">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
+            v-ripple
             :to="{ name: tab.name }"
             class="hover:bg-content-xlight hover:text-white w-full py-4 flex justify-center items-center"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
@@ -72,3 +76,9 @@ const tabs: Array<Tab> = [
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.mobile-footer {
+  padding-bottom: constant(safe-area-inset-bottom);
+}
+</style>

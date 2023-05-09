@@ -17,7 +17,6 @@ import { i18nGlobal } from '@/support/i18n';
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
-userStore.setUser();
 
 const { t } = i18nGlobal;
 
@@ -59,7 +58,7 @@ const tutorialElements = computed((): Array<Record<string, string>> => {
       </p>
       <div class="flex flex-col md:flex-row justify-evenly w-full mt-14">
         <template v-for="(element, index) in tutorialElements" :key="index">
-          <div class="flex flex-col w-full md:w-80 flex justify-center items-center">
+          <div class="flex flex-col w-full md:w-80 justify-center items-center">
             <div class="h-52 max-h-52 my-auto">
               <img class="h-full" :src="element.image" alt="" />
             </div>
