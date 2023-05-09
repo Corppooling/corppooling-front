@@ -5,11 +5,12 @@ import Password from 'primevue/password';
 import Button from '@/components/molecules/Button.vue';
 import PrimeInput from '@/components/atoms/PrimeInput.vue';
 import { useAuthStore } from '@/stores/auth';
-import { warning } from '@/composables/toast';
+import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
 
 const { t } = i18nGlobal;
 const authStore = useAuthStore();
+const toast = useToast();
 const email = ref<string>('');
 const password = ref<string>('');
 const loading = ref<boolean>(false);
@@ -20,7 +21,7 @@ const onSubmit = async () => {
     await authStore.login(email.value, password.value);
     loading.value = false;
   } else {
-    warning(t('form.empties'));
+    toast.warning(t('form.empties'));
   }
 };
 </script>

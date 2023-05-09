@@ -7,11 +7,11 @@ export interface Trip {
   departure_location: string;
   arrival_location: string;
   departure_time: string;
-  available_seats: number;
+  available_seats?: number;
   message?: string;
-  price: number;
-  car_model: string;
-  car_color: string;
+  price?: number;
+  car_model?: string;
+  car_color?: string;
   updated_at: string;
   created_at: string;
   reservation: Reservation;

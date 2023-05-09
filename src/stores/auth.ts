@@ -3,7 +3,6 @@ import type { AxiosResponse } from 'axios';
 import { router } from '@/router';
 import axiosClient from '@/support/axiosClient';
 import { useUserStore } from '@/stores/user';
-import { error } from '@/composables/toast';
 import type { AxiosError } from 'axios';
 import { i18nGlobal } from '@/support/i18n';
 import StatusCode from 'status-code-enum';
@@ -19,6 +18,9 @@ export const useAuthStore = defineStore({
   }),
   actions: {
     async login(username: string, password: string): Promise<void> {
+      const { useToast } = await import('@/composables/toast');
+      const toast = useToast();
+
       await axiosClient
         .post('/auth', {
           username: username,
@@ -30,9 +32,9 @@ export const useAuthStore = defineStore({
         })
         .catch((err: AxiosError) => {
           if (err.response?.status === StatusCode.ClientErrorUnauthorized) {
-            error(undefined, t('auth.badCredentials'));
+            toast.error(undefined, t('auth.badCredentials'));
           } else {
-            error();
+            toast.error();
           }
         });
     },
