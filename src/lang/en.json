@@ -48,6 +48,7 @@
     "passenger": "1 passenger | {count} passengers",
     "join": "Join",
     "noTrips": "No trips match your search",
+    "noTripsNow": "No trips available for now",
     "filter": {
       "departure": "Departure",
       "arrival": "Arrival",
@@ -64,7 +65,27 @@
     "price": "Indicative price for 1 passenger",
     "contact": "Contact {name}",
     "availableSeats": "1 seat available | {count} seats available",
-    "joinThisTrip": "Join this trip"
+    "joinThisTrip": "Join this trip",
+    "addTrip": {
+      "fillFields": "Please fill in all fields",
+      "publish": "Publish",
+      "next": "Next",
+      "success": "Your trip has been successfully published",
+      "newTrip": "New trip",
+      "step1": "Are you a driver or a passenger?",
+      "step2": "Where are you departing from?",
+      "step3": "Where are you going?",
+      "step4": "When are you departing?",
+      "step5": "Any message to convey?",
+      "message": "Your message",
+      "step6": "How many seats are available in the car?",
+      "step7": "What is the model of your vehicle?",
+      "carModel": "Your car model",
+      "step8": "What is the color of your vehicle?",
+      "carColor": "Your car color",
+      "step9": "What price would you like to set?",
+      "price": "Indicative price for 1 passenger"
+    }
   },
   "contact": {
     "yourMessage": "Your message",
@@ -79,5 +100,11 @@
   },
   "form": {
     "empties": "Please fill out all fields"
+  },
+  "account": {
+    "profile": "My profile",
+    "trips": "My trips",
+    "bookings": "My bookings",
+    "company": "My company"
   }
 }

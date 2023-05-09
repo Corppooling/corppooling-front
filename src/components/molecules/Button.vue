@@ -39,19 +39,20 @@ const props = defineProps<{
   textColor?: string;
   fn?: () => void;
   loading?: boolean;
+  disabled?: boolean;
 }>();
 
-const bgColorClass = computed(() => {
+const bgColorClass = computed<string>(() => {
   if (props.bgColor) return `bg-${props.bgColor}`;
   return 'bg-content-glight';
 });
 
-const textColorClass = computed(() => {
+const textColorClass = computed<string>(() => {
   if (props.textColor) return `text-${props.textColor}`;
   return 'text-white';
 });
 
-const generateSizeClass = (size?: string) => {
+const generateSizeClass = (size?: string): string => {
   switch (size) {
     case 'sm':
       return 'text-sm';
@@ -82,30 +83,34 @@ const generateSizeClass = (size?: string) => {
   }
 };
 
-const iconSizeClass = computed(() => {
+const iconSizeClass = computed<string>(() => {
   return generateSizeClass(props.iconSize);
 });
 
-const textSizeClass = computed(() => {
+const textSizeClass = computed<string>(() => {
   return generateSizeClass(props.textSize);
 });
 
-const handleClick = () => {
-  if (props.fn) {
-    props.fn();
-  }
+const disabledClass = computed<string>(() => {
+  if (props.disabled) return 'bg-black-light hover:drop-shadow-none cursor-not-allowed';
+  return '';
+});
+
+const handleClick = (): void => {
+  if (!props.disabled && props.fn) props.fn();
 };
 </script>
 
 <template>
   <component
     :is="to ? 'router-link' : 'div'"
+    v-ripple
     :to="to"
     class="flex p-3 justify-center items-center shadow-md rounded-2xl cursor-pointer hover:saturate-150 transition-all duration-200 hover:drop-shadow-md whitespace-nowrap select-none"
-    :class="[bgColorClass, textColorClass]"
+    :class="[bgColorClass, textColorClass, disabledClass]"
     @click="handleClick"
   >
-    <Spinner v-if="props.loading" />
+    <Spinner v-if="!props.disabled && props.loading" />
     <font-awesome-icon
       v-if="props.icon && !props.loading && (props.iconPosition === 'left' || !props.iconPosition)"
       :class="[iconSizeClass, props.iconClass]"
