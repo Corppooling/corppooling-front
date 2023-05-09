@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useTripStore } from '@/stores/trip';
 import { useRoute } from 'vue-router';
 import { TripType } from '@/interfaces/trip.interface';
-import { info } from '@/composables/toast';
+import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
 
 const { t } = i18nGlobal;
 const tripStore = useTripStore();
 const route = useRoute();
+const toast = useToast();
 const sorts = ref<Record<string, string>>({
   orderSort: 'order[departure_time]=asc',
   typeSort: '',
@@ -38,7 +39,7 @@ const resetFilters = (): void => {
   sorts.value.orderSort = 'order[departure_time]=asc';
   sorts.value.typeSort = '';
   tripStore.resetExtraSorts();
-  info(t('trip.filter.reset'));
+  toast.info(t('trip.filter.reset'));
 };
 
 window.addEventListener('resize', (): void => {

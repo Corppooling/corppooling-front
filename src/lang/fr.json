@@ -42,12 +42,13 @@
     }
   },
   "trip": {
-    "title": "Voyages",
+    "title": "Trajets",
     "searchPassengers": "Je recherche des passagers",
     "searchDriver": "Je recherche un conducteur",
     "passenger": "1 passager | {count} passagers",
     "join": "Rejoindre",
-    "noTrips": "Aucun voyage ne correspond à votre recherche",
+    "noTrips": "Aucun trajet ne correspond à votre recherche",
+    "noTripsNow": "Il n'y a aucun trajet disponible actuellement",
     "filter": {
       "departure": "Départ",
       "arrival": "Arrivée",
@@ -64,7 +65,27 @@
     "price": "Prix indicatif pour 1 passager",
     "contact": "Contacter {name}",
     "availableSeats": "1 place disponible | {count} places disponibles",
-    "joinThisTrip": "Rejoindre ce trajet"
+    "joinThisTrip": "Rejoindre ce trajet",
+    "addTrip": {
+      "fillFields": "Veuillez remplir tous les champs",
+      "publish": "Publier",
+      "next": "Suivant",
+      "success": "Votre trajet a bien été publié",
+      "newTrip": "Nouveau trajet",
+      "step1": "Êtes-vous vous conducteur ou passager ?",
+      "step2": "D’où partez-vous ?",
+      "step3": "Où allez-vous ?",
+      "step4": "Quand partez-vous ?",
+      "step5": "Un message à transmettre ?",
+      "message": "Votre message",
+      "step6": "Combien y a-t-il de places dans la voiture ?",
+      "step7": "Quel est le modèle de votre véhicule ?",
+      "carModel": "Votre modèle de voiture",
+      "step8": "Quelle est la couleur de votre véhicule ?",
+      "carColor": "Votre couleur de voiture",
+      "step9": "Quel tarif souhaitez-vous mettre ?",
+      "price": "Prix indicatif pour 1 passager"
+    }
   },
   "contact": {
     "yourMessage": "Votre message",
@@ -79,5 +100,11 @@
   },
   "form": {
     "empties": "Veuillez remplir tous les champs"
+  },
+  "account": {
+    "profile": "Mon profil",
+    "trips": "Mes trajets",
+    "bookings": "Mes réservations",
+    "company": "Mon entreprise"
   }
 }

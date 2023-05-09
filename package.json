@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
+    "serve": "serve -s dist",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:unit:ci": "vitest run",
@@ -26,6 +27,7 @@
     "pinia": "^2.0.28",
     "primeicons": "^6.0.1",
     "primevue": "^3.23.0",
+    "serve": "^14.2.0",
     "status-code-enum": "^1.0.0",
     "swiper": "^9.0.5",
     "vee-validate": "^4.8.4",
@@ -35,7 +37,6 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
-    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/luxon": "^3.3.0",
     "@types/node": "^18.11.12",
     "@vitejs/plugin-vue": "^4.0.0",
