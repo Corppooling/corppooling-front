@@ -22,9 +22,9 @@ const sendMessage = (): void => {
 
 <template>
   <Modal :isOpen="props.isOpen" @update:isOpen="emit('update:isOpen', $event)">
-    <div class="w-full h-full px-6 pt-14 pb-6 flex flex-col items-center justify-center">
-      <span class="p-float-label w-full my-4">
-        <Textarea class="w-full lg:w-[40rem]" rows="5" v-model="message" />
+    <div class="flex h-full w-full flex-col items-center justify-center px-6 pb-6 pt-14">
+      <span class="p-float-label my-4 w-full">
+        <Textarea v-model="message" class="w-full lg:w-[40rem]" rows="5" />
         <label>{{ $t('contact.yourMessage') }}</label>
       </span>
       <Button

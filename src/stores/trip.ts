@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axiosClient from '@/support/axiosClient';
 import type { Trip } from '@/interfaces/trip.interface';
 import { DateTime } from 'luxon';
+
 export const useTripStore = defineStore({
   id: 'trip',
   state: () => ({

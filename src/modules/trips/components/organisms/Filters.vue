@@ -51,12 +51,12 @@ window.addEventListener('resize', (): void => {
   <Transition name="bounce">
     <div
       v-if="displayFilters"
-      class="flex flex-col ring-1 rounded-2xl ring-content-flight shadow-md p-4 md:min-w-[350px] max-h-fit h-fit bg-white sticky top-32 z-10 mb-10"
+      class="sticky top-32 z-10 mb-10 flex h-fit max-h-fit flex-col rounded-2xl bg-white p-4 shadow-md ring-1 ring-content-flight md:min-w-[350px]"
     >
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <h3 class="text-xl">{{ $t('trip.filter.filterBy') }}</h3>
         <div class="flex items-center">
-          <span @click="resetFilters" class="cursor-pointer p-2">
+          <span class="cursor-pointer p-2" @click="resetFilters">
             <FontAwesomeIcon
               size="lg"
               icon="trash-can"
@@ -66,12 +66,12 @@ window.addEventListener('resize', (): void => {
           <FontAwesomeIcon
             size="xl"
             icon="times"
-            class="lg:hidden p-2 cursor-pointer ml-6"
+            class="ml-6 cursor-pointer p-2 lg:hidden"
             @click="displayFilters = false"
           />
         </div>
       </div>
-      <div class="flex flex-col mt-4">
+      <div class="mt-4 flex flex-col">
         <div class="flex items-center p-2">
           <RadioButton
             v-model="sorts.orderSort"
@@ -106,9 +106,9 @@ window.addEventListener('resize', (): void => {
           </label>
         </div>
       </div>
-      <hr class="border-b-2 opacity-10 my-4" />
+      <hr class="my-4 border-b-2 opacity-10" />
       <h3 class="text-xl">{{ $t('trip.filter.iAm') }}</h3>
-      <div class="flex flex-col mt-4">
+      <div class="mt-4 flex flex-col">
         <div class="flex items-center p-2">
           <RadioButton
             v-model="sorts.typeSort"
@@ -137,7 +137,7 @@ window.addEventListener('resize', (): void => {
   <Transition name="bounce">
     <div
       v-if="!displayFilters"
-      class="bg-white drop-shadow-md rounded-full w-14 h-14 flex justify-center items-center cursor-pointer ml-auto sticky top-32 z-10 mb-10"
+      class="sticky top-32 z-10 mb-10 ml-auto flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-white drop-shadow-md"
       @click="displayFilters = true"
     >
       <FontAwesomeIcon size="lg" icon="filter" class="text-content-base" />
