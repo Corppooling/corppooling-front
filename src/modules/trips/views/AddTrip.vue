@@ -15,6 +15,7 @@ import { useUserStore } from '@/stores/user';
 import { User } from '@/interfaces/user.interface';
 import { useToast } from '@/composables/toast';
 import { useRouter } from 'vue-router';
+import { i18nGlobal } from '@/support/i18n';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -24,6 +25,7 @@ const step = ref<number>(1);
 const stepLoading = ref<boolean>(false);
 const user = ref<User>(userStore.getUser as User);
 const toast = useToast();
+const { t } = i18nGlobal;
 
 interface formDataI {
   announcer: string;
@@ -90,7 +92,7 @@ const checkStep = (): void => {
   stepLoading.value = true;
 
   setTimeout(() => {
-    let tempStep = step.value;
+    let tempStep: number = step.value;
 
     for (let i = 1; i <= conditions.length; i++) {
       if (conditions[i - 1]()) {
@@ -98,7 +100,7 @@ const checkStep = (): void => {
       } else {
         step.value = i;
         if (tempStep === step.value) {
-          toast.warning('Veuillez remplir tous les champs');
+          toast.warning(t('trip.addTrip.fillFields'));
         }
         break;
       }
@@ -117,7 +119,7 @@ const formCanBeSend = computed<boolean>(() => {
 });
 
 const buttonText = computed<string>(() => {
-  return formCanBeSend.value ? 'Publier' : 'Suivant';
+  return formCanBeSend.value ? t('trip.addTrip.publish') : t('trip.addTrip.next');
 });
 
 const sendForm = async (): Promise<void> => {
@@ -127,7 +129,7 @@ const sendForm = async (): Promise<void> => {
     .post('api/trips', formData)
     .then(() => {
       router.push({ name: 'account.trips' });
-      toast.success('Votre trajet a bien été publié');
+      toast.success(t('trip.addTrip.success'));
     })
     .catch(() => {
       toast.error();
@@ -143,10 +145,10 @@ const rightFunction = async (): Promise<void> => {
 
 <template>
   <div class="px-4 py-14 max-w-screen-md mx-auto w-full">
-    <h1 class="text-4xl text-center font-bold mb-16">Nouveau trajet</h1>
+    <h1 class="text-4xl text-center font-bold mb-16">{{ $t('trip.addTrip.newTrip') }}</h1>
     <form class="flex flex-col gap-10">
       <div v-if="step >= 1">
-        <h3 class="text-2xl mb-6">Êtes-vous vous conducteur ou passager ?</h3>
+        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step1') }}</h3>
         <div>
           <div class="flex items-center mb-4">
             <RadioButton
@@ -155,7 +157,7 @@ const rightFunction = async (): Promise<void> => {
               name="driver"
               :value="TripType.DRIVER"
             />
-            <label for="driver" class="ml-2 cursor-pointer">Conducteur</label>
+            <label for="driver" class="ml-2 cursor-pointer">{{ $t('trip.filter.driver') }}</label>
           </div>
           <div class="flex items-center">
             <RadioButton
@@ -164,12 +166,14 @@ const rightFunction = async (): Promise<void> => {
               name="passenger"
               :value="TripType.PASSENGER"
             />
-            <label for="passenger" class="ml-2 cursor-pointer">Passager</label>
+            <label for="passenger" class="ml-2 cursor-pointer">
+              {{ $t('trip.filter.passenger') }}
+            </label>
           </div>
         </div>
       </div>
       <div v-if="step >= 2">
-        <h3 class="text-2xl mb-6">D’où partez-vous ?</h3>
+        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step2') }}</h3>
         <div>
           <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
             <FontAwesomeIcon
@@ -186,7 +190,7 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 3">
-        <h3 class="text-2xl mb-6">Où allez-vous ?</h3>
+        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step3') }}</h3>
         <div>
           <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
             <FontAwesomeIcon
@@ -203,7 +207,7 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 4">
-        <h3 class="text-2xl mb-6">Quand partez-vous ?</h3>
+        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step4') }}</h3>
         <div>
           <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
             <FontAwesomeIcon
@@ -225,19 +229,19 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 5">
-        <h3 class="text-2xl mb-6">Un message à transmettre ?</h3>
+        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step5') }}</h3>
         <div class="border-2 border-black-light">
           <Textarea
             class="w-full"
             rows="4"
             v-model="formData.message"
-            placeholder="Votre message"
+            :placeholder="$t('trip.addTrip.message')"
           />
         </div>
       </div>
       <template v-if="formData.type === TripType.DRIVER">
         <div v-if="step >= 6">
-          <h3 class="text-2xl mb-6">Combien y a-t-il de places dans la voiture ?</h3>
+          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step6') }}</h3>
           <div>
             <InputNumber
               class="w-full"
@@ -255,27 +259,27 @@ const rightFunction = async (): Promise<void> => {
           </div>
         </div>
         <div v-if="step >= 7">
-          <h3 class="text-2xl mb-6">Quel est le modèle de votre véhicule ?</h3>
+          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step7') }}</h3>
           <div class="border-b-2 border-black-light">
             <InputText
               class="w-full"
               v-model="formData.carModel"
-              placeholder="Votre modèle de voiture"
+              :placeholder="$t('trip.addTrip.carModel')"
             />
           </div>
         </div>
         <div v-if="step >= 8">
-          <h3 class="text-2xl mb-6">Quelle est la couleur de votre véhicule ?</h3>
+          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step8') }}</h3>
           <div class="border-b-2 border-black-light">
             <InputText
               class="w-full"
               v-model="formData.carColor"
-              placeholder="Votre couleur de voiture"
+              :placeholder="$t('trip.addTrip.carColor')"
             />
           </div>
         </div>
         <div v-if="step >= 9">
-          <h3 class="text-2xl mb-6">Quel tarif souhaitez-vous mettre ?</h3>
+          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step9') }}</h3>
           <div>
             <InputNumber
               class="w-full"
@@ -291,7 +295,7 @@ const rightFunction = async (): Promise<void> => {
               decrementButtonIcon="pi pi-minus"
               mode="currency"
               currency="EUR"
-              placeholder="Prix indicatif"
+              :placeholder="$t('trip.addTrip.price')"
             />
           </div>
         </div>
