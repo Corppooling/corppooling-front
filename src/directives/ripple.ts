@@ -1,3 +1,5 @@
+import { type Directive } from 'vue';
+
 /**
  * @param event
  */
@@ -74,7 +76,7 @@ function getRippleElement(parent: HTMLElement): HTMLElement | undefined {
   );
 }
 
-export const ripple = {
+export const ripple: Directive = {
   mounted(element: HTMLElement) {
     element.classList.add('overflow-hidden', 'relative');
 
