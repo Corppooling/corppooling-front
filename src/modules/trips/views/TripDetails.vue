@@ -30,12 +30,12 @@ onMounted(async () => {
 
 <template>
   <template v-if="!tripStore.requestLoading">
-    <div class="p-4 max-w-screen-lg mx-auto">
-      <div class="flex flex-wrap justify-between items-center py-10">
-        <h1 v-if="trip" class="capitalize text-4xl mr-4 my-2">
+    <div class="mx-auto max-w-screen-lg p-4">
+      <div class="flex flex-wrap items-center justify-between py-10">
+        <h1 v-if="trip" class="my-2 mr-4 text-4xl capitalize">
           {{ dateFormatedShort(trip?.departure_time) }}
         </h1>
-        <div class="flex items-center py-2 px-4 rounded-md my-2" :class="bgTypeColor(trip?.type)">
+        <div class="my-2 flex items-center rounded-md px-4 py-2" :class="bgTypeColor(trip?.type)">
           <p
             v-html="
               trip?.type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver')
@@ -48,16 +48,16 @@ onMounted(async () => {
           />
         </div>
       </div>
-      <div class="flex justify-center flex-col md:flex-row md:my-10">
-        <div class="flex flex-col md:justify-center md:items-end py-4 md:p-4">
-          <span class="font-bold text-lg">{{ trip?.departure_location }}</span>
+      <div class="flex flex-col justify-center md:my-10 md:flex-row">
+        <div class="flex flex-col py-4 md:items-end md:justify-center md:p-4">
+          <span class="text-lg font-bold">{{ trip?.departure_location }}</span>
           <span v-if="trip">
             {{ dateFormatedOnlyHours(trip?.departure_time) }}
           </span>
         </div>
         <div class="mx-auto md:mx-0">
           <img
-            class="hidden md:block relative top-4 w-10 car-animate ml-8"
+            class="car-animate relative top-4 ml-8 hidden w-10 md:block"
             src="@/assets/images/logos/logo_content.svg"
             alt=""
           />
@@ -74,32 +74,32 @@ onMounted(async () => {
             />
           </svg>
         </div>
-        <div class="flex flex-col items-end md:justify-center md:items-start py-4 md:p-4">
-          <span class="font-bold text-lg">{{ trip?.arrival_location }}</span>
+        <div class="flex flex-col items-end py-4 md:items-start md:justify-center md:p-4">
+          <span class="text-lg font-bold">{{ trip?.arrival_location }}</span>
         </div>
       </div>
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER && trip.price">
-        <div class="flex justify-between my-4 p-4">
+        <div class="my-4 flex justify-between p-4">
           <p>{{ $t('trip.price') }}</p>
-          <span class="font-bold text-xl">
+          <span class="text-xl font-bold">
             {{ formatPrice(trip?.price) }}
           </span>
         </div>
         <hr class="opacity-25" />
       </div>
-      <div v-if="trip?.message" class="p-4 my-4">
+      <div v-if="trip?.message" class="my-4 p-4">
         <p class="text-justify">{{ trip?.message }}</p>
       </div>
       <RouterLink
         to=""
-        class="flex justify-between items-center p-4 rounded hover:bg-content-flight hover:bg-opacity-25"
+        class="flex items-center justify-between rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
       >
         <div class="flex flex-col">
-          <span class="font-bold text-md">
+          <span class="text-md font-bold">
             {{ `${trip?.announcer.firstname} ${trip?.announcer.lastname}` }}
           </span>
-          <span class="text-sm mt-1">{{ trip?.company.name }}</span>
+          <span class="mt-1 text-sm">{{ trip?.company.name }}</span>
           <span class="text-xs opacity-40">
             {{ trip?.announcer.department.name }}
           </span>
@@ -110,8 +110,8 @@ onMounted(async () => {
         </div>
       </RouterLink>
       <div
+        class="mb-4 flex cursor-pointer items-center rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
         @click="displayContactModal = true"
-        class="flex items-center p-4 mb-4 rounded hover:bg-content-flight hover:bg-opacity-25 cursor-pointer"
       >
         <FontAwesomeIcon class="mr-4 text-xl" icon="fa-regular fa-comments" />
         <span>
@@ -120,12 +120,12 @@ onMounted(async () => {
       </div>
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
-        <div class="p-4 mt-4">
+        <div class="mt-4 p-4">
           <p class="text-md">
             {{ $t('trip.availableSeats', { count: trip?.available_seats }) }}
           </p>
         </div>
-        <div class="p-4 mb-4 flex items-center">
+        <div class="mb-4 flex items-center p-4">
           <FontAwesomeIcon class="mr-4 text-xl" icon="fa-car-side" />
           <div class="flex flex-col">
             <span class="text-lg font-bold">{{ trip?.car_model }}</span>
@@ -134,10 +134,10 @@ onMounted(async () => {
         </div>
         <hr class="opacity-25" />
       </div>
-      <div class="mt-8 mb-16">
+      <div class="mb-16 mt-8">
         <Button
           :text="$t('trip.joinThisTrip')"
-          class="md:w-1/2 mx-auto"
+          class="mx-auto md:w-1/2"
           bgColor="content-light"
           iconPosition="right"
         />
@@ -145,7 +145,7 @@ onMounted(async () => {
     </div>
   </template>
   <template v-else>
-    <div class="h-screen flex justify-center items-center">
+    <div class="flex h-screen items-center justify-center">
       <Spinner :size="8" color="content-base" />
     </div>
   </template>

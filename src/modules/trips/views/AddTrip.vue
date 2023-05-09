@@ -59,7 +59,7 @@ watch(
   () => formData.departureLocation,
   async (value) => {
     if (value?.trim()) {
-      townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
+      townsAutocomplete.value = (await geoGouvAPI.getTowns(value?.trim())) as Array<string>;
     }
   }
 );
@@ -68,7 +68,7 @@ watch(
   () => formData.arrivalLocation,
   async (value) => {
     if (value?.trim()) {
-      townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
+      townsAutocomplete.value = (await geoGouvAPI.getTowns(value?.trim())) as Array<string>;
     }
   }
 );
@@ -92,7 +92,7 @@ const checkStep = (): void => {
   stepLoading.value = true;
 
   setTimeout(() => {
-    let tempStep: number = step.value;
+    const tempStep: number = step.value;
 
     for (let i = 1; i <= conditions.length; i++) {
       if (conditions[i - 1]()) {
@@ -139,18 +139,18 @@ const sendForm = async (): Promise<void> => {
 };
 
 const rightFunction = async (): Promise<void> => {
-  return formCanBeSend.value ? await sendForm() : checkStep();
+  return formCanBeSend.value ? sendForm() : checkStep();
 };
 </script>
 
 <template>
-  <div class="px-4 py-14 max-w-screen-md mx-auto w-full">
-    <h1 class="text-4xl text-center font-bold mb-16">{{ $t('trip.addTrip.newTrip') }}</h1>
+  <div class="mx-auto w-full max-w-screen-md px-4 py-14">
+    <h1 class="mb-16 text-center text-4xl font-bold">{{ $t('trip.addTrip.newTrip') }}</h1>
     <form class="flex flex-col gap-10">
       <div v-if="step >= 1">
-        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step1') }}</h3>
+        <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step1') }}</h3>
         <div>
-          <div class="flex items-center mb-4">
+          <div class="mb-4 flex items-center">
             <RadioButton
               v-model="formData.type"
               inputId="driver"
@@ -173,9 +173,9 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 2">
-        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step2') }}</h3>
+        <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step2') }}</h3>
         <div>
-          <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
+          <span class="relative flex h-full items-center border-b-2 border-black-light px-5">
             <FontAwesomeIcon
               :class="formData.departureLocation?.trim() ? 'opacity-100' : 'opacity-40'"
               class="text-content-base"
@@ -190,9 +190,9 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 3">
-        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step3') }}</h3>
+        <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step3') }}</h3>
         <div>
-          <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
+          <span class="relative flex h-full items-center border-b-2 border-black-light px-5">
             <FontAwesomeIcon
               :class="formData.arrivalLocation?.trim() ? 'opacity-100' : 'opacity-40'"
               class="text-content-base"
@@ -207,17 +207,17 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 4">
-        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step4') }}</h3>
+        <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step4') }}</h3>
         <div>
-          <span class="flex items-center h-full px-5 border-b-2 border-black-light relative">
+          <span class="relative flex h-full items-center border-b-2 border-black-light px-5">
             <FontAwesomeIcon
               :class="formData.departureTime ? 'opacity-100' : 'opacity-40'"
               class="text-content-base"
               icon="calendar"
             />
             <Calendar
-              class="w-full"
               v-model="formData.departureTime"
+              class="w-full"
               hourFormat="24"
               dateFormat="dd/mm/yy à"
               :placeholder="$t('trip.filter.departureTime')"
@@ -229,23 +229,23 @@ const rightFunction = async (): Promise<void> => {
         </div>
       </div>
       <div v-if="step >= 5">
-        <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step5') }}</h3>
+        <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step5') }}</h3>
         <div class="border-2 border-black-light">
           <Textarea
+            v-model="formData.message"
             class="w-full"
             rows="4"
-            v-model="formData.message"
             :placeholder="$t('trip.addTrip.message')"
           />
         </div>
       </div>
       <template v-if="formData.type === TripType.DRIVER">
         <div v-if="step >= 6">
-          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step6') }}</h3>
+          <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step6') }}</h3>
           <div>
             <InputNumber
-              class="w-full"
               v-model="formData.availableSeats"
+              class="w-full"
               showButtons
               :allowEmpty="false"
               buttonLayout="horizontal"
@@ -259,31 +259,31 @@ const rightFunction = async (): Promise<void> => {
           </div>
         </div>
         <div v-if="step >= 7">
-          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step7') }}</h3>
+          <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step7') }}</h3>
           <div class="border-b-2 border-black-light">
             <InputText
-              class="w-full"
               v-model="formData.carModel"
+              class="w-full"
               :placeholder="$t('trip.addTrip.carModel')"
             />
           </div>
         </div>
         <div v-if="step >= 8">
-          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step8') }}</h3>
+          <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step8') }}</h3>
           <div class="border-b-2 border-black-light">
             <InputText
-              class="w-full"
               v-model="formData.carColor"
+              class="w-full"
               :placeholder="$t('trip.addTrip.carColor')"
             />
           </div>
         </div>
         <div v-if="step >= 9">
-          <h3 class="text-2xl mb-6">{{ $t('trip.addTrip.step9') }}</h3>
+          <h3 class="mb-6 text-2xl">{{ $t('trip.addTrip.step9') }}</h3>
           <div>
             <InputNumber
-              class="w-full"
               v-model="formData.price"
+              class="w-full"
               showButtons
               :allowEmpty="false"
               buttonLayout="horizontal"
@@ -304,7 +304,7 @@ const rightFunction = async (): Promise<void> => {
         :fn="rightFunction"
         :loading="stepLoading"
         bgColor="content-light"
-        class="w-fit px-20 mx-auto"
+        class="mx-auto w-fit px-20"
         :text="buttonText"
       />
     </form>

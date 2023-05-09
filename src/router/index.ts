@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import { type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 import HomeView from '@/views/Home.vue';
 import { useUserStore } from '@/stores/user';
 import { authRoutes } from '@/modules/auth/auth.routes';

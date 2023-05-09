@@ -13,10 +13,10 @@ const props = defineProps<{
 
 <template>
   <div
-    class="flex flex-col p-1 rounded-2xl shadow-md hover:shadow-lg w-fit"
+    class="flex w-fit flex-col rounded-2xl p-1 shadow-md hover:shadow-lg"
     :class="bgTypeColor(props.trip.type)"
   >
-    <div class="w-full h-14 flex justify-between items-center px-4">
+    <div class="flex h-14 w-full items-center justify-between px-4">
       <p
         v-html="
           props.trip.type === TripType.DRIVER
@@ -30,10 +30,10 @@ const props = defineProps<{
         size="2xl"
       />
     </div>
-    <div class="bg-white p-6 rounded-2xl max-w-[350px] sm:w-[350px]">
+    <div class="max-w-[350px] rounded-2xl bg-white p-6 sm:w-[350px]">
       <div class="flex justify-around">
         <div class="flex flex-col">
-          <div class="py-1 whitespace-nowrap">
+          <div class="whitespace-nowrap py-1">
             <FontAwesomeIcon class="w-4" icon="fa-calendar" />
             <span class="ml-1">{{ dateFormated(props.trip.departure_time) }}</span>
           </div>
@@ -56,7 +56,7 @@ const props = defineProps<{
             </span>
           </div>
         </div>
-        <div class="hidden sm:flex flex-col justify-center items-center ml-4">
+        <div class="ml-4 hidden flex-col items-center justify-center sm:flex">
           <ProfileImage class="mb-2" :trip="props.trip" />
           <div class="flex text-center">
             <span>

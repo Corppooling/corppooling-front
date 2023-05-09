@@ -37,19 +37,19 @@ const tabs: Array<Tab> = [
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row flex-1">
+  <div class="flex flex-1 flex-col md:flex-row">
     <div class="order-2 flex-1">
       <RouterView />
     </div>
     <div
-      class="hidden md:flex order-1 sticky flex-1 top-0 left-0 bg-content-flight text-content-base max-w-fit shadow-md"
+      class="sticky left-0 top-0 order-1 hidden max-w-fit flex-1 bg-content-flight text-content-base shadow-md md:flex"
     >
       <div class="flex flex-col">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
             v-ripple
             :to="{ name: tab.name }"
-            class="flex items-center py-5 px-8 hover:bg-content-xlight hover:text-white"
+            class="flex items-center px-8 py-5 hover:bg-content-xlight hover:text-white"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
             <FontAwesomeIcon :icon="tab.icon" class="mr-4 text-lg" />
@@ -59,14 +59,14 @@ const tabs: Array<Tab> = [
       </div>
     </div>
     <div
-      class="mobile-footer md:hidden flex order-3 sticky bottom-0 bg-content-flight text-content-base shadow-md -mb-px"
+      class="mobile-footer sticky bottom-0 order-3 -mb-px flex bg-content-flight text-content-base shadow-md md:hidden"
     >
-      <div class="flex justify-between w-full">
+      <div class="flex w-full justify-between">
         <template v-for="tab in tabs" :key="tab.name">
           <RouterLink
             v-ripple
             :to="{ name: tab.name }"
-            class="hover:bg-content-xlight hover:text-white w-full py-4 flex justify-center items-center"
+            class="flex w-full items-center justify-center py-4 hover:bg-content-xlight hover:text-white"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
             <FontAwesomeIcon :icon="tab.icon" class="text-lg" />
