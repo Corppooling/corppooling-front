@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import type { User } from '@/interfaces/user.interface';
-import { useAuthStore } from '@/stores/auth';
 import axiosClient from '@/support/axiosClient';
 export const useUserStore = defineStore({
   id: 'user',
@@ -9,13 +8,16 @@ export const useUserStore = defineStore({
   }),
   actions: {
     async setUser(): Promise<void> {
-      if (useAuthStore().token !== null && !this.isAuth) {
+      const { useAuthStore } = await import('@/stores/auth');
+      const authStore = useAuthStore();
+
+      if (authStore.token !== null && !this.isAuth) {
         try {
           await axiosClient.get('/api/user/me').then((res) => {
             this.user = res.data;
           });
         } catch (e) {
-          await useAuthStore().refreshToken();
+          await authStore.refreshToken();
         }
       }
     },

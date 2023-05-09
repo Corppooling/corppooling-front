@@ -86,7 +86,7 @@ const swiperOptions = ref<SwiperOptions>({
     <template v-else>
       <div class="text-xl text-center my-28">
         <font-awesome-icon class="text-content-base opacity-40" icon="fa-flag-checkered" />
-        <p class="opacity-70">Il n'y a aucun voyage disponible actuellement</p>
+        <p class="opacity-70">{{ $t('trip.noTripsNow') }}</p>
       </div>
     </template>
   </div>

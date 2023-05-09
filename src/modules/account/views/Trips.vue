@@ -1,7 +1,3 @@
-<script lang="ts" setup>
-import AccountLayout from '@/modules/account/layouts/Account.vue';
-</script>
+<script lang="ts" setup></script>
 
-<template>
-  <AccountLayout>trips</AccountLayout>
-</template>
+<template>trips</template>
