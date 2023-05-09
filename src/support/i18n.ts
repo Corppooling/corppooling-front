@@ -2,6 +2,9 @@ import { createI18n } from 'vue-i18n';
 import fr from '@/lang/fr.json';
 import en from '@/lang/en.json';
 
+/**
+ * Return the locale language
+ */
 export const localeLang = (): string => {
   return localStorage.getItem('lang') ?? 'fr';
 };

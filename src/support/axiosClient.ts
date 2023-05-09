@@ -4,6 +4,7 @@ const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 axiosClient.interceptors.request.use((config: AxiosRequestConfig) => {
   if (config.headers === undefined) {

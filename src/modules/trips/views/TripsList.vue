@@ -25,7 +25,7 @@ watch(
       case Layout.GRID:
         tripComponent.value = TripCard;
         break;
-      case Layout.LIST:
+      default:
         tripComponent.value = TripInline;
         break;
     }
@@ -66,13 +66,13 @@ const handleScroll = (): void => {
 
 <template>
   <div>
-    <div class="flex flex-col items-center py-10 px-6 bg-content-flight">
+    <div class="flex flex-col items-center bg-content-flight px-6 py-10">
       <Searchbar />
     </div>
-    <div class="flex flex-col lg:flex-row p-10 max-w-[1246px] mx-auto">
+    <div class="mx-auto flex max-w-[1246px] flex-col p-10 lg:flex-row">
       <Filters />
-      <div class="flex flex-col px-0 lg:px-10 w-full">
-        <div class="pb-10 flex justify-between items-center">
+      <div class="flex w-full flex-col px-0 lg:px-10">
+        <div class="flex items-center justify-between pb-10">
           <h2 class="text-3xl">{{ $t('trip.title') }}</h2>
           <DataViewLayoutOptions v-model="layout" />
         </div>
@@ -85,12 +85,12 @@ const handleScroll = (): void => {
             <component :is="tripComponent" :trip="trip" />
           </template>
         </div>
-        <div class="h-screen" v-if="tripStore.requestLoading">
-          <div class="flex justify-center items-center my-8">
+        <div v-if="tripStore.requestLoading" class="h-screen">
+          <div class="my-8 flex items-center justify-center">
             <Spinner :size="6" color="content-base" />
           </div>
         </div>
-        <div v-if="tripStore.totalTrips === 0" class="text-xl text-center my-8">
+        <div v-if="tripStore.totalTrips === 0" class="my-8 text-center text-xl">
           <font-awesome-icon class="text-content-base opacity-40" icon="fa-flag-checkered" />
           <p class="opacity-70">
             {{ $t('trip.noTrips') }}

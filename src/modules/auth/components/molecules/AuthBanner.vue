@@ -1,10 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import loginImage from '@/assets/images/login.svg?url';
+</script>
 
 <template>
   <div
-    class="bg-content-glight hidden md:flex flex-col justify-end w-1/2 bg-[url('@/assets/images/login.svg')] bg-cover bg-contain bg-no-repeat bg-center"
+    class="hidden w-1/2 flex-col justify-end bg-content-glight bg-contain bg-center bg-no-repeat md:flex"
+    :style="`background-image: url('${loginImage}')`"
   >
-    <div class="w-44 p-4 ml-auto">
+    <div class="ml-auto w-44 p-4">
       <img src="@/assets/images/logos/logo_full.svg" alt="logo" />
     </div>
   </div>

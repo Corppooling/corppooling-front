@@ -41,11 +41,11 @@ watch(
 <template>
   <div
     v-if="!route.meta.hideFooter"
-    class="w-full bg-content-base text-main-base py-2 relative overflow-hidden mt-auto"
+    class="relative mt-auto w-full overflow-hidden bg-content-base py-2 text-main-base"
   >
-    <div class="max-w-screen-sm mx-auto flex flex-col justify-end relative z-10">
+    <div class="relative z-10 mx-auto flex max-w-screen-sm flex-col justify-end">
       <div class="flex flex-wrap justify-between py-2">
-        <div class="p-2 mx-auto sm:mx-0">
+        <div class="mx-auto p-2 sm:mx-0">
           <SelectButton
             v-model="lang"
             :options="langOptions"
@@ -54,7 +54,7 @@ watch(
             aria-labelledby="basic"
           />
         </div>
-        <div class="p-2 flex items-center mx-auto sm:mx-0">
+        <div class="mx-auto flex items-center p-2 sm:mx-0">
           <a href="#" target="_blank">
             <font-awesome-icon icon="fa-brands fa-facebook" class="fa-2x p-2" />
           </a>
@@ -69,7 +69,7 @@ watch(
           </a>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row justify-center items-center py-1 text-sm">
+      <div class="flex flex-col items-center justify-center py-1 text-sm md:flex-row">
         <span>Copyright © 2022 - {{ currentYear }} Corppooling</span>
         <span class="mx-1 hidden md:block">|</span>
         <div class="flex flex-wrap justify-center">
@@ -85,31 +85,31 @@ watch(
     </div>
     <div>
       <img
-        class="hidden lg:block absolute z-0 top-20 right-10 w-24 animate-floating"
+        class="absolute right-10 top-20 z-0 hidden w-24 animate-floating lg:block"
         style="animation-delay: 4s"
         src="@/assets/images/shapes/shape_2.svg"
         alt=""
       />
       <img
-        class="absolute z-0 top-5 left-1/4 w-16 animate-floating"
+        class="absolute left-1/4 top-5 z-0 w-16 animate-floating"
         style="animation-delay: 3s"
         src="@/assets/images/shapes/shape_2.svg"
         alt=""
       />
       <img
-        class="absolute z-0 bottom-0 left-2/3 w-64 animate-floating"
+        class="absolute bottom-0 left-2/3 z-0 w-64 animate-floating"
         style="animation-delay: 2s"
         src="@/assets/images/shapes/shape_4.svg"
         alt=""
       />
       <img
-        class="hidden lg:block absolute z-0 bottom-0 left-10 w-64 animate-floating"
+        class="absolute bottom-0 left-10 z-0 hidden w-64 animate-floating lg:block"
         style="animation-delay: 5s"
         src="@/assets/images/shapes/shape_3.svg"
         alt=""
       />
       <img
-        class="hidden sm:block absolute z-0 bottom-0 left-1/3 w-32 animate-floating rotate-6"
+        class="absolute bottom-0 left-1/3 z-0 hidden w-32 rotate-6 animate-floating sm:block"
         style="animation-delay: 0s"
         src="@/assets/images/shapes/shape_1.svg"
         alt=""

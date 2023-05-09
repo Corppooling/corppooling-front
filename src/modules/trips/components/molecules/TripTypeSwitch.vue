@@ -35,7 +35,7 @@ watch(booleanType, (booleanType) => {
   >
     <span
       :class="booleanType ? 'translate-x-9' : 'translate-x-1'"
-      class="flex justify-center items-center h-6 w-6 transform rounded-full bg-white transition"
+      class="flex h-6 w-6 transform items-center justify-center rounded-full bg-white transition"
     >
       <FontAwesomeIcon :icon="booleanType ? 'fa-thumbs-up' : 'fa-car'" />
     </span>
