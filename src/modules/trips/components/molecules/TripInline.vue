@@ -12,23 +12,28 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'delete:trip', id: number): void;
+  (e: 'delete:trip'): void;
 }>();
 </script>
 
 <template>
   <div
-    class="flex w-full rounded-2xl p-1 shadow-md hover:shadow-lg"
+    class="flex w-full overflow-hidden rounded-2xl p-1 shadow-md hover:shadow-lg"
     :class="bgTypeColor(props.trip.type)"
   >
     <div class="relative flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:flex-row">
       <div class="ml-4 hidden flex-col items-center justify-center sm:flex">
-        <FontAwesomeIcon
+        <div
           v-if="props.withDelete"
-          class="absolute left-3 top-3 cursor-pointer text-xl text-error-base"
-          icon="fa-trash-can"
-          @click="emit('delete:trip', props.trip.id)"
-        />
+          class="absolute right-0 top-0 rounded-bl-2xl bg-opacity-40 p-3"
+          :class="bgTypeColor(props.trip.type)"
+        >
+          <FontAwesomeIcon
+            class="mx-1 cursor-pointer text-xl text-error-base"
+            icon="fa-trash-can"
+            @click="emit('delete:trip')"
+          />
+        </div>
         <ProfileImage class="mb-2" :trip="props.trip" />
         <div class="flex text-center">
           <span>

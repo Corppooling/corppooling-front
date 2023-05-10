@@ -5,6 +5,7 @@ import Sidebar from 'primevue/sidebar';
 import UserButton from '@/components/molecules/UserButton.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
+import ConfirmDialog from 'primevue/confirmdialog';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -120,6 +121,7 @@ const displaySidebar = ref<boolean>(false);
       </template>
     </div>
   </Sidebar>
+  <ConfirmDialog />
 </template>
 
 <style lang="scss">
