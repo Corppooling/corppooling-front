@@ -18,7 +18,7 @@ export const useGeoGouvAPI = () => {
   const getTowns = useDebounceFn(
     async (
       town: string,
-      fields: string[] = ['nom', 'code'],
+      fields: string[] = ['nom'],
       limit = 4,
       boost = 'population'
     ): Promise<string[]> => {
