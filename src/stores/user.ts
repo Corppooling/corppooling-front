@@ -30,9 +30,6 @@ export const useUserStore = defineStore({
     isAuth(): boolean {
       return this.user !== null;
     },
-    getUser(): User | null {
-      return this.user;
-    },
     getFullName(): string {
       return this.user?.firstname + ' ' + this.user?.lastname;
     },

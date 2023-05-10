@@ -4,23 +4,37 @@ import { useUserStore } from '@/stores/user';
 import { Trip } from '@/interfaces/trip.interface';
 import { actualFullDate } from '@/support/luxon';
 import TripInline from '@/modules/trips/components/molecules/TripInline.vue';
+import axiosClient from '@/support/axiosClient';
+import { useToast } from '@/composables/toast';
 
+const toast = useToast();
 const userStore = useUserStore();
-const trips = ref<Trip[]>(
-  userStore.getUser?.trips.sort((a, b) => (a.departure_time > b.departure_time ? 1 : -1)) ?? []
-);
+const trips = ref<Trip[]>(userStore.user?.trips ?? []);
+
+const sortedTrips = computed<Trip[]>(() => {
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+  return trips.value.sort((a, b) => (a.departure_time > b.departure_time ? 1 : -1));
+});
 
 const passedTrips = computed<Trip[]>(() => {
-  return trips.value.filter((trip) => trip.departure_time < actualFullDate());
+  return sortedTrips.value.filter((trip) => trip.departure_time < actualFullDate());
 });
 const upcomingTrips = computed<Trip[]>(() => {
-  return trips.value.filter((trip) => trip.departure_time >= actualFullDate());
+  return sortedTrips.value.filter((trip) => trip.departure_time >= actualFullDate());
 });
 
-const deleteTrip = (tripId: number): void => {
-  //trips.value = trips.value.filter((t) => t.id !== trip.id);
-  // eslint-disable-next-line no-console
-  console.log(tripId);
+const deleteTrip = async (tripId: number): Promise<void> => {
+  await axiosClient
+    .delete(`/api/trips/${tripId}`)
+    .then(() => {
+      if (!userStore.user) return;
+      userStore.user.trips = userStore.user.trips.filter((t) => t.id !== tripId);
+      trips.value = userStore.user.trips;
+      toast.success('Votre trajet a bien été supprimé');
+    })
+    .catch(() => {
+      toast.error();
+    });
 };
 </script>
 
