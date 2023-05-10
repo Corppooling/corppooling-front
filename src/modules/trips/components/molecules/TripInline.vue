@@ -8,6 +8,11 @@ import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
 
 const props = defineProps<{
   trip: Trip;
+  withDelete?: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'delete:trip', id: number): void;
 }>();
 </script>
 
@@ -16,8 +21,14 @@ const props = defineProps<{
     class="flex w-full rounded-2xl p-1 shadow-md hover:shadow-lg"
     :class="bgTypeColor(props.trip.type)"
   >
-    <div class="flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:flex-row">
+    <div class="relative flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:flex-row">
       <div class="ml-4 hidden flex-col items-center justify-center sm:flex">
+        <FontAwesomeIcon
+          v-if="props.withDelete"
+          class="absolute left-3 top-3 cursor-pointer text-xl text-error-base"
+          icon="fa-trash-can"
+          @click="emit('delete:trip', props.trip.id)"
+        />
         <ProfileImage class="mb-2" :trip="props.trip" />
         <div class="flex text-center">
           <span>
