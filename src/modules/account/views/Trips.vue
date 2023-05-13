@@ -8,11 +8,13 @@ import axiosClient from '@/support/axiosClient';
 import { useToast } from '@/composables/toast';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from '@/components/molecules/Button.vue';
+import { i18nGlobal } from '@/support/i18n';
 
 const confirm = useConfirm();
 const toast = useToast();
 const userStore = useUserStore();
 const trips = ref<Trip[]>(userStore.user?.trips ?? []);
+const { t } = i18nGlobal;
 
 const sortedTrips = computed<Trip[]>(() => {
   // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -29,8 +31,8 @@ const upcomingTrips = computed<Trip[]>(() => {
 const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
   confirm.require({
     target: el,
-    header: 'Suppression',
-    message: 'Êtes-vous sûr de vouloir supprimer ce trajet ?',
+    header: t('account.myTrips.delete'),
+    message: t('account.myTrips.deleteConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
     accept: async () => {
@@ -40,7 +42,7 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
           if (!userStore.user) return;
           userStore.user.trips = userStore.user.trips.filter((t) => t.id !== tripId);
           trips.value = userStore.user.trips;
-          toast.info('Votre trajet a bien été supprimé');
+          toast.info(t('account.myTrips.deleteSuccess'));
         })
         .catch(() => {
           toast.error();
@@ -54,7 +56,7 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
   <div class="my-8">
     <div class="flex flex-wrap gap-8">
       <div class="w-full">
-        <h3 class="mb-8 text-2xl">Trajets à venir</h3>
+        <h3 class="mb-8 text-2xl">{{ $t('account.myTrips.upcoming') }}</h3>
         <div
           v-if="upcomingTrips.length > 0"
           class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
@@ -74,7 +76,7 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
               class="mr-2 text-2xl"
               style="transform: rotateY(180deg)"
             />
-            <p class="text-lg">Vous n'avez pas encore de trajets à venir</p>
+            <p class="text-lg">{{ $t('account.myTrips.noUpcoming') }}</p>
           </div>
           <Button
             :to="{ name: 'trip.add' }"
@@ -86,7 +88,7 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
         </div>
       </div>
       <div class="mt-8 w-full">
-        <h3 class="mb-8 text-2xl">Trajets archivés</h3>
+        <h3 class="mb-8 text-2xl">{{ $t('account.myTrips.archived') }}</h3>
         <div
           v-if="passedTrips.length > 0"
           class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
@@ -95,7 +97,7 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
         </div>
         <div v-else class="flex items-center">
           <FontAwesomeIcon icon="person-walking-luggage" class="mr-2 text-2xl" />
-          <p class="text-lg">Vous n'avez aucun trajet archivé</p>
+          <p class="text-lg">{{ $t('account.myTrips.noArchived') }}</p>
         </div>
       </div>
     </div>
