@@ -105,6 +105,15 @@
     "profile": "My profile",
     "trips": "My trips",
     "bookings": "My bookings",
-    "company": "My company"
+    "company": "My company",
+    "myTrips": {
+      "delete": "Deletion",
+      "deleteConfirm": "Are you sure you want to delete this trip?",
+      "deleteSuccess": "Your trip has been successfully deleted",
+      "upcoming": "Upcoming trips",
+      "noUpcoming": "You have no upcoming trips",
+      "archived": "Archived trips",
+      "noArchived": "You have no archived trips"
+    }
   }
 }

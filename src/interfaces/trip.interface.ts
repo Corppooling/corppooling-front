@@ -14,7 +14,7 @@ export interface Trip {
   car_color?: string;
   updated_at: string;
   created_at: string;
-  reservation: Reservation;
+  reservation: Reservation[];
   type: TripType;
   company: Company;
   announcer: User;

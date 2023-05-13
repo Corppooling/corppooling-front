@@ -105,6 +105,15 @@
     "profile": "Mon profil",
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
-    "company": "Mon entreprise"
+    "company": "Mon entreprise",
+    "myTrips": {
+      "delete": "Suppression",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
+      "deleteSuccess": "Le trajet a bien été supprimé",
+      "upcoming": "Trajets à venir",
+      "noUpcoming": "Vous n'avez pas encore de trajets à venir",
+      "archived": "Trajets archivés",
+      "noArchived": "Vous n'avez aucun trajet archivé"
+    }
   }
 }

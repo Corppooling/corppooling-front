@@ -55,3 +55,17 @@ export const dateFormatedOnlyHours = (date: string): string => {
     }
   );
 };
+
+/**
+ * Return the actual date (format: YYYY-MM-DD)
+ */
+export const actualDate = (): string => {
+  return DateTime.now().toISODate() as string;
+};
+
+/**
+ * Return full actual date (format: YYYY-MM-DDTHH:mm:ss.sssZ)
+ */
+export const actualFullDate = (): string => {
+  return DateTime.now().toISO() as string;
+};
