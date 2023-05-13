@@ -68,7 +68,7 @@ const currentLabel = computed<string>(() => {
       </div>
     </div>
     <div
-      class="mobile-footer sticky bottom-0 order-3 -mb-px flex bg-content-flight text-content-base shadow-md md:hidden"
+      class="sticky bottom-0 order-3 -mb-px flex bg-content-flight text-content-base shadow-md md:hidden"
     >
       <div class="flex w-full justify-between">
         <template v-for="tab in tabs" :key="tab.name">
@@ -85,9 +85,3 @@ const currentLabel = computed<string>(() => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.mobile-footer {
-  padding-bottom: constant(safe-area-inset-bottom);
-}
-</style>
