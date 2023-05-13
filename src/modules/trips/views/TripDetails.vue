@@ -13,11 +13,13 @@ import { formatPrice } from '@/support/format';
 import { bgTypeColor } from '@/composables/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
 import ContactModal from '@/modules/trips/components/organisms/ContactModal.vue';
+import { useUserStore } from '@/stores/user';
 
+const userStore = useUserStore();
 const { width } = useWindowSize();
 const route = useRoute();
 const tripStore = useTripStore();
-const trip = ref<Trip | undefined>();
+const trip = ref<Trip>();
 const displayContactModal = ref<boolean>(false);
 
 const lineLength = computed((): number => (width.value <= 768 ? width.value - 100 : 450));
@@ -25,6 +27,16 @@ const lineLength = computed((): number => (width.value <= 768 ? width.value - 10
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
   trip.value = tripStore.getTrip;
+});
+
+const canJoin = computed((): boolean => {
+  return !(
+    typeof trip.value !== 'undefined' &&
+    ((trip.value?.type === TripType.DRIVER &&
+      typeof trip.value?.available_seats !== 'undefined' &&
+      trip.value?.available_seats > trip.value?.reservation?.length) ||
+      trip.value?.announcer.id === userStore.user?.id)
+  );
 });
 </script>
 
@@ -134,7 +146,7 @@ onMounted(async () => {
         </div>
         <hr class="opacity-25" />
       </div>
-      <div class="mb-16 mt-8">
+      <div v-if="canJoin" class="mb-16 mt-8">
         <Button
           :text="$t('trip.joinThisTrip')"
           class="mx-auto md:w-1/2"

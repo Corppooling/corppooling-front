@@ -23,7 +23,7 @@ const geoGouvAPI = useGeoGouvAPI();
 const townsAutocomplete = ref<Array<string>>([]);
 const step = ref<number>(1);
 const stepLoading = ref<boolean>(false);
-const user = ref<User>(userStore.getUser as User);
+const user = ref<User>(userStore.user as User);
 const toast = useToast();
 const { t } = i18nGlobal;
 
