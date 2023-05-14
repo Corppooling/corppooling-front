@@ -6,7 +6,7 @@ export interface Trip {
   departure_location: string;
   arrival_location: string;
   departure_time: string;
-  available_seats?: number;
+  available_seats: number | null;
   message?: string;
   price?: number;
   car_model?: string;

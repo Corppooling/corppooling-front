@@ -6,9 +6,7 @@ import type { Trip } from '@/interfaces/trip.interface';
 import { TripType } from '@/interfaces/trip.interface';
 import { dateFormatedOnlyHours, dateFormatedShort } from '@/support/luxon';
 import { useWindowSize } from '@vueuse/core';
-import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
 import Button from '@/components/molecules/Button.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { formatPrice } from '@/support/format';
 import { bgTypeColor } from '@/composables/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
@@ -18,6 +16,7 @@ import { useConfirm } from 'primevue/useconfirm';
 import axiosClient from '@/support/axiosClient';
 import { useToast } from '@/composables/toast';
 import { User } from '@/interfaces/user.interface';
+import TripUser from '@/modules/trips/components/molecules/TripUser.vue';
 
 const confirm = useConfirm();
 const userStore = useUserStore();
@@ -31,7 +30,13 @@ const user = ref<User | null>(userStore.user);
 const displayContactModal = ref<boolean>(false);
 const joinLoading = ref<boolean>(false);
 
-const lineLength = computed((): number => (width.value <= 768 ? width.value - 100 : 450));
+const lineLength = computed<number>(() => (width.value <= 768 ? width.value - 100 : 450));
+const readySeats = computed<number>(() => {
+  if (trip.value?.type === TripType.DRIVER && trip.value?.available_seats !== null) {
+    return trip.value?.available_seats - trip.value?.members?.length;
+  }
+  return 0;
+});
 
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
@@ -44,8 +49,8 @@ const canJoin = computed<boolean>(() => {
   if (
     typeof trip.value !== 'undefined' &&
     trip.value?.type === TripType.DRIVER &&
-    typeof trip.value?.available_seats !== 'undefined' &&
-    trip.value?.available_seats <= trip.value?.members?.length
+    trip.value?.available_seats !== null &&
+    readySeats.value <= 0
   ) {
     return false;
   }
@@ -81,7 +86,7 @@ const joinTrip = async (el: HTMLElement) => {
 
 <template>
   <template v-if="!tripStore.requestLoading">
-    <div class="mx-auto max-w-screen-lg p-4">
+    <div class="mx-auto max-w-screen-md p-4">
       <div class="flex flex-wrap items-center justify-between py-10">
         <h1 v-if="trip" class="my-2 mr-4 text-4xl capitalize">
           {{ dateFormatedShort(trip?.departure_time) }}
@@ -142,24 +147,7 @@ const joinTrip = async (el: HTMLElement) => {
       <div v-if="trip?.message" class="my-4 p-4">
         <p class="text-justify">{{ trip?.message }}</p>
       </div>
-      <RouterLink
-        to=""
-        class="flex items-center justify-between rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
-      >
-        <div class="flex flex-col">
-          <span class="text-md font-bold">
-            {{ `${trip?.announcer.firstname} ${trip?.announcer.lastname}` }}
-          </span>
-          <span class="mt-1 text-sm">{{ trip?.company.name }}</span>
-          <span class="text-xs opacity-40">
-            {{ trip?.announcer.department.name }}
-          </span>
-        </div>
-        <div class="flex items-center justify-center">
-          <ProfileImage v-if="trip" :trip="trip" />
-          <FontAwesomeIcon class="ml-4" icon="chevron-right" />
-        </div>
-      </RouterLink>
+      <TripUser v-if="trip?.announcer" :user="trip.announcer" :trip="trip" />
       <div
         class="mb-4 flex cursor-pointer items-center rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
         @click="displayContactModal = true"
@@ -173,7 +161,7 @@ const joinTrip = async (el: HTMLElement) => {
       <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
         <div class="mt-4 p-4">
           <p class="text-md">
-            {{ $t('trip.availableSeats', { count: trip?.available_seats }) }}
+            {{ $t('trip.availableSeats', { count: readySeats }) }}
           </p>
         </div>
         <div class="mb-4 flex items-center p-4">
@@ -185,7 +173,7 @@ const joinTrip = async (el: HTMLElement) => {
         </div>
         <hr class="opacity-25" />
       </div>
-      <div v-if="canJoin" class="mb-16 mt-8">
+      <div v-if="canJoin" class="mb-10 mt-8">
         <Button
           :loading="joinLoading"
           :text="$t('trip.joinThisTrip')"
@@ -194,6 +182,18 @@ const joinTrip = async (el: HTMLElement) => {
           iconPosition="right"
           @click="joinTrip($el)"
         />
+      </div>
+      <div class="mb-16 mt-8">
+        <h4 class="text-2xl">
+          {{ trip?.type === TripType.DRIVER ? 'Autres passagers' : 'Autres personnes intéressés' }}
+        </h4>
+        <div v-if="trip?.members?.length! > 0" class="my-4">
+          <TripUser v-for="member in trip?.members" :key="member.id" :user="member" />
+        </div>
+        <div v-else class="my-4 flex items-center">
+          <FontAwesomeIcon icon="user-tie" class="mr-2 text-xl" />
+          <p class="py-4 text-lg">Aucun collaborateur n'a encore rejoint ce trajet</p>
+        </div>
       </div>
     </div>
   </template>
