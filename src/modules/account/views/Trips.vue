@@ -13,6 +13,7 @@ import { i18nGlobal } from '@/support/i18n';
 const confirm = useConfirm();
 const toast = useToast();
 const userStore = useUserStore();
+await userStore.setUser(true);
 const trips = ref<Trip[]>(userStore.user?.trips ?? []);
 const { t } = i18nGlobal;
 
@@ -103,13 +104,3 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.p-confirm-dialog-accept {
-  color: rgb(var(--color-main-base)) !important;
-
-  &:hover {
-    color: rgb(var(--color-white)) !important;
-  }
-}
-</style>

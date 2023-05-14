@@ -57,7 +57,7 @@ const emit = defineEmits<{
           <FontAwesomeIcon class="w-4" icon="fa-calendar" />
           <span class="ml-1">{{ dateFormated(props.trip.departure_time) }}</span>
         </div>
-        <div class="py-1">
+        <div v-if="props.trip.available_seats" class="py-1">
           <FontAwesomeIcon class="w-4" icon="fa-users" />
           <span class="ml-1">
             {{
@@ -67,6 +67,7 @@ const emit = defineEmits<{
             }}
           </span>
         </div>
+        <div v-else class="h-8" />
       </div>
     </div>
     <div class="mx-4 flex !w-14 flex-col items-center justify-between">

@@ -45,7 +45,7 @@ const props = defineProps<{
             <FontAwesomeIcon class="w-4" icon="fa-map-marker-alt" />
             <span class="ml-1">{{ props.trip.arrival_location }}</span>
           </div>
-          <div class="py-1">
+          <div v-if="props.trip.available_seats" class="py-1">
             <FontAwesomeIcon class="w-4" icon="fa-users" />
             <span class="ml-1">
               {{
@@ -55,6 +55,7 @@ const props = defineProps<{
               }}
             </span>
           </div>
+          <div v-else class="h-8" />
         </div>
         <div class="ml-4 hidden flex-col items-center justify-center sm:flex">
           <ProfileImage class="mb-2" :trip="props.trip" />
