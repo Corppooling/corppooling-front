@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useTripStore } from '@/stores/trip';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { computed, onMounted, ref } from 'vue';
 import type { Trip } from '@/interfaces/trip.interface';
 import { TripType } from '@/interfaces/trip.interface';
@@ -14,13 +14,22 @@ import { bgTypeColor } from '@/composables/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
 import ContactModal from '@/modules/trips/components/organisms/ContactModal.vue';
 import { useUserStore } from '@/stores/user';
+import { useConfirm } from 'primevue/useconfirm';
+import axiosClient from '@/support/axiosClient';
+import { useToast } from '@/composables/toast';
+import { User } from '@/interfaces/user.interface';
 
+const confirm = useConfirm();
 const userStore = useUserStore();
+const router = useRouter();
 const { width } = useWindowSize();
 const route = useRoute();
 const tripStore = useTripStore();
+const toast = useToast();
 const trip = ref<Trip>();
+const user = ref<User | null>(userStore.user);
 const displayContactModal = ref<boolean>(false);
+const joinLoading = ref<boolean>(false);
 
 const lineLength = computed((): number => (width.value <= 768 ? width.value - 100 : 450));
 
@@ -29,15 +38,45 @@ onMounted(async () => {
   trip.value = tripStore.getTrip;
 });
 
-const canJoin = computed((): boolean => {
-  return !(
+const canJoin = computed<boolean>(() => {
+  if (trip.value?.members?.find((u) => u.id === user.value?.id)) return false;
+  if (trip.value?.announcer.id === user.value?.id) return false;
+  if (
     typeof trip.value !== 'undefined' &&
-    ((trip.value?.type === TripType.DRIVER &&
-      typeof trip.value?.available_seats !== 'undefined' &&
-      trip.value?.available_seats > trip.value?.reservation?.length) ||
-      trip.value?.announcer.id === userStore.user?.id)
-  );
+    trip.value?.type === TripType.DRIVER &&
+    typeof trip.value?.available_seats !== 'undefined' &&
+    trip.value?.available_seats <= trip.value?.members?.length
+  ) {
+    return false;
+  }
+  return true;
 });
+
+const joinTrip = async (el: HTMLElement) => {
+  confirm.require({
+    target: el,
+    header: 'Confirmation',
+    message: 'Je confirme ma réservation',
+    icon: 'pi pi-car',
+    position: 'center',
+    accept: async () => {
+      joinLoading.value = true;
+      await axiosClient
+        .post(`/api/reservations`, {
+          userId: user.value?.id,
+          tripId: trip.value?.id,
+        })
+        .then(() => {
+          router.push({ name: 'account.bookings' });
+          toast.success('Réservation enregistrée');
+        })
+        .catch(() => {
+          toast.error();
+        });
+      joinLoading.value = false;
+    },
+  });
+};
 </script>
 
 <template>
@@ -148,10 +187,12 @@ const canJoin = computed((): boolean => {
       </div>
       <div v-if="canJoin" class="mb-16 mt-8">
         <Button
+          :loading="joinLoading"
           :text="$t('trip.joinThisTrip')"
           class="mx-auto md:w-1/2"
           bgColor="content-light"
           iconPosition="right"
+          @click="joinTrip($el)"
         />
       </div>
     </div>

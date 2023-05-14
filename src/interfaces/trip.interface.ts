@@ -1,6 +1,5 @@
 import type { User } from '@/interfaces/user.interface';
 import type { Company } from '@/interfaces/company.interface';
-import type { Reservation } from '@/interfaces/reservation.interface';
 
 export interface Trip {
   id: number;
@@ -14,7 +13,7 @@ export interface Trip {
   car_color?: string;
   updated_at: string;
   created_at: string;
-  reservation: Reservation[];
+  members: User[];
   type: TripType;
   company: Company;
   announcer: User;
