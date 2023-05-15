@@ -66,6 +66,11 @@
     "contact": "Contacter {name}",
     "availableSeats": "1 place disponible | {count} places disponibles",
     "joinThisTrip": "Rejoindre ce trajet",
+    "confirmBooking": "Je confirme ma réservation",
+    "bookingRegistered": "Réservation enregistrée",
+    "othersPassengers": "Autres passagers",
+    "othersInterested": "Autres personnes intéressés",
+    "noPassengers": "Aucun collaborateur n'a encore rejoint ce trajet",
     "addTrip": {
       "fillFields": "Veuillez remplir tous les champs",
       "publish": "Publier",
@@ -101,19 +106,32 @@
   "form": {
     "empties": "Veuillez remplir tous les champs"
   },
+  "action": {
+    "delete": "Suppression",
+    "confirm": "Confirmation",
+    "yes": "Oui",
+    "no": "Non"
+  },
   "account": {
     "profile": "Mon profil",
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise",
     "myTrips": {
-      "delete": "Suppression",
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
       "deleteSuccess": "Le trajet a bien été supprimé",
       "upcoming": "Trajets à venir",
       "noUpcoming": "Vous n'avez pas encore de trajets à venir",
       "archived": "Trajets archivés",
       "noArchived": "Vous n'avez aucun trajet archivé"
+    },
+    "myBookings": {
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette réservation ?",
+      "deleteSuccess": "La réservation a bien été supprimée",
+      "upcoming": "Trajets réservés à venir",
+      "noUpcoming": "Aucun trajet réservé pour le moment",
+      "archived": "Trajets réservés archivés",
+      "noArchived": "Vous n'avez encore aucun trajet réservé archivé"
     }
   }
 }

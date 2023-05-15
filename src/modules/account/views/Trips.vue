@@ -32,10 +32,12 @@ const upcomingTrips = computed<Trip[]>(() => {
 const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
   confirm.require({
     target: el,
-    header: t('account.myTrips.delete'),
+    header: t('action.delete'),
     message: t('account.myTrips.deleteConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
+    acceptLabel: t('action.yes'),
+    rejectLabel: t('action.no'),
     accept: async () => {
       await axiosClient
         .delete(`/api/trips/${tripId}`)

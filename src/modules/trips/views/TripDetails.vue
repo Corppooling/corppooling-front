@@ -17,6 +17,7 @@ import axiosClient from '@/support/axiosClient';
 import { useToast } from '@/composables/toast';
 import { User } from '@/interfaces/user.interface';
 import TripUser from '@/modules/trips/components/molecules/TripUser.vue';
+import { i18nGlobal } from '@/support/i18n';
 
 const confirm = useConfirm();
 const userStore = useUserStore();
@@ -25,6 +26,7 @@ const { width } = useWindowSize();
 const route = useRoute();
 const tripStore = useTripStore();
 const toast = useToast();
+const { t } = i18nGlobal;
 const trip = ref<Trip>();
 const user = ref<User | null>(userStore.user);
 const displayContactModal = ref<boolean>(false);
@@ -60,10 +62,12 @@ const canJoin = computed<boolean>(() => {
 const joinTrip = async (el: HTMLElement) => {
   confirm.require({
     target: el,
-    header: 'Confirmation',
-    message: 'Je confirme ma réservation',
+    header: t('action.confirm'),
+    message: t('trip.confirmBooking'),
     icon: 'pi pi-car',
     position: 'center',
+    acceptLabel: t('action.yes'),
+    rejectLabel: t('action.no'),
     accept: async () => {
       joinLoading.value = true;
       await axiosClient
@@ -73,7 +77,7 @@ const joinTrip = async (el: HTMLElement) => {
         })
         .then(() => {
           router.push({ name: 'account.bookings' });
-          toast.success('Réservation enregistrée');
+          toast.success(t('trip.bookingRegistered'));
         })
         .catch(() => {
           toast.error();
@@ -185,14 +189,16 @@ const joinTrip = async (el: HTMLElement) => {
       </div>
       <div class="mb-16 mt-8">
         <h4 class="text-2xl">
-          {{ trip?.type === TripType.DRIVER ? 'Autres passagers' : 'Autres personnes intéressés' }}
+          {{
+            trip?.type === TripType.DRIVER ? t('trip.othersPassengers') : t('trip.othersInterested')
+          }}
         </h4>
         <div v-if="trip?.members?.length! > 0" class="my-4">
           <TripUser v-for="member in trip?.members" :key="member.id" :user="member" />
         </div>
         <div v-else class="my-4 flex items-center">
           <FontAwesomeIcon icon="user-tie" class="mr-2 text-xl" />
-          <p class="py-4 text-lg">Aucun collaborateur n'a encore rejoint ce trajet</p>
+          <p class="py-4 text-lg">{{ $t('trip.noPassengers') }}</p>
         </div>
       </div>
     </div>
