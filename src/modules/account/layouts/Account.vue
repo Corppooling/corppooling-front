@@ -47,7 +47,9 @@ const currentLabel = computed<string>(() => {
     <div class="order-2 flex-1">
       <div class="p-10">
         <h1 class="text-4xl font-bold">{{ currentLabel }}</h1>
-        <RouterView />
+        <Suspense>
+          <RouterView />
+        </Suspense>
       </div>
     </div>
     <div

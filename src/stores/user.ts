@@ -8,11 +8,11 @@ export const useUserStore = defineStore({
     user: null as User | null,
   }),
   actions: {
-    async setUser(): Promise<void> {
+    async setUser(forceRefresh = false): Promise<void> {
       const { useAuthStore } = await import('@/stores/auth');
       const authStore = useAuthStore();
 
-      if (authStore.token !== null && !this.isAuth) {
+      if ((authStore.token !== null && !this.isAuth) || forceRefresh) {
         try {
           await axiosClient.get('/api/user/me').then((res) => {
             this.user = res.data;

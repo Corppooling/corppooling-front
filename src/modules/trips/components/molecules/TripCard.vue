@@ -5,6 +5,9 @@ import Button from '@/components/molecules/Button.vue';
 import { dateFormated } from '@/support/luxon';
 import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
 import { bgTypeColor } from '@/composables/typeColor';
+import { i18nGlobal } from '@/support/i18n';
+
+const { t } = i18nGlobal;
 
 const props = defineProps<{
   trip: Trip;
@@ -47,10 +50,17 @@ const props = defineProps<{
           </div>
           <div class="py-1">
             <FontAwesomeIcon class="w-4" icon="fa-users" />
-            <span class="ml-1">
+            <span v-if="trip.type === TripType.DRIVER && props.trip.available_seats" class="ml-1">
+              {{
+                `${props.trip.members.length}/${t('trip.passenger', {
+                  count: props.trip.available_seats + 1,
+                })}`
+              }}
+            </span>
+            <span v-else class="ml-1">
               {{
                 $t('trip.passenger', {
-                  count: props.trip.available_seats,
+                  count: props.trip.members.length + 1,
                 })
               }}
             </span>
