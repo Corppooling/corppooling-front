@@ -128,4 +128,12 @@ const displaySidebar = ref<boolean>(false);
 .p-sidebar-header {
   justify-content: space-between !important;
 }
+
+.p-confirm-dialog-accept {
+  color: rgb(var(--color-main-base)) !important;
+
+  &:hover {
+    color: rgb(var(--color-white)) !important;
+  }
+}
 </style>

@@ -1,6 +1,5 @@
 import type { Department } from '@/interfaces/department.interface';
 import type { Company } from '@/interfaces/company.interface';
-import { Reservation } from '@/interfaces/reservation.interface';
 import { Trip } from '@/interfaces/trip.interface';
 
 export interface User {
@@ -16,7 +15,7 @@ export interface User {
   updated_at: string;
   department: Department;
   company: Company;
-  reservations: Reservation[];
+  reservations: Trip[];
   trips: Trip[];
 }
 

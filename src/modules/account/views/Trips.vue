@@ -13,6 +13,7 @@ import { i18nGlobal } from '@/support/i18n';
 const confirm = useConfirm();
 const toast = useToast();
 const userStore = useUserStore();
+await userStore.setUser(true);
 const trips = ref<Trip[]>(userStore.user?.trips ?? []);
 const { t } = i18nGlobal;
 
@@ -31,10 +32,12 @@ const upcomingTrips = computed<Trip[]>(() => {
 const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
   confirm.require({
     target: el,
-    header: t('account.myTrips.delete'),
+    header: t('action.delete'),
     message: t('account.myTrips.deleteConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
+    acceptLabel: t('action.yes'),
+    rejectLabel: t('action.no'),
     accept: async () => {
       await axiosClient
         .delete(`/api/trips/${tripId}`)
@@ -103,13 +106,3 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.p-confirm-dialog-accept {
-  color: rgb(var(--color-main-base)) !important;
-
-  &:hover {
-    color: rgb(var(--color-white)) !important;
-  }
-}
-</style>
