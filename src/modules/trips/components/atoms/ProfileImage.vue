@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import defaultProfileImage from '@/assets/images/logos/logo_white.svg';
+import defaultProfileImage from '@/assets/images/logos/logo_white.svg?url';
 import type { Trip } from '@/interfaces/trip.interface';
 import { bgTypeColor } from '@/composables/typeColor';
 
