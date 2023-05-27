@@ -66,6 +66,11 @@
     "contact": "Contact {name}",
     "availableSeats": "1 seat available | {count} seats available",
     "joinThisTrip": "Join this trip",
+    "confirmBooking": "Confirm booking",
+    "bookingRegistered": "Your booking has been registered",
+    "othersPassengers": "Other passengers",
+    "othersInterested": "Other people interested",
+    "noPassengers": "No colleagues have booked this trip yet",
     "addTrip": {
       "fillFields": "Please fill in all fields",
       "publish": "Publish",
@@ -101,10 +106,32 @@
   "form": {
     "empties": "Please fill out all fields"
   },
+  "action": {
+    "delete": "Deletion",
+    "confirm": "Confirmation",
+    "yes": "Yes",
+    "no": "No"
+  },
   "account": {
     "profile": "My profile",
     "trips": "My trips",
     "bookings": "My bookings",
-    "company": "My company"
+    "company": "My company",
+    "myTrips": {
+      "deleteConfirm": "Are you sure you want to delete this trip?",
+      "deleteSuccess": "Your trip has been successfully deleted",
+      "upcoming": "Upcoming trips",
+      "noUpcoming": "You have no upcoming trips",
+      "archived": "Archived trips",
+      "noArchived": "You have no archived trips"
+    },
+    "myBookings": {
+      "deleteConfirm": "Are you sure you want to delete this booking?",
+      "deleteSuccess": "Your booking has been successfully deleted",
+      "upcoming": "Upcoming bookings",
+      "noUpcoming": "You have no upcoming bookings",
+      "archived": "Archived bookings",
+      "noArchived": "You have no archived bookings"
+    }
   }
 }

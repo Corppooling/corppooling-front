@@ -5,6 +5,7 @@ import Sidebar from 'primevue/sidebar';
 import UserButton from '@/components/molecules/UserButton.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useUserStore } from '@/stores/user';
+import ConfirmDialog from 'primevue/confirmdialog';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -13,9 +14,9 @@ const displaySidebar = ref<boolean>(false);
 </script>
 
 <template>
-  <div class="sticky z-50 top-0 bg-white w-full h-20 py-4 px-5 shadow-md flex justify-between">
+  <div class="sticky top-0 z-50 flex h-20 w-full justify-between bg-white px-5 py-4 shadow-md">
     <RouterLink :to="{ name: 'home' }" class="w-52">
-      <img class="w-full h-full" src="@/assets/images/logos/logo_full.svg" alt="logo" />
+      <img class="h-full w-full" src="@/assets/images/logos/logo_full.svg" alt="logo" />
     </RouterLink>
     <div class="hidden md:flex">
       <template v-if="userStore.isAuth">
@@ -102,28 +103,37 @@ const displaySidebar = ref<boolean>(false);
       </template>
       <template v-else>
         <Button
-          @click="displaySidebar = false"
           :to="{ name: 'login' }"
-          class="mx-2 mt-10 mb-4"
+          class="mx-2 mb-4 mt-10"
           icon="fa-lock"
           :text="$t('auth.login')"
           iconSize="2xl"
+          @click="displaySidebar = false"
         />
         <Button
-          @click="displaySidebar = false"
           :to="{ name: 'register' }"
           class="mx-2 my-4"
           icon="fa-regular fa-pen-to-square"
           :text="$t('auth.register')"
           iconSize="2xl"
+          @click="displaySidebar = false"
         />
       </template>
     </div>
   </Sidebar>
+  <ConfirmDialog />
 </template>
 
 <style lang="scss">
 .p-sidebar-header {
   justify-content: space-between !important;
+}
+
+.p-confirm-dialog-accept {
+  color: rgb(var(--color-main-base)) !important;
+
+  &:hover {
+    color: rgb(var(--color-white)) !important;
+  }
 }
 </style>

@@ -29,6 +29,10 @@ module.exports = {
         flight: 'rgb(var(--color-content-flight) / <alpha-value>)',
       },
 
+      error: {
+        base: 'rgb(var(--color-error-base) / <alpha-value>)',
+      },
+
       contextual: {
         1: 'rgb(var(--color-contextual-1) / <alpha-value>)',
         2: 'rgb(var(--color-contextual-2) / <alpha-value>)',

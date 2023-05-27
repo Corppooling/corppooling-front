@@ -24,7 +24,7 @@ const props = withDefaults(
     >
       <MenuItems
         :class="props.class"
-        class="absolute right-0 mt-6 origin-top-right bg-white rounded-md p-2 shadow-md ring-1 ring-content-glight"
+        class="absolute right-0 mt-6 origin-top-right rounded-md bg-white p-2 shadow-md ring-1 ring-content-glight"
       >
         <slot name="content" />
       </MenuItems>

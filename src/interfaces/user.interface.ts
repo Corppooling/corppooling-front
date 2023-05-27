@@ -1,23 +1,27 @@
 import type { Department } from '@/interfaces/department.interface';
 import type { Company } from '@/interfaces/company.interface';
+import { Trip } from '@/interfaces/trip.interface';
 
 export interface User {
-  id: number;
+  id: string | number;
+  roles: Role[];
   firstname: string;
   lastname: string;
   email: string;
   phone: string;
   presentation?: string;
   profile_image?: string;
-  role: Role;
+  role: Role[];
   created_at: string;
   updated_at: string;
   department: Department;
   company: Company;
+  reservations: Trip[];
+  trips: Trip[];
 }
 
 export const enum Role {
-  ADMIN = 'admin',
-  MANAGER = 'manager',
-  USER = 'user',
+  ADMIN = 'ROLE_ADMIN',
+  MANAGER = 'ROLE_MANAGER',
+  USER = 'ROLE_USER',
 }

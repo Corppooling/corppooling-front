@@ -26,21 +26,26 @@ const emit = defineEmits<{
 
 const search = async (): Promise<void> => {
   loading.value = true;
+
   await tripStore.setTrips(
     departureLocation.value?.trim() ? departureLocation.value?.trim() : undefined,
     arrivalLocation.value?.trim() ? arrivalLocation.value?.trim() : undefined,
-    departureTime.value ? DateTime.fromJSDate(departureTime.value).toISO() ?? undefined : undefined
+    departureTime.value
+      ? DateTime.fromJSDate(departureTime.value as Date).toISO() ?? undefined
+      : undefined
   );
+
   await router.push({
     name: 'trips',
     query: {
       departure: departureLocation.value?.trim() ? departureLocation.value?.trim() : undefined,
       arrival: arrivalLocation.value?.trim() ? arrivalLocation.value?.trim() : undefined,
       departure_time: departureTime.value
-        ? DateTime.fromJSDate(departureTime.value).toISO()
+        ? DateTime.fromJSDate(departureTime.value as Date).toISO() ?? undefined
         : undefined,
     },
   });
+
   loading.value = false;
   emit('closeModal', false);
 };
@@ -60,24 +65,24 @@ const reverseLocations = (): void => {
 
 watch(departureLocation, async (value) => {
   if (value?.trim()) {
-    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
+    townsAutocomplete.value = (await geoGouvAPI.getTowns(value?.trim())) as Array<string>;
   }
 });
 
 watch(arrivalLocation, async (value) => {
   if (value?.trim()) {
-    townsAutocomplete.value = await geoGouvAPI.getTowns(value.trim());
+    townsAutocomplete.value = (await geoGouvAPI.getTowns(value?.trim())) as Array<string>;
   }
 });
 </script>
 
 <template>
   <div
-    class="bg-white w-full rounded-2xl shadow-md max-w-4xl overflow-hidden flex flex-col lg:flex-row text-xl"
+    class="flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white text-xl shadow-md lg:flex-row"
   >
     <div>
       <span
-        class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light relative"
+        class="relative mx-6 flex h-full items-center border-b-2 border-black-light px-5 lg:mx-0 lg:w-fit lg:border-b-0 lg:border-r-2"
       >
         <FontAwesomeIcon
           :class="departureLocation?.trim() ? 'opacity-100' : 'opacity-40'"
@@ -91,15 +96,15 @@ watch(arrivalLocation, async (value) => {
         />
         <FontAwesomeIcon
           v-if="canReverseLocations()"
-          @click="reverseLocations"
-          class="absolute right-3 top-4 text-content-base opacity-60 hover:opacity-100 cursor-pointer rotate-90 lg:rotate-0"
+          class="absolute right-3 top-4 rotate-90 cursor-pointer text-content-base opacity-60 hover:opacity-100 lg:rotate-0"
           icon="arrow-right-arrow-left"
+          @click="reverseLocations"
         />
       </span>
     </div>
     <div>
       <span
-        class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit border-b-2 lg:border-b-0 lg:border-r-2 border-black-light"
+        class="mx-6 flex h-full items-center border-b-2 border-black-light px-5 lg:mx-0 lg:w-fit lg:border-b-0 lg:border-r-2"
       >
         <FontAwesomeIcon
           :class="arrivalLocation?.trim() ? 'opacity-100' : 'opacity-40'"
@@ -107,23 +112,23 @@ watch(arrivalLocation, async (value) => {
           icon="fa-map-marker-alt"
         />
         <AutoComplete
-          class="w-full"
           v-model="arrivalLocation"
+          class="w-full"
           :suggestions="townsAutocomplete"
           :placeholder="$t('trip.filter.arrival')"
         />
       </span>
     </div>
     <div>
-      <span class="flex items-center h-full px-5 mx-6 lg:mx-0 lg:w-fit">
+      <span class="mx-6 flex h-full items-center px-5 lg:mx-0 lg:w-fit">
         <FontAwesomeIcon
           :class="departureTime ? 'opacity-100' : 'opacity-40'"
           class="text-content-base"
           icon="calendar"
         />
         <Calendar
-          class="w-full lg:w-48"
           v-model="departureTime"
+          class="w-full lg:w-48"
           hourFormat="24"
           dateFormat="dd/mm/yy à"
           :placeholder="$t('trip.filter.departureTime')"
@@ -137,7 +142,7 @@ watch(arrivalLocation, async (value) => {
       :fn="search"
       :loading="loading"
       bgColor="content-light"
-      class="grow min-w-[200px] rounded-tr-none rounded-l-none bg-content-light"
+      class="min-w-[200px] grow rounded-l-none rounded-tr-none bg-content-light"
       :text="$t('header.search')"
     />
   </div>

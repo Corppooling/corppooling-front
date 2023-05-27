@@ -10,7 +10,7 @@ const authStore = useAuthStore();
   <Dropdown>
     <template #cta>
       <MenuButton
-        class="ml-2 bg-content-flight h-full aspect-square rounded-full shadow-md flex justify-center items-center w-12"
+        class="ml-2 flex aspect-square h-full w-12 items-center justify-center rounded-full bg-content-flight shadow-md"
       >
         <img class="w-full p-2" src="@/assets/images/logos/logo_white.svg" alt="icon" />
       </MenuButton>
@@ -29,11 +29,11 @@ const authStore = useAuthStore();
       </MenuItem>
       <MenuItem v-slot="{ active }">
         <div
-          @click="authStore.logout()"
           :class="[
             active ? 'bg-main-base text-white' : 'text-content-base',
-            'group flex w-full items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out cursor-pointer',
+            'group flex w-full cursor-pointer items-center rounded-md p-2 text-base transition-all duration-150 ease-in-out',
           ]"
+          @click="authStore.logout()"
         >
           {{ $t('auth.logout') }}
         </div>

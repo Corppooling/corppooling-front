@@ -5,6 +5,7 @@ export const accountRoutes: Array<RouteRecordRaw> = [
     path: '/account',
     name: 'account',
     component: () => import('@/modules/account/layouts/Account.vue'),
+    redirect: { name: 'account.profile' },
     meta: {
       authRequired: true,
       hideFooter: true,

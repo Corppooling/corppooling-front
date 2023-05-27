@@ -10,7 +10,7 @@ const props = defineProps<{
 
 <template>
   <div
-    class="rounded-full w-16 h-16 overflow-hidden p-1 flex justify-center items-center"
+    class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full p-1"
     :class="bgTypeColor(props.trip.type)"
   >
     <img class="w-full" :src="defaultProfileImage" alt="" />
