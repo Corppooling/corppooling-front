@@ -5,9 +5,13 @@ import Password from 'primevue/password';
 import { reactive, ref } from 'vue';
 import PrimeInput from '@/components/atoms/PrimeInput.vue';
 import Button from '@/components/molecules/Button.vue';
+import { useToast } from '@/composables/toast';
+import { i18nGlobal } from '@/support/i18n';
 
 const userStore = useUserStore();
 const loading = ref<boolean>(false);
+const toast = useToast();
+const { t } = i18nGlobal;
 
 interface FormDataI {
   currentPassword?: string;
@@ -21,7 +25,37 @@ const formData = reactive<FormDataI>({
   newPasswordConfirmation: undefined,
 });
 
-const onSubmit = (): void => {};
+const onSubmit = async (): Promise<void> => {
+  if (
+    !formData.currentPassword?.trim() ||
+    !formData.newPassword?.trim() ||
+    !formData.newPasswordConfirmation?.trim()
+  ) {
+    toast.warning(t('form.empties'));
+    return;
+  }
+
+  if (formData.newPassword !== formData.newPasswordConfirmation) {
+    toast.warning('Les mots de passe ne correspondent pas');
+    return;
+  }
+
+  loading.value = true;
+
+  //route for update password
+  /*await axiosClient
+    .put(`api/users/${userStore.user?.id}`, {
+      password: formData.newPassword,
+    })
+    .then(async () => {
+      toast.success('Votre mot de passe a bien été modifié');
+    })
+    .catch(() => {
+      toast.error();
+    });*/
+
+  loading.value = false;
+};
 </script>
 
 <template>
