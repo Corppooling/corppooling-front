@@ -4,6 +4,7 @@ import { Trip } from '@/interfaces/trip.interface';
 
 export interface User {
   id: string | number;
+  roles: Role[];
   firstname: string;
   lastname: string;
   email: string;
