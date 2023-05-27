@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { User } from '@/interfaces/user.interface';
+import { Role } from '@/interfaces/user.interface';
 import axiosClient from '@/support/axiosClient';
 
 export const useUserStore = defineStore({
@@ -32,6 +33,15 @@ export const useUserStore = defineStore({
     },
     getFullName(): string {
       return this.user?.firstname + ' ' + this.user?.lastname;
+    },
+    isUser(): boolean {
+      return this.user !== null && this.user.roles.some((role) => role === Role.USER);
+    },
+    isManager(): boolean {
+      return this.user !== null && this.user.roles.some((role) => role === Role.MANAGER);
+    },
+    isAdmin(): boolean {
+      return this.user !== null && this.user.roles.some((role) => role === Role.ADMIN);
     },
   },
 });
