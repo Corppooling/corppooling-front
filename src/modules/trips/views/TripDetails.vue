@@ -75,8 +75,9 @@ const joinTrip = async (el: HTMLElement) => {
           userId: user.value?.id,
           tripId: trip.value?.id,
         })
-        .then(() => {
-          router.push({ name: 'account.bookings' });
+        .then(async () => {
+          await userStore.setUser(true);
+          await router.push({ name: 'account.bookings' });
           toast.success(t('trip.bookingRegistered'));
         })
         .catch(() => {

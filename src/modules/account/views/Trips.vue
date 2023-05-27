@@ -13,7 +13,6 @@ import { i18nGlobal } from '@/support/i18n';
 const confirm = useConfirm();
 const toast = useToast();
 const userStore = useUserStore();
-await userStore.setUser(true);
 const trips = ref<Trip[]>(userStore.user?.trips ?? []);
 const { t } = i18nGlobal;
 

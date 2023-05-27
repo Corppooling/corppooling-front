@@ -39,7 +39,7 @@ watch(
 </script>
 
 <template>
-  <div
+  <footer
     v-if="!route.meta.hideFooter"
     class="relative mt-auto w-full overflow-hidden bg-content-base py-2 text-main-base"
   >
@@ -115,5 +115,5 @@ watch(
         alt=""
       />
     </div>
-  </div>
+  </footer>
 </template>
