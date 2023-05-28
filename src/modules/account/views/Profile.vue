@@ -9,10 +9,13 @@ import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
 import axiosClient from '@/support/axiosClient';
 import { AxiosResponse } from 'axios';
+import SelectButton from 'primevue/selectbutton';
+import { useLangTranslation } from '@/composables/langTranslation';
 
 const userStore = useUserStore();
 const loading = ref<boolean>(false);
 const toast = useToast();
+const { lang, langOptions } = useLangTranslation();
 const { t } = i18nGlobal;
 
 interface FormDataI {
@@ -122,6 +125,19 @@ const onSubmit = async (): Promise<void> => {
             params: { id: userStore.user?.id },
           }"
         />
+      </div>
+      <h3 class="my-8 text-2xl">{{ $t('account.myProfile.preferences') }}</h3>
+      <div class="flex w-full flex-col text-lg md:pl-4">
+        <div class="flex justify-between py-2">
+          <span>{{ $t('account.myProfile.language') }}:</span>
+          <SelectButton
+            v-model="lang"
+            :options="langOptions"
+            optionLabel="name"
+            optionValue="value"
+            aria-labelledby="basic"
+          />
+        </div>
       </div>
       <h3 class="my-8 text-2xl">{{ $t('account.myProfile.yourStats') }}</h3>
       <div class="flex w-full flex-col text-lg md:pl-4">
