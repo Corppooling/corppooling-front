@@ -46,7 +46,8 @@ const onSubmit = async (): Promise<void> => {
   }
 
   if (formData.newPassword !== formData.newPasswordConfirmation) {
-    toast.warning('Les mots de passe ne correspondent pas');
+    // eslint-disable-next-line no-secrets/no-secrets
+    toast.warning(t('account.myProfile.passwordsDoesNotMatch'));
     return;
   }
 
@@ -58,7 +59,7 @@ const onSubmit = async (): Promise<void> => {
       password: formData.currentPassword,
     })
     .catch(() => {
-      toast.error('Le mot de passe actuel est incorrect');
+      toast.error(t('account.myProfile.incorrectPassword'));
     });
 
   if (typeof auth === 'undefined') {
@@ -76,7 +77,8 @@ const onSubmit = async (): Promise<void> => {
     .then(async (res: AxiosResponse<Record<string, string>>) => {
       localStorage.setItem('token', res.data.jwt);
       resetForm();
-      toast.success('Votre mot de passe a bien été modifié');
+      // eslint-disable-next-line no-secrets/no-secrets
+      toast.success(t('account.myProfile.passwordChanged'));
     })
     .catch(() => {
       toast.error();
@@ -89,7 +91,7 @@ const onSubmit = async (): Promise<void> => {
 <template>
   <div class="flex max-w-screen-2xl flex-wrap">
     <div class="w-full md:p-4 xl:w-96">
-      <h3 class="mb-8 text-2xl">A propos de vous</h3>
+      <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.aboutYou') }}</h3>
       <div class="flex w-full flex-col">
         <div class="flex w-full">
           <div class="flex w-2/3 flex-col">
@@ -104,9 +106,9 @@ const onSubmit = async (): Promise<void> => {
             <div
               class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-content-glight p-1"
             >
-              <img class="w-full" :src="defaultProfileImage" alt="" />
+              <img class="w-full" :src="defaultProfileImage" alt="profile picture" />
             </div>
-            <span class="animate-underline mt-2 select-none">Modifier</span>
+            <span class="animate-underline mt-2 select-none">{{ $t('action.update') }}</span>
           </div>
         </div>
         <Button
@@ -114,29 +116,33 @@ const onSubmit = async (): Promise<void> => {
           :iconPosition="'left'"
           bgColor="content-glight"
           class="mt-8 w-full"
-          text="Profil public"
+          :text="t('account.myProfile.publicProfile')"
           :to="{
             name: 'public.profile',
             params: { id: userStore.user?.id },
           }"
         />
       </div>
-      <h3 class="my-8 text-2xl">Vos statistiques</h3>
+      <h3 class="my-8 text-2xl">{{ $t('account.myProfile.yourStats') }}</h3>
       <div class="flex w-full flex-col text-lg md:pl-4">
         <div class="flex justify-between py-2">
-          <span>Nombre de trajets publiés:</span>
+          <span>{{ $t('account.myProfile.publishedTrips') }}:</span>
           <span class="ml-4 font-bold">{{ userStore.user?.trips.length }}</span>
         </div>
         <div class="flex justify-between py-2">
-          <span>Nombre de réservations effectuées:</span>
+          <span>{{ $t('account.myProfile.bookedTrips') }}:</span>
           <span class="ml-4 font-bold">{{ userStore.user?.reservations.length }}</span>
         </div>
       </div>
     </div>
     <div class="mx-auto w-full pt-8 md:p-4 xl:w-96">
-      <h3 class="mb-8 text-2xl">Modifier votre mot de passe</h3>
+      <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.updatePassword') }}</h3>
       <form class="pt-3">
-        <PrimeInput id="currentPassword" placeholder="Mot de passe actuel" class="mb-12 w-full">
+        <PrimeInput
+          id="currentPassword"
+          :placeholder="t('account.myProfile.currentPassword')"
+          class="mb-12 w-full"
+        >
           <Password
             v-model="formData.currentPassword"
             inputId="currentPassword"
@@ -144,30 +150,34 @@ const onSubmit = async (): Promise<void> => {
             toggleMask
           />
         </PrimeInput>
-        <PrimeInput id="newPassword" placeholder="Nouveau mot de passe" class="mb-10 w-full">
+        <PrimeInput
+          id="newPassword"
+          :placeholder="t('account.myProfile.newPassword')"
+          class="mb-10 w-full"
+        >
           <Password
             v-model="formData.newPassword"
             inputId="newPassword"
             toggleMask
-            promptLabel="Nouveau mot de passe"
-            weakLabel="Trop simple"
-            mediumLabel="Peu mieux faire"
-            strongLabel="Super"
+            :promptLabel="t('account.myProfile.newPassword')"
+            :weakLabel="t('account.myProfile.canDoBetter')"
+            :mediumLabel="t('account.myProfile.canDoBetter')"
+            :strongLabel="t('account.myProfile.greatPassword')"
           />
         </PrimeInput>
         <PrimeInput
           id="newPasswordConfirmation"
-          placeholder="Confirmer votre nouveau mot de passe"
+          :placeholder="t('account.myProfile.confirmNewPassword')"
           class="mb-10 w-full"
         >
           <Password
             v-model="formData.newPasswordConfirmation"
             inputId="newPasswordConfirmation"
             toggleMask
-            promptLabel="Confirmer votre nouveau mot de passe"
-            weakLabel="Trop simple"
-            mediumLabel="Peu mieux faire"
-            strongLabel="Super"
+            :promptLabel="t('account.myProfile.confirmNewPassword')"
+            :weakLabel="t('account.myProfile.canDoBetter')"
+            :mediumLabel="t('account.myProfile.canDoBetter')"
+            :strongLabel="t('account.myProfile.greatPassword')"
           />
         </PrimeInput>
         <Button
@@ -175,7 +185,7 @@ const onSubmit = async (): Promise<void> => {
           :loading="loading"
           bgColor="content-light"
           class="w-full"
-          text="Modifier mon mot de passe"
+          :text="t('action.update')"
         />
       </form>
     </div>

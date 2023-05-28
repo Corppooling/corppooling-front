@@ -110,13 +110,31 @@
     "delete": "Suppression",
     "confirm": "Confirmation",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "update": "Modifier"
   },
   "account": {
     "profile": "Mon profil",
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise",
+    "myProfile": {
+      "passwordsDoesNotMatch": "Les mots de passe ne correspondent pas",
+      "incorrectPassword": "Mot de passe courant incorrect",
+      "passwordChanged": "Votre mot de passe a bien été modifié",
+      "aboutYou": "À propos de vous",
+      "publicProfile": "Profil public",
+      "yourStats": "Vos statistiques",
+      "publishedTrips": "Nombre de trajets publiés:",
+      "bookedTrips": "Nombre de réservations effectuées:",
+      "updatePassword": "Modifier mon mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmNewPassword": "Confirmer le nouveau mot de passe",
+      "tooSimple": "Trop simple",
+      "canDoBetter": "Peut mieux faire",
+      "greatPassword": "Super !"
+    },
     "myTrips": {
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
       "deleteSuccess": "Le trajet a bien été supprimé",
