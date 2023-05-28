@@ -7,6 +7,8 @@ import PrimeInput from '@/components/atoms/PrimeInput.vue';
 import Button from '@/components/molecules/Button.vue';
 import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
+import axiosClient from '@/support/axiosClient';
+import { AxiosResponse } from 'axios';
 
 const userStore = useUserStore();
 const loading = ref<boolean>(false);
@@ -25,6 +27,14 @@ const formData = reactive<FormDataI>({
   newPasswordConfirmation: undefined,
 });
 
+const resetForm = (): void => {
+  Object.assign(formData, {
+    currentPassword: undefined,
+    newPassword: undefined,
+    newPasswordConfirmation: undefined,
+  });
+};
+
 const onSubmit = async (): Promise<void> => {
   if (
     !formData.currentPassword?.trim() ||
@@ -42,24 +52,42 @@ const onSubmit = async (): Promise<void> => {
 
   loading.value = true;
 
-  //route for update password
-  /*await axiosClient
-    .put(`api/users/${userStore.user?.id}`, {
+  const auth = await axiosClient
+    .post('/auth', {
+      username: userStore.user?.email,
+      password: formData.currentPassword,
+    })
+    .catch(() => {
+      toast.error('Le mot de passe actuel est incorrect');
+    });
+
+  if (typeof auth === 'undefined') {
+    loading.value = false;
+    return;
+  }
+
+  await axiosClient
+    .put('api/users', {
+      email: userStore.user?.email,
+      firstname: userStore.user?.firstname,
+      lastname: userStore.user?.lastname,
       password: formData.newPassword,
     })
-    .then(async () => {
+    .then(async (res: AxiosResponse<Record<string, string>>) => {
+      localStorage.setItem('token', res.data.jwt);
+      resetForm();
       toast.success('Votre mot de passe a bien été modifié');
     })
     .catch(() => {
       toast.error();
-    });*/
+    });
 
   loading.value = false;
 };
 </script>
 
 <template>
-  <div class="flex max-w-screen-2xl flex-wrap justify-around">
+  <div class="flex max-w-screen-2xl flex-wrap">
     <div class="w-full md:p-4 xl:w-96">
       <h3 class="mb-8 text-2xl">A propos de vous</h3>
       <div class="flex w-full">
@@ -92,7 +120,7 @@ const onSubmit = async (): Promise<void> => {
         </div>
       </div>
     </div>
-    <div class="w-full pt-8 md:p-4 xl:w-96">
+    <div class="mx-auto w-full pt-8 md:p-4 xl:w-96">
       <h3 class="mb-8 text-2xl">Modifier votre mot de passe</h3>
       <form class="pt-3">
         <PrimeInput id="currentPassword" placeholder="Mot de passe actuel" class="mb-12 w-full">
@@ -110,7 +138,7 @@ const onSubmit = async (): Promise<void> => {
             toggleMask
             promptLabel="Nouveau mot de passe"
             weakLabel="Trop simple"
-            mediumLabel="Peu faire mieux"
+            mediumLabel="Peu mieux faire"
             strongLabel="Super"
           />
         </PrimeInput>
@@ -125,7 +153,7 @@ const onSubmit = async (): Promise<void> => {
             toggleMask
             promptLabel="Confirmer votre nouveau mot de passe"
             weakLabel="Trop simple"
-            mediumLabel="Peu faire mieux"
+            mediumLabel="Peu mieux faire"
             strongLabel="Super"
           />
         </PrimeInput>
