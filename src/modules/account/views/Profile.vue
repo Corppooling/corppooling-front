@@ -90,23 +90,36 @@ const onSubmit = async (): Promise<void> => {
   <div class="flex max-w-screen-2xl flex-wrap">
     <div class="w-full md:p-4 xl:w-96">
       <h3 class="mb-8 text-2xl">A propos de vous</h3>
-      <div class="flex w-full">
-        <div class="flex w-2/3 flex-col">
-          <span class="text-4xl">{{ userStore.getFullName }}</span>
-          <span class="mt-2 text-lg font-bold">{{ userStore.user?.company.name }}</span>
-          <span class="text-md opacity-40">
-            {{ userStore.user?.department.name }}
-          </span>
-          <span class="mt-4 text-base font-bold">{{ userStore.user?.email }}</span>
-        </div>
-        <div class="flex w-1/3 flex-col items-center justify-center">
-          <div
-            class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-content-glight p-1"
-          >
-            <img class="w-full" :src="defaultProfileImage" alt="" />
+      <div class="flex w-full flex-col">
+        <div class="flex w-full">
+          <div class="flex w-2/3 flex-col">
+            <span class="text-4xl">{{ userStore.getFullName }}</span>
+            <span class="mt-2 text-lg font-bold">{{ userStore.user?.company.name }}</span>
+            <span class="text-md opacity-40">
+              {{ userStore.user?.department.name }}
+            </span>
+            <span class="mt-4 text-base font-bold">{{ userStore.user?.email }}</span>
           </div>
-          <span class="animate-underline mt-2 select-none">Modifier</span>
+          <div class="flex w-1/3 flex-col items-center justify-center">
+            <div
+              class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-content-glight p-1"
+            >
+              <img class="w-full" :src="defaultProfileImage" alt="" />
+            </div>
+            <span class="animate-underline mt-2 select-none">Modifier</span>
+          </div>
         </div>
+        <Button
+          icon="fa-image-portrait"
+          :iconPosition="'left'"
+          bgColor="content-glight"
+          class="mt-8 w-full"
+          text="Profil public"
+          :to="{
+            name: 'public.profile',
+            params: { id: userStore.user?.id },
+          }"
+        />
       </div>
       <h3 class="my-8 text-2xl">Vos statistiques</h3>
       <div class="flex w-full flex-col text-lg md:pl-4">
