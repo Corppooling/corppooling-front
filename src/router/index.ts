@@ -25,6 +25,15 @@ const routes: Array<RouteRecordRaw> = [
       authRequired: false,
     },
   },
+  {
+    path: '/:code',
+    name: 'error',
+    component: () => import('@/views/ErrorPage.vue'),
+    props: true,
+    meta: {
+      authRequired: false,
+    },
+  },
 ];
 
 export const router = createRouter({

@@ -1,20 +1,29 @@
 <script lang="ts" setup>
 import Button from '@/components/molecules/Button.vue';
 import { i18nGlobal } from '@/support/i18n';
+import { computed } from 'vue';
+import { HttpStatusCode } from 'axios';
 
 const { t } = i18nGlobal;
 
 const props = withDefaults(
   defineProps<{
-    code?: '401' | '403' | '404' | '500';
+    code?: HttpStatusCode;
   }>(),
   {
-    code: '404',
+    code: HttpStatusCode.NotFound,
   }
 );
 
+const codeError = computed<string>(() => {
+  if (props.code in HttpStatusCode) {
+    return props.code.toString();
+  }
+  return HttpStatusCode.NotFound.toString();
+});
+
 const buildTranslation = (type: 'title' | 'subtitle' | 'ban' | 'description') => {
-  const magicString = `errors.${props.code}.${type}`;
+  const magicString = `errors.${codeError.value}.${type}`;
   const value = t(magicString).toString();
   return value !== magicString ? value : false;
 };
@@ -27,12 +36,12 @@ const buildTranslation = (type: 'title' | 'subtitle' | 'ban' | 'description') =>
     <span
       class="absolute left-0 top-0 flex h-full w-full select-none items-center justify-center text-[10rem] font-bold text-content-flight drop-shadow-neon-light sm:text-[20rem] lg:text-[30rem] xl:text-[40rem]"
     >
-      {{ code }}
+      {{ codeError }}
     </span>
     <div class="flex items-center justify-center text-center">
       <div class="absolute flex flex-col gap-2 lg:gap-4">
-        <h1 class="text-7xl">{{ buildTranslation('title') }}</h1>
-        <h2 class="text-3xl font-normal">
+        <h1 v-if="buildTranslation('title')" class="text-7xl">{{ buildTranslation('title') }}</h1>
+        <h2 v-if="buildTranslation('subtitle')" class="text-3xl font-normal">
           {{ buildTranslation('subtitle') }}
 
           <strong v-if="buildTranslation('ban')">{{ buildTranslation('ban') }}</strong>

@@ -1,4 +1,5 @@
-import axios, { type AxiosRequestConfig } from 'axios';
+import axios, { type AxiosRequestConfig, HttpStatusCode } from 'axios';
+import router from '@/router';
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -22,13 +23,29 @@ axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+
+    if (error.response.status === HttpStatusCode.Unauthorized && !originalRequest._retry) {
       originalRequest._retry = true;
 
       const { useAuthStore } = await import('@/stores/auth');
       await useAuthStore().refreshToken();
       return axiosClient(originalRequest);
     }
+
+    if (
+      error.response.status === HttpStatusCode.Unauthorized ||
+      error.response.status === HttpStatusCode.Forbidden ||
+      error.response.status === HttpStatusCode.NotFound ||
+      error.response.status === HttpStatusCode.InternalServerError
+    ) {
+      await router.push({
+        name: 'error',
+        params: {
+          code: error.response.status,
+        },
+      });
+    }
+
     return Promise.reject(error);
   }
 );
