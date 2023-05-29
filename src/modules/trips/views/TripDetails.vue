@@ -10,7 +10,6 @@ import Button from '@/components/molecules/Button.vue';
 import { formatPrice } from '@/support/format';
 import { bgTypeColor } from '@/composables/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
-import ContactModal from '@/modules/trips/components/organisms/ContactModal.vue';
 import { useUserStore } from '@/stores/user';
 import { useConfirm } from 'primevue/useconfirm';
 import axiosClient from '@/support/axiosClient';
@@ -18,6 +17,7 @@ import { useToast } from '@/composables/toast';
 import { User } from '@/interfaces/user.interface';
 import TripUser from '@/modules/trips/components/molecules/TripUser.vue';
 import { i18nGlobal } from '@/support/i18n';
+import ContactSection from '@/modules/account/components/molecules/ContactSection.vue';
 
 const confirm = useConfirm();
 const userStore = useUserStore();
@@ -29,7 +29,6 @@ const toast = useToast();
 const { t } = i18nGlobal;
 const trip = ref<Trip>();
 const user = ref<User | null>(userStore.user);
-const displayContactModal = ref<boolean>(false);
 const joinLoading = ref<boolean>(false);
 
 const lineLength = computed<number>(() => (width.value <= 768 ? width.value - 100 : 450));
@@ -153,15 +152,7 @@ const joinTrip = async (el: HTMLElement) => {
         <p class="text-justify">{{ trip?.message }}</p>
       </div>
       <TripUser v-if="trip?.announcer" :user="trip.announcer" :trip="trip" />
-      <div
-        class="mb-4 flex cursor-pointer items-center rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
-        @click="displayContactModal = true"
-      >
-        <FontAwesomeIcon class="mr-4 text-xl" icon="fa-regular fa-comments" />
-        <span>
-          {{ $t('trip.contact', { name: trip?.announcer.firstname }) }}
-        </span>
-      </div>
+      <ContactSection v-if="trip?.announcer" :user="trip.announcer" />
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
         <div class="mt-4 p-4">
@@ -209,10 +200,6 @@ const joinTrip = async (el: HTMLElement) => {
       <Spinner :size="8" color="content-base" />
     </div>
   </template>
-  <ContactModal
-    :isOpen="displayContactModal"
-    @update:isOpen="(value) => (displayContactModal = value)"
-  />
 </template>
 
 <style lang="scss" scoped>

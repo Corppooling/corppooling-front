@@ -118,6 +118,11 @@
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise",
+    "publicProfile": {
+      "stats": "Statistiques",
+      "contact": "Contact",
+      "email": "Email"
+    },
     "myProfile": {
       "passwordsDoesNotMatch": "Les mots de passe ne correspondent pas",
       "incorrectPassword": "Mot de passe courant incorrect",
@@ -125,8 +130,8 @@
       "aboutYou": "À propos de vous",
       "publicProfile": "Profil public",
       "yourStats": "Vos statistiques",
-      "publishedTrips": "Nombre de trajets publiés:",
-      "bookedTrips": "Nombre de réservations effectuées:",
+      "publishedTrips": "Nombre de trajets publiés",
+      "bookedTrips": "Nombre de réservations effectuées",
       "updatePassword": "Modifier mon mot de passe",
       "currentPassword": "Mot de passe actuel",
       "newPassword": "Nouveau mot de passe",

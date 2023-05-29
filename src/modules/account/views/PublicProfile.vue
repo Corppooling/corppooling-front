@@ -5,6 +5,7 @@ import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Spinner from '@/components/atoms/Spinner.vue';
 import defaultProfileImage from '@/assets/images/logos/logo_white.svg?url';
+import ContactSection from '@/modules/account/components/molecules/ContactSection.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -22,20 +23,42 @@ const fullName = computed<string>(
 </script>
 
 <template>
-  <div v-if="!isLoading" class="mx-auto w-full max-w-screen-md p-20">
+  <div v-if="!isLoading" class="mx-auto w-full max-w-screen-md px-4 py-14 md:p-20">
     <div class="flex items-center justify-between">
       <div class="flex flex-col">
         <h1 class="text-4xl">{{ fullName }}</h1>
-        <span class="mt-2 text-lg font-bold">{{ userStore.user?.company.name }}</span>
+        <span class="mt-2 text-lg font-bold">{{ userStore.publicUser?.company.name }}</span>
         <span class="text-md opacity-40">
-          {{ userStore.user?.department.name }}
+          {{ userStore.publicUser?.department.name }}
         </span>
-        <span class="mt-4 text-base font-bold">{{ userStore.user?.email }}</span>
       </div>
       <div
         class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-content-glight p-1"
       >
         <img class="w-full" :src="defaultProfileImage" alt="profile picture" />
+      </div>
+    </div>
+    <h3 class="my-8 text-2xl">{{ $t('account.publicProfile.stats') }}</h3>
+    <div class="flex w-full flex-col text-lg">
+      <div class="flex justify-between">
+        <span>{{ $t('account.myProfile.publishedTrips') }}:</span>
+        <span class="ml-4 font-bold">{{ userStore.publicUser?.trips.length }}</span>
+      </div>
+      <div class="flex justify-between py-2">
+        <span>{{ $t('account.myProfile.bookedTrips') }}:</span>
+        <span class="ml-4 font-bold">{{ userStore.publicUser?.reservations.length }}</span>
+      </div>
+    </div>
+    <h3 class="my-8 text-2xl">{{ $t('account.publicProfile.contact') }}</h3>
+    <div>
+      <p>
+        <span class="mr-2 font-bold">{{ $t('account.publicProfile.email') }}:</span>
+        <a :href="`mailto:${userStore.publicUser?.email}`" class="animate-underline text-base">
+          {{ userStore.publicUser?.email }}
+        </a>
+      </p>
+      <div class="my-4">
+        <ContactSection v-if="userStore.publicUser" :user="userStore.publicUser" />
       </div>
     </div>
   </div>

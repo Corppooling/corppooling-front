@@ -118,6 +118,11 @@
     "trips": "My trips",
     "bookings": "My bookings",
     "company": "My company",
+    "publicProfile": {
+      "stats": "Statistics",
+      "contact": "Contact",
+      "email": "Email"
+    },
     "myProfile": {
       "passwordsDoesNotMatch": "Passwords do not match",
       "incorrectPassword": "Incorrect password",
@@ -125,8 +130,8 @@
       "aboutYou": "About you",
       "publicProfile": "Public profile",
       "yourStats": "Your statistics",
-      "publishedTrips": "Number of trips published:",
-      "bookedTrips": "Number of trips booked:",
+      "publishedTrips": "Number of trips published",
+      "bookedTrips": "Number of trips booked",
       "updatePassword": "Update my password",
       "currentPassword": "Current password",
       "newPassword": "New password",
