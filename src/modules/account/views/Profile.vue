@@ -14,6 +14,7 @@ import { useLangTranslation } from '@/composables/langTranslation';
 import { dateFormated } from '@/support/luxon';
 
 const userStore = useUserStore();
+await userStore.setUser();
 const loading = ref<boolean>(false);
 const toast = useToast();
 const { lang, langOptions } = useLangTranslation();
