@@ -7,6 +7,7 @@ export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     user: null as User | null,
+    publicUser: null as User | null,
   }),
   actions: {
     async setUser(forceRefresh = false): Promise<void> {
@@ -25,6 +26,11 @@ export const useUserStore = defineStore({
     },
     unsetUser(): void {
       this.user = null;
+    },
+    async setPublicUser(id: number): Promise<void> {
+      await axiosClient.get(`/api/users/${id}`).then((res) => {
+        this.publicUser = res.data;
+      });
     },
   },
   getters: {

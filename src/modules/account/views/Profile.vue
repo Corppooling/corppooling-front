@@ -154,7 +154,7 @@ const onSubmit = async (): Promise<void> => {
     </div>
     <div class="mx-auto w-full pt-8 md:p-4 xl:w-96">
       <h3 class="mb-1 text-2xl">{{ $t('account.myProfile.updatePassword') }}</h3>
-      <div class="mb-8 flex flex-wrap justify-between text-sm">
+      <div v-if="userStore.user" class="mb-8 flex flex-wrap justify-between text-sm">
         <span>{{ $t('account.myProfile.lastUpdate') }}:</span>
         <span>{{ dateFormated(userStore.user?.updated_at) }}</span>
       </div>
