@@ -1,24 +1,27 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Spinner from '@/components/atoms/Spinner.vue';
 import defaultProfileImage from '@/assets/images/logos/logo_white.svg?url';
 import ContactSection from '@/modules/account/components/molecules/ContactSection.vue';
+import axiosClient from '@/support/axiosClient';
+import { User } from '@/interfaces/user.interface';
 
-const userStore = useUserStore();
 const router = useRouter();
 const isLoading = ref<boolean>(false);
+const publicUser = ref<User>();
 
 onMounted(async () => {
   isLoading.value = true;
-  await userStore.setPublicUser(parseInt(router.currentRoute.value.params.id as string));
+  await axiosClient.get(`/api/users/${router.currentRoute.value.params.id}`).then((res) => {
+    publicUser.value = res.data;
+  });
   isLoading.value = false;
 });
 
 const fullName = computed<string>(
-  () => `${userStore.publicUser?.firstname} ${userStore.publicUser?.lastname}`
+  () => `${publicUser.value?.firstname} ${publicUser.value?.lastname}`
 );
 </script>
 
@@ -27,9 +30,9 @@ const fullName = computed<string>(
     <div class="flex items-center justify-between">
       <div class="flex flex-col">
         <h1 class="text-4xl">{{ fullName }}</h1>
-        <span class="mt-2 text-lg font-bold">{{ userStore.publicUser?.company.name }}</span>
+        <span class="mt-2 text-lg font-bold">{{ publicUser?.company.name }}</span>
         <span class="text-md opacity-40">
-          {{ userStore.publicUser?.department.name }}
+          {{ publicUser?.department.name }}
         </span>
       </div>
       <div
@@ -42,23 +45,23 @@ const fullName = computed<string>(
     <div class="flex w-full flex-col text-lg">
       <div class="flex justify-between">
         <span>{{ $t('account.myProfile.publishedTrips') }}:</span>
-        <span class="ml-4 font-bold">{{ userStore.publicUser?.trips.length }}</span>
+        <span class="ml-4 font-bold">{{ publicUser?.trips.length }}</span>
       </div>
       <div class="flex justify-between py-2">
         <span>{{ $t('account.myProfile.bookedTrips') }}:</span>
-        <span class="ml-4 font-bold">{{ userStore.publicUser?.reservations.length }}</span>
+        <span class="ml-4 font-bold">{{ publicUser?.reservations.length }}</span>
       </div>
     </div>
     <h3 class="my-8 text-2xl">{{ $t('account.publicProfile.contact') }}</h3>
     <div>
       <p>
         <span class="mr-2 font-bold">{{ $t('account.publicProfile.email') }}:</span>
-        <a :href="`mailto:${userStore.publicUser?.email}`" class="animate-underline text-base">
-          {{ userStore.publicUser?.email }}
+        <a :href="`mailto:${publicUser?.email}`" class="animate-underline text-base">
+          {{ publicUser?.email }}
         </a>
       </p>
       <div class="my-4">
-        <ContactSection v-if="userStore.publicUser" :user="userStore.publicUser" />
+        <ContactSection v-if="publicUser" :user="publicUser" />
       </div>
     </div>
   </div>
