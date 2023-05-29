@@ -32,12 +32,7 @@ axiosClient.interceptors.response.use(
       return axiosClient(originalRequest);
     }
 
-    if (
-      error.response.status === HttpStatusCode.Unauthorized ||
-      error.response.status === HttpStatusCode.Forbidden ||
-      error.response.status === HttpStatusCode.NotFound ||
-      error.response.status === HttpStatusCode.InternalServerError
-    ) {
+    if (error.response.status === HttpStatusCode.NotFound) {
       await router.push({
         name: 'error',
         params: {
