@@ -1,45 +1,15 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
 import SelectButton from 'primevue/selectbutton';
 import { useRoute } from 'vue-router';
-import { i18nGlobal } from '@/support/i18n';
+import { useLangTranslation } from '@/composables/langTranslation';
 
 const route = useRoute();
-const { locale } = i18nGlobal;
-const enum Lang {
-  FR = 'fr',
-  EN = 'en',
-}
-
+const { lang, langOptions } = useLangTranslation();
 const currentYear: number = new Date(Date.now()).getFullYear();
-const lang = ref<Lang>((localStorage.getItem('lang') as Lang) ?? Lang.FR);
-const langOptions = [
-  { name: 'Français', value: Lang.FR },
-  { name: 'English', value: Lang.EN },
-] as Array<Record<string, string>>;
-
-watch(
-  lang,
-  (newLang: Lang) => {
-    switch (newLang) {
-      case Lang.FR:
-        locale.value = Lang.FR;
-        localStorage.setItem('lang', Lang.FR);
-        break;
-      case Lang.EN:
-        locale.value = Lang.EN;
-        localStorage.setItem('lang', Lang.EN);
-        break;
-      default:
-        lang.value = Lang.FR;
-    }
-  },
-  { immediate: true }
-);
 </script>
 
 <template>
-  <div
+  <footer
     v-if="!route.meta.hideFooter"
     class="relative mt-auto w-full overflow-hidden bg-content-base py-2 text-main-base"
   >
@@ -115,5 +85,5 @@ watch(
         alt=""
       />
     </div>
-  </div>
+  </footer>
 </template>

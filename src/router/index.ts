@@ -20,7 +20,16 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('@/views/NotFound.vue'),
+    component: () => import('@/views/ErrorPage.vue'),
+    meta: {
+      authRequired: false,
+    },
+  },
+  {
+    path: '/:code',
+    name: 'error',
+    component: () => import('@/views/ErrorPage.vue'),
+    props: true,
     meta: {
       authRequired: false,
     },

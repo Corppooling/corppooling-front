@@ -14,7 +14,7 @@ const displaySidebar = ref<boolean>(false);
 </script>
 
 <template>
-  <div class="sticky top-0 z-50 flex h-20 w-full justify-between bg-white px-5 py-4 shadow-md">
+  <header class="sticky top-0 z-50 flex h-20 w-full justify-between bg-white px-5 py-4 shadow-md">
     <RouterLink :to="{ name: 'home' }" class="w-52">
       <img class="h-full w-full" src="@/assets/images/logos/logo_full.svg" alt="logo" />
     </RouterLink>
@@ -55,7 +55,7 @@ const displaySidebar = ref<boolean>(false);
         @click="displaySidebar = !displaySidebar"
       />
     </div>
-  </div>
+  </header>
   <Sidebar v-model:visible="displaySidebar" position="right">
     <template #header>
       <div class="w-32">

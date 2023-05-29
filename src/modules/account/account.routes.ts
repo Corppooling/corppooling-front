@@ -33,4 +33,12 @@ export const accountRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/profile/:id',
+    name: 'public.profile',
+    component: () => import('@/modules/account/views/PublicProfile.vue'),
+    meta: {
+      authRequired: true,
+    },
+  },
 ];

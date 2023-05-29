@@ -47,9 +47,11 @@ const currentLabel = computed<string>(() => {
     <div class="order-2 flex-1">
       <div class="p-10">
         <h1 class="text-4xl font-bold">{{ currentLabel }}</h1>
-        <Suspense>
-          <RouterView />
-        </Suspense>
+        <div class="my-8">
+          <Suspense>
+            <RouterView />
+          </Suspense>
+        </div>
       </div>
     </div>
     <div
@@ -77,7 +79,7 @@ const currentLabel = computed<string>(() => {
           <RouterLink
             v-ripple
             :to="{ name: tab.name }"
-            class="flex w-full items-center justify-center py-4 hover:bg-content-xlight hover:text-white"
+            class="flex w-full items-center justify-center pb-7 pt-4 hover:bg-content-xlight hover:text-white"
             :class="{ 'bg-content-xlight text-white': route.name === tab.name }"
           >
             <FontAwesomeIcon :icon="tab.icon" class="text-lg" />

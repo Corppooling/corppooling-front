@@ -13,7 +13,6 @@ import { i18nGlobal } from '@/support/i18n';
 const confirm = useConfirm();
 const toast = useToast();
 const userStore = useUserStore();
-await userStore.setUser(true);
 const trips = ref<Trip[]>(userStore.user?.reservations ?? []);
 const { t } = i18nGlobal;
 
@@ -61,52 +60,50 @@ const deleteTrip = async (tripId: number, el: HTMLElement): Promise<void> => {
 </script>
 
 <template>
-  <div class="my-8">
-    <div class="flex flex-wrap gap-8">
-      <div class="w-full">
-        <h3 class="mb-8 text-2xl">{{ $t('account.myBookings.upcoming') }}</h3>
-        <div
-          v-if="upcomingTrips.length > 0"
-          class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
-        >
-          <TripInline
-            v-for="trip in upcomingTrips"
-            :key="trip.id"
-            :trip="trip"
-            withDelete
-            @delete:trip="deleteTrip(trip.id, $el)"
-          />
-        </div>
-        <div v-else>
-          <div class="mb-4 flex items-center">
-            <FontAwesomeIcon
-              icon="suitcase"
-              class="mr-2 text-2xl"
-              style="transform: rotateY(180deg)"
-            />
-            <p class="text-lg">{{ $t('account.myBookings.noUpcoming') }}</p>
-          </div>
-          <Button
-            :to="{ name: 'trips' }"
-            class="w-fit"
-            icon="fa-search"
-            :text="$t('header.search')"
-            iconSize="2xl"
-          />
-        </div>
+  <div class="flex flex-wrap gap-8">
+    <div class="w-full">
+      <h3 class="mb-8 text-2xl">{{ $t('account.myBookings.upcoming') }}</h3>
+      <div
+        v-if="upcomingTrips.length > 0"
+        class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
+      >
+        <TripInline
+          v-for="trip in upcomingTrips"
+          :key="trip.id"
+          :trip="trip"
+          withDelete
+          @delete:trip="deleteTrip(trip.id, $el)"
+        />
       </div>
-      <div class="mt-8 w-full">
-        <h3 class="mb-8 text-2xl">{{ $t('account.myBookings.archived') }}</h3>
-        <div
-          v-if="passedTrips.length > 0"
-          class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
-        >
-          <TripInline v-for="trip in passedTrips" :key="trip.id" :trip="trip" />
+      <div v-else>
+        <div class="mb-4 flex items-center">
+          <FontAwesomeIcon
+            icon="suitcase"
+            class="mr-2 text-2xl"
+            style="transform: rotateY(180deg)"
+          />
+          <p class="text-lg">{{ $t('account.myBookings.noUpcoming') }}</p>
         </div>
-        <div v-else class="flex items-center">
-          <FontAwesomeIcon icon="suitcase-rolling" class="mr-2 text-2xl" />
-          <p class="text-lg">{{ $t('account.myBookings.noArchived') }}</p>
-        </div>
+        <Button
+          :to="{ name: 'trips' }"
+          class="w-fit"
+          icon="fa-search"
+          :text="$t('header.search')"
+          iconSize="2xl"
+        />
+      </div>
+    </div>
+    <div class="mt-8 w-full">
+      <h3 class="mb-8 text-2xl">{{ $t('account.myBookings.archived') }}</h3>
+      <div
+        v-if="passedTrips.length > 0"
+        class="grid-cols-[repeat(auto-fill, w-full)] grid gap-8 lg:grid-cols-[repeat(auto-fill,650px)]"
+      >
+        <TripInline v-for="trip in passedTrips" :key="trip.id" :trip="trip" />
+      </div>
+      <div v-else class="flex items-center">
+        <FontAwesomeIcon icon="suitcase-rolling" class="mr-2 text-2xl" />
+        <p class="text-lg">{{ $t('account.myBookings.noArchived') }}</p>
       </div>
     </div>
   </div>

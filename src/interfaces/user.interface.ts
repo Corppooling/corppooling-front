@@ -12,7 +12,6 @@ export interface User {
   presentation?: string;
   profile_image?: string;
   role: Role[];
-  created_at: string;
   updated_at: string;
   department: Department;
   company: Company;

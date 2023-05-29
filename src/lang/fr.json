@@ -2,6 +2,30 @@
   "global": {
     "appName": "Corppooling"
   },
+  "errors": {
+    "404": {
+      "title": "Oops...",
+      "subtitle": "Cette page n'existe pas !"
+    },
+    "401": {
+      "title": "Et non !",
+      "subtitle": "Vous n’avez pas",
+      "ban": "l’autorisation d’accéder à cette page."
+    },
+    "403": {
+      "title": "Et non !",
+      "subtitle": "L'accès à cette page",
+      "ban": "vous est interdit."
+    },
+    "500": {
+      "title": "Nous revenons",
+      "subtitle": "Une erreur temporaire est survenue.",
+      "description": "Nos équipes sont déjà mobilisées pour résoudre le problème : réessayez d’accéder à cette page dans quelques minutes !"
+    },
+    "links": {
+      "home": "Revenir à l'accueil"
+    }
+  },
   "auth": {
     "login": "Connexion",
     "password": "Mot de passe",
@@ -110,13 +134,39 @@
     "delete": "Suppression",
     "confirm": "Confirmation",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "update": "Modifier"
   },
   "account": {
     "profile": "Mon profil",
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise",
+    "publicProfile": {
+      "stats": "Statistiques",
+      "contact": "Contact",
+      "email": "Email"
+    },
+    "myProfile": {
+      "passwordsDoesNotMatch": "Les mots de passe ne correspondent pas",
+      "incorrectPassword": "Mot de passe courant incorrect",
+      "passwordChanged": "Votre mot de passe a bien été modifié",
+      "aboutYou": "À propos de vous",
+      "publicProfile": "Profil public",
+      "yourStats": "Vos statistiques",
+      "publishedTrips": "Nombre de trajets publiés",
+      "bookedTrips": "Nombre de réservations effectuées",
+      "updatePassword": "Modifier mon mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmNewPassword": "Confirmer le nouveau mot de passe",
+      "tooSimple": "Trop simple",
+      "canDoBetter": "Peut mieux faire",
+      "greatPassword": "Super !",
+      "preferences": "Vos préférences",
+      "language": "Langue",
+      "lastUpdate": "Dernière modification"
+    },
     "myTrips": {
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
       "deleteSuccess": "Le trajet a bien été supprimé",

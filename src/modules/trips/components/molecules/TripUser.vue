@@ -15,7 +15,10 @@ const fullName = computed<string>(() => `${props.user.firstname} ${props.user.la
 
 <template>
   <RouterLink
-    to=""
+    :to="{
+      name: 'public.profile',
+      params: { id: user.id },
+    }"
     class="flex items-center justify-between rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
   >
     <div class="flex flex-col">

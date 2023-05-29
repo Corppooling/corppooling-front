@@ -10,7 +10,6 @@ import Button from '@/components/molecules/Button.vue';
 import { formatPrice } from '@/support/format';
 import { bgTypeColor } from '@/composables/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
-import ContactModal from '@/modules/trips/components/organisms/ContactModal.vue';
 import { useUserStore } from '@/stores/user';
 import { useConfirm } from 'primevue/useconfirm';
 import axiosClient from '@/support/axiosClient';
@@ -18,6 +17,7 @@ import { useToast } from '@/composables/toast';
 import { User } from '@/interfaces/user.interface';
 import TripUser from '@/modules/trips/components/molecules/TripUser.vue';
 import { i18nGlobal } from '@/support/i18n';
+import ContactSection from '@/modules/account/components/molecules/ContactSection.vue';
 
 const confirm = useConfirm();
 const userStore = useUserStore();
@@ -29,7 +29,6 @@ const toast = useToast();
 const { t } = i18nGlobal;
 const trip = ref<Trip>();
 const user = ref<User | null>(userStore.user);
-const displayContactModal = ref<boolean>(false);
 const joinLoading = ref<boolean>(false);
 
 const lineLength = computed<number>(() => (width.value <= 768 ? width.value - 100 : 450));
@@ -42,7 +41,7 @@ const readySeats = computed<number>(() => {
 
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
-  trip.value = tripStore.getTrip;
+  trip.value = tripStore.trip;
 });
 
 const canJoin = computed<boolean>(() => {
@@ -75,8 +74,9 @@ const joinTrip = async (el: HTMLElement) => {
           userId: user.value?.id,
           tripId: trip.value?.id,
         })
-        .then(() => {
-          router.push({ name: 'account.bookings' });
+        .then(async () => {
+          await userStore.setUser(true);
+          await router.push({ name: 'account.bookings' });
           toast.success(t('trip.bookingRegistered'));
         })
         .catch(() => {
@@ -89,7 +89,7 @@ const joinTrip = async (el: HTMLElement) => {
 </script>
 
 <template>
-  <template v-if="!tripStore.requestLoading">
+  <template v-if="!tripStore.loading">
     <div class="mx-auto max-w-screen-md p-4">
       <div class="flex flex-wrap items-center justify-between py-10">
         <h1 v-if="trip" class="my-2 mr-4 text-4xl capitalize">
@@ -152,15 +152,7 @@ const joinTrip = async (el: HTMLElement) => {
         <p class="text-justify">{{ trip?.message }}</p>
       </div>
       <TripUser v-if="trip?.announcer" :user="trip.announcer" :trip="trip" />
-      <div
-        class="mb-4 flex cursor-pointer items-center rounded p-4 hover:bg-content-flight hover:bg-opacity-25"
-        @click="displayContactModal = true"
-      >
-        <FontAwesomeIcon class="mr-4 text-xl" icon="fa-regular fa-comments" />
-        <span>
-          {{ $t('trip.contact', { name: trip?.announcer.firstname }) }}
-        </span>
-      </div>
+      <ContactSection v-if="trip?.announcer" :user="trip.announcer" />
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
         <div class="mt-4 p-4">
@@ -204,14 +196,12 @@ const joinTrip = async (el: HTMLElement) => {
     </div>
   </template>
   <template v-else>
-    <div class="flex h-screen items-center justify-center">
+    <div
+      class="flex h-[calc(100vh-14.1rem)] items-center justify-center md:h-[calc(100vh-12.9rem)]"
+    >
       <Spinner :size="8" color="content-base" />
     </div>
   </template>
-  <ContactModal
-    :isOpen="displayContactModal"
-    @update:isOpen="(value) => (displayContactModal = value)"
-  />
 </template>
 
 <style lang="scss" scoped>
