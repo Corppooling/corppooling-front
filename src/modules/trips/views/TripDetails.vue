@@ -42,7 +42,7 @@ const readySeats = computed<number>(() => {
 
 onMounted(async () => {
   await tripStore.setTrip(route.params.id as string);
-  trip.value = tripStore.getTrip;
+  trip.value = tripStore.trip;
 });
 
 const canJoin = computed<boolean>(() => {
@@ -90,7 +90,7 @@ const joinTrip = async (el: HTMLElement) => {
 </script>
 
 <template>
-  <template v-if="!tripStore.requestLoading">
+  <template v-if="!tripStore.loading">
     <div class="mx-auto max-w-screen-md p-4">
       <div class="flex flex-wrap items-center justify-between py-10">
         <h1 v-if="trip" class="my-2 mr-4 text-4xl capitalize">
@@ -205,7 +205,7 @@ const joinTrip = async (el: HTMLElement) => {
     </div>
   </template>
   <template v-else>
-    <div class="flex h-screen items-center justify-center">
+    <div class="flex h-[calc(100vh-13rem)] items-center justify-center">
       <Spinner :size="8" color="content-base" />
     </div>
   </template>

@@ -77,6 +77,7 @@ export const useTripStore = defineStore({
           params: {
             itemsPerPage: 8,
             'order[created_at]': 'desc',
+            'departure_time[after]': DateTime.local().toLocal().toISO(),
           },
         })
         .then((res) => {
@@ -88,20 +89,6 @@ export const useTripStore = defineStore({
     },
     resetExtraSorts() {
       this.extraSorts = [];
-    },
-  },
-  getters: {
-    getTrip(): Trip {
-      return this.trip;
-    },
-    getTrips(): Array<Trip> {
-      return this.trips;
-    },
-    getLastTrips(): Array<Trip> {
-      return this.lastTrips;
-    },
-    requestLoading(): boolean {
-      return this.loading;
     },
   },
 });
