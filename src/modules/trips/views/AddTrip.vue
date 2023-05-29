@@ -127,8 +127,9 @@ const sendForm = async (): Promise<void> => {
 
   await axiosClient
     .post('api/trips', formData)
-    .then(() => {
-      router.push({ name: 'account.trips' });
+    .then(async () => {
+      await userStore.setUser(true);
+      await router.push({ name: 'account.trips' });
       toast.success(t('trip.addTrip.success'));
     })
     .catch(() => {

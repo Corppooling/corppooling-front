@@ -2,6 +2,30 @@
   "global": {
     "appName": "Corppooling"
   },
+  "errors": {
+    "404": {
+      "title": "Oops...",
+      "subtitle": "This page does not exist"
+    },
+    "401": {
+      "title": "Sorry...",
+      "subtitle": "You do not have",
+      "ban": "rights to access this page."
+    },
+    "403": {
+      "title": "Sorry...",
+      "subtitle": "Access to this page is",
+      "ban": "restricted."
+    },
+    "500": {
+      "title": "Will be back soon !",
+      "subtitle": "An temporary error occurred on our side.",
+      "description": "Our teams are already mobilized to solve the problem: try to access this page again in a few minutes!"
+    },
+    "links": {
+      "home": "Go home"
+    }
+  },
   "auth": {
     "login": "Login",
     "password": "Password",
@@ -110,13 +134,39 @@
     "delete": "Deletion",
     "confirm": "Confirmation",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "update": "Update"
   },
   "account": {
     "profile": "My profile",
     "trips": "My trips",
     "bookings": "My bookings",
     "company": "My company",
+    "publicProfile": {
+      "stats": "Statistics",
+      "contact": "Contact",
+      "email": "Email"
+    },
+    "myProfile": {
+      "passwordsDoesNotMatch": "Passwords do not match",
+      "incorrectPassword": "Incorrect password",
+      "passwordChanged": "Your password has been successfully changed",
+      "aboutYou": "About you",
+      "publicProfile": "Public profile",
+      "yourStats": "Your statistics",
+      "publishedTrips": "Number of trips published",
+      "bookedTrips": "Number of trips booked",
+      "updatePassword": "Update my password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password",
+      "tooSimple": "Too simple",
+      "canDoBetter": "Can do better",
+      "greatPassword": "Great !",
+      "preferences": "Your preferences",
+      "language": "Language",
+      "lastUpdate": "Last update"
+    },
     "myTrips": {
       "deleteConfirm": "Are you sure you want to delete this trip?",
       "deleteSuccess": "Your trip has been successfully deleted",

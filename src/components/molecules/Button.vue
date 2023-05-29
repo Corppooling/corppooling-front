@@ -116,7 +116,10 @@ const handleClick = (): void => {
       :class="[iconSizeClass, props.iconClass]"
       :icon="props.icon"
     />
-    <span :class="[textSizeClass, props.icon && props.text && 'mx-2']">{{ props.text }}</span>
+    <span v-if="text" :class="[textSizeClass, props.icon && props.text && 'mx-2']">
+      {{ props.text }}
+    </span>
+    <slot v-else />
     <font-awesome-icon
       v-if="props.icon && !props.loading && props.iconPosition === 'right'"
       :class="[iconSizeClass, props.iconClass]"

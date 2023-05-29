@@ -47,6 +47,10 @@ module.exports = {
         floating: 'floating 6s ease-in-out infinite alternate',
       },
 
+      dropShadow: {
+        'neon-light': '0px 30px 20px rgba(53, 28, 117, 0.45)',
+      },
+
       keyframes: {
         ripple: {
           '0%': {

@@ -85,7 +85,7 @@ const handleScroll = (): void => {
             <component :is="tripComponent" :trip="trip" />
           </template>
         </div>
-        <div v-if="tripStore.requestLoading" class="h-screen">
+        <div v-if="tripStore.loading" class="h-screen">
           <div class="my-8 flex items-center justify-center">
             <Spinner :size="6" color="content-base" />
           </div>
