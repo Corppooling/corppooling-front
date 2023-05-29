@@ -93,7 +93,7 @@ const onSubmit = async (): Promise<void> => {
 </script>
 
 <template>
-  <div class="flex max-w-screen-2xl flex-wrap">
+  <div v-if="userStore.isAuth" class="flex max-w-screen-2xl flex-wrap">
     <div class="w-full md:p-4 xl:w-96">
       <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.aboutYou') }}</h3>
       <div class="flex w-full flex-col">
