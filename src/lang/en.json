@@ -135,7 +135,8 @@
       "canDoBetter": "Can do better",
       "greatPassword": "Great !",
       "preferences": "Your preferences",
-      "language": "Language"
+      "language": "Language",
+      "lastUpdate": "Last update"
     },
     "myTrips": {
       "deleteConfirm": "Are you sure you want to delete this trip?",

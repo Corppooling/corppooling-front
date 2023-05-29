@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axiosClient from '@/support/axiosClient';
 import type { Trip } from '@/interfaces/trip.interface';
 import { DateTime } from 'luxon';
+import { actualDate } from '@/support/luxon';
 
 export const useTripStore = defineStore({
   id: 'trip',
@@ -39,7 +40,7 @@ export const useTripStore = defineStore({
         ? DateTime.fromISO(date).endOf('day').toISO()
         : undefined;
 
-      date = date ?? DateTime.local().toLocal().toISO();
+      date = date ?? actualDate();
 
       const extraSortsObject: Record<string, string> = {};
       for (const extraSort of this.extraSorts) {
@@ -77,7 +78,7 @@ export const useTripStore = defineStore({
           params: {
             itemsPerPage: 8,
             'order[created_at]': 'desc',
-            'departure_time[after]': DateTime.local().toLocal().toISO(),
+            'departure_time[after]': actualDate(),
           },
         })
         .then((res) => {

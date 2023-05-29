@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { localeLang } from '@/support/i18n';
 
 /**
- * Return the date formatted
+ * Return the date formatted (format: EEEE dd MMMM yyyy HH:mm)
  * @param date
  */
 export const dateFormated = (date: string): string => {
@@ -31,7 +31,7 @@ export const dateFormated = (date: string): string => {
 };
 
 /**
- * Return the date formatted in short format
+ * Return the date formatted in short format (format: EEEE dd MMMM)
  * @param date
  */
 export const dateFormatedShort = (date: string): string => {
@@ -41,7 +41,7 @@ export const dateFormatedShort = (date: string): string => {
 };
 
 /**
- * Return the date formatted with only hours
+ * Return the date formatted with only hours (format: HH:mm)
  * @param date
  */
 export const dateFormatedOnlyHours = (date: string): string => {
