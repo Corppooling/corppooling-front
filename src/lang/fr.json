@@ -2,6 +2,30 @@
   "global": {
     "appName": "Corppooling"
   },
+  "errors": {
+    "404": {
+      "title": "Oops...",
+      "subtitle": "Cette page n'existe pas !"
+    },
+    "401": {
+      "title": "Et non !",
+      "subtitle": "Vous n’avez pas",
+      "ban": "l’autorisation d’accéder à cette page."
+    },
+    "403": {
+      "title": "Et non !",
+      "subtitle": "L'accès à cette page",
+      "ban": "vous est interdit."
+    },
+    "500": {
+      "title": "Nous revenons",
+      "subtitle": "Une erreur temporaire est survenue.",
+      "description": "Nos équipes sont déjà mobilisées pour résoudre le problème : réessayez d’accéder à cette page dans quelques minutes !"
+    },
+    "links": {
+      "home": "Revenir à l'accueil"
+    }
+  },
   "auth": {
     "login": "Connexion",
     "password": "Mot de passe",

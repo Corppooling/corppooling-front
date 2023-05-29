@@ -65,7 +65,10 @@ const fullName = computed<string>(
       </div>
     </div>
   </div>
-  <div v-else class="flex h-[calc(100vh-13rem)] items-center justify-center">
+  <div
+    v-else
+    class="flex h-[calc(100vh-14.1rem)] items-center justify-center md:h-[calc(100vh-12.9rem)]"
+  >
     <Spinner :size="8" color="content-base" />
   </div>
 </template>

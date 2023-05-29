@@ -2,6 +2,30 @@
   "global": {
     "appName": "Corppooling"
   },
+  "errors": {
+    "404": {
+      "title": "Oops...",
+      "subtitle": "This page does not exist"
+    },
+    "401": {
+      "title": "Sorry...",
+      "subtitle": "You do not have",
+      "ban": "rights to access this page."
+    },
+    "403": {
+      "title": "Sorry...",
+      "subtitle": "Access to this page is",
+      "ban": "restricted."
+    },
+    "500": {
+      "title": "Will be back soon !",
+      "subtitle": "An temporary error occurred on our side.",
+      "description": "Our teams are already mobilized to solve the problem: try to access this page again in a few minutes!"
+    },
+    "links": {
+      "home": "Go home"
+    }
+  },
   "auth": {
     "login": "Login",
     "password": "Password",
