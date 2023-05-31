@@ -3,7 +3,7 @@ import { type Trip, TripType } from '@/interfaces/trip.interface';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Button from '@/components/molecules/Button.vue';
 import { dateFormated } from '@/support/luxon';
-import { bgTypeColor } from '@/composables/typeColor';
+import { bgTypeColor } from '@/support/typeColor';
 import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
 import { i18nGlobal } from '@/support/i18n';
 
