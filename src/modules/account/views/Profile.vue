@@ -14,7 +14,6 @@ import { useLangTranslation } from '@/composables/langTranslation';
 import { dateFormated } from '@/support/luxon';
 
 const userStore = useUserStore();
-await userStore.setUser();
 const loading = ref<boolean>(false);
 const toast = useToast();
 const { lang, langOptions } = useLangTranslation();
@@ -155,7 +154,7 @@ const onSubmit = async (): Promise<void> => {
     </div>
     <div class="mx-auto w-full pt-8 md:p-4 xl:w-96">
       <h3 class="mb-1 text-2xl">{{ $t('account.myProfile.updatePassword') }}</h3>
-      <div v-if="userStore.user" class="mb-8 flex flex-wrap justify-between text-sm">
+      <div v-if="userStore.user?.updated_at" class="mb-8 flex flex-wrap justify-between text-sm">
         <span>{{ $t('account.myProfile.lastUpdate') }}:</span>
         <span>{{ dateFormated(userStore.user?.updated_at) }}</span>
       </div>

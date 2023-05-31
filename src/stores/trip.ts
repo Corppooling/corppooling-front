@@ -62,7 +62,7 @@ export const useTripStore = defineStore({
             'departure_time[before]': endOfDay,
             'company.id':
               userStore.user?.company?.cluster !== null ? undefined : userStore.user?.company?.id,
-            'cluster.company.id': userStore.user?.company?.cluster?.id ?? undefined,
+            'company.cluster.id': userStore.user?.company?.cluster?.id ?? undefined,
             ...extraSortsObject,
           },
         })
@@ -89,7 +89,7 @@ export const useTripStore = defineStore({
             'departure_time[after]': actualDate(),
             'company.id':
               userStore.user?.company?.cluster !== null ? undefined : userStore.user?.company?.id,
-            'cluster.company.id': userStore.user?.company?.cluster?.id ?? undefined,
+            'company.cluster.id': userStore.user?.company?.cluster?.id ?? undefined,
           },
         })
         .then((res) => {

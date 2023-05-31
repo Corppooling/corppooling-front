@@ -38,7 +38,7 @@ const emit = defineEmits<{
       </div>
       <div class="ml-4 hidden flex-col items-center justify-center sm:flex">
         <ProfileImage class="mb-2" :trip="props.trip" />
-        <div class="flex text-center">
+        <div v-if="props.trip.announcer" class="flex text-center">
           <span>
             {{ props.trip.announcer.firstname }}
             {{ props.trip.announcer.lastname }}
