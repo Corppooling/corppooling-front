@@ -7,6 +7,8 @@ import PrimeInput from '@/components/atoms/PrimeInput.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
+import StatusCode from 'status-code-enum';
+import type { AxiosError } from 'axios';
 
 const { t } = i18nGlobal;
 const authStore = useAuthStore();
@@ -18,7 +20,13 @@ const loading = ref<boolean>(false);
 const onSubmit = async () => {
   if (!!email.value.trim() && !!password.value.trim()) {
     loading.value = true;
-    await authStore.login(email.value, password.value);
+    await authStore.login(email.value, password.value).catch((err: AxiosError) => {
+      if (err.response?.status === StatusCode.ClientErrorUnauthorized) {
+        toast.error(undefined, t('auth.badCredentials'));
+      } else {
+        toast.error();
+      }
+    });
     loading.value = false;
   } else {
     toast.warning(t('form.empties'));

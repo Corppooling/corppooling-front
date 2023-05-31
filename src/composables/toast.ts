@@ -1,6 +1,6 @@
 import { ToastSeverity } from 'primevue/api';
-import app from '@/main';
 import { i18nGlobal } from '@/support/i18n';
+import { getCurrentInstance } from 'vue';
 
 const { t } = i18nGlobal;
 const lifeTime = 3500;
@@ -9,12 +9,15 @@ const lifeTime = 3500;
  * Composable to use PrimeVue Toast
  */
 export const useToast = () => {
+  const app = getCurrentInstance()?.appContext.app;
   /**
    * Add a toast with info severity
    * @param title
    * @param body
    */
   const info = (title?: string, body?: string): void => {
+    if (!app) return;
+
     app.config.globalProperties.$toast.add({
       severity: ToastSeverity.INFO,
       summary: title ?? t('toast.info'),
@@ -29,6 +32,8 @@ export const useToast = () => {
    * @param body
    */
   const success = (title?: string, body?: string): void => {
+    if (!app) return;
+
     app.config.globalProperties.$toast.add({
       severity: ToastSeverity.SUCCESS,
       summary: title ?? t('toast.success'),
@@ -43,6 +48,8 @@ export const useToast = () => {
    * @param body
    */
   const warning = (title?: string, body?: string): void => {
+    if (!app) return;
+
     app.config.globalProperties.$toast.add({
       severity: ToastSeverity.WARN,
       summary: title ?? t('toast.warning'),
@@ -57,6 +64,8 @@ export const useToast = () => {
    * @param body
    */
   const error = (title?: string, body?: string): void => {
+    if (!app) return;
+
     app.config.globalProperties.$toast.add({
       severity: ToastSeverity.ERROR,
       summary: title ?? t('toast.error'),
