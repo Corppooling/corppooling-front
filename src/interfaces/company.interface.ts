@@ -8,7 +8,7 @@ export interface Company {
   siren: string;
   logo: string;
   auth_code: string;
-  cluster?: Cluster;
+  cluster: Cluster | null;
   updated_at: string;
   created_at: string;
   users: User[];
