@@ -15,25 +15,28 @@ const company = ref<Company | undefined>(userStore.user?.company);
       </div>
       <div>
         <h3 class="mb-4 text-7xl">{{ company.name }}</h3>
-        <span>
-          <b>Siren :</b>
-          {{ company.siren }}
-        </span>
+        <div class="flex flex-col">
+          <span>
+            <b>Siren :</b>
+            {{ company.siren }}
+          </span>
+          <span v-if="company.cluster">
+            <b>Groupe d'entreprise:</b>
+            <br />
+            {{ company.cluster?.name }}
+          </span>
+        </div>
       </div>
     </div>
-    <template v-if="company.cluster">
-      <h3 class="my-8 text-2xl">Regroupement d'entreprises</h3>
-      <div></div>
-    </template>
     <h3 class="my-8 text-2xl">Statistiques</h3>
     <div class="flex w-full flex-col text-lg md:pl-4">
       <div class="flex justify-between py-2">
         <span>Nombre d'utilisateurs actifs:</span>
-        <span class="ml-4 font-bold">{{ company.users.length }}</span>
+        <span class="ml-4 font-bold">{{ company.users?.length }}</span>
       </div>
       <div class="flex justify-between py-2">
         <span>Nombre de trajets créés:</span>
-        <span class="ml-4 font-bold">{{ company.trips.length }}</span>
+        <span class="ml-4 font-bold">{{ company.trips?.length }}</span>
       </div>
     </div>
   </div>
