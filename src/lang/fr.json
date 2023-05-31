@@ -182,6 +182,13 @@
       "noUpcoming": "Aucun trajet réservé pour le moment",
       "archived": "Trajets réservés archivés",
       "noArchived": "Vous n'avez encore aucun trajet réservé archivé"
+    },
+    "myCompany": {
+      "siren": "SIREN",
+      "cluster": "Groupe d'entreprises",
+      "stats": "Statistiques",
+      "activeUsers": "Nombre d'utilisateurs actifs",
+      "tripsCreated": "Nombre de trajets créés"
     }
   }
 }

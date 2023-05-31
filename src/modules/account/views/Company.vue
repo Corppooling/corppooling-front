@@ -17,25 +17,25 @@ const company = ref<Company | undefined>(userStore.user?.company);
         <h3 class="mb-4 text-7xl">{{ company.name }}</h3>
         <div class="flex flex-col">
           <span>
-            <b>Siren :</b>
+            <b>{{ $t('account.myCompany.siren') }}:</b>
             {{ company.siren }}
           </span>
           <span v-if="company.cluster">
-            <b>Groupe d'entreprise:</b>
+            <b>{{ $t('account.myCompany.cluster') }}:</b>
             <br />
             {{ company.cluster?.name }}
           </span>
         </div>
       </div>
     </div>
-    <h3 class="my-8 text-2xl">Statistiques</h3>
+    <h3 class="my-8 text-2xl">{{ $t('account.myCompany.stats') }}</h3>
     <div class="flex w-full flex-col text-lg md:pl-4">
       <div class="flex justify-between py-2">
-        <span>Nombre d'utilisateurs actifs:</span>
+        <span>{{ $t('account.myCompany.cluster') }}:</span>
         <span class="ml-4 font-bold">{{ company.users?.length }}</span>
       </div>
       <div class="flex justify-between py-2">
-        <span>Nombre de trajets créés:</span>
+        <span>{{ $t('account.myCompany.tripsCreated') }}:</span>
         <span class="ml-4 font-bold">{{ company.trips?.length }}</span>
       </div>
     </div>

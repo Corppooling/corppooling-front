@@ -182,6 +182,13 @@
       "noUpcoming": "You have no upcoming bookings",
       "archived": "Archived bookings",
       "noArchived": "You have no archived bookings"
+    },
+    "myCompany": {
+      "siren": "SIREN",
+      "cluster": "Company cluster",
+      "stats": "Statistics",
+      "activeUsers": "Number of active users",
+      "tripsCreated": "Number of trips created"
     }
   }
 }
