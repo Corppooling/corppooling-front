@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Button from '@/components/molecules/Button.vue';
 import { dateFormated } from '@/support/luxon';
 import ProfileImage from '@/modules/trips/components/atoms/ProfileImage.vue';
-import { bgTypeColor } from '@/composables/typeColor';
+import { bgTypeColor } from '@/support/typeColor';
 import { i18nGlobal } from '@/support/i18n';
 
 const { t } = i18nGlobal;

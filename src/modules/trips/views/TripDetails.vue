@@ -8,7 +8,7 @@ import { dateFormatedOnlyHours, dateFormatedShort } from '@/support/luxon';
 import { useWindowSize } from '@vueuse/core';
 import Button from '@/components/molecules/Button.vue';
 import { formatPrice } from '@/support/format';
-import { bgTypeColor } from '@/composables/typeColor';
+import { bgTypeColor } from '@/support/typeColor';
 import Spinner from '@/components/atoms/Spinner.vue';
 import { useUserStore } from '@/stores/user';
 import { useConfirm } from 'primevue/useconfirm';

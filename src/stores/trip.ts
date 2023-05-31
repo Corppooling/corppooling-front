@@ -3,6 +3,7 @@ import axiosClient from '@/support/axiosClient';
 import type { Trip } from '@/interfaces/trip.interface';
 import { DateTime } from 'luxon';
 import { actualDate } from '@/support/luxon';
+import { useUserStore } from '@/stores/user';
 
 export const useTripStore = defineStore({
   id: 'trip',
@@ -48,6 +49,8 @@ export const useTripStore = defineStore({
         extraSortsObject[key] = value;
       }
 
+      const userStore = useUserStore();
+
       await axiosClient
         .get('api/trips', {
           params: {
@@ -57,6 +60,9 @@ export const useTripStore = defineStore({
             arrival_location: arrival,
             'departure_time[after]': date,
             'departure_time[before]': endOfDay,
+            'company.id':
+              userStore.user?.company?.cluster !== null ? undefined : userStore.user?.company?.id,
+            'company.cluster.id': userStore.user?.company?.cluster?.id ?? undefined,
             ...extraSortsObject,
           },
         })
@@ -73,12 +79,17 @@ export const useTripStore = defineStore({
       this.loading = false;
     },
     async setLatestTrips() {
+      const userStore = useUserStore();
+
       await axiosClient
         .get('api/trips', {
           params: {
             itemsPerPage: 8,
             'order[created_at]': 'desc',
             'departure_time[after]': actualDate(),
+            'company.id':
+              userStore.user?.company?.cluster !== null ? undefined : userStore.user?.company?.id,
+            'company.cluster.id': userStore.user?.company?.cluster?.id ?? undefined,
           },
         })
         .then((res) => {

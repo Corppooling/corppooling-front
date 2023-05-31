@@ -1,12 +1,8 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { dateFormated, dateFormatedOnlyHours, dateFormatedShort } from '@/support/luxon';
 
 describe('luxon', () => {
   beforeEach(() => {
-    localStorage.clear();
-  });
-
-  afterEach(() => {
     localStorage.clear();
   });
 

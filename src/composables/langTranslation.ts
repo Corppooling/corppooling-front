@@ -11,12 +11,17 @@ export const useLangTranslation = () => {
     EN = 'en',
   }
 
+  interface LangOption {
+    name: string;
+    value: Lang;
+  }
+
   const lang = ref<Lang.FR | Lang.EN>((localStorage.getItem('lang') as Lang) ?? Lang.FR);
 
-  const langOptions = [
+  const langOptions: Array<LangOption> = [
     { name: 'Français', value: Lang.FR },
     { name: 'English', value: Lang.EN },
-  ] as Array<Record<string, string>>;
+  ];
 
   watch(
     lang,
