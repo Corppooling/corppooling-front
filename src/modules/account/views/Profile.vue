@@ -19,13 +19,13 @@ const toast = useToast();
 const { lang, langOptions } = useLangTranslation();
 const { t } = i18nGlobal;
 
-interface FormDataI {
+interface FormDataDTO {
   currentPassword?: string;
   newPassword?: string;
   newPasswordConfirmation?: string;
 }
 
-const formData = reactive<FormDataI>({
+const formData = reactive<FormDataDTO>({
   currentPassword: undefined,
   newPassword: undefined,
   newPasswordConfirmation: undefined,

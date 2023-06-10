@@ -10,8 +10,8 @@ const company = ref<Company | undefined>(userStore.user?.company);
 <template>
   <div v-if="company" class="w-full xl:w-96">
     <div class="flex">
-      <div>
-        <h3 class="mb-4 text-7xl">{{ company.name }}</h3>
+      <div class="w-full">
+        <h3 class="mb-4 text-5xl">{{ company.name }}</h3>
         <div class="flex flex-col">
           <span>
             <b>{{ $t('account.myCompany.siren') }}:</b>
@@ -24,7 +24,7 @@ const company = ref<Company | undefined>(userStore.user?.company);
           </span>
         </div>
       </div>
-      <div class="flex w-40 items-center pl-8">
+      <div class="flex w-full items-center pl-8">
         <img class="object-contain" :src="company.logo" alt="company logo" />
       </div>
     </div>

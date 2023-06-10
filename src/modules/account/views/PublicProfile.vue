@@ -14,9 +14,14 @@ const publicUser = ref<User>();
 
 onMounted(async () => {
   isLoading.value = true;
-  await axiosClient.get(`/api/users/${router.currentRoute.value.params.id}`).then((res) => {
-    publicUser.value = res.data;
-  });
+  await axiosClient
+    .get(`/api/users/${router.currentRoute.value.params.id}`)
+    .then((res) => {
+      publicUser.value = res.data;
+    })
+    .catch((res) => {
+      router.push({ name: 'error', params: { code: res.response.status } });
+    });
   isLoading.value = false;
 });
 
