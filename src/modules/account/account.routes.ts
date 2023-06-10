@@ -31,6 +31,11 @@ export const accountRoutes: Array<RouteRecordRaw> = [
         name: 'account.company',
         component: () => import('@/modules/account/views/Company.vue'),
       },
+      {
+        path: 'management',
+        name: 'account.management',
+        component: () => import('@/modules/account/views/Management.vue'),
+      },
     ],
   },
   {
