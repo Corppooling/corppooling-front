@@ -24,7 +24,7 @@ const company = ref<Company | undefined>(userStore.user?.company);
           </span>
         </div>
       </div>
-      <div class="flex w-40 items-center pl-8 mix-blend-color-burn">
+      <div class="flex w-40 items-center pl-8">
         <img class="object-contain" :src="company.logo" alt="company logo" />
       </div>
     </div>
