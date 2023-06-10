@@ -190,6 +190,12 @@
       "stats": "Statistics",
       "activeUsers": "Number of active users",
       "tripsCreated": "Number of trips created"
+    },
+    "myManagement": {
+      "company": "Company",
+      "departments": "Departments",
+      "trips": "Trips",
+      "users": "Users"
     }
   }
 }

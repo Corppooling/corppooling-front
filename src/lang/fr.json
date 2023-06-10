@@ -190,6 +190,12 @@
       "stats": "Statistiques",
       "activeUsers": "Nombre d'utilisateurs actifs",
       "tripsCreated": "Nombre de trajets créés"
+    },
+    "myManagement": {
+      "company": "Entreprise",
+      "departments": "Pôles",
+      "trips": "Trajets",
+      "users": "Utilisateurs"
     }
   }
 }
