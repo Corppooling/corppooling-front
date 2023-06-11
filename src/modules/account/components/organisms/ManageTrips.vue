@@ -12,10 +12,12 @@ import axiosClient from '@/support/axiosClient';
 import { useConfirm } from 'primevue/useconfirm';
 import { i18nGlobal } from '@/support/i18n';
 import { useToast } from '@/composables/toast';
+import { useUserStore } from '@/stores/user';
 
 const router = useRouter();
 const confirm = useConfirm();
 const toast = useToast();
+const userStore = useUserStore();
 const { t } = i18nGlobal;
 
 const props = defineProps<{
@@ -52,6 +54,7 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
         .delete(`/api/trips/${tripId}`)
         .then(() => {
           sortedTrips.value = sortedTrips.value.filter((t) => t.id !== tripId);
+          userStore.setUser(true);
           toast.info(t('account.myTrips.deleteSuccess'));
         })
         .catch(() => {
@@ -82,7 +85,10 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
           <div class="m-2">
             <span class="flex items-center">
               <i class="pi pi-search" />
-              <InputText v-model="filters['global'].value" placeholder="Rechercher" />
+              <InputText
+                v-model="filters['global'].value"
+                :placeholder="$t('account.myManagement.search')"
+              />
             </span>
           </div>
         </div>
@@ -90,34 +96,44 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
       <template #empty>
         <div class="text-center">
           <font-awesome-icon class="mr-2" :icon="['fas', 'frown']" />
-          <span>Aucun trajet ne correspond à votre recherche</span>
+          <span>{{ $t('account.myManagement.manageTrips.noResults') }}</span>
         </div>
       </template>
       <Column field="id" header="ID" sortable />
-      <Column field="type" header="Type" :sortable="true">
+      <Column field="type" :header="t('account.myManagement.manageTrips.type')" :sortable="true">
         <template #body="{ data }">
           <span
             class="rounded p-1"
             :class="bgTypeColor(data?.type)"
-            v-html="data?.type === TripType.DRIVER ? 'Conducteur' : 'Passager'"
+            v-html="
+              data?.type === TripType.DRIVER ? t('trip.filter.driver') : t('trip.filter.passenger')
+            "
           />
         </template>
       </Column>
-      <Column field="departure_location" header="Départ" sortable />
-      <Column field="arrival_location" header="Arrivée" sortable />
-      <Column field="departure_time" header="Date de départ" sortable>
+      <Column field="departure_location" :header="t('trip.filter.departure')" sortable />
+      <Column field="arrival_location" :header="t('trip.filter.arrival')" sortable />
+      <Column
+        field="departure_time"
+        :header="t('account.myManagement.manageTrips.departureTime')"
+        sortable
+      >
         <template #body="{ data }">
           <span :class="{ 'text-error-base': tripIsPassed(data?.departure_time) }">
             {{ dateFormated(data?.departure_time) }}
           </span>
         </template>
       </Column>
-      <Column field="members" header="Nombre de participants" sortable>
+      <Column
+        field="members"
+        :header="t('account.myManagement.manageTrips.membersNumber')"
+        sortable
+      >
         <template #body="{ data }">
           <span>{{ data?.members.length }}</span>
         </template>
       </Column>
-      <Column field="actions" header="Actions">
+      <Column field="actions" :header="t('account.myManagement.manageTrips.actions')">
         <template #body="{ data }">
           <FontAwesomeIcon
             icon="trash-can"

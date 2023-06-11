@@ -195,7 +195,15 @@
       "company": "Entreprise",
       "departments": "Pôles",
       "trips": "Trajets",
-      "users": "Utilisateurs"
+      "users": "Utilisateurs",
+      "search": "Rechercher",
+      "manageTrips": {
+        "noResults": "Aucun trajet ne correspond à votre recherche",
+        "type": "Type",
+        "departureTime": "Date de départ",
+        "membersNumber": "Nombre de participants",
+        "actions": "Actions"
+      }
     }
   }
 }

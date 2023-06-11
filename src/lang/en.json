@@ -195,7 +195,15 @@
       "company": "Company",
       "departments": "Departments",
       "trips": "Trips",
-      "users": "Users"
+      "users": "Users",
+      "search": "Search",
+      "manageTrips": {
+        "noResults": "No results",
+        "type": "Type",
+        "departureTime": "Departure time",
+        "membersNumber": "Number of members",
+        "actions": "Actions"
+      }
     }
   }
 }
