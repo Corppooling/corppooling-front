@@ -9,6 +9,7 @@ import { useUserStore } from '@/stores/user';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Company } from '@/interfaces/company.interface';
+import { useLocalStorage } from '@vueuse/core';
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -19,22 +20,24 @@ onMounted(() => {
     router.push({ name: 'error', params: { code: '403' } });
   }
 });
+
+const activeTab = useLocalStorage('activeTab', 0);
 </script>
 
 <template>
   <div v-if="userStore.isManager && company">
-    <TabView>
+    <TabView v-model:active-index="activeTab">
       <TabPanel :header="$t('account.myManagement.company')">
         <h2 class="mb-7 text-3xl">{{ $t('account.myManagement.company') }}</h2>
         <ManageCompany :company="company" />
       </TabPanel>
       <TabPanel :header="$t('account.myManagement.departments')">
         <h2 class="mb-7 text-3xl">{{ $t('account.myManagement.departments') }}</h2>
-        <ManageDepartments :departments="company.departments" />
+        <ManageDepartments :company="company" />
       </TabPanel>
       <TabPanel :header="$t('account.myManagement.users')">
         <h2 class="mb-7 text-3xl">{{ $t('account.myManagement.users') }}</h2>
-        <ManageUsers :users="company.users" />
+        <ManageUsers :company="company" />
       </TabPanel>
       <TabPanel :header="$t('account.myManagement.trips')">
         <h2 class="mb-7 text-3xl">{{ $t('account.myManagement.trips') }}</h2>
