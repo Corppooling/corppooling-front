@@ -7,7 +7,6 @@ import Column from 'primevue/column';
 import { useRouter } from 'vue-router';
 import { dateFormated } from '@/support/luxon';
 import { bgTypeColor } from '@/support/typeColor';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axiosClient from '@/support/axiosClient';
 import { useConfirm } from 'primevue/useconfirm';
 import { i18nGlobal } from '@/support/i18n';
@@ -95,7 +94,7 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
       </template>
       <template #empty>
         <div class="text-center">
-          <font-awesome-icon class="mr-2" :icon="['fas', 'frown']" />
+          <FontAwesomeIcon class="mr-2" :icon="['fas', 'frown']" />
           <span>{{ $t('account.myManagement.manageTrips.noResults') }}</span>
         </div>
       </template>
