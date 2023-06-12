@@ -7,7 +7,12 @@ const props = defineProps<{
   roles: Role[];
 }>();
 
-const roles = ref([
+interface RoleOption {
+  name: string;
+  code: Role;
+}
+
+const roles = ref<RoleOption[]>([
   {
     name: 'Administrateur',
     code: Role.ADMIN,
