@@ -2,13 +2,14 @@
 import { onMounted, ref } from 'vue';
 import axiosClient from '@/support/axiosClient';
 import { Company } from '@/interfaces/company.interface';
-import { User } from '@/interfaces/user.interface';
+import { Role, User } from '@/interfaces/user.interface';
 import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
 import { useRouter } from 'vue-router';
 import Column from 'primevue/column';
 import RolesMultiSelect from '@/modules/account/components/molecules/RolesMultiSelect.vue';
 import { HttpStatusCode } from 'axios';
+import { useUserStore } from '@/stores/user';
 
 const props = defineProps<{
   company: Company;
@@ -16,6 +17,7 @@ const props = defineProps<{
 
 const users = ref<User[]>([]);
 const router = useRouter();
+const userStore = useUserStore();
 
 const filters = ref({
   global: { value: null, matchMode: 'contains' },
@@ -92,7 +94,16 @@ const redirect = (event: any): void => {
       </Column>
       <Column field="roles" header="Rôles">
         <template #body="{ data }">
-          <RolesMultiSelect :roles="data?.roles" />
+          <RolesMultiSelect
+            v-if="
+              userStore.isAdmin &&
+              userStore.user?.id !== data?.id &&
+              !data?.roles.includes(Role.ADMIN)
+            "
+            :roles="data?.roles"
+            :userId="data?.id"
+          />
+          <RolesMultiSelect v-else :roles="data?.roles" :userId="data?.id" disabled />
         </template>
       </Column>
       <Column field="actions" header="Actions">
