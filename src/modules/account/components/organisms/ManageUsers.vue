@@ -10,6 +10,8 @@ import Column from 'primevue/column';
 import RolesMultiSelect from '@/modules/account/components/molecules/RolesMultiSelect.vue';
 import { HttpStatusCode } from 'axios';
 import { useUserStore } from '@/stores/user';
+import { useConfirm } from 'primevue/useconfirm';
+import { useToast } from '@/composables/toast';
 
 const props = defineProps<{
   company: Company;
@@ -18,12 +20,14 @@ const props = defineProps<{
 const users = ref<User[]>([]);
 const router = useRouter();
 const userStore = useUserStore();
+const confirm = useConfirm();
+const toast = useToast();
 
 const filters = ref({
   global: { value: null, matchMode: 'contains' },
 });
 
-onMounted(async () => {
+const fetchUsers = async (): Promise<void> => {
   await axiosClient
     .get('/api/users', {
       params: {
@@ -36,11 +40,42 @@ onMounted(async () => {
     .catch(() => {
       router.push({ name: 'error', params: { code: HttpStatusCode.InternalServerError } });
     });
+};
+
+onMounted(async () => {
+  await fetchUsers();
 });
 
 // eslint-disable-next-line
 const redirect = (event: any): void => {
   router.push({ name: 'public.profile', params: { id: event.data.id } });
+};
+
+const deleteUser = (userId: number, el: HTMLElement): void => {
+  confirm.require({
+    target: el,
+    header: 'Suppression',
+    message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?',
+    icon: 'pi pi-exclamation-triangle',
+    position: 'top',
+    acceptLabel: 'Oui',
+    rejectLabel: 'Non',
+    accept: async () => {
+      await axiosClient
+        .delete(`/api/users/${userId}`)
+        .then(async () => {
+          await fetchUsers();
+          toast.success('Utilisateur supprimé avec succès');
+        })
+        .catch(() => {
+          toast.error();
+        });
+    },
+  });
+};
+
+const userHasEnoughRights = (user: User): boolean => {
+  return userStore.isAdmin && userStore.user?.id !== user.id && !user.roles.includes(Role.ADMIN);
 };
 </script>
 
@@ -95,11 +130,7 @@ const redirect = (event: any): void => {
       <Column field="roles" header="Rôles">
         <template #body="{ data }">
           <RolesMultiSelect
-            v-if="
-              userStore.isAdmin &&
-              userStore.user?.id !== data?.id &&
-              !data?.roles.includes(Role.ADMIN)
-            "
+            v-if="userHasEnoughRights(data)"
             :roles="data?.roles"
             :userId="data?.id"
           />
@@ -107,8 +138,14 @@ const redirect = (event: any): void => {
         </template>
       </Column>
       <Column field="actions" header="Actions">
-        <template>
-          <FontAwesomeIcon icon="trash-can" class="mx-auto mr-2 text-xl" />
+        <template #body="{ data }">
+          <FontAwesomeIcon
+            v-if="userHasEnoughRights(data)"
+            icon="trash-can"
+            class="mx-auto mr-2 text-xl"
+            @click.stop="deleteUser(data?.id, $event.target)"
+          />
+          <span v-else>Aucune</span>
         </template>
       </Column>
     </DataTable>
