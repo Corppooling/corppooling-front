@@ -35,7 +35,7 @@ const logo = computed((): string => {
     <div class="w-12 sm:w-16">
       <img :src="logo" alt="" />
     </div>
-    <h2 class="ml-2 whitespace-nowrap text-2xl font-light text-content-base sm:text-3xl">
+    <h2 class="ml-2 whitespace-nowrap text-3xl font-light text-content-base">
       {{ props.content }}
     </h2>
   </div>

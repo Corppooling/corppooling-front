@@ -20,59 +20,103 @@ const userStore = useUserStore();
 
 const { t } = i18nGlobal;
 
-const tutorialElements = computed((): Array<Record<string, string>> => {
-  switch (type.value) {
-    case TripType.PASSENGER:
-      return [
-        { image: search_passenger, text: t('home.tutorial.searchPassenger') },
-        { image: talk_passenger, text: t('home.tutorial.talkPassenger') },
-        { image: car_passenger, text: t('home.tutorial.carPassenger') },
-      ];
-    default:
-      return [
-        { image: search_driver, text: t('home.tutorial.searchDriver') },
-        { image: talk_driver, text: t('home.tutorial.talkDriver') },
-        { image: car_driver, text: t('home.tutorial.carDriver') },
-      ];
+const tutorialElements = computed(
+  (): {
+    image: string;
+    text: string;
+  }[] => {
+    switch (type.value) {
+      case TripType.PASSENGER:
+        return [
+          { image: search_passenger, text: t('home.tutorial.searchPassenger') },
+          { image: talk_passenger, text: t('home.tutorial.talkPassenger') },
+          { image: car_passenger, text: t('home.tutorial.carPassenger') },
+        ];
+      default:
+        return [
+          { image: search_driver, text: t('home.tutorial.searchDriver') },
+          { image: talk_driver, text: t('home.tutorial.talkDriver') },
+          { image: car_driver, text: t('home.tutorial.carDriver') },
+        ];
+    }
   }
-});
+);
 </script>
 
 <template>
   <div>
     <HomeHeader />
-    <section class="mx-auto mt-28 max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
-      <template v-if="userStore.isAuth">
+    <div class="mx-auto mt-28 max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
+      <section v-if="userStore.isAuth">
         <LastTripsSlider />
-      </template>
-      <div class="flex flex-wrap items-center justify-between">
-        <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.howTo')" />
-        <TripTypeSwitch :type="type" @update:type="type = $event" />
-      </div>
-      <p class="mt-4 text-lg md:text-xl">
-        <FontAwesomeIcon
-          :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
-          class="mr-2"
-        />
-        {{ type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver') }}
-      </p>
-      <div class="mt-14 flex w-full flex-col justify-evenly md:flex-row">
-        <template v-for="(element, index) in tutorialElements" :key="index">
-          <div class="flex w-full flex-col items-center justify-center md:w-80">
-            <div class="my-auto h-52 max-h-52">
-              <img class="h-full" :src="element.image" alt="" />
-            </div>
-            <div class="my-6 h-24 text-justify md:mb-0">
-              <p>{{ element.text }}</p>
-            </div>
+      </section>
+      <section>
+        <Title class="my-4 sm:my-0" logoColor="base" content="Les nouveautés" />
+        <div class="mb-4 flex flex-col lg:flex-row">
+          <div class="flex w-full items-center justify-center lg:w-1/2">
+            <img
+              class="max-w-[500px]"
+              src="https://cdn.blablacar.com/kairos/assets/images/esc_bbc-aad142670044d99e2f66..svg"
+              alt=""
+            />
           </div>
-          <hr
-            v-if="index < tutorialElements.length - 1"
-            class="mx-auto mb-20 h-1 w-24 rotate-90 rounded-full border-none md:mx-4 md:my-auto md:rotate-0"
-            :class="type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'"
+          <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
+            <h3 class="text-3xl">Recevez jusqu'à 100 € de Prime Covoiturage !</h3>
+            <p class="mt-4 text-lg md:text-xl">
+              Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées !
+              Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col lg:flex-row">
+          <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
+            <h3 class="text-3xl">Doublez votre Prime Covoiturage de 100 € avec Corppooling</h3>
+            <p class="mt-4 text-lg md:text-xl">
+              Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime
+              Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.
+              <br />
+              <small>* Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité.</small>
+            </p>
+          </div>
+          <div class="flex w-full items-center justify-center lg:w-1/2">
+            <img
+              class="max-w-[500px]"
+              src="https://cdn.blablacar.com/kairos/assets/images/esc_daily-561b2a35c4af3060b2d5..svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="flex flex-wrap items-center justify-between">
+          <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.howTo')" />
+          <TripTypeSwitch :type="type" @update:type="type = $event" />
+        </div>
+        <p class="mt-4 text-lg md:text-xl">
+          <FontAwesomeIcon
+            :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
+            class="mr-2"
           />
-        </template>
-      </div>
-    </section>
+          {{ type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver') }}
+        </p>
+        <div class="mt-14 flex w-full flex-col justify-evenly md:flex-row">
+          <template v-for="(element, index) in tutorialElements" :key="index">
+            <div class="flex w-full flex-col items-center justify-center md:w-80">
+              <div class="my-auto h-52 max-h-52">
+                <img class="h-full" :src="element.image" alt="" />
+              </div>
+              <div class="my-6 h-24 text-justify md:mb-0">
+                <p>{{ element.text }}</p>
+              </div>
+            </div>
+            <hr
+              v-if="index < tutorialElements.length - 1"
+              class="mx-auto mb-20 h-1 w-24 rotate-90 rounded-full border-none md:mx-4 md:my-auto md:rotate-0"
+              :class="type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'"
+            />
+          </template>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
