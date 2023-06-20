@@ -32,7 +32,7 @@ const logo = computed((): string => {
 
 <template>
   <div class="flex items-center">
-    <div class="w-12 sm:w-16">
+    <div class="w-12 sm:w-14">
       <img :src="logo" alt="" />
     </div>
     <h2 class="ml-2 whitespace-nowrap text-3xl font-light text-content-base">

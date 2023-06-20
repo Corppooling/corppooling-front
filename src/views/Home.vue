@@ -5,7 +5,6 @@ import HomeHeader from '@/components/molecules/HomeHeader.vue';
 import TripTypeSwitch from '@/modules/trips/components/molecules/TripTypeSwitch.vue';
 import { computed, ref } from 'vue';
 import { TripType } from '@/interfaces/trip.interface';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import search_driver from '@/assets/images/tutorial/search_driver.svg';
 import search_passenger from '@/assets/images/tutorial/search_passenger.svg';
 import talk_driver from '@/assets/images/tutorial/talk_driver.svg';
@@ -14,6 +13,7 @@ import car_driver from '@/assets/images/tutorial/car_driver.svg';
 import car_passenger from '@/assets/images/tutorial/car_passenger.svg';
 import { useUserStore } from '@/stores/user';
 import { i18nGlobal } from '@/support/i18n';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
@@ -46,7 +46,7 @@ const tutorialElements = computed(
 <template>
   <div>
     <HomeHeader />
-    <div class="mx-auto mt-28 max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
+    <div class="mx-auto max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
       <section v-if="userStore.isAuth">
         <LastTripsSlider />
       </section>
@@ -55,14 +55,14 @@ const tutorialElements = computed(
         <div class="mb-4 flex flex-col lg:flex-row">
           <div class="flex w-full items-center justify-center lg:w-1/2">
             <img
-              class="max-w-[500px]"
+              class="max-w-[450px]"
               src="https://cdn.blablacar.com/kairos/assets/images/esc_bbc-aad142670044d99e2f66..svg"
               alt=""
             />
           </div>
           <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
             <h3 class="text-3xl">Recevez jusqu'à 100 € de Prime Covoiturage !</h3>
-            <p class="mt-4 text-lg md:text-xl">
+            <p class="mt-4 text-lg">
               Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées !
               Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.
             </p>
@@ -71,7 +71,7 @@ const tutorialElements = computed(
         <div class="mb-4 flex flex-col lg:flex-row">
           <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
             <h3 class="text-3xl">Doublez votre Prime Covoiturage de 100 € avec Corppooling</h3>
-            <p class="mt-4 text-lg md:text-xl">
+            <p class="mt-4 text-lg">
               Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime
               Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.
               <br />
@@ -80,10 +80,48 @@ const tutorialElements = computed(
           </div>
           <div class="flex w-full items-center justify-center lg:w-1/2">
             <img
-              class="max-w-[500px]"
+              class="max-w-[450px]"
               src="https://cdn.blablacar.com/kairos/assets/images/esc_daily-561b2a35c4af3060b2d5..svg"
               alt=""
             />
+          </div>
+        </div>
+      </section>
+      <section>
+        <Title class="my-4 sm:my-0" logoColor="base" content="Les + Corppooling" />
+        <div class="flex flex-wrap mt-3 mb-10">
+          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
+            <div class="flex mt-4 items-center">
+              <FontAwesomeIcon icon="fa-euro-sign" class="text-2xl mr-3 text-main-base" />
+              <span class="text-lg font-bold">Vos trajets préférés à petits prix</span>
+            </div>
+            <p class="mt-4 text-lg text-justify">
+              Où que vous alliez, en bus ou en covoiturage, trouvez le trajet idéal parmi notre
+              large choix de destinations à petits prix.
+            </p>
+          </div>
+          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
+            <div class="flex mt-4 items-center">
+              <FontAwesomeIcon icon="fa-handshake" class="text-2xl mr-3 text-main-base" />
+              <span class="text-lg font-bold">Voyagez en toute confiance</span>
+            </div>
+            <p class="mt-4 text-lg text-justify">
+              Nous prenons le temps qu’il faut pour connaître nos membres et nos compagnies de bus
+              partenaires. Nous vérifions les avis, les profils et les pièces d’identité. Vous savez
+              donc avec qui vous allez voyager pour réserver en toute confiance sur notre plateforme
+              sécurisée.
+            </p>
+          </div>
+          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
+            <div class="flex mt-4 items-center">
+              <FontAwesomeIcon icon="fa-rocket" class="text-2xl mr-3 text-main-base" />
+              <span class="text-lg font-bold">Recherchez, cliquez et réservez !</span>
+            </div>
+            <p class="mt-4 text-lg text-justify">
+              Réserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de
+              technologies avancées, notre appli vous permet de réserver un trajet à proximité en un
+              rien de temps.
+            </p>
           </div>
         </div>
       </section>
@@ -106,7 +144,7 @@ const tutorialElements = computed(
                 <img class="h-full" :src="element.image" alt="" />
               </div>
               <div class="my-6 h-24 text-justify md:mb-0">
-                <p>{{ element.text }}</p>
+                <p class="text-lg">{{ element.text }}</p>
               </div>
             </div>
             <hr
