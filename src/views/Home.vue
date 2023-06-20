@@ -50,39 +50,98 @@ const tutorialElements = computed(
         <LastTripsSlider />
       </section>
       <section>
-        <Title class="my-4 sm:my-0" logoColor="base" content="Les nouveautés" />
-        <div class="mb-4 flex flex-col lg:flex-row">
-          <div class="flex w-full items-center justify-center lg:w-1/2">
-            <img
-              class="max-w-[450px]"
-              src="https://cdn.blablacar.com/kairos/assets/images/esc_bbc-aad142670044d99e2f66..svg"
-              alt=""
-            />
+        <div class="mb-10">
+          <Title class="my-4 sm:my-0" logoColor="base" content="Les nouveautés" />
+          <div class="mb-4 flex flex-col lg:flex-row">
+            <div class="flex w-full items-center justify-center lg:w-1/2">
+              <img
+                class="max-w-[450px]"
+                src="https://cdn.blablacar.com/kairos/assets/images/esc_bbc-aad142670044d99e2f66..svg"
+                alt=""
+              />
+            </div>
+            <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
+              <h3 class="text-3xl">Recevez jusqu'à 100 € de Prime Covoiturage !</h3>
+              <p class="mt-4 text-lg">
+                Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées !
+                Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.
+              </p>
+            </div>
           </div>
-          <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
-            <h3 class="text-3xl">Recevez jusqu'à 100 € de Prime Covoiturage !</h3>
-            <p class="mt-4 text-lg">
-              Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées !
-              Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.
-            </p>
+          <div class="mb-4 flex flex-col lg:flex-row">
+            <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
+              <h3 class="text-3xl">Doublez votre Prime Covoiturage de 100 € avec Corppooling</h3>
+              <p class="mt-4 text-lg">
+                Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime
+                Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.
+                <br />
+                <small>* Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité.</small>
+              </p>
+            </div>
+            <div class="flex w-full items-center justify-center lg:w-1/2">
+              <img
+                class="max-w-[450px]"
+                src="https://cdn.blablacar.com/kairos/assets/images/esc_daily-561b2a35c4af3060b2d5..svg"
+                alt=""
+              />
+            </div>
           </div>
         </div>
-        <div class="mb-4 flex flex-col lg:flex-row">
-          <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
-            <h3 class="text-3xl">Doublez votre Prime Covoiturage de 100 € avec Corppooling</h3>
-            <p class="mt-4 text-lg">
-              Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime
-              Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.
-              <br />
-              <small>* Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité.</small>
-            </p>
+      </section>
+      <section>
+        <div class="mb-16">
+          <div class="flex flex-wrap items-center justify-between">
+            <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.howTo')" />
+            <TripTypeSwitch :type="type" @update:type="type = $event" />
           </div>
-          <div class="flex w-full items-center justify-center lg:w-1/2">
-            <img
-              class="max-w-[450px]"
-              src="https://cdn.blablacar.com/kairos/assets/images/esc_daily-561b2a35c4af3060b2d5..svg"
-              alt=""
+          <p class="mt-4 text-lg md:text-xl">
+            <FontAwesomeIcon
+              :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
+              class="mr-2"
             />
+            {{ type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver') }}
+          </p>
+          <div class="mt-14 flex w-full flex-col justify-evenly md:flex-row">
+            <template v-for="(element, index) in tutorialElements" :key="index">
+              <div class="flex w-full flex-col items-center justify-center md:w-80">
+                <div class="my-auto h-52 max-h-52">
+                  <img class="h-full" :src="element.image" alt="" />
+                </div>
+                <div class="my-6 h-24 text-justify md:mb-0">
+                  <p class="text-lg">{{ element.text }}</p>
+                </div>
+              </div>
+              <hr
+                v-if="index < tutorialElements.length - 1"
+                class="mx-auto mb-20 h-1 w-24 rotate-90 rounded-full border-none md:mx-4 md:my-auto md:rotate-0"
+                :class="type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'"
+              />
+            </template>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="mb-16 rounded-2xl bg-main-base p-4">
+          <Title
+            class="my-4 sm:my-0"
+            logoColor="content"
+            content="Les trajets les plus populaires"
+          />
+          <div class="flex flex-wrap justify-around gap-4 p-8">
+            <div
+              v-for="i in 4"
+              :key="i"
+              class="flex cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md"
+            >
+              <div class="flex items-center text-lg">
+                <span>Marseille</span>
+                <FontAwesomeIcon icon="fa-arrow-right" class="mx-2" />
+                <span>Paris</span>
+              </div>
+              <div class="ml-8 flex items-center justify-center">
+                <FontAwesomeIcon icon="fa-angle-right" class="mx-2" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -122,36 +181,6 @@ const tutorialElements = computed(
               rien de temps.
             </p>
           </div>
-        </div>
-      </section>
-      <section>
-        <div class="flex flex-wrap items-center justify-between">
-          <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.howTo')" />
-          <TripTypeSwitch :type="type" @update:type="type = $event" />
-        </div>
-        <p class="mt-4 text-lg md:text-xl">
-          <FontAwesomeIcon
-            :icon="type === TripType.DRIVER ? 'fa-car' : 'fa-thumbs-up'"
-            class="mr-2"
-          />
-          {{ type === TripType.DRIVER ? $t('trip.searchPassengers') : $t('trip.searchDriver') }}
-        </p>
-        <div class="mt-14 flex w-full flex-col justify-evenly md:flex-row">
-          <template v-for="(element, index) in tutorialElements" :key="index">
-            <div class="flex w-full flex-col items-center justify-center md:w-80">
-              <div class="my-auto h-52 max-h-52">
-                <img class="h-full" :src="element.image" alt="" />
-              </div>
-              <div class="my-6 h-24 text-justify md:mb-0">
-                <p class="text-lg">{{ element.text }}</p>
-              </div>
-            </div>
-            <hr
-              v-if="index < tutorialElements.length - 1"
-              class="mx-auto mb-20 h-1 w-24 rotate-90 rounded-full border-none md:mx-4 md:my-auto md:rotate-0"
-              :class="type === TripType.DRIVER ? 'bg-main-base' : 'bg-content-glight'"
-            />
-          </template>
         </div>
       </section>
     </div>
