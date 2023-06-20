@@ -13,7 +13,6 @@ import car_driver from '@/assets/images/tutorial/car_driver.svg';
 import car_passenger from '@/assets/images/tutorial/car_passenger.svg';
 import { useUserStore } from '@/stores/user';
 import { i18nGlobal } from '@/support/i18n';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
@@ -89,35 +88,35 @@ const tutorialElements = computed(
       </section>
       <section>
         <Title class="my-4 sm:my-0" logoColor="base" content="Les + Corppooling" />
-        <div class="flex flex-wrap mt-3 mb-10">
-          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
-            <div class="flex mt-4 items-center">
-              <FontAwesomeIcon icon="fa-euro-sign" class="text-2xl mr-3 text-main-base" />
+        <div class="mb-10 mt-3 flex flex-wrap">
+          <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
+            <div class="mt-4 flex items-center">
+              <FontAwesomeIcon icon="fa-euro-sign" class="mr-3 text-2xl text-main-base" />
               <span class="text-lg font-bold">Vos trajets préférés à petits prix</span>
             </div>
-            <p class="mt-4 text-lg text-justify">
+            <p class="mt-4 text-justify text-lg">
               Où que vous alliez, en bus ou en covoiturage, trouvez le trajet idéal parmi notre
               large choix de destinations à petits prix.
             </p>
           </div>
-          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
-            <div class="flex mt-4 items-center">
-              <FontAwesomeIcon icon="fa-handshake" class="text-2xl mr-3 text-main-base" />
+          <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
+            <div class="mt-4 flex items-center">
+              <FontAwesomeIcon icon="fa-handshake" class="mr-3 text-2xl text-main-base" />
               <span class="text-lg font-bold">Voyagez en toute confiance</span>
             </div>
-            <p class="mt-4 text-lg text-justify">
+            <p class="mt-4 text-justify text-lg">
               Nous prenons le temps qu’il faut pour connaître nos membres et nos compagnies de bus
               partenaires. Nous vérifions les avis, les profils et les pièces d’identité. Vous savez
               donc avec qui vous allez voyager pour réserver en toute confiance sur notre plateforme
               sécurisée.
             </p>
           </div>
-          <div class="flex flex-col text-left w-full lg:w-1/3 p-3">
-            <div class="flex mt-4 items-center">
-              <FontAwesomeIcon icon="fa-rocket" class="text-2xl mr-3 text-main-base" />
+          <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
+            <div class="mt-4 flex items-center">
+              <FontAwesomeIcon icon="fa-rocket" class="mr-3 text-2xl text-main-base" />
               <span class="text-lg font-bold">Recherchez, cliquez et réservez !</span>
             </div>
-            <p class="mt-4 text-lg text-justify">
+            <p class="mt-4 text-justify text-lg">
               Réserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de
               technologies avancées, notre appli vous permet de réserver un trajet à proximité en un
               rien de temps.
