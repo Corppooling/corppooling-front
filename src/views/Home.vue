@@ -51,39 +51,29 @@ const tutorialElements = computed(
       </section>
       <section>
         <div class="mb-10">
-          <Title class="my-4 sm:my-0" logoColor="base" content="Les nouveautés" />
+          <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.news.title')" />
           <div class="mb-4 flex flex-col lg:flex-row">
             <div class="flex w-full items-center justify-center lg:w-1/2">
-              <img
-                class="max-w-[450px]"
-                src="https://cdn.blablacar.com/kairos/assets/images/esc_bbc-aad142670044d99e2f66..svg"
-                alt=""
-              />
+              <img class="max-w-[450px]" src="@/assets/images/home_news_1.svg" alt="home news 1" />
             </div>
             <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
-              <h3 class="text-3xl">Recevez jusqu'à 100 € de Prime Covoiturage !</h3>
+              <h3 class="text-3xl">{{ $t('home.news.news1Title') }}</h3>
               <p class="mt-4 text-lg">
-                Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées !
-                Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.
+                {{ $t('home.news.news1Desc') }}
               </p>
             </div>
           </div>
           <div class="mb-4 flex flex-col lg:flex-row">
             <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
-              <h3 class="text-3xl">Doublez votre Prime Covoiturage de 100 € avec Corppooling</h3>
+              <h3 class="text-3xl">{{ $t('home.news.news2Title') }}</h3>
               <p class="mt-4 text-lg">
-                Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime
-                Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.
+                {{ $t('home.news.news2Desc') }}
                 <br />
-                <small>* Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité.</small>
+                <small>{{ $t('home.news.news2Asterisk') }}</small>
               </p>
             </div>
             <div class="flex w-full items-center justify-center lg:w-1/2">
-              <img
-                class="max-w-[450px]"
-                src="https://cdn.blablacar.com/kairos/assets/images/esc_daily-561b2a35c4af3060b2d5..svg"
-                alt=""
-              />
+              <img class="max-w-[450px]" src="@/assets/images/home_news_2.svg" alt="home news 2" />
             </div>
           </div>
         </div>

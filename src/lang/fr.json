@@ -63,6 +63,14 @@
       "talkDriver": "Discuter avec le passager pour convenir du prix et du lieu de rendez-vous.",
       "carPassenger": "En route ! Vous pouvez maintenant profiter de votre trajet.",
       "carDriver": "Super ! Vous voyagez à moindre coût, et vous pouvez faire des rencontres."
+    },
+    "news": {
+      "title": "Les dernières actualités",
+      "news1Title": "Recevez jusqu'à 100 € de Prime Covoiturage !",
+      "news1Desc": "Conducteurs, conductrices, bonne nouvelle : vos bonnes habitudes sont récompensées ! Bénéficiez de la Prime Covoiturage en réalisant 3 covoiturages en 3 mois.",
+      "news2Title": "Doublez votre Prime Covoiturage de 100 € avec Corppooling",
+      "news2Desc": "Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.",
+      "news2Asterisk": "*Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité."
     }
   },
   "trip": {

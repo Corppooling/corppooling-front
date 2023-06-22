@@ -63,6 +63,14 @@
       "talkDriver": "Talk to the passenger to agree on the price and meeting point.",
       "carPassenger": "On the road! You can now enjoy your trip.",
       "carDriver": "Great! You're traveling at a lower cost and can make new connections."
+    },
+    "news": {
+      "title": "News",
+      "news1Title": "Receive up to €100 in Carpooling Bonus!",
+      "news1Desc": "Drivers, good news: your good habits are rewarded! Take advantage of the Carpooling Bonus by making 3 carpools in 3 months.",
+      "news2Title": "Double your Carpooling Bonus of €100 with Corppooling",
+      "news2Desc": "Do you hit the road every day? Good news ! Receive a €100 carpooling bonus by carpooling 10 trips in 3 months* with Corppooling.",
+      "news2Asterisk": "*Valid from January 1, 2023 under eligibility conditions."
     }
   },
   "trip": {
