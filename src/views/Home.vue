@@ -88,7 +88,7 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
   <div>
     <HomeHeader />
     <div class="mx-auto max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
-      <section v-if="userStore.isAuth">
+      <section class="mt-32 lg:mt-0" v-if="userStore.isAuth">
         <LastTripsSlider />
       </section>
       <section>
@@ -163,7 +163,7 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
             <div
               v-for="(trip, index) in popularTrips"
               :key="index"
-              class="flex cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md w-72"
+              class="flex w-72 cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md"
               @click="redirectPopularTrip(trip.departureLocation, trip.arrivalLocation)"
             >
               <div class="flex items-center text-lg">
