@@ -163,7 +163,7 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
             <div
               v-for="(trip, index) in popularTrips"
               :key="index"
-              class="flex cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md"
+              class="flex cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md w-72"
               @click="redirectPopularTrip(trip.departureLocation, trip.arrivalLocation)"
             >
               <div class="flex items-center text-lg">
