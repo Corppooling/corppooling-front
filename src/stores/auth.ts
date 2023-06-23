@@ -40,8 +40,8 @@ export const useAuthStore = defineStore({
         });
     },
     async logout(): Promise<void> {
-      this.unsetAllAuthItems();
       await router.push({ name: 'login' });
+      this.unsetAllAuthItems();
     },
     async setAllAuthItems(token: string, refresh_token: string): Promise<void> {
       this.token = token;
