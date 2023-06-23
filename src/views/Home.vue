@@ -13,9 +13,11 @@ import car_driver from '@/assets/images/tutorial/car_driver.svg';
 import car_passenger from '@/assets/images/tutorial/car_passenger.svg';
 import { useUserStore } from '@/stores/user';
 import { i18nGlobal } from '@/support/i18n';
+import { useRouter } from 'vue-router';
 
 const type = ref<TripType>(TripType.DRIVER);
 const userStore = useUserStore();
+const router = useRouter();
 
 const { t } = i18nGlobal;
 
@@ -40,6 +42,46 @@ const tutorialElements = computed(
     }
   }
 );
+
+interface PopularTrip {
+  departureLocation: string;
+  arrivalLocation: string;
+}
+
+const popularTrips: PopularTrip[] = [
+  {
+    departureLocation: 'Marseille',
+    arrivalLocation: 'Lyon',
+  },
+  {
+    departureLocation: 'Bordeaux',
+    arrivalLocation: 'Toulouse',
+  },
+  {
+    departureLocation: 'Rennes',
+    arrivalLocation: 'Nantes',
+  },
+  {
+    departureLocation: 'Paris',
+    arrivalLocation: 'Lille',
+  },
+];
+
+const redirectPopularTrip = (departureLocation: string, arrivalLocation: string): void => {
+  if (userStore.isAuth) {
+    router.push({
+      name: 'trips',
+      query: {
+        departure: departureLocation,
+        arrival: arrivalLocation,
+      },
+    });
+  } else {
+    router.push({
+      name: 'login',
+    });
+  }
+};
 </script>
 
 <template>
@@ -119,14 +161,15 @@ const tutorialElements = computed(
           />
           <div class="flex flex-wrap justify-around gap-4 p-8">
             <div
-              v-for="i in 4"
-              :key="i"
+              v-for="(trip, index) in popularTrips"
+              :key="index"
               class="flex cursor-pointer items-center justify-between rounded-2xl bg-white p-6 transition-all duration-300 ease-in-out hover:drop-shadow-md"
+              @click="redirectPopularTrip(trip.departureLocation, trip.arrivalLocation)"
             >
               <div class="flex items-center text-lg">
-                <span>Marseille</span>
+                <span>{{ trip.departureLocation }}</span>
                 <FontAwesomeIcon icon="fa-arrow-right" class="mx-2" />
-                <span>Paris</span>
+                <span>{{ trip.arrivalLocation }}</span>
               </div>
               <div class="ml-8 flex items-center justify-center">
                 <FontAwesomeIcon icon="fa-angle-right" class="mx-2" />
