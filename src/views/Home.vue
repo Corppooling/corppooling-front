@@ -96,7 +96,11 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
           <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.news.title')" />
           <div class="mb-4 flex flex-col lg:flex-row">
             <div class="flex w-full items-center justify-center lg:w-1/2">
-              <img class="max-w-[450px]" src="@/assets/images/home_news_1.svg" alt="home news 1" />
+              <img
+                class="w-full max-w-[450px]"
+                src="@/assets/images/home_news_1.svg"
+                alt="home news 1"
+              />
             </div>
             <div class="flex w-full flex-col justify-center p-4 lg:w-1/2">
               <h3 class="text-3xl">{{ $t('home.news.news1Title') }}</h3>
@@ -115,7 +119,11 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
               </p>
             </div>
             <div class="flex w-full items-center justify-center lg:w-1/2">
-              <img class="max-w-[450px]" src="@/assets/images/home_news_2.svg" alt="home news 2" />
+              <img
+                class="w-full max-w-[450px]"
+                src="@/assets/images/home_news_2.svg"
+                alt="home news 2"
+              />
             </div>
           </div>
         </div>
@@ -171,7 +179,7 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
                 <FontAwesomeIcon icon="fa-arrow-right" class="mx-2" />
                 <span>{{ trip.arrivalLocation }}</span>
               </div>
-              <div class="ml-8 flex items-center justify-center">
+              <div class="flex items-center justify-center">
                 <FontAwesomeIcon icon="fa-angle-right" class="mx-2" />
               </div>
             </div>
