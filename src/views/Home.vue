@@ -88,7 +88,7 @@ const redirectPopularTrip = (departureLocation: string, arrivalLocation: string)
   <div>
     <HomeHeader />
     <div class="mx-auto max-w-screen-2xl px-6 pt-6 sm:py-8 md:px-12 lg:mt-0">
-      <section class="mt-32 lg:mt-0" v-if="userStore.isAuth">
+      <section v-if="userStore.isAuth" class="mt-32 lg:mt-0">
         <LastTripsSlider />
       </section>
       <section>
