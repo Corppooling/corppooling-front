@@ -115,7 +115,7 @@ const tutorialElements = computed(
           <Title
             class="my-4 sm:my-0"
             logoColor="content"
-            content="Les trajets les plus populaires"
+            :content="$t('home.popularTrips.title')"
           />
           <div class="flex flex-wrap justify-around gap-4 p-8">
             <div
@@ -136,39 +136,33 @@ const tutorialElements = computed(
         </div>
       </section>
       <section>
-        <Title class="my-4 sm:my-0" logoColor="base" content="Les + Corppooling" />
+        <Title class="my-4 sm:my-0" logoColor="base" :content="$t('home.bonusCorppooling.title')" />
         <div class="mb-10 mt-3 flex flex-wrap">
           <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
             <div class="mt-4 flex items-center">
               <FontAwesomeIcon icon="fa-euro-sign" class="mr-3 text-2xl text-main-base" />
-              <span class="text-lg font-bold">Vos trajets préférés à petits prix</span>
+              <span class="text-lg font-bold">{{ $t('home.bonusCorppooling.bonus1Title') }}</span>
             </div>
             <p class="mt-4 text-justify text-lg">
-              Où que vous alliez, en bus ou en covoiturage, trouvez le trajet idéal parmi notre
-              large choix de destinations à petits prix.
+              {{ $t('home.bonusCorppooling.bonus1Desc') }}
             </p>
           </div>
           <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
             <div class="mt-4 flex items-center">
               <FontAwesomeIcon icon="fa-handshake" class="mr-3 text-2xl text-main-base" />
-              <span class="text-lg font-bold">Voyagez en toute confiance</span>
+              <span class="text-lg font-bold">{{ $t('home.bonusCorppooling.bonus2Title') }}</span>
             </div>
             <p class="mt-4 text-justify text-lg">
-              Nous prenons le temps qu’il faut pour connaître nos membres et nos compagnies de bus
-              partenaires. Nous vérifions les avis, les profils et les pièces d’identité. Vous savez
-              donc avec qui vous allez voyager pour réserver en toute confiance sur notre plateforme
-              sécurisée.
+              {{ $t('home.bonusCorppooling.bonus2Desc') }}
             </p>
           </div>
           <div class="flex w-full flex-col p-3 text-left lg:w-1/3">
             <div class="mt-4 flex items-center">
               <FontAwesomeIcon icon="fa-rocket" class="mr-3 text-2xl text-main-base" />
-              <span class="text-lg font-bold">Recherchez, cliquez et réservez !</span>
+              <span class="text-lg font-bold">{{ $t('home.bonusCorppooling.bonus3Title') }}</span>
             </div>
             <p class="mt-4 text-justify text-lg">
-              Réserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de
-              technologies avancées, notre appli vous permet de réserver un trajet à proximité en un
-              rien de temps.
+              {{ $t('home.bonusCorppooling.bonus3Desc') }}
             </p>
           </div>
         </div>

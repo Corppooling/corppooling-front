@@ -51,7 +51,7 @@
   },
   "home": {
     "find": "Trouvez votre trajet",
-    "popularTrips": "Trajets à la une !",
+    "lastTrips": "Trajets à la une !",
     "howTo": "Comment ça marche ?",
     "welcome": "Bienvenue sur Corppooling",
     "description": "L'application de covoiturage dédiée aux entreprises",
@@ -71,6 +71,18 @@
       "news2Title": "Doublez votre Prime Covoiturage de 100 € avec Corppooling",
       "news2Desc": "Vous prenez la route tous les jours ? Bonne nouvelle ! Recevez 100 € de Prime Covoiturage en covoiturant 10 trajets en 3 mois* avec Corppooling.",
       "news2Asterisk": "*Valable à partir du 1er Janvier 2023 sous conditions d'éligibilité."
+    },
+    "popularTrips": {
+      "title": "Les trajets les plus populaires"
+    },
+    "bonusCorppooling": {
+      "title": "Les + Corppooling",
+      "bonus1Title": "Vos trajets préférés à petits prix",
+      "bonus1Desc": "Où que vous alliez, en bus ou en covoiturage, trouvez le trajet idéal parmi notre large choix de destinations à petits prix.",
+      "bonus2Title": "Voyagez en toute confiance",
+      "bonus2Desc": "Nous prenons le temps qu’il faut pour connaître nos membres et nos compagnies de bus partenaires. Nous vérifions les avis, les profils et les pièces d’identité. Vous savez donc avec qui vous allez voyager pour réserver en toute confiance sur notre plateforme sécurisée.",
+      "bonus3Title": "Recherchez, cliquez et réservez !",
+      "bonus3Desc": "Réserver un trajet devient encore plus simple ! Facile d'utilisation et dotée de technologies avancées, notre appli vous permet de réserver un trajet à proximité en un rien de temps."
     }
   },
   "trip": {

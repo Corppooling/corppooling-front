@@ -51,7 +51,7 @@
   },
   "home": {
     "find": "Find your trip",
-    "popularTrips": "Popular trips!",
+    "lastTrips": "Popular trips!",
     "howTo": "How does it work?",
     "welcome": "Welcome to Corppooling",
     "description": "The carpooling app dedicated to businesses",
@@ -71,6 +71,18 @@
       "news2Title": "Double your Carpooling Bonus of €100 with Corppooling",
       "news2Desc": "Do you hit the road every day? Good news ! Receive a €100 carpooling bonus by carpooling 10 trips in 3 months* with Corppooling.",
       "news2Asterisk": "*Valid from January 1, 2023 under eligibility conditions."
+    },
+    "popularTrips": {
+      "title": "Popular trips"
+    },
+    "bonusCorppooling": {
+      "title": "Why Corppooling?",
+      "bonus1Title": "Your favorite trips at low prices",
+      "bonus1Desc": "Wherever you are going, by bus or carpooling, find the ideal route from our wide choice of destinations at low prices.",
+      "bonus2Title": "Travel with confidence",
+      "bonus2Desc": "We take the time to get to know our members and partner bus companies. We check reviews, profiles and IDs. So you know who you are going to travel with to book with confidence on our secure platform.",
+      "bonus3Title": "Search, click and book!",
+      "bonus3Desc": "Booking a trip becomes even easier! Easy to use and equipped with advanced technologies, our app allows you to book a trip nearby in no time."
     }
   },
   "trip": {
