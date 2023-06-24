@@ -44,7 +44,7 @@ const swiperOptions = ref<SwiperOptions>({
 <template>
   <div>
     <div class="flex flex-wrap items-center justify-between">
-      <Title logoColor="base" :content="$t('home.popularTrips')" />
+      <Title logoColor="base" :content="$t('home.lastTrips')" />
       <RouterLink :to="{ name: 'trips' }" class="block p-2 text-lg hover:underline">
         {{ $t('home.seeAll') }}
       </RouterLink>
