@@ -12,6 +12,7 @@ import { HttpStatusCode } from 'axios';
 import { useUserStore } from '@/stores/user';
 import { useConfirm } from 'primevue/useconfirm';
 import { useToast } from '@/composables/toast';
+import { i18nGlobal } from '@/support/i18n';
 
 const props = defineProps<{
   company: Company;
@@ -22,6 +23,7 @@ const router = useRouter();
 const userStore = useUserStore();
 const confirm = useConfirm();
 const toast = useToast();
+const { t } = i18nGlobal;
 
 const filters = ref({
   global: { value: null, matchMode: 'contains' },
@@ -54,18 +56,18 @@ const redirect = (event: any): void => {
 const deleteUser = (userId: number, el: HTMLElement): void => {
   confirm.require({
     target: el,
-    header: 'Suppression',
-    message: 'Êtes-vous sûr de vouloir supprimer cet utilisateur ?',
+    header: t('action.delete'),
+    message: t('account.myManagement.manageUsers.deleteConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
-    acceptLabel: 'Oui',
-    rejectLabel: 'Non',
+    acceptLabel: t('action.yes'),
+    rejectLabel: t('action.no'),
     accept: async () => {
       await axiosClient
         .delete(`/api/users/${userId}`)
         .then(async () => {
           await fetchUsers();
-          toast.success('Utilisateur supprimé avec succès');
+          toast.success(t('account.myManagement.manageUsers.deleteSuccess'));
         })
         .catch(() => {
           toast.error();
@@ -101,7 +103,7 @@ const userHasEnoughRights = (user: User): boolean => {
               <i class="pi pi-search" />
               <InputText
                 v-model="filters['global'].value"
-                :placeholder="$t('account.myManagement.search')"
+                :placeholder="t('account.myManagement.search')"
               />
             </span>
           </div>
@@ -110,24 +112,32 @@ const userHasEnoughRights = (user: User): boolean => {
       <template #empty>
         <div class="text-center">
           <FontAwesomeIcon class="mr-2" :icon="['fas', 'frown']" />
-          <span>Aucun utilisateur ne correspond à votre recherche</span>
+          <span>{{ t('account.myManagement.manageUsers.noResults') }}</span>
         </div>
       </template>
       <Column field="id" header="ID" sortable />
-      <Column field="firstname" header="Prénom" sortable />
-      <Column field="lastname" header="Nom" sortable />
-      <Column field="email" header="Email" sortable>
+      <Column
+        field="firstname"
+        :header="t('account.myManagement.manageUsers.firstName')"
+        sortable
+      />
+      <Column field="lastname" :header="t('account.myManagement.manageUsers.lastName')" sortable />
+      <Column field="email" :header="t('account.myManagement.manageUsers.email')" sortable>
         <template #body="{ data }">
           <a :href="`mailto:${data?.email}`">{{ data?.email }}</a>
         </template>
       </Column>
-      <!-- <Column field="phone" header="Téléphone" sortable />-->
-      <Column field="department" header="Pôle" sortable>
+      <Column field="phone" :header="t('account.myManagement.manageUsers.phone')" sortable />
+      <Column
+        field="department"
+        :header="t('account.myManagement.manageUsers.department')"
+        sortable
+      >
         <template #body="{ data }">
           <span>{{ data?.department?.name }}</span>
         </template>
       </Column>
-      <Column field="roles" header="Rôles">
+      <Column field="roles" :header="t('account.myManagement.manageUsers.roles')">
         <template #body="{ data }">
           <RolesMultiSelect
             v-if="userHasEnoughRights(data)"
@@ -137,7 +147,7 @@ const userHasEnoughRights = (user: User): boolean => {
           <RolesMultiSelect v-else :roles="data?.roles" :userId="data?.id" disabled />
         </template>
       </Column>
-      <Column field="actions" header="Actions">
+      <Column field="actions" :header="t('account.myManagement.actions')">
         <template #body="{ data }">
           <FontAwesomeIcon
             v-if="userHasEnoughRights(data)"
@@ -145,7 +155,7 @@ const userHasEnoughRights = (user: User): boolean => {
             class="mx-auto mr-2 text-xl"
             @click.stop="deleteUser(data?.id, $event.target)"
           />
-          <span v-else>Aucune</span>
+          <span v-else>{{ t('account.myManagement.noActions') }}</span>
         </template>
       </Column>
     </DataTable>

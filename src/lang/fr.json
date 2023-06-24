@@ -216,13 +216,33 @@
       "departments": "Pôles",
       "trips": "Trajets",
       "users": "Utilisateurs",
+      "stats": "Statistiques",
       "search": "Rechercher",
+      "actions": "Actions",
+      "noActions": "Aucune",
       "manageTrips": {
         "noResults": "Aucun trajet ne correspond à votre recherche",
         "type": "Type",
         "departureTime": "Date de départ",
-        "membersNumber": "Nombre de participants",
-        "actions": "Actions"
+        "membersNumber": "Nombre de participants"
+      },
+      "manageUsers": {
+        "noResults": "Aucun utilisateur ne correspond à votre recherche",
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "deleteSuccess": "L'utilisateur a bien été supprimé",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Email",
+        "phone": "Téléphone",
+        "department": "Pôle",
+        "roles": "Rôles"
+      },
+      "userRights": {
+        "admin": "Administrateur",
+        "manager": "Manager",
+        "user": "Utilisateur",
+        "confirmUpdate": "Êtes-vous sûr de vouloir modifier les droits de cet utilisateur ?",
+        "updateSuccess": "Les droits de l'utilisateur ont bien été modifiés"
       }
     }
   }

@@ -24,15 +24,15 @@ interface RoleOption {
 
 const roles = ref<RoleOption[]>([
   {
-    name: 'Administrateur',
+    name: t('account.myManagement.userRights.admin'),
     code: Role.ADMIN,
   },
   {
-    name: 'Manager',
+    name: t('account.myManagement.userRights.manager'),
     code: Role.MANAGER,
   },
   {
-    name: 'Utilisateur',
+    name: t('account.myManagement.userRights.user'),
     code: Role.USER,
   },
 ]);
@@ -48,7 +48,7 @@ watch(selectedRoles, (newValue) => {
 const submitRole = (): void => {
   confirm.require({
     header: t('action.update'),
-    message: 'Êtes-vous sûr de vouloir modifier les droits de cet utilisateur ?',
+    message: t('account.myManagement.userRights.confirmUpdate'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
     acceptLabel: t('action.yes'),
@@ -59,7 +59,7 @@ const submitRole = (): void => {
           roles: selectedRoles.value,
         })
         .then(() => {
-          toast.success('Les droits ont été modifiés avec succès !');
+          toast.success(t('account.myManagement.userRights.updateSuccess'));
         })
         .catch(() => {
           toast.error();

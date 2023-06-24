@@ -216,13 +216,33 @@
       "departments": "Departments",
       "trips": "Trips",
       "users": "Users",
+      "stats": "Statistics",
       "search": "Search",
+      "actions": "Actions",
+      "noActions": "No actions",
       "manageTrips": {
         "noResults": "No results",
         "type": "Type",
         "departureTime": "Departure time",
-        "membersNumber": "Number of members",
-        "actions": "Actions"
+        "membersNumber": "Number of members"
+      },
+      "manageUsers": {
+        "noResults": "No results",
+        "deleteConfirm": "Are you sure you want to delete this user?",
+        "deleteSuccess": "The user has been successfully deleted",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone",
+        "department": "Department",
+        "roles": "Roles"
+      },
+      "userRights": {
+        "admin": "Administrator",
+        "manager": "Manager",
+        "user": "User",
+        "confirmUpdate": "Are you sure you want to update this user's rights?",
+        "updateSuccess": "The user's rights have been successfully updated"
       }
     }
   }

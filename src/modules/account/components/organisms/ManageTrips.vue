@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import { Trip, TripType } from '@/interfaces/trip.interface';
 import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
@@ -132,7 +132,7 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
           <span>{{ data?.members.length }}</span>
         </template>
       </Column>
-      <Column field="actions" :header="t('account.myManagement.manageTrips.actions')">
+      <Column field="actions" :header="t('account.myManagement.actions')">
         <template #body="{ data }">
           <FontAwesomeIcon
             icon="trash-can"
