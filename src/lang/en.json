@@ -148,7 +148,8 @@
     "errorBody": "Please try again"
   },
   "form": {
-    "empties": "Please fill out all fields"
+    "empties": "Please fill out all fields",
+    "reset": "Reset fields"
   },
   "action": {
     "delete": "Deletion",
@@ -225,6 +226,14 @@
         "type": "Type",
         "departureTime": "Departure time",
         "membersNumber": "Number of members"
+      },
+      "manageCompany": {
+        "updateSuccess": "The company has been successfully updated",
+        "name": "Name",
+        "siren": "SIREN",
+        "authCode": "Authentication code",
+        "wrongURL": "Wrong URL",
+        "logoLink": "Logo link"
       },
       "manageUsers": {
         "noResults": "No results",

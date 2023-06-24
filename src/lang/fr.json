@@ -148,7 +148,8 @@
     "errorBody": "Veuillez réessayer"
   },
   "form": {
-    "empties": "Veuillez remplir tous les champs"
+    "empties": "Veuillez remplir tous les champs",
+    "reset": "Champs réinitialisés"
   },
   "action": {
     "delete": "Suppression",
@@ -220,6 +221,14 @@
       "search": "Rechercher",
       "actions": "Actions",
       "noActions": "Aucune",
+      "manageCompany": {
+        "updateSuccess": "Votre entreprise a bien été modifiée",
+        "name": "Nom",
+        "siren": "SIREN",
+        "authCode": "Code d'authentification",
+        "wrongURL": "URL invalide",
+        "logoLink": "Lien du logo"
+      },
       "manageTrips": {
         "noResults": "Aucun trajet ne correspond à votre recherche",
         "type": "Type",

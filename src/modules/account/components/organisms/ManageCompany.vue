@@ -37,7 +37,7 @@ const resetForm = async (refreshUser = false): Promise<void> => {
   if (refreshUser) {
     await userStore.setUser(true);
   } else {
-    toast.info('Champs réinitialisés');
+    toast.info(t('form.reset'));
   }
 
   const company: Company | undefined = userStore.user?.company;
@@ -67,7 +67,7 @@ const onSubmit = async (): Promise<void> => {
     .put(`api/companies/${props.company.id}`, formData)
     .then(async () => {
       await resetForm(true);
-      toast.success('Votre entreprise a bien été modifiée');
+      toast.success(t('account.myManagement.manageCompany.updateSuccess'));
     })
     .catch(async () => {
       await resetForm();
@@ -90,19 +90,39 @@ const onSubmit = async (): Promise<void> => {
       </span>
     </div>
     <form class="pt-4">
-      <PrimeInput id="name" class="mb-10 w-full" placeholder="Nom">
+      <PrimeInput
+        id="name"
+        class="mb-10 w-full"
+        :placeholder="t('account.myManagement.manageCompany.name')"
+      >
         <InputText v-model="formData.name" type="text" />
       </PrimeInput>
-      <PrimeInput id="siren" class="mb-10 w-full" placeholder="SIREN">
+      <PrimeInput
+        id="siren"
+        class="mb-10 w-full"
+        :placeholder="t('account.myManagement.manageCompany.siren')"
+      >
         <InputText v-model="formData.siren" type="text" />
       </PrimeInput>
-      <PrimeInput id="auth_code" class="mb-10 w-full" placeholder="Code d'authentification">
+      <PrimeInput
+        id="auth_code"
+        class="mb-10 w-full"
+        :placeholder="t('account.myManagement.manageCompany.authCode')"
+      >
         <InputText v-model="formData.auth_code" type="text" />
       </PrimeInput>
       <div class="mb-10 flex w-1/2 items-center">
-        <img class="object-contain" :src="formData.logo" alt="URL incorrect" />
+        <img
+          class="object-contain"
+          :src="formData.logo"
+          :alt="t('account.myManagement.manageCompany.wrongURL')"
+        />
       </div>
-      <PrimeInput id="logo" class="mb-10 w-full" placeholder="Lien logo">
+      <PrimeInput
+        id="logo"
+        class="mb-10 w-full"
+        :placeholder="t('account.myManagement.manageCompany.logoLink')"
+      >
         <InputText v-model="formData.logo" type="text" />
       </PrimeInput>
       <Button
@@ -110,7 +130,7 @@ const onSubmit = async (): Promise<void> => {
         :loading="loading"
         bgColor="content-light"
         class="w-full"
-        text="Modifier"
+        :text="t('action.update')"
       />
     </form>
   </div>
