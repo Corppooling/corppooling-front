@@ -22,7 +22,7 @@ interface RoleOption {
   code: Role;
 }
 
-const roles = ref<RoleOption[]>([
+const rolesOptions = ref<RoleOption[]>([
   {
     name: t('account.myManagement.userRights.admin'),
     code: Role.ADMIN,
@@ -41,7 +41,7 @@ const selectedRoles = ref<Role[]>(props.roles);
 
 watch(selectedRoles, (newValue) => {
   if (newValue.length === 0) {
-    selectedRoles.value = [roles.value[2].code];
+    selectedRoles.value = [rolesOptions.value[2].code];
   }
 });
 
@@ -75,7 +75,7 @@ const submitRole = (): void => {
 <template>
   <MultiSelect
     v-model="selectedRoles"
-    :options="roles"
+    :options="rolesOptions"
     optionLabel="name"
     optionValue="code"
     :disabled="props.disabled"
