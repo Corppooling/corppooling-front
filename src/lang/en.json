@@ -138,7 +138,8 @@
   },
   "contact": {
     "yourMessage": "Your message",
-    "send": "Send"
+    "send": "Send",
+    "sendMessage": "Send a message"
   },
   "toast": {
     "info": "Info",

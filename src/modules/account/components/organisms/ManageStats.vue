@@ -1,3 +1,3 @@
 <script setup lang="ts"></script>
 
-<template><div></div></template>
+<template><div>https://primevue.org/chart/</div></template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Company } from '@/interfaces/company.interface';
 import { Department } from '@/interfaces/department.interface';
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import axiosClient from '@/support/axiosClient';
 import { HttpStatusCode } from 'axios';
 import router from '@/router';
@@ -13,6 +13,8 @@ import { dateClassicFormated } from '@/support/luxon';
 import { useToast } from '@/composables/toast';
 import { useConfirm } from 'primevue/useconfirm';
 import Button from '@/components/molecules/Button.vue';
+import Modal from '@/components/organisms/Modal.vue';
+import PrimeInput from '@/components/atoms/PrimeInput.vue';
 
 const props = defineProps<{
   company: Company;
@@ -67,14 +69,48 @@ const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
   });
 };
 
-// eslint-disable-next-line
-const displayUpdatePopup = (event: any): void => {
-  //TODO
-};
+const showUpdateModal = ref<boolean>(false);
+const showAddModal = ref<boolean>(false);
 
 // eslint-disable-next-line
-const displayAddPopup = (event: any): void => {
-  //TODO
+const displayUpdateModal = (event: any): void => {
+  showUpdateModal.value = true;
+};
+
+interface departmentDTO {
+  name: string;
+  company: string;
+}
+
+const formAddData = reactive<departmentDTO>({
+  name: '',
+  company: `/api/companies/${props.company.id}`,
+});
+
+const resetAddForm = (): void => {
+  Object.assign(formAddData, {
+    name: '',
+    company_id: props.company.id,
+  });
+};
+
+const addDepartment = async (): Promise<void> => {
+  if (!formAddData.name.trim()) {
+    toast.warning('Veuillez renseigner un nom de pôle');
+    return;
+  }
+
+  await axiosClient
+    .post('/api/departments', formAddData)
+    .then(async () => {
+      await fetchDepartments();
+      toast.success('Le pôle a bien été ajouté');
+      showAddModal.value = false;
+      resetAddForm();
+    })
+    .catch(() => {
+      toast.error();
+    });
 };
 </script>
 
@@ -91,7 +127,7 @@ const displayAddPopup = (event: any): void => {
       :rowsPerPageOptions="[10, 25, 50]"
       responsiveLayout="scroll"
       :rowStyle="'cursor: pointer'"
-      @rowClick="displayUpdatePopup"
+      @rowClick="displayUpdateModal"
     >
       <template #header>
         <div class="flex flex-wrap justify-between">
@@ -105,7 +141,12 @@ const displayAddPopup = (event: any): void => {
             </span>
           </div>
           <div class="m-2">
-            <Button icon="fa-add" text="Ajouter" bgColor="content-light" @click="displayAddPopup" />
+            <Button
+              icon="fa-add"
+              text="Ajouter"
+              bgColor="content-light"
+              @click="showAddModal = true"
+            />
           </div>
         </div>
       </template>
@@ -138,4 +179,13 @@ const displayAddPopup = (event: any): void => {
       </Column>
     </DataTable>
   </div>
+  <!--add modal-->
+  <Modal title="Ajouter un pôle" :isOpen="showAddModal" @update:isOpen="showAddModal = false">
+    <form class="flex h-full w-full flex-col p-6">
+      <PrimeInput id="name" placeholder="Nom" class="mb-12 w-full lg:w-96">
+        <InputText v-model="formAddData.name" inputId="name" />
+      </PrimeInput>
+      <Button text="Ajouter" bgColor="content-light" @click="addDepartment" />
+    </form>
+  </Modal>
 </template>
