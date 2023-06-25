@@ -71,9 +71,17 @@ const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
 
 const showUpdateModal = ref<boolean>(false);
 const showAddModal = ref<boolean>(false);
+const selectedDepartmentId = ref<number>();
+
+const displayAddModal = (): void => {
+  formData.name = '';
+  showAddModal.value = true;
+};
 
 // eslint-disable-next-line
 const displayUpdateModal = (event: any): void => {
+  formData.name = event.data.name;
+  selectedDepartmentId.value = event.data.id;
   showUpdateModal.value = true;
 };
 
@@ -82,31 +90,52 @@ interface departmentDTO {
   company: string;
 }
 
-const formAddData = reactive<departmentDTO>({
+const formData = reactive<departmentDTO>({
   name: '',
   company: `/api/companies/${props.company.id}`,
 });
 
-const resetAddForm = (): void => {
-  Object.assign(formAddData, {
+const resetForm = (): void => {
+  Object.assign(formData, {
     name: '',
     company_id: props.company.id,
   });
 };
 
 const addDepartment = async (): Promise<void> => {
-  if (!formAddData.name.trim()) {
+  if (!formData.name.trim()) {
     toast.warning('Veuillez renseigner un nom de pôle');
     return;
   }
 
   await axiosClient
-    .post('/api/departments', formAddData)
+    .post('/api/departments', formData)
     .then(async () => {
       await fetchDepartments();
       toast.success('Le pôle a bien été ajouté');
       showAddModal.value = false;
-      resetAddForm();
+      resetForm();
+    })
+    .catch(() => {
+      toast.error();
+    });
+};
+
+const updateDepartment = async (): Promise<void> => {
+  if (!formData.name.trim()) {
+    toast.warning('Veuillez renseigner un nom de pôle');
+    return;
+  }
+
+  await axiosClient
+    .put(`/api/departments/${selectedDepartmentId.value}`, {
+      name: formData.name,
+    })
+    .then(async () => {
+      await fetchDepartments();
+      toast.success('Le pôle a bien été modifié');
+      showUpdateModal.value = false;
+      resetForm();
     })
     .catch(() => {
       toast.error();
@@ -141,12 +170,7 @@ const addDepartment = async (): Promise<void> => {
             </span>
           </div>
           <div class="m-2">
-            <Button
-              icon="fa-add"
-              text="Ajouter"
-              bgColor="content-light"
-              @click="showAddModal = true"
-            />
+            <Button icon="fa-add" text="Ajouter" bgColor="content-light" @click="displayAddModal" />
           </div>
         </div>
       </template>
@@ -183,9 +207,22 @@ const addDepartment = async (): Promise<void> => {
   <Modal title="Ajouter un pôle" :isOpen="showAddModal" @update:isOpen="showAddModal = false">
     <form class="flex h-full w-full flex-col p-6">
       <PrimeInput id="name" placeholder="Nom" class="mb-12 w-full lg:w-96">
-        <InputText v-model="formAddData.name" inputId="name" />
+        <InputText v-model="formData.name" inputId="name" />
       </PrimeInput>
       <Button text="Ajouter" bgColor="content-light" @click="addDepartment" />
+    </form>
+  </Modal>
+  <!--update modal-->
+  <Modal
+    title="Modifier un pôle"
+    :isOpen="showUpdateModal"
+    @update:isOpen="showUpdateModal = false"
+  >
+    <form class="flex h-full w-full flex-col p-6">
+      <PrimeInput id="name" placeholder="Nom" class="mb-12 w-full lg:w-96">
+        <InputText v-model="formData.name" inputId="name" />
+      </PrimeInput>
+      <Button text="Modifier" bgColor="content-light" @click="updateDepartment" />
     </form>
   </Modal>
 </template>
