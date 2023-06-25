@@ -13,6 +13,7 @@ import { useUserStore } from '@/stores/user';
 import { useConfirm } from 'primevue/useconfirm';
 import { useToast } from '@/composables/toast';
 import { i18nGlobal } from '@/support/i18n';
+import DepartmentSelect from '@/modules/account/components/molecules/DepartmentSelect.vue';
 
 const props = defineProps<{
   company: Company;
@@ -128,13 +129,13 @@ const userHasEnoughRights = (user: User): boolean => {
         </template>
       </Column>
       <Column field="phone" :header="t('account.myManagement.manageUsers.phone')" sortable />
-      <Column
-        field="department"
-        :header="t('account.myManagement.manageUsers.department')"
-        sortable
-      >
+      <Column field="department" :header="t('account.myManagement.manageUsers.department')">
         <template #body="{ data }">
-          <span>{{ data?.department?.name }}</span>
+          <DepartmentSelect
+            :department="data?.department"
+            :company="props.company"
+            :userId="data?.id"
+          />
         </template>
       </Column>
       <Column field="roles" :header="t('account.myManagement.manageUsers.roles')">
