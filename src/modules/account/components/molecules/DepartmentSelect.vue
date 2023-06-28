@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Department } from '@/interfaces/department.interface';
 import axiosClient from '@/support/axiosClient';
-import router from '@/router';
-import { HttpStatusCode } from 'axios';
-import { onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import Dropdown from 'primevue/dropdown';
 import { Company } from '@/interfaces/company.interface';
 import { useToast } from '@/composables/toast';
 import { useConfirm } from 'primevue/useconfirm';
 import { i18nGlobal } from '@/support/i18n';
+import { useDepartmentStore } from '@/stores/department';
 
 const props = defineProps<{
   department: Department;
@@ -20,37 +19,21 @@ const props = defineProps<{
 const confirm = useConfirm();
 const { t } = i18nGlobal;
 const toast = useToast();
+const departmentStore = useDepartmentStore();
 
 interface DepartmentOption {
   name: string;
   code: number;
 }
 
-const departmentsOptions = ref<DepartmentOption[]>([]);
+const departmentsOptions = computed<DepartmentOption[]>(() => {
+  return departmentStore.departments.map((department: Department) => ({
+    name: department.name,
+    code: department.id,
+  }));
+});
 
 const selectedDepartment = ref<number>(props.department.id);
-
-const fetchDepartments = async (): Promise<void> => {
-  await axiosClient
-    .get('/api/departments', {
-      params: {
-        'company.id': props.company.id,
-      },
-    })
-    .then((res: { data: { [x: string]: Department[] } }) => {
-      departmentsOptions.value = res.data['hydra:member'].map((department: Department) => ({
-        name: department.name,
-        code: department.id,
-      }));
-    })
-    .catch(() => {
-      router.push({ name: 'error', params: { code: HttpStatusCode.InternalServerError } });
-    });
-};
-
-onMounted(async () => {
-  await fetchDepartments();
-});
 
 const submitDepartment = (): void => {
   confirm.require({

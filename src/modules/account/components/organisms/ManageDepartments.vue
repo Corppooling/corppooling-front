@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { Company } from '@/interfaces/company.interface';
-import { Department } from '@/interfaces/department.interface';
 import { onMounted, reactive, ref } from 'vue';
 import axiosClient from '@/support/axiosClient';
-import { HttpStatusCode } from 'axios';
-import router from '@/router';
 import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
 import { i18nGlobal } from '@/support/i18n';
@@ -15,6 +12,7 @@ import { useConfirm } from 'primevue/useconfirm';
 import Button from '@/components/molecules/Button.vue';
 import Modal from '@/components/organisms/Modal.vue';
 import PrimeInput from '@/components/atoms/PrimeInput.vue';
+import { useDepartmentStore } from '@/stores/department';
 
 const props = defineProps<{
   company: Company;
@@ -23,29 +21,14 @@ const props = defineProps<{
 const { t } = i18nGlobal;
 const toast = useToast();
 const confirm = useConfirm();
-const departments = ref<Department[]>([]);
+const departmentStore = useDepartmentStore();
 
 const filters = ref({
   global: { value: null, matchMode: 'contains' },
 });
 
-const fetchDepartments = async (): Promise<void> => {
-  await axiosClient
-    .get('/api/departments', {
-      params: {
-        'company.id': props.company.id,
-      },
-    })
-    .then((res) => {
-      departments.value = res.data['hydra:member'];
-    })
-    .catch(() => {
-      router.push({ name: 'error', params: { code: HttpStatusCode.InternalServerError } });
-    });
-};
-
 onMounted(async () => {
-  await fetchDepartments();
+  await departmentStore.fetchDepartments();
 });
 
 const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
@@ -59,7 +42,7 @@ const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
       await axiosClient
         .delete(`/api/departments/${departmentId}`)
         .then(async () => {
-          await fetchDepartments();
+          await departmentStore.fetchDepartments();
           toast.success('Le pôle a bien été supprimé');
         })
         .catch(() => {
@@ -111,7 +94,7 @@ const addDepartment = async (): Promise<void> => {
   await axiosClient
     .post('/api/departments', formData)
     .then(async () => {
-      await fetchDepartments();
+      await departmentStore.fetchDepartments();
       toast.success('Le pôle a bien été ajouté');
       showAddModal.value = false;
       resetForm();
@@ -132,7 +115,7 @@ const updateDepartment = async (): Promise<void> => {
       name: formData.name,
     })
     .then(async () => {
-      await fetchDepartments();
+      await departmentStore.fetchDepartments();
       toast.success('Le pôle a bien été modifié');
       showUpdateModal.value = false;
       resetForm();
@@ -147,15 +130,16 @@ const updateDepartment = async (): Promise<void> => {
   <div>
     <DataTable
       v-model:filters="filters"
-      :value="departments"
+      :value="departmentStore.departments"
       paginator
       rowHover
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-      :totalRecords="departments.length"
+      :totalRecords="departmentStore.departments.length"
       :rows="10"
       :rowsPerPageOptions="[10, 25, 50]"
       responsiveLayout="scroll"
       :rowStyle="'cursor: pointer'"
+      :loading="departmentStore.isLoading"
       @rowClick="displayUpdateModal"
     >
       <template #header>
