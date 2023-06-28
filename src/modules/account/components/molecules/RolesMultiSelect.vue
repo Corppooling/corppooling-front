@@ -38,6 +38,7 @@ const rolesOptions = ref<RoleOption[]>([
 ]);
 
 const selectedRoles = ref<Role[]>(props.roles);
+const sessionSelection = ref<Role[]>(props.roles);
 
 watch(selectedRoles, (newValue) => {
   if (newValue.length === 0) {
@@ -60,13 +61,14 @@ const submitRole = (): void => {
         })
         .then(() => {
           toast.success(t('account.myManagement.userRights.updateSuccess'));
+          sessionSelection.value = selectedRoles.value;
         })
         .catch(() => {
           toast.error();
         });
     },
     reject: () => {
-      selectedRoles.value = props.roles;
+      selectedRoles.value = sessionSelection.value;
     },
   });
 };

@@ -34,6 +34,7 @@ const departmentsOptions = computed<DepartmentOption[]>(() => {
 });
 
 const selectedDepartment = ref<number>(props.department.id);
+const sessionSelection = ref<number>(props.department.id);
 
 const submitDepartment = (): void => {
   confirm.require({
@@ -50,13 +51,14 @@ const submitDepartment = (): void => {
         })
         .then(() => {
           toast.success(t('account.myManagement.manageDepartments.updateDepartmentUserSuccess'));
+          sessionSelection.value = selectedDepartment.value;
         })
         .catch(() => {
           toast.error();
         });
     },
     reject: () => {
-      selectedDepartment.value = props.department.id;
+      selectedDepartment.value = sessionSelection.value;
     },
   });
 };
