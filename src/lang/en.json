@@ -268,7 +268,9 @@
         "updatedAt": "Last update",
         "createdAt": "Creation date",
         "addDepartment": "Add a department",
-        "updateDepartment": "Update a department"
+        "updateDepartment": "Update a department",
+        "updateDepartmentUserConfirm": "Are you sure you want to update this user's department?",
+        "updateDepartmentUserSuccess": "The user's department has been successfully updated"
       }
     }
   }

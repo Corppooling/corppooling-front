@@ -38,7 +38,7 @@ const selectedDepartment = ref<number>(props.department.id);
 const submitDepartment = (): void => {
   confirm.require({
     header: t('action.update'),
-    message: "Êtes-vous sûr de vouloir modifier le pôle de l'utilisateur ?",
+    message: t('account.myManagement.manageDepartments.updateDepartmentUserConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
     acceptLabel: t('action.yes'),
@@ -49,7 +49,7 @@ const submitDepartment = (): void => {
           department: `/api/departments/${selectedDepartment.value}`,
         })
         .then(() => {
-          toast.success('Le pôle a bien été modifié');
+          toast.success(t('account.myManagement.manageDepartments.updateDepartmentUserSuccess'));
         })
         .catch(() => {
           toast.error();

@@ -268,7 +268,9 @@
         "updatedAt": "Dernière modification",
         "createdAt": "Création",
         "addDepartment": "Ajouter un pôle",
-        "updateDepartment": "Modifier un pôle"
+        "updateDepartment": "Modifier un pôle",
+        "updateDepartmentUserConfirm": "Êtes-vous sûr de vouloir modifier le pôle de cet utilisateur ?",
+        "updateDepartmentUserSuccess": "Le pôle de l'utilisateur a bien été modifié"
       }
     }
   }
