@@ -157,7 +157,8 @@
     "confirm": "Confirmation",
     "yes": "Oui",
     "no": "Non",
-    "update": "Modifier"
+    "update": "Modifier",
+    "add": "Ajouter"
   },
   "account": {
     "profile": "Mon profil",
@@ -253,6 +254,21 @@
         "user": "Utilisateur",
         "confirmUpdate": "Êtes-vous sûr de vouloir modifier les droits de cet utilisateur ?",
         "updateSuccess": "Les droits de l'utilisateur ont bien été modifiés"
+      },
+      "manageDepartments": {
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce pôle ?",
+        "deleteSuccess": "Le pôle a bien été supprimé",
+        "cantDelete": "Suppression impossible",
+        "cantDeleteBody": "Le pôle est lié à des utilisateurs",
+        "addDepartmentName": "Veuillez renseigner un nom de pôle",
+        "addDepartmentSuccess": "Le pôle a bien été ajouté",
+        "updateDepartmentSuccess": "Le pôle a bien été modifié",
+        "noResults": "Aucun pôle ne correspond à votre recherche",
+        "name": "Nom",
+        "updatedAt": "Dernière modification",
+        "createdAt": "Création",
+        "addDepartment": "Ajouter un pôle",
+        "updateDepartment": "Modifier un pôle"
       }
     }
   }

@@ -157,7 +157,8 @@
     "confirm": "Confirmation",
     "yes": "Yes",
     "no": "No",
-    "update": "Update"
+    "update": "Update",
+    "add": "Add"
   },
   "account": {
     "profile": "My profile",
@@ -253,6 +254,21 @@
         "user": "User",
         "confirmUpdate": "Are you sure you want to update this user's rights?",
         "updateSuccess": "The user's rights have been successfully updated"
+      },
+      "manageDepartments": {
+        "deleteConfirm": "Are you sure you want to delete this department?",
+        "deleteSuccess": "The department has been successfully deleted",
+        "cantDelete": "You can't delete this department",
+        "cantDeleteBody": "This department is used by one or more users",
+        "addDepartmentName": "Add a department name",
+        "addDepartmentSuccess": "The department has been successfully added",
+        "updateDepartmentSuccess": "The department has been successfully updated",
+        "noResults": "No results",
+        "name": "Name",
+        "updatedAt": "Last update",
+        "createdAt": "Creation date",
+        "addDepartment": "Add a department",
+        "updateDepartment": "Update a department"
       }
     }
   }

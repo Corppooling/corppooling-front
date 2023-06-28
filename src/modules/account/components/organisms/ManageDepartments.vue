@@ -35,7 +35,7 @@ const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
   confirm.require({
     target: el,
     header: t('action.delete'),
-    message: 'Êtes-vous sûr de vouloir supprimer ce pôle ?',
+    message: t('account.myManagement.manageDepartments.deleteConfirm'),
     icon: 'pi pi-exclamation-triangle',
     position: 'top',
     accept: async () => {
@@ -43,10 +43,13 @@ const deleteDepartment = (departmentId: number, el: HTMLElement): void => {
         .delete(`/api/departments/${departmentId}`)
         .then(async () => {
           await departmentStore.fetchDepartments();
-          toast.success('Le pôle a bien été supprimé');
+          toast.success(t('account.myManagement.manageDepartments.deleteSuccess'));
         })
         .catch(() => {
-          toast.error('Suppression impossible', 'Le pôle est lié à des utilisateurs');
+          toast.error(
+            t('account.myManagement.manageDepartments.cantDelete'),
+            t('account.myManagement.manageDepartments.cantDeleteBody')
+          );
         });
     },
   });
@@ -87,7 +90,7 @@ const resetForm = (): void => {
 
 const addDepartment = async (): Promise<void> => {
   if (!formData.name.trim()) {
-    toast.warning('Veuillez renseigner un nom de pôle');
+    toast.warning(t('account.myManagement.manageDepartments.addDepartmentName'));
     return;
   }
 
@@ -95,7 +98,7 @@ const addDepartment = async (): Promise<void> => {
     .post('/api/departments', formData)
     .then(async () => {
       await departmentStore.fetchDepartments();
-      toast.success('Le pôle a bien été ajouté');
+      toast.success(t('account.myManagement.manageDepartments.addDepartmentSuccess'));
       showAddModal.value = false;
       resetForm();
     })
@@ -106,7 +109,7 @@ const addDepartment = async (): Promise<void> => {
 
 const updateDepartment = async (): Promise<void> => {
   if (!formData.name.trim()) {
-    toast.warning('Veuillez renseigner un nom de pôle');
+    toast.warning(t('account.myManagement.manageDepartments.addDepartmentName'));
     return;
   }
 
@@ -116,7 +119,7 @@ const updateDepartment = async (): Promise<void> => {
     })
     .then(async () => {
       await departmentStore.fetchDepartments();
-      toast.success('Le pôle a bien été modifié');
+      toast.success(t('account.myManagement.manageDepartments.updateDepartmentSuccess'));
       showUpdateModal.value = false;
       resetForm();
     })
@@ -154,24 +157,37 @@ const updateDepartment = async (): Promise<void> => {
             </span>
           </div>
           <div class="m-2">
-            <Button icon="fa-add" text="Ajouter" bgColor="content-light" @click="displayAddModal" />
+            <Button
+              icon="fa-add"
+              :text="t('action.add')"
+              bgColor="content-light"
+              @click="displayAddModal"
+            />
           </div>
         </div>
       </template>
       <template #empty>
         <div class="text-center">
           <FontAwesomeIcon class="mr-2" :icon="['fas', 'frown']" />
-          <span>Aucun pôle ne correspond à votre recherche</span>
+          <span>{{ t('account.myManagement.manageDepartments.noResults') }}</span>
         </div>
       </template>
       <Column field="id" header="ID" sortable />
-      <Column field="name" header="Nom" sortable />
-      <Column field="updated_at" header="Modifié le" sortable>
+      <Column field="name" :header="t('account.myManagement.manageDepartments.name')" sortable />
+      <Column
+        field="updated_at"
+        :header="t('account.myManagement.manageDepartments.updatedAt')"
+        sortable
+      >
         <template #body="{ data }">
           <span>{{ dateClassicFormated(data?.updated_at) }}</span>
         </template>
       </Column>
-      <Column field="created_at" header="Créé le" sortable>
+      <Column
+        field="created_at"
+        :header="t('account.myManagement.manageDepartments.createdAt')"
+        sortable
+      >
         <template #body="{ data }">
           <span>{{ dateClassicFormated(data?.created_at) }}</span>
         </template>
@@ -188,25 +204,37 @@ const updateDepartment = async (): Promise<void> => {
     </DataTable>
   </div>
   <!--add modal-->
-  <Modal title="Ajouter un pôle" :isOpen="showAddModal" @update:isOpen="showAddModal = false">
+  <Modal
+    :title="t('account.myManagement.manageDepartments.addDepartment')"
+    :isOpen="showAddModal"
+    @update:isOpen="showAddModal = false"
+  >
     <form class="flex h-full w-full flex-col p-6">
-      <PrimeInput id="name" placeholder="Nom" class="mb-12 w-full lg:w-96">
+      <PrimeInput
+        id="name"
+        :placeholder="t('account.myManagement.manageDepartments.name')"
+        class="mb-12 w-full lg:w-96"
+      >
         <InputText v-model="formData.name" inputId="name" />
       </PrimeInput>
-      <Button text="Ajouter" bgColor="content-light" @click="addDepartment" />
+      <Button :text="t('action.add')" bgColor="content-light" @click="addDepartment" />
     </form>
   </Modal>
   <!--update modal-->
   <Modal
-    title="Modifier un pôle"
+    :title="t('account.myManagement.manageDepartments.updateDepartment')"
     :isOpen="showUpdateModal"
     @update:isOpen="showUpdateModal = false"
   >
     <form class="flex h-full w-full flex-col p-6">
-      <PrimeInput id="name" placeholder="Nom" class="mb-12 w-full lg:w-96">
+      <PrimeInput
+        id="name"
+        :placeholder="t('account.myManagement.manageDepartments.name')"
+        class="mb-12 w-full lg:w-96"
+      >
         <InputText v-model="formData.name" inputId="name" />
       </PrimeInput>
-      <Button text="Modifier" bgColor="content-light" @click="updateDepartment" />
+      <Button :text="t('action.update')" bgColor="content-light" @click="updateDepartment" />
     </form>
   </Modal>
 </template>
