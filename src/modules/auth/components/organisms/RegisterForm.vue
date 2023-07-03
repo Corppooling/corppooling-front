@@ -1,10 +1,30 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import PrimeInput from '@/components/atoms/PrimeInput.vue';
 import Button from '@/components/molecules/Button.vue';
 import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
+import Checkbox from 'primevue/checkbox';
 
-const email = ref<string>('');
+interface formDTO {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  companyName: string;
+  description: string;
+  validConditions: boolean;
+}
+
+const formData = reactive<formDTO>({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  companyName: '',
+  description: '',
+  validConditions: false,
+});
 </script>
 
 <template>
@@ -16,9 +36,37 @@ const email = ref<string>('');
       {{ $t('auth.recontactDesc') }}
     </p>
     <div class="pb-20 pt-16">
-      <PrimeInput id="username" placeholder="Email" class="mb-14">
-        <InputText id="username" v-model="email" class="w-full" type="email" />
+      <div class="mb-8 flex gap-4">
+        <PrimeInput id="firstName" placeholder="Prénom" class="w-1/2">
+          <InputText id="firstName" v-model="formData.firstName" class="w-full" type="text" />
+        </PrimeInput>
+        <PrimeInput id="lastName" placeholder="Nom" class="w-1/2">
+          <InputText id="lastName" v-model="formData.lastName" class="w-full" type="text" />
+        </PrimeInput>
+      </div>
+      <PrimeInput id="email" placeholder="Email" class="mb-8">
+        <InputText id="email" v-model="formData.email" class="w-full" type="email" />
       </PrimeInput>
+      <PrimeInput id="phone" placeholder="Téléphone" class="mb-8">
+        <InputText id="phone" v-model="formData.phone" class="w-full" type="tel" />
+      </PrimeInput>
+      <PrimeInput id="companyName" placeholder="Nom de l'entreprise" class="mb-8">
+        <InputText id="companyName" v-model="formData.companyName" class="w-full" type="text" />
+      </PrimeInput>
+      <PrimeInput id="description" placeholder="Description" class="mb-8">
+        <Textarea id="description" v-model="formData.description" rows="4" class="w-full" />
+      </PrimeInput>
+      <div class="mb-10 flex items-center">
+        <Checkbox
+          v-model="formData.validConditions"
+          inputId="validConditions"
+          name="validConditions"
+          :binary="true"
+        />
+        <label for="validConditions" class="ml-3 select-none">
+          J'accepte que ces informations soient utilisées pour me recontacter.
+        </label>
+      </div>
       <Button bgColor="content-base" :text="$t('auth.recontact')" />
       <RouterLink :to="{ name: 'login' }" class="mt-10 block text-center hover:underline">
         {{ $t('auth.toLogin') }}
