@@ -196,7 +196,10 @@
       "greatPassword": "Great !",
       "preferences": "Your preferences",
       "language": "Language",
-      "lastUpdate": "Last update"
+      "lastUpdate": "Last update",
+      "successPresentation": "Your presentation has been successfully updated",
+      "updatePresentation": "Update my presentation",
+      "presentation": "Presentation"
     },
     "myTrips": {
       "deleteConfirm": "Are you sure you want to delete this trip?",

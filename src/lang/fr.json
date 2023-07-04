@@ -196,7 +196,10 @@
       "greatPassword": "Super !",
       "preferences": "Vos préférences",
       "language": "Langue",
-      "lastUpdate": "Dernière modification"
+      "lastUpdate": "Dernière modification",
+      "successPresentation": "Votre présentation a bien été modifiée",
+      "updatePresentation": "Modifier ma présentation",
+      "presentation": "Présentation"
     },
     "myTrips": {
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
