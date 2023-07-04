@@ -269,4 +269,8 @@ const onSubmit = async (): Promise<void> => {
     @apply w-full;
   }
 }
+
+.p-inputtextarea {
+  @apply w-full h-full;
+}
 </style>
