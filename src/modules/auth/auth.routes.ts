@@ -20,7 +20,7 @@ export const authRoutes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/user-register/:authCode',
+    path: '/register/:authCode',
     name: 'user-register',
     component: () => import('@/modules/auth/views/UserRegister.vue'),
     meta: {
