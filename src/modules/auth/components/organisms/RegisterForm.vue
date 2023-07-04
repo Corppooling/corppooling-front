@@ -91,10 +91,10 @@ const submitForm = (): void => {
       <PrimeInput id="email" :placeholder="t('form.email') + '*'" class="mb-8">
         <InputText id="email" v-model="formData.email" class="w-full" type="email" />
       </PrimeInput>
-      <PrimeInput id="phone" :placeholder="t('form.phone') + '*'" class="mb-8">
+      <PrimeInput id="phone" :placeholder="t('form.phone')" class="mb-8">
         <InputText id="phone" v-model="formData.phone" class="w-full" type="tel" />
       </PrimeInput>
-      <PrimeInput id="companyName" :placeholder="t('auth.companyName') + '*'" class="mb-8">
+      <PrimeInput id="companyName" :placeholder="t('auth.companyName')" class="mb-8">
         <InputText id="companyName" v-model="formData.companyName" class="w-full" type="text" />
       </PrimeInput>
       <PrimeInput id="description" :placeholder="t('auth.description') + '*'" class="mb-8">
