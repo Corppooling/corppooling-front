@@ -36,7 +36,10 @@
     "recontact": "I want to be contacted",
     "toLogin": "Already have an account?",
     "logout": "Logout",
-    "badCredentials": "Incorrect credentials"
+    "badCredentials": "Incorrect credentials",
+    "companyName": "Company name",
+    "description": "Description",
+    "acceptRecontact": "I accept to be contacted by Corppooling"
   },
   "header": {
     "newTrip": "New trip",
@@ -148,7 +151,15 @@
     "errorBody": "Please try again"
   },
   "form": {
-    "empties": "Please fill out all fields"
+    "empties": "Please fill out all fields",
+    "requiredFields": "Please fill out all required fields",
+    "acceptConditions": "Please accept the terms and conditions",
+    "sent": "Your message has been sent",
+    "responseBack": "We will get back to you as soon as possible",
+    "lastName": "Last name",
+    "firstName": "First name",
+    "email": "Email",
+    "phone": "Phone"
   },
   "action": {
     "delete": "Deletion",

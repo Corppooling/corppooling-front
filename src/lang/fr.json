@@ -36,7 +36,10 @@
     "recontact": "Je souhaite être recontacté",
     "toLogin": "J'ai déjà un compte",
     "logout": "Déconnexion",
-    "badCredentials": "Identifiants incorrects"
+    "badCredentials": "Identifiants incorrects",
+    "companyName": "Nom de l'entreprise",
+    "description": "Description",
+    "acceptRecontact": "J'accepte que ces informations soient utilisées pour me recontacter."
   },
   "header": {
     "newTrip": "Nouveau trajet",
@@ -148,7 +151,15 @@
     "errorBody": "Veuillez réessayer"
   },
   "form": {
-    "empties": "Veuillez remplir tous les champs"
+    "empties": "Veuillez remplir tous les champs",
+    "requiredFields": "Veuillez remplir tous les champs obligatoires",
+    "acceptConditions": "Veuillez accepter les conditions",
+    "sent": "Votre message a bien été envoyé",
+    "responseBack": "Nous vous répondrons dans les plus brefs délais",
+    "lastName": "Nom",
+    "firstName": "Prénom",
+    "email": "Email",
+    "phone": "Téléphone"
   },
   "action": {
     "delete": "Suppression",
