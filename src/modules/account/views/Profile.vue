@@ -12,9 +12,11 @@ import { AxiosResponse } from 'axios';
 import SelectButton from 'primevue/selectbutton';
 import { useLangTranslation } from '@/composables/langTranslation';
 import { dateFormated } from '@/support/luxon';
+import Textarea from 'primevue/textarea';
 
 const userStore = useUserStore();
 const loading = ref<boolean>(false);
+const loadingPresentation = ref<boolean>(false);
 const toast = useToast();
 const { lang, langOptions } = useLangTranslation();
 const { t } = i18nGlobal;
@@ -31,12 +33,33 @@ const formData = reactive<FormDataI>({
   newPasswordConfirmation: undefined,
 });
 
+const presentation = ref<string | undefined>(userStore.user?.presentation);
+
 const resetForm = (): void => {
   Object.assign(formData, {
     currentPassword: undefined,
     newPassword: undefined,
     newPasswordConfirmation: undefined,
   });
+};
+
+const onSubmitPresentation = async (): Promise<void> => {
+  loadingPresentation.value = true;
+
+  await axiosClient
+    .put(`api/users/${userStore.user?.id}`, {
+      presentation: presentation.value,
+    })
+    .then(async () => {
+      await userStore.setUser(true);
+      toast.success(t('account.myProfile.successPresentation'));
+    })
+    .catch(() => {
+      toast.error();
+      presentation.value = userStore.user?.presentation;
+    });
+
+  loadingPresentation.value = false;
 };
 
 const onSubmit = async (): Promise<void> => {
@@ -94,7 +117,7 @@ const onSubmit = async (): Promise<void> => {
 
 <template>
   <div v-if="userStore.isAuth" class="flex max-w-screen-2xl flex-wrap">
-    <div class="w-full md:p-4 xl:w-96">
+    <div class="w-full md:p-4 xl:w-1/3">
       <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.aboutYou') }}</h3>
       <div class="flex w-full flex-col">
         <div class="flex w-full">
@@ -152,7 +175,32 @@ const onSubmit = async (): Promise<void> => {
         </div>
       </div>
     </div>
-    <div class="mx-auto w-full pt-8 md:p-4 xl:w-96">
+    <div class="mx-auto w-full pt-9 md:p-4 xl:w-1/3">
+      <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.updatePresentation') }}</h3>
+      <form class="pt-3">
+        <PrimeInput
+          id="presentation"
+          class="mb-10"
+          :placeholder="t('account.myProfile.presentation')"
+        >
+          <Textarea
+            v-model="presentation"
+            inputId="presentation"
+            :rows="5"
+            :feedback="false"
+            :autoResize="true"
+          />
+        </PrimeInput>
+        <Button
+          :fn="onSubmitPresentation"
+          :loading="loadingPresentation"
+          bgColor="content-light"
+          class="w-full"
+          :text="t('action.update')"
+        />
+      </form>
+    </div>
+    <div class="mx-auto w-full pt-9 md:p-4 xl:w-1/3">
       <h3 class="mb-8 text-2xl">{{ $t('account.myProfile.updatePassword') }}</h3>
       <div v-if="userStore.user?.updated_at" class="mb-8 flex flex-wrap justify-between text-sm">
         <span>{{ $t('account.myProfile.lastUpdate') }}:</span>
@@ -220,5 +268,9 @@ const onSubmit = async (): Promise<void> => {
   .p-password-input {
     @apply w-full;
   }
+}
+
+.p-inputtextarea {
+  @apply w-full h-full;
 }
 </style>

@@ -176,7 +176,8 @@
     "publicProfile": {
       "stats": "Statistics",
       "contact": "Contact",
-      "email": "Email"
+      "email": "Email",
+      "presentation": "Presentation"
     },
     "myProfile": {
       "passwordsDoesNotMatch": "Passwords do not match",
@@ -196,7 +197,10 @@
       "greatPassword": "Great !",
       "preferences": "Your preferences",
       "language": "Language",
-      "lastUpdate": "Last update"
+      "lastUpdate": "Last update",
+      "successPresentation": "Your presentation has been successfully updated",
+      "updatePresentation": "Update my presentation",
+      "presentation": "Presentation"
     },
     "myTrips": {
       "deleteConfirm": "Are you sure you want to delete this trip?",
