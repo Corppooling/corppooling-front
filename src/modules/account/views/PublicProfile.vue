@@ -41,6 +41,10 @@ const fullName = computed<string>(
         <img class="w-full" :src="defaultProfileImage" alt="profile picture" />
       </div>
     </div>
+    <div v-if="publicUser?.presentation || publicUser?.presentation?.trim() !== ''" class="my-4">
+      <span class="mb-2 font-bold">{{ $t('account.publicProfile.presentation') }}:</span>
+      <p>{{ publicUser?.presentation }}</p>
+    </div>
     <h3 class="my-8 text-2xl">{{ $t('account.publicProfile.stats') }}</h3>
     <div class="flex w-full flex-col text-lg">
       <div class="flex justify-between">

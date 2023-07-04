@@ -176,7 +176,8 @@
     "publicProfile": {
       "stats": "Statistics",
       "contact": "Contact",
-      "email": "Email"
+      "email": "Email",
+      "presentation": "Presentation"
     },
     "myProfile": {
       "passwordsDoesNotMatch": "Passwords do not match",
