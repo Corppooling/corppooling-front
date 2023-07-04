@@ -19,4 +19,13 @@ export const authRoutes: Array<RouteRecordRaw> = [
       hideFooter: true,
     },
   },
+  {
+    path: '/user-register/:authCode',
+    name: 'user-register',
+    component: () => import('@/modules/auth/views/UserRegister.vue'),
+    meta: {
+      authRequired: false,
+      hideFooter: false,
+    },
+  },
 ];
