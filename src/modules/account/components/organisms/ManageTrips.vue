@@ -135,10 +135,12 @@ const deleteTrip = (tripId: number, el: HTMLElement): void => {
       <Column field="actions" :header="t('account.myManagement.actions')">
         <template #body="{ data }">
           <FontAwesomeIcon
+            v-if="!tripIsPassed(data?.departure_time)"
             icon="trash-can"
             class="mx-auto mr-2 text-xl"
             @click.stop="deleteTrip(data?.id, $event.target)"
           />
+          <span v-else>{{ t('account.myManagement.noActions') }}</span>
         </template>
       </Column>
     </DataTable>
