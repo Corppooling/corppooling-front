@@ -186,7 +186,7 @@ const onSubmit = async (): Promise<void> => {
           <Textarea
             v-model="presentation"
             inputId="presentation"
-            :rows="5"
+            :rows="9"
             :feedback="false"
             :autoResize="true"
           />
@@ -210,7 +210,7 @@ const onSubmit = async (): Promise<void> => {
         <PrimeInput
           id="currentPassword"
           :placeholder="t('account.myProfile.currentPassword')"
-          class="mb-12 w-full"
+          class="mb-14 w-full"
         >
           <Password
             v-model="formData.currentPassword"
