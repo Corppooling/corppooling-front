@@ -4,9 +4,9 @@ import RegisterForm from '@/modules/auth/components/organisms/RegisterForm.vue';
 </script>
 
 <template>
-  <div class="flex min-h-[calc(100vh-5rem)]">
+  <div class="flex h-[calc(100vh-5rem)] overflow-hidden">
     <AuthBanner />
-    <div class="w-full md:w-1/2">
+    <div class="w-full overflow-y-auto md:w-1/2">
       <RegisterForm />
     </div>
   </div>

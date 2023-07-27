@@ -36,7 +36,10 @@
     "recontact": "Je souhaite être recontacté",
     "toLogin": "J'ai déjà un compte",
     "logout": "Déconnexion",
-    "badCredentials": "Identifiants incorrects"
+    "badCredentials": "Identifiants incorrects",
+    "companyName": "Nom de l'entreprise",
+    "description": "Description",
+    "acceptRecontact": "J'accepte que ces informations soient utilisées pour me recontacter."
   },
   "header": {
     "newTrip": "Nouveau trajet",
@@ -149,8 +152,16 @@
     "errorBody": "Veuillez réessayer"
   },
   "form": {
+    "reset": "Champs réinitialisés",
     "empties": "Veuillez remplir tous les champs",
-    "reset": "Champs réinitialisés"
+    "requiredFields": "Veuillez remplir tous les champs obligatoires",
+    "acceptConditions": "Veuillez accepter les conditions",
+    "sent": "Votre message a bien été envoyé",
+    "responseBack": "Nous vous répondrons dans les plus brefs délais",
+    "lastName": "Nom",
+    "firstName": "Prénom",
+    "email": "Email",
+    "phone": "Téléphone"
   },
   "action": {
     "delete": "Suppression",
@@ -169,7 +180,8 @@
     "publicProfile": {
       "stats": "Statistiques",
       "contact": "Contact",
-      "email": "Email"
+      "email": "Email",
+      "presentation": "Présentation"
     },
     "myProfile": {
       "passwordsDoesNotMatch": "Les mots de passe ne correspondent pas",
@@ -189,7 +201,10 @@
       "greatPassword": "Super !",
       "preferences": "Vos préférences",
       "language": "Langue",
-      "lastUpdate": "Dernière modification"
+      "lastUpdate": "Dernière modification",
+      "successPresentation": "Votre présentation a bien été modifiée",
+      "updatePresentation": "Modifier ma présentation",
+      "presentation": "Présentation"
     },
     "myTrips": {
       "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce trajet ?",
