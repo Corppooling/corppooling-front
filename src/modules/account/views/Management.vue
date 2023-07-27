@@ -48,7 +48,7 @@ const activeTab = useLocalStorage('activeTab', 0);
       </TabPanel>
       <TabPanel :header="t('account.myManagement.stats')">
         <h2 class="mb-7 text-3xl">{{ t('account.myManagement.stats') }}</h2>
-        <ManageStats :company="company" />
+        <ManageStats :trips="company.trips" />
       </TabPanel>
     </TabView>
   </div>

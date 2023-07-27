@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import Chart from 'primevue/chart';
-import axiosClient from '@/support/axiosClient';
-import { useUserStore } from '@/stores/user';
 import { Trip } from '@/interfaces/trip.interface';
 import Spinner from '@/components/atoms/Spinner.vue';
 import { ChartOptions } from 'chart.js';
@@ -12,37 +10,29 @@ interface ChartData {
   datasets: object[];
 }
 
-const userStore = useUserStore();
-const loading = ref<boolean>(false);
-const trips = ref<Trip[]>();
+const props = defineProps<{
+  trips: Trip[];
+}>();
+
+const loading = ref<boolean>(true);
 const departureLocationsData = ref<ChartData>();
 const arrivalLocationsData = ref<ChartData>();
 const typesData = ref<ChartData>();
 
 onMounted(async () => {
-  loading.value = true;
-  await fetchTrips();
-  departureLocationsData.value = setOccurrencesData('departure_location');
-  arrivalLocationsData.value = setOccurrencesData('arrival_location');
-  typesData.value = setTypesData();
+  departureLocationsData.value = await setOccurrencesData('departure_location');
+  arrivalLocationsData.value = await setOccurrencesData('arrival_location');
+  typesData.value = await setTypesData();
   loading.value = false;
 });
 
-const fetchTrips = async () => {
-  const allTrips = await axiosClient.get('api/trips', {
-    params: {
-      'company.id':
-        userStore.user?.company?.cluster !== null ? undefined : userStore.user?.company?.id,
-    },
-  });
-
-  trips.value = allTrips.data['hydra:member'];
-};
-
-const setOccurrencesData = (field: keyof Trip, color = 'rgba(246,178,107,0.7)'): ChartData => {
+const setOccurrencesData = async (
+  field: keyof Trip,
+  color = 'rgba(246,178,107,0.7)'
+): Promise<ChartData> => {
   const occurrences: { name: unknown; occurrence: number }[] =
-    trips.value
-      ?.reduce((acc: { name: unknown; occurrence: number }[], trip: Trip) => {
+    props.trips
+      .reduce((acc: { name: unknown; occurrence: number }[], trip: Trip) => {
         const index = acc.findIndex((item) => item.name === trip[field]);
         if (index === -1) {
           acc.push({ name: trip[field], occurrence: 1 });
@@ -67,15 +57,15 @@ const setOccurrencesData = (field: keyof Trip, color = 'rgba(246,178,107,0.7)'):
   };
 };
 
-const setTypesData = (): ChartData => {
+const setTypesData = async (): Promise<ChartData> => {
   return {
     labels: ['Conducteur', 'Passager'],
     datasets: [
       {
         label: 'Nombre de trajets',
         data: [
-          trips.value?.filter((trip) => trip.type === 'driver').length,
-          trips.value?.filter((trip) => trip.type === 'passenger').length,
+          props.trips.filter((trip) => trip.type === 'driver').length,
+          props.trips.filter((trip) => trip.type === 'passenger').length,
         ],
         borderWidth: 1,
         backgroundColor: ['rgba(246,178,107,0.7)', 'rgba(180,167,214,0.7)'],
