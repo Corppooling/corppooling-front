@@ -21,8 +21,13 @@ const sendMessage = (): void => {
 </script>
 
 <template>
-  <Modal :isOpen="props.isOpen" @update:isOpen="emit('update:isOpen', $event)">
-    <div class="flex h-full w-full flex-col items-center justify-center px-6 pb-6 pt-14">
+  <Modal
+    class="w-64"
+    :title="$t('contact.sendMessage')"
+    :isOpen="props.isOpen"
+    @update:isOpen="emit('update:isOpen', $event)"
+  >
+    <form class="flex h-full w-full flex-col items-center justify-center p-6">
       <span class="p-float-label my-4 w-full">
         <Textarea v-model="message" class="w-full lg:w-[40rem]" rows="5" />
         <label>{{ $t('contact.yourMessage') }}</label>
@@ -33,7 +38,7 @@ const sendMessage = (): void => {
         class="mr-auto px-10"
         @click="sendMessage"
       />
-    </div>
+    </form>
   </Modal>
 </template>
 

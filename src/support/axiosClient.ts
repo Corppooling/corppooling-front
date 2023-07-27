@@ -1,5 +1,4 @@
 import axios, { type AxiosRequestConfig, HttpStatusCode } from 'axios';
-import router from '@/router';
 
 const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -30,15 +29,6 @@ axiosClient.interceptors.response.use(
       const { useAuthStore } = await import('@/stores/auth');
       await useAuthStore().refreshToken();
       return axiosClient(originalRequest);
-    }
-
-    if (error.response.status === HttpStatusCode.NotFound) {
-      await router.push({
-        name: 'error',
-        params: {
-          code: error.response.status,
-        },
-      });
     }
 
     return Promise.reject(error);

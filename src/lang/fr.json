@@ -124,7 +124,7 @@
       "next": "Suivant",
       "success": "Votre trajet a bien été publié",
       "newTrip": "Nouveau trajet",
-      "step1": "Êtes-vous vous conducteur ou passager ?",
+      "step1": "Êtes-vous conducteur ou passager ?",
       "step2": "D’où partez-vous ?",
       "step3": "Où allez-vous ?",
       "step4": "Quand partez-vous ?",
@@ -141,7 +141,8 @@
   },
   "contact": {
     "yourMessage": "Votre message",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "sendMessage": "Envoyer un message"
   },
   "toast": {
     "info": "Info",
@@ -151,6 +152,7 @@
     "errorBody": "Veuillez réessayer"
   },
   "form": {
+    "reset": "Champs réinitialisés",
     "empties": "Veuillez remplir tous les champs",
     "requiredFields": "Veuillez remplir tous les champs obligatoires",
     "acceptConditions": "Veuillez accepter les conditions",
@@ -166,13 +168,15 @@
     "confirm": "Confirmation",
     "yes": "Oui",
     "no": "Non",
-    "update": "Modifier"
+    "update": "Modifier",
+    "add": "Ajouter"
   },
   "account": {
     "profile": "Mon profil",
     "trips": "Mes trajets",
     "bookings": "Mes réservations",
     "company": "Mon entreprise",
+    "management": "Gestion",
     "publicProfile": {
       "stats": "Statistiques",
       "contact": "Contact",
@@ -224,6 +228,91 @@
       "stats": "Statistiques",
       "activeUsers": "Nombre d'utilisateurs actifs",
       "tripsCreated": "Nombre de trajets créés"
+    },
+    "myManagement": {
+      "company": "Entreprise",
+      "departments": "Pôles",
+      "trips": "Trajets",
+      "users": "Utilisateurs",
+      "stats": "Statistiques",
+      "search": "Rechercher",
+      "actions": "Actions",
+      "noActions": "Aucune",
+      "manageCompany": {
+        "updateSuccess": "Votre entreprise a bien été modifiée",
+        "name": "Nom",
+        "siren": "SIREN",
+        "authCode": "Code d'authentification",
+        "wrongURL": "URL invalide",
+        "logoLink": "Lien du logo"
+      },
+      "manageTrips": {
+        "noResults": "Aucun trajet ne correspond à votre recherche",
+        "type": "Type",
+        "departureTime": "Date de départ",
+        "membersNumber": "Nombre de participants"
+      },
+      "manageUsers": {
+        "noResults": "Aucun utilisateur ne correspond à votre recherche",
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+        "deleteSuccess": "L'utilisateur a bien été supprimé",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Email",
+        "phone": "Téléphone",
+        "department": "Pôle",
+        "roles": "Rôles"
+      },
+      "userRights": {
+        "admin": "Administrateur",
+        "manager": "Manager",
+        "user": "Utilisateur",
+        "confirmUpdate": "Êtes-vous sûr de vouloir modifier les droits de cet utilisateur ?",
+        "updateSuccess": "Les droits de l'utilisateur ont bien été modifiés"
+      },
+      "manageDepartments": {
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce pôle ?",
+        "deleteSuccess": "Le pôle a bien été supprimé",
+        "cantDelete": "Suppression impossible",
+        "cantDeleteBody": "Le pôle est lié à des utilisateurs",
+        "addDepartmentName": "Veuillez renseigner un nom de pôle",
+        "addDepartmentSuccess": "Le pôle a bien été ajouté",
+        "updateDepartmentSuccess": "Le pôle a bien été modifié",
+        "noResults": "Aucun pôle ne correspond à votre recherche",
+        "name": "Nom",
+        "updatedAt": "Dernière modification",
+        "createdAt": "Création",
+        "addDepartment": "Ajouter un pôle",
+        "updateDepartment": "Modifier un pôle",
+        "updateDepartmentUserConfirm": "Êtes-vous sûr de vouloir modifier le pôle de cet utilisateur ?",
+        "updateDepartmentUserSuccess": "Le pôle de l'utilisateur a bien été modifié"
+      },
+      "statistics": {
+        "tripsNumber": "Nombre de trajets",
+        "bookingsNumber": "Nombre de réservations",
+        "months": {
+          "january": "Janvier",
+          "february": "Février",
+          "march": "Mars",
+          "april": "Avril",
+          "may": "Mai",
+          "june": "Juin",
+          "july": "Juillet",
+          "august": "Août",
+          "september": "Septembre",
+          "october": "Octobre",
+          "november": "Novembre",
+          "december": "Décembre"
+        },
+        "departureTowns": "Villes de départ",
+        "departureTownsDescription": "Top 5 des villes de départ les plus fréquentes",
+        "arrivalTowns": "Villes d'arrivée",
+        "arrivalTownsDescription": "Top 5 des villes d'arrivée les plus fréquentes",
+        "tripTypes": "Types de trajets",
+        "tripTypesDescription": "Nombre de trajets par type",
+        "tripBookings": "Réservations",
+        "tripBookingsDescription": "Répartition du nombre de réservations sur une année"
+      }
     }
   }
 }

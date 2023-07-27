@@ -7,16 +7,23 @@ import defaultProfileImage from '@/assets/images/logos/logo_white.svg?url';
 import ContactSection from '@/modules/account/components/molecules/ContactSection.vue';
 import axiosClient from '@/support/axiosClient';
 import { User } from '@/interfaces/user.interface';
+import { useUserStore } from '@/stores/user';
 
 const router = useRouter();
 const isLoading = ref<boolean>(false);
 const publicUser = ref<User>();
+const userStore = useUserStore();
 
 onMounted(async () => {
   isLoading.value = true;
-  await axiosClient.get(`/api/users/${router.currentRoute.value.params.id}`).then((res) => {
-    publicUser.value = res.data;
-  });
+  await axiosClient
+    .get(`/api/users/${router.currentRoute.value.params.id}`)
+    .then((res) => {
+      publicUser.value = res.data;
+    })
+    .catch((res) => {
+      router.push({ name: 'error', params: { code: res.response.status } });
+    });
   isLoading.value = false;
 });
 
@@ -64,7 +71,7 @@ const fullName = computed<string>(
           {{ publicUser?.email }}
         </a>
       </p>
-      <div class="my-4">
+      <div v-if="publicUser?.id !== userStore.user?.id" class="my-4">
         <ContactSection v-if="publicUser" :user="publicUser" />
       </div>
     </div>

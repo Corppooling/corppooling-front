@@ -6,10 +6,12 @@ const props = withDefaults(
   defineProps<{
     isOpen: boolean;
     className?: string;
+    title?: string;
   }>(),
   {
     isOpen: false,
     className: 'max-w-md bg-white',
+    title: '',
   }
 );
 
@@ -47,10 +49,11 @@ const emit = defineEmits<{
               class="rounded-b-0 flex min-w-full flex-col overflow-hidden rounded-t-3xl ring-1 ring-content-base lg:min-w-fit lg:rounded-2xl"
               :class="props.className"
             >
-              <div class="flex w-full justify-end bg-black-base">
+              <div class="flex w-full items-center justify-between p-6">
+                <h4 class="text-xl">{{ title }}</h4>
                 <FontAwesomeIcon
+                  class="cursor-pointer text-2xl"
                   icon="times"
-                  class="absolute cursor-pointer p-6 text-2xl"
                   @click="emit('update:isOpen', false)"
                 />
               </div>

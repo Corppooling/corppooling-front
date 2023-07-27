@@ -35,6 +35,12 @@ export const dateFormated = (date: string): string => {
  * @param date
  */
 export const dateFormatedShort = (date: string): string => {
+  if (DateTime.now().year !== DateTime.fromISO(date).year) {
+    return DateTime.fromISO(date).toFormat('EEEE dd MMMM yyyy', {
+      locale: localeLang(),
+    });
+  }
+
   return DateTime.fromISO(date).toFormat('EEEE dd MMMM', {
     locale: localeLang(),
   });
@@ -49,6 +55,23 @@ export const dateFormatedOnlyHours = (date: string): string => {
     {
       hour: '2-digit',
       minute: '2-digit',
+    },
+    {
+      locale: localeLang(),
+    }
+  );
+};
+
+/**
+ * Return the date formatted in classic format (format: dd/MM/yyyy or MM/dd/yyyy)
+ * @param date
+ */
+export const dateClassicFormated = (date: string): string => {
+  return DateTime.fromISO(date).toLocaleString(
+    {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
     },
     {
       locale: localeLang(),

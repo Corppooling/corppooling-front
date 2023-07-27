@@ -39,7 +39,7 @@ const onSubmit = async () => {
     <h1 class="mt-10 text-center text-5xl font-bold">
       {{ $t('auth.login') }}
     </h1>
-    <div class="pb-20 pt-24">
+    <form class="pb-20 pt-24">
       <PrimeInput id="username" placeholder="Email" class="mb-14">
         <InputText id="username" v-model="email" class="w-full" type="email" />
       </PrimeInput>
@@ -55,7 +55,7 @@ const onSubmit = async () => {
       <RouterLink :to="{ name: 'register' }" class="mt-10 block text-center hover:underline">
         {{ $t('auth.registerMyCompany') }}
       </RouterLink>
-    </div>
+    </form>
     <div></div>
   </div>
 </template>
