@@ -271,6 +271,32 @@
         "updateDepartment": "Modifier un pôle",
         "updateDepartmentUserConfirm": "Êtes-vous sûr de vouloir modifier le pôle de cet utilisateur ?",
         "updateDepartmentUserSuccess": "Le pôle de l'utilisateur a bien été modifié"
+      },
+      "statistics": {
+        "tripsNumber": "Nombre de trajets",
+        "bookingsNumber": "Nombre de réservations",
+        "months": {
+          "january": "Janvier",
+          "february": "Février",
+          "march": "Mars",
+          "april": "Avril",
+          "may": "Mai",
+          "june": "Juin",
+          "july": "Juillet",
+          "august": "Août",
+          "september": "Septembre",
+          "october": "Octobre",
+          "november": "Novembre",
+          "december": "Décembre"
+        },
+        "departureTowns": "Villes de départ",
+        "departureTownsDescription": "Top 5 des villes de départ les plus fréquentes",
+        "arrivalTowns": "Villes d'arrivée",
+        "arrivalTownsDescription": "Top 5 des villes d'arrivée les plus fréquentes",
+        "tripTypes": "Types de trajets",
+        "tripTypesDescription": "Nombre de trajets par type",
+        "tripBookings": "Réservations",
+        "tripBookingsDescription": "Répartition du nombre de réservations sur une année"
       }
     }
   }

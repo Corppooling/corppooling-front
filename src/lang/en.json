@@ -271,6 +271,32 @@
         "updateDepartment": "Update a department",
         "updateDepartmentUserConfirm": "Are you sure you want to update this user's department?",
         "updateDepartmentUserSuccess": "The user's department has been successfully updated"
+      },
+      "statistics": {
+        "tripsNumber": "Number of trips",
+        "bookingsNumber": "Number of bookings",
+        "months": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        },
+        "departureTowns": "Departure towns",
+        "departureTownsDescription": "Top 5 of the most frequent departure towns",
+        "arrivalTowns": "Arrival towns",
+        "arrivalTownsDescription": "Top 5 of the most frequent arrival towns",
+        "tripTypes": "Trip types",
+        "tripTypesDescription": "Distribution of the number of trips by type",
+        "tripBookings": "Trip bookings",
+        "tripBookingsDescription": "Distribution of the number of bookings over a year"
       }
     }
   }
