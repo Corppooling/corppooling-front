@@ -17,12 +17,14 @@ const loading = ref<boolean>(false);
 const trips = ref<Trip[]>();
 const departureLocationsData = ref<ChartData>();
 const arrivalLocationsData = ref<ChartData>();
+const typesData = ref<ChartData>();
 
 onMounted(async () => {
   loading.value = true;
   await fetchTrips();
   departureLocationsData.value = setOccurrencesData('departure_location');
   arrivalLocationsData.value = setOccurrencesData('arrival_location');
+  typesData.value = setTypesData();
   loading.value = false;
 });
 
@@ -56,7 +58,7 @@ const setOccurrencesData = (field: keyof Trip, color = 'rgba(246,178,107,0.7)'):
     labels: occurrences.map((item) => item.name),
     datasets: [
       {
-        label: "Nombre d'occurrences",
+        label: 'Nombre de trajets',
         data: occurrences.map((item) => item.occurrence),
         borderWidth: 1,
         backgroundColor: color,
@@ -65,12 +67,40 @@ const setOccurrencesData = (field: keyof Trip, color = 'rgba(246,178,107,0.7)'):
   };
 };
 
-const chartOptions = ref<ChartOptions>({
+const setTypesData = (): ChartData => {
+  return {
+    labels: ['Conducteur', 'Passager'],
+    datasets: [
+      {
+        label: 'Nombre de trajets',
+        data: [
+          trips.value?.filter((trip) => trip.type === 'driver').length,
+          trips.value?.filter((trip) => trip.type === 'passenger').length,
+        ],
+        borderWidth: 1,
+        backgroundColor: ['rgba(246,178,107,0.7)', 'rgba(180,167,214,0.7)'],
+      },
+    ],
+  };
+};
+
+const barChartOptions = ref<ChartOptions>({
   scales: {
     y: {
       beginAtZero: true,
       ticks: {
         stepSize: 1,
+      },
+    },
+  },
+});
+
+const pieChartOptions = ref<ChartOptions>({
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        usePointStyle: true,
       },
     },
   },
@@ -86,13 +116,23 @@ const chartOptions = ref<ChartOptions>({
         type="bar"
         :data="departureLocationsData"
         class="h-72 w-full"
-        :options="chartOptions"
+        :options="barChartOptions"
       />
     </div>
     <div class="w-full 2xl:w-1/3">
       <h3 class="text-lg">Villes d'arrivées</h3>
       <p class="mb-2 text-sm">Top 5 des villes d'arrivées les plus fréquentes</p>
-      <Chart type="bar" :data="arrivalLocationsData" class="h-72 w-full" :options="chartOptions" />
+      <Chart
+        type="bar"
+        :data="arrivalLocationsData"
+        class="h-72 w-full"
+        :options="barChartOptions"
+      />
+    </div>
+    <div class="w-full 2xl:w-1/3">
+      <h3 class="text-lg">Types de trajet</h3>
+      <p class="mb-2 text-sm">Répartition des types de trajet</p>
+      <Chart type="pie" :data="typesData" :options="pieChartOptions" class="md:w-30rem w-full" />
     </div>
   </div>
   <div v-else class="flex h-[calc(50vh)] items-center justify-center">
