@@ -1,6 +1,7 @@
 import { User } from '@/interfaces/user.interface';
 import { Trip } from '@/interfaces/trip.interface';
 import { Cluster } from '@/interfaces/cluster.interface';
+import { Department } from '@/interfaces/department.interface';
 
 export interface Company {
   id: number;
@@ -13,4 +14,5 @@ export interface Company {
   created_at: string;
   users: User[];
   trips: Trip[];
+  departments: Department[];
 }
