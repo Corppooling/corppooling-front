@@ -141,7 +141,8 @@
   },
   "contact": {
     "yourMessage": "Your message",
-    "send": "Send"
+    "send": "Send",
+    "sendMessage": "Send a message"
   },
   "toast": {
     "info": "Info",
@@ -151,6 +152,7 @@
     "errorBody": "Please try again"
   },
   "form": {
+    "reset": "Reset fields",
     "empties": "Please fill out all fields",
     "requiredFields": "Please fill out all required fields",
     "acceptConditions": "Please accept the terms and conditions",
@@ -166,13 +168,15 @@
     "confirm": "Confirmation",
     "yes": "Yes",
     "no": "No",
-    "update": "Update"
+    "update": "Update",
+    "add": "Add"
   },
   "account": {
     "profile": "My profile",
     "trips": "My trips",
     "bookings": "My bookings",
     "company": "My company",
+    "management": "Management",
     "publicProfile": {
       "stats": "Statistics",
       "contact": "Contact",
@@ -224,6 +228,91 @@
       "stats": "Statistics",
       "activeUsers": "Number of active users",
       "tripsCreated": "Number of trips created"
+    },
+    "myManagement": {
+      "company": "Company",
+      "departments": "Departments",
+      "trips": "Trips",
+      "users": "Users",
+      "stats": "Statistics",
+      "search": "Search",
+      "actions": "Actions",
+      "noActions": "No actions",
+      "manageTrips": {
+        "noResults": "No results",
+        "type": "Type",
+        "departureTime": "Departure time",
+        "membersNumber": "Number of members"
+      },
+      "manageCompany": {
+        "updateSuccess": "The company has been successfully updated",
+        "name": "Name",
+        "siren": "SIREN",
+        "authCode": "Authentication code",
+        "wrongURL": "Wrong URL",
+        "logoLink": "Logo link"
+      },
+      "manageUsers": {
+        "noResults": "No results",
+        "deleteConfirm": "Are you sure you want to delete this user?",
+        "deleteSuccess": "The user has been successfully deleted",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone",
+        "department": "Department",
+        "roles": "Roles"
+      },
+      "userRights": {
+        "admin": "Administrator",
+        "manager": "Manager",
+        "user": "User",
+        "confirmUpdate": "Are you sure you want to update this user's rights?",
+        "updateSuccess": "The user's rights have been successfully updated"
+      },
+      "manageDepartments": {
+        "deleteConfirm": "Are you sure you want to delete this department?",
+        "deleteSuccess": "The department has been successfully deleted",
+        "cantDelete": "You can't delete this department",
+        "cantDeleteBody": "This department is used by one or more users",
+        "addDepartmentName": "Add a department name",
+        "addDepartmentSuccess": "The department has been successfully added",
+        "updateDepartmentSuccess": "The department has been successfully updated",
+        "noResults": "No results",
+        "name": "Name",
+        "updatedAt": "Last update",
+        "createdAt": "Creation date",
+        "addDepartment": "Add a department",
+        "updateDepartment": "Update a department",
+        "updateDepartmentUserConfirm": "Are you sure you want to update this user's department?",
+        "updateDepartmentUserSuccess": "The user's department has been successfully updated"
+      },
+      "statistics": {
+        "tripsNumber": "Number of trips",
+        "bookingsNumber": "Number of bookings",
+        "months": {
+          "january": "January",
+          "february": "February",
+          "march": "March",
+          "april": "April",
+          "may": "May",
+          "june": "June",
+          "july": "July",
+          "august": "August",
+          "september": "September",
+          "october": "October",
+          "november": "November",
+          "december": "December"
+        },
+        "departureTowns": "Departure towns",
+        "departureTownsDescription": "Top 5 of the most frequent departure towns",
+        "arrivalTowns": "Arrival towns",
+        "arrivalTownsDescription": "Top 5 of the most frequent arrival towns",
+        "tripTypes": "Trip types",
+        "tripTypesDescription": "Distribution of the number of trips by type",
+        "tripBookings": "Trip bookings",
+        "tripBookingsDescription": "Distribution of the number of bookings over a year"
+      }
     }
   }
 }

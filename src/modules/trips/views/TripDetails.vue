@@ -152,7 +152,10 @@ const joinTrip = async (el: HTMLElement) => {
         <p class="text-justify">{{ trip?.message }}</p>
       </div>
       <TripUser v-if="trip?.announcer" :user="trip.announcer" :trip="trip" />
-      <ContactSection v-if="trip?.announcer" :user="trip.announcer" />
+      <ContactSection
+        v-if="trip?.announcer && trip.announcer.id !== userStore.user?.id"
+        :user="trip.announcer"
+      />
       <hr class="opacity-25" />
       <div v-if="trip?.type === TripType.DRIVER && trip.car_model">
         <div class="mt-4 p-4">
