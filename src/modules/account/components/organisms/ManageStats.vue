@@ -5,21 +5,24 @@ import axiosClient from '@/support/axiosClient';
 import { useUserStore } from '@/stores/user';
 import { Trip } from '@/interfaces/trip.interface';
 import Spinner from '@/components/atoms/Spinner.vue';
+import { ChartOptions } from 'chart.js';
 
 interface ChartData {
-  labels: string[];
+  labels: unknown[];
   datasets: object[];
 }
 
 const userStore = useUserStore();
-const departureLocationsData = ref<ChartData>();
-const trips = ref<Trip[]>();
 const loading = ref<boolean>(false);
+const trips = ref<Trip[]>();
+const departureLocationsData = ref<ChartData>();
+const arrivalLocationsData = ref<ChartData>();
 
 onMounted(async () => {
   loading.value = true;
   await fetchTrips();
-  departureLocationsData.value = setDepartureLocationsData();
+  departureLocationsData.value = setOccurrencesData('departure_location');
+  arrivalLocationsData.value = setOccurrencesData('arrival_location');
   loading.value = false;
 });
 
@@ -34,42 +37,62 @@ const fetchTrips = async () => {
   trips.value = allTrips.data['hydra:member'];
 };
 
-const setDepartureLocationsData = (): ChartData => {
-  const departureLocations =
+const setOccurrencesData = (field: keyof Trip, color = 'rgba(246,178,107,0.7)'): ChartData => {
+  const occurrences: { name: unknown; occurrence: number }[] =
     trips.value
-      ?.reduce((acc: { name: string; occurrence: number }[], trip: Trip) => {
-        const index = acc.findIndex((item) => item.name === trip.departure_location);
-
+      ?.reduce((acc: { name: unknown; occurrence: number }[], trip: Trip) => {
+        const index = acc.findIndex((item) => item.name === trip[field]);
         if (index === -1) {
-          acc.push({ name: trip.departure_location, occurrence: 1 });
+          acc.push({ name: trip[field], occurrence: 1 });
         } else {
           acc[index].occurrence++;
         }
-
         return acc;
       }, [])
       .sort((a, b) => b.occurrence - a.occurrence)
       .slice(0, 5) || [];
 
   return {
-    labels: departureLocations.map((item) => item.name),
+    labels: occurrences.map((item) => item.name),
     datasets: [
       {
         label: "Nombre d'occurrences",
-        data: departureLocations.map((item) => item.occurrence),
+        data: occurrences.map((item) => item.occurrence),
         borderWidth: 1,
+        backgroundColor: color,
       },
     ],
   };
 };
+
+const chartOptions = ref<ChartOptions>({
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        stepSize: 1,
+      },
+    },
+  },
+});
 </script>
 
 <template>
-  <div v-if="!loading" class="flex flex-wrap gap-2">
-    <div class="h-96 w-full 2xl:w-1/2">
+  <div v-if="!loading" class="flex flex-wrap justify-evenly gap-2">
+    <div class="w-full 2xl:w-1/3">
       <h3 class="text-lg">Villes de départs</h3>
       <p class="mb-2 text-sm">Top 5 des villes de départ les plus fréquentes</p>
-      <Chart type="bar" :data="departureLocationsData" class="h-full w-full" />
+      <Chart
+        type="bar"
+        :data="departureLocationsData"
+        class="h-72 w-full"
+        :options="chartOptions"
+      />
+    </div>
+    <div class="w-full 2xl:w-1/3">
+      <h3 class="text-lg">Villes d'arrivées</h3>
+      <p class="mb-2 text-sm">Top 5 des villes d'arrivées les plus fréquentes</p>
+      <Chart type="bar" :data="arrivalLocationsData" class="h-72 w-full" :options="chartOptions" />
     </div>
   </div>
   <div v-else class="flex h-[calc(50vh)] items-center justify-center">
