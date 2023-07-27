@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import Chart from 'primevue/chart';
-import { Trip } from '@/interfaces/trip.interface';
+import { Trip, TripType } from '@/interfaces/trip.interface';
 import Spinner from '@/components/atoms/Spinner.vue';
 import { ChartOptions } from 'chart.js';
 
@@ -17,12 +17,14 @@ const props = defineProps<{
 const loading = ref<boolean>(true);
 const departureLocationsData = ref<ChartData>();
 const arrivalLocationsData = ref<ChartData>();
-const typesData = ref<ChartData>();
+const tripsTypesData = ref<ChartData>();
+const tripsMembersData = ref<ChartData>();
 
 onMounted(async () => {
   departureLocationsData.value = await setOccurrencesData('departure_location');
   arrivalLocationsData.value = await setOccurrencesData('arrival_location');
-  typesData.value = await setTypesData();
+  tripsTypesData.value = await setTripsTypesData();
+  tripsMembersData.value = await setTripsMembersData();
   loading.value = false;
 });
 
@@ -57,18 +59,57 @@ const setOccurrencesData = async (
   };
 };
 
-const setTypesData = async (): Promise<ChartData> => {
+const setTripsTypesData = async (): Promise<ChartData> => {
   return {
     labels: ['Conducteur', 'Passager'],
     datasets: [
       {
         label: 'Nombre de trajets',
         data: [
-          props.trips.filter((trip) => trip.type === 'driver').length,
-          props.trips.filter((trip) => trip.type === 'passenger').length,
+          props.trips.filter((trip) => trip.type === TripType.DRIVER).length,
+          props.trips.filter((trip) => trip.type === TripType.PASSENGER).length,
         ],
         borderWidth: 1,
         backgroundColor: ['rgba(246,178,107,0.7)', 'rgba(180,167,214,0.7)'],
+      },
+    ],
+  };
+};
+
+const setTripsMembersData = async (): Promise<ChartData> => {
+  const months = [
+    'Janvier',
+    'Février',
+    'Mars',
+    'Avril',
+    'Mai',
+    'Juin',
+    'Juillet',
+    'Août',
+    'Septembre',
+    'Octobre',
+    'Novembre',
+    'Décembre',
+  ];
+  const tripsMembersData: { month: string; members: number }[] = [];
+  for (let i = 0; i < 12; i++) {
+    tripsMembersData.push({ month: months[i], members: 0 });
+  }
+  props.trips.forEach((trip) => {
+    const month = new Date(trip.departure_time).getMonth();
+    tripsMembersData[month].members++;
+  });
+  return {
+    labels: tripsMembersData.map((item) => item.month),
+    datasets: [
+      {
+        label: 'Nombre de réservations',
+        data: tripsMembersData.map((item) => item.members),
+        fill: false,
+        borderWidth: 2,
+        borderColor: 'rgba(246,178,107,0.7)',
+        tension: 0.4,
+        backgroundColor: 'rgba(246,178,107,0.7)',
       },
     ],
   };
@@ -95,6 +136,8 @@ const pieChartOptions = ref<ChartOptions>({
     },
   },
 });
+
+const lineChartOptions = ref<ChartOptions>({});
 </script>
 
 <template>
@@ -122,7 +165,12 @@ const pieChartOptions = ref<ChartOptions>({
     <div class="w-full 2xl:w-1/3">
       <h3 class="text-lg">Types de trajet</h3>
       <p class="mb-2 text-sm">Répartition des types de trajet</p>
-      <Chart type="pie" :data="typesData" :options="pieChartOptions" class="md:w-30rem w-full" />
+      <Chart type="pie" :data="tripsTypesData" class="h-72 w-full" :options="pieChartOptions" />
+    </div>
+    <div class="w-full 2xl:w-1/3">
+      <h3 class="text-lg">Réservations</h3>
+      <p class="mb-2 text-sm">Répartition du nombre de réservations sur une année</p>
+      <Chart type="line" :data="tripsMembersData" class="h-72 w-full" :options="lineChartOptions" />
     </div>
   </div>
   <div v-else class="flex h-[calc(50vh)] items-center justify-center">
