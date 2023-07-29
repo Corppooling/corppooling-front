@@ -14,9 +14,11 @@ import { useDepartmentStore } from '@/stores/department';
 import Dropdown from 'primevue/dropdown';
 import Button from '@/components/molecules/Button.vue';
 import { useToast } from '@/composables/toast';
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
 const router = useRouter();
+const userStore = useUserStore();
 const { t } = i18nGlobal;
 const company = ref<Company>();
 const departmentStore = useDepartmentStore();
@@ -53,6 +55,14 @@ const departmentsOptions = computed<DepartmentOption[]>(() => {
 });
 
 onMounted(async () => {
+  if (localStorage.getItem('hasCreatedAccount') === 'true') {
+    await router.push({ name: 'login' });
+  }
+
+  if (userStore.isAuth) {
+    await router.push({ name: 'home' });
+  }
+
   isLoading.value = true;
   await fetchCompany();
   await departmentStore.fetchDepartments();
@@ -88,7 +98,7 @@ const onSubmit = async (): Promise<void> => {
     !formData.confirmPassword?.trim() ||
     !formData.departmentId
   ) {
-    toast.error(t('form.empties'));
+    toast.warning(t('form.empties'));
     return;
   }
 
@@ -101,17 +111,18 @@ const onSubmit = async (): Promise<void> => {
   submitLoading.value = true;
 
   await axiosClient
-    .post('/api/users', {
+    .post('/api/register', {
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,
       phone: formData.phone,
       password: formData.password,
-      department: `/api/departments/${formData.departmentId}`,
-      company: `/api/companies/${company.value?.id}`,
+      department_id: formData.departmentId,
+      auth_code: authCode.value,
     })
     .then(() => {
       toast.success('Votre compte a bien été créé !');
+      localStorage.setItem('hasCreatedAccount', 'true');
       router.push({
         name: 'login',
       });
