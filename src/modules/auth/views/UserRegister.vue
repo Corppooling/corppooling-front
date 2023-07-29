@@ -13,14 +13,17 @@ import { i18nGlobal } from '@/support/i18n';
 import { useDepartmentStore } from '@/stores/department';
 import Dropdown from 'primevue/dropdown';
 import Button from '@/components/molecules/Button.vue';
+import { useToast } from '@/composables/toast';
 
 const route = useRoute();
 const router = useRouter();
 const { t } = i18nGlobal;
 const company = ref<Company>();
 const departmentStore = useDepartmentStore();
+const toast = useToast();
 const authCode = ref<string>(route.params.authCode as string);
 const isLoading = ref<boolean>(false);
+const submitLoading = ref<boolean>(false);
 
 const fetchCompany = async () => {
   await axiosClient.get('/api/companies', { params: { auth_code: authCode.value } }).then((res) => {
@@ -76,7 +79,53 @@ const formData = reactive<formDataDTO>({
   confirmPassword: undefined,
 });
 
-const onSubmit = (): void => {};
+const onSubmit = async (): Promise<void> => {
+  if (
+    !formData.firstname?.trim() ||
+    !formData.lastname?.trim() ||
+    !formData.email?.trim() ||
+    !formData.password?.trim() ||
+    !formData.confirmPassword?.trim() ||
+    !formData.departmentId
+  ) {
+    toast.error(t('form.empties'));
+    return;
+  }
+
+  if (formData.password !== formData.confirmPassword) {
+    // eslint-disable-next-line no-secrets/no-secrets
+    toast.warning(t('account.myProfile.passwordsDoesNotMatch'));
+    return;
+  }
+
+  submitLoading.value = true;
+
+  await axiosClient
+    .post('/api/users', {
+      firstname: formData.firstname,
+      lastname: formData.lastname,
+      email: formData.email,
+      phone: formData.phone,
+      password: formData.password,
+      department: `/api/departments/${formData.departmentId}`,
+      company: `/api/companies/${company.value?.id}`,
+    })
+    .then(() => {
+      toast.success('Votre compte a bien été créé !');
+      router.push({
+        name: 'login',
+      });
+    })
+    .catch((err) => {
+      if (err.response.status === HttpStatusCode.Conflict) {
+        toast.error('Un compte existe déjà avec cet email !');
+      } else {
+        toast.error();
+      }
+    });
+
+  submitLoading.value = false;
+};
 </script>
 
 <template>
@@ -84,20 +133,20 @@ const onSubmit = (): void => {};
     <div class="mb-3 flex flex-wrap items-center justify-between gap-4">
       <h1 class="text-4xl">Inscription</h1>
       <div class="flex items-center">
-        <img class="mr-3 aspect-auto w-10" :src="company.logo" :alt="company.name" />
+        <img class="mr-3 aspect-square w-10 rounded-full" :src="company.logo" :alt="company.name" />
         <span class="text-2xl">{{ company.name }}</span>
       </div>
     </div>
     <form class="my-10">
       <div class="flex flex-col md:flex-row md:gap-4">
-        <PrimeInput id="firstname" class="mb-10 w-full" placeholder="Prénom">
+        <PrimeInput id="firstname" class="mb-10 w-full" placeholder="Prénom" required>
           <InputText v-model="formData.firstname" type="text" />
         </PrimeInput>
-        <PrimeInput id="lastname" class="mb-10 w-full" placeholder="Nom">
+        <PrimeInput id="lastname" class="mb-10 w-full" placeholder="Nom" required>
           <InputText v-model="formData.lastname" type="text" />
         </PrimeInput>
       </div>
-      <PrimeInput id="email" class="mb-10 w-full" placeholder="Email">
+      <PrimeInput id="email" class="mb-10 w-full" placeholder="Email" required>
         <InputText v-model="formData.email" type="email" />
       </PrimeInput>
       <PrimeInput id="phone" class="mb-10 w-full" placeholder="Téléphone">
@@ -109,9 +158,9 @@ const onSubmit = (): void => {};
         :options="departmentsOptions"
         optionLabel="name"
         optionValue="code"
-        placeholder="Pôle"
+        placeholder="Pôle*"
       />
-      <PrimeInput id="password" class="mb-10 w-full" placeholder="Mot de passe">
+      <PrimeInput id="password" class="mb-10 w-full" placeholder="Mot de passe" required>
         <Password
           v-model="formData.password"
           inputId="password"
@@ -122,7 +171,12 @@ const onSubmit = (): void => {};
           :strongLabel="t('account.myProfile.greatPassword')"
         />
       </PrimeInput>
-      <PrimeInput id="confirmPassword" class="mb-10 w-full" placeholder="Confirmer le mot de passe">
+      <PrimeInput
+        id="confirmPassword"
+        class="mb-10 w-full"
+        placeholder="Confirmer le mot de passe"
+        required
+      >
         <Password
           v-model="formData.confirmPassword"
           inputId="confirmPassword"
@@ -133,7 +187,13 @@ const onSubmit = (): void => {};
           :strongLabel="t('account.myProfile.greatPassword')"
         />
       </PrimeInput>
-      <Button :fn="onSubmit" bgColor="content-light" class="w-full" text="Créer mon compte" />
+      <Button
+        :fn="onSubmit"
+        :loading="submitLoading"
+        bgColor="content-light"
+        class="w-full"
+        text="Créer mon compte"
+      />
     </form>
   </div>
   <div
