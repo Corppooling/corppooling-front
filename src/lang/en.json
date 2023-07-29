@@ -39,7 +39,20 @@
     "badCredentials": "Incorrect credentials",
     "companyName": "Company name",
     "description": "Description",
-    "acceptRecontact": "I accept to be contacted by Corppooling"
+    "acceptRecontact": "I accept to be contacted by Corppooling",
+    "registerPage": {
+      "accountSuccess": "Your account has been created successfully.",
+      "accountAlreadyExists": "An account with this email already exists.",
+      "register": "Register",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "email": "Email",
+      "phone": "Phone",
+      "department": "Department*",
+      "password": "Password",
+      "passwordConfirm": "Confirm password",
+      "createAccount": "Create an account"
+    }
   },
   "header": {
     "newTrip": "New trip",

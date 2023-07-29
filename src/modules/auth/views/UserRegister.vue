@@ -121,7 +121,7 @@ const onSubmit = async (): Promise<void> => {
       auth_code: authCode.value,
     })
     .then(() => {
-      toast.success('Votre compte a bien été créé !');
+      toast.success(t('auth.registerPage.accountSuccess'));
       localStorage.setItem('hasCreatedAccount', 'true');
       router.push({
         name: 'login',
@@ -129,7 +129,7 @@ const onSubmit = async (): Promise<void> => {
     })
     .catch((err) => {
       if (err.response.status === HttpStatusCode.Conflict) {
-        toast.error('Un compte existe déjà avec cet email !');
+        toast.error(t('auth.registerPage.accountAlreadyExists'));
       } else {
         toast.error();
       }
@@ -142,7 +142,7 @@ const onSubmit = async (): Promise<void> => {
 <template>
   <div v-if="!isLoading && company" class="mx-auto w-full max-w-screen-md px-4 py-14 md:p-14">
     <div class="mb-3 flex flex-wrap items-center justify-between gap-4">
-      <h1 class="text-4xl">Inscription</h1>
+      <h1 class="text-4xl">{{ t('auth.registerPage.register') }}</h1>
       <div class="flex items-center">
         <img class="mr-3 aspect-square w-10 rounded-full" :src="company.logo" :alt="company.name" />
         <span class="text-2xl">{{ company.name }}</span>
@@ -150,17 +150,32 @@ const onSubmit = async (): Promise<void> => {
     </div>
     <form class="my-10">
       <div class="flex flex-col md:flex-row md:gap-4">
-        <PrimeInput id="firstname" class="mb-10 w-full" placeholder="Prénom" required>
+        <PrimeInput
+          id="firstname"
+          class="mb-10 w-full"
+          :placeholder="t('auth.registerPage.firstname')"
+          required
+        >
           <InputText v-model="formData.firstname" type="text" />
         </PrimeInput>
-        <PrimeInput id="lastname" class="mb-10 w-full" placeholder="Nom" required>
+        <PrimeInput
+          id="lastname"
+          class="mb-10 w-full"
+          :placeholder="t('auth.registerPage.lastname')"
+          required
+        >
           <InputText v-model="formData.lastname" type="text" />
         </PrimeInput>
       </div>
-      <PrimeInput id="email" class="mb-10 w-full" placeholder="Email" required>
+      <PrimeInput
+        id="email"
+        class="mb-10 w-full"
+        :placeholder="t('auth.registerPage.email')"
+        required
+      >
         <InputText v-model="formData.email" type="email" />
       </PrimeInput>
-      <PrimeInput id="phone" class="mb-10 w-full" placeholder="Téléphone">
+      <PrimeInput id="phone" class="mb-10 w-full" :placeholder="t('auth.registerPage.phone')">
         <InputText v-model="formData.phone" type="tel" />
       </PrimeInput>
       <Dropdown
@@ -169,14 +184,19 @@ const onSubmit = async (): Promise<void> => {
         :options="departmentsOptions"
         optionLabel="name"
         optionValue="code"
-        placeholder="Pôle*"
+        :placeholder="t('auth.registerPage.department')"
       />
-      <PrimeInput id="password" class="mb-10 w-full" placeholder="Mot de passe" required>
+      <PrimeInput
+        id="password"
+        class="mb-10 w-full"
+        :placeholder="t('auth.registerPage.password')"
+        required
+      >
         <Password
           v-model="formData.password"
           inputId="password"
           toggleMask
-          promptLabel="Mot de passe"
+          :promptLabel="t('auth.registerPage.password')"
           :weakLabel="t('account.myProfile.canDoBetter')"
           :mediumLabel="t('account.myProfile.canDoBetter')"
           :strongLabel="t('account.myProfile.greatPassword')"
@@ -185,14 +205,14 @@ const onSubmit = async (): Promise<void> => {
       <PrimeInput
         id="confirmPassword"
         class="mb-10 w-full"
-        placeholder="Confirmer le mot de passe"
+        :placeholder="t('auth.registerPage.passwordConfirm')"
         required
       >
         <Password
           v-model="formData.confirmPassword"
           inputId="confirmPassword"
           toggleMask
-          promptLabel="Confirmer le mot de passe"
+          :promptLabel="t('auth.registerPage.passwordConfirm')"
           :weakLabel="t('account.myProfile.canDoBetter')"
           :mediumLabel="t('account.myProfile.canDoBetter')"
           :strongLabel="t('account.myProfile.greatPassword')"
@@ -203,7 +223,7 @@ const onSubmit = async (): Promise<void> => {
         :loading="submitLoading"
         bgColor="content-light"
         class="w-full"
-        text="Créer mon compte"
+        :text="t('auth.registerPage.createAccount')"
       />
     </form>
   </div>
