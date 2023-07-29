@@ -39,7 +39,20 @@
     "badCredentials": "Identifiants incorrects",
     "companyName": "Nom de l'entreprise",
     "description": "Description",
-    "acceptRecontact": "J'accepte que ces informations soient utilisées pour me recontacter."
+    "acceptRecontact": "J'accepte que ces informations soient utilisées pour me recontacter.",
+    "registerPage": {
+      "accountSuccess": "Votre compte a bien été créé !",
+      "accountAlreadyExists": "Un compte existe déjà avec cet email.",
+      "register": "Inscription",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "department": "Pôle*",
+      "password": "Mot de passe",
+      "passwordConfirm": "Confirmer le mot de passe",
+      "createAccount": "Créer mon compte"
+    }
   },
   "header": {
     "newTrip": "Nouveau trajet",

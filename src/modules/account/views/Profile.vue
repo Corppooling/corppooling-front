@@ -211,6 +211,7 @@ const onSubmit = async (): Promise<void> => {
           id="currentPassword"
           :placeholder="t('account.myProfile.currentPassword')"
           class="mb-14 w-full"
+          required
         >
           <Password
             v-model="formData.currentPassword"
@@ -223,6 +224,7 @@ const onSubmit = async (): Promise<void> => {
           id="newPassword"
           :placeholder="t('account.myProfile.newPassword')"
           class="mb-10 w-full"
+          required
         >
           <Password
             v-model="formData.newPassword"
@@ -238,6 +240,7 @@ const onSubmit = async (): Promise<void> => {
           id="newPasswordConfirmation"
           :placeholder="t('account.myProfile.confirmNewPassword')"
           class="mb-10 w-full"
+          required
         >
           <Password
             v-model="formData.newPasswordConfirmation"
