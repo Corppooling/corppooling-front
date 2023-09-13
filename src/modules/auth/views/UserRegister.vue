@@ -15,12 +15,16 @@ import Dropdown from 'primevue/dropdown';
 import Button from '@/components/molecules/Button.vue';
 import { useToast } from '@/composables/toast';
 import { useUserStore } from '@/stores/user';
+import { compileAsync } from 'sass';
 
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = i18nGlobal;
-const company = ref<Company>();
+const company = ref<{
+  name: string;
+  logo: string;
+}>();
 const departmentStore = useDepartmentStore();
 const toast = useToast();
 const authCode = ref<string>(route.params.authCode as string);
@@ -28,18 +32,19 @@ const isLoading = ref<boolean>(false);
 const submitLoading = ref<boolean>(false);
 
 const fetchCompany = async () => {
-  await axiosClient.get('/api/companies', { params: { auth_code: authCode.value } }).then((res) => {
-    if (res.data['hydra:member'].length !== 1) {
+  await axiosClient
+    .get(`/api/companybyauthcode/${authCode.value}`)
+    .then((res) => {
+      company.value = res.data;
+    })
+    .catch(() => {
       router.push({
         name: 'error',
         params: {
           code: HttpStatusCode.NotFound,
         },
       });
-    } else {
-      company.value = res.data['hydra:member'][0];
-    }
-  });
+    });
 };
 
 interface DepartmentOption {
