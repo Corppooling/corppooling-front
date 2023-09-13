@@ -78,7 +78,7 @@ const currentLabel = computed<string>(() => {
       </div>
     </div>
     <div
-      class="sticky bottom-0 order-3 flex bg-content-flight pb-6 text-content-base shadow-md md:hidden"
+      class="sticky bottom-0 order-3 flex bg-content-flight pb-12 text-content-base shadow-md md:hidden"
     >
       <div class="flex w-full justify-between">
         <template v-for="tab in tabs" :key="tab.name">
