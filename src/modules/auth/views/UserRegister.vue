@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue';
-import { Company } from '@/interfaces/company.interface';
 import axiosClient from '@/support/axiosClient';
 import { useRoute, useRouter } from 'vue-router';
 import { HttpStatusCode } from 'axios';
@@ -15,7 +14,6 @@ import Dropdown from 'primevue/dropdown';
 import Button from '@/components/molecules/Button.vue';
 import { useToast } from '@/composables/toast';
 import { useUserStore } from '@/stores/user';
-import { compileAsync } from 'sass';
 
 const route = useRoute();
 const router = useRouter();
