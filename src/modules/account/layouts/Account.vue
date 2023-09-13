@@ -49,7 +49,7 @@ const currentLabel = computed<string>(() => {
 </script>
 
 <template>
-  <div class="flex max-h-[calc(100vh-5rem)] flex-1 flex-col overflow-hidden md:flex-row">
+  <div class="flex flex-1 flex-col overflow-hidden md:max-h-[calc(100vh-5rem)] md:flex-row">
     <div class="order-2 flex-1 overflow-y-auto">
       <div class="p-10">
         <h1 v-if="currentLabel.trim()" class="text-4xl font-bold">{{ $t(currentLabel) }}</h1>
