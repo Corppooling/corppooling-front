@@ -49,7 +49,9 @@ const currentLabel = computed<string>(() => {
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col overflow-hidden md:max-h-[calc(100vh-5rem)] md:flex-row">
+  <div
+    class="flex max-h-[calc(100vh)] flex-1 flex-col overflow-hidden md:md:max-h-[calc(100vh-5rem)] md:flex-row"
+  >
     <div class="order-2 flex-1 overflow-y-auto">
       <div class="p-10">
         <h1 v-if="currentLabel.trim()" class="text-4xl font-bold">{{ $t(currentLabel) }}</h1>
@@ -85,7 +87,7 @@ const currentLabel = computed<string>(() => {
           <RouterLink
             v-ripple
             :to="{ name: tab.name }"
-            class="flex w-full items-center justify-center pb-8 pt-4 hover:bg-content-xlight hover:text-white"
+            class="flex w-full items-center justify-center pb-32 pt-4 hover:bg-content-xlight hover:text-white"
             :class="[{ 'bg-content-xlight text-white': route.name === tab.name }, tab.class]"
           >
             <FontAwesomeIcon :icon="tab.icon" class="text-lg" />
