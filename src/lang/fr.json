@@ -323,8 +323,8 @@
         "arrivalTownsDescription": "Top 5 des villes d'arrivée les plus fréquentes",
         "tripTypes": "Types de trajets",
         "tripTypesDescription": "Nombre de trajets par type",
-        "tripBookings": "Réservations",
-        "tripBookingsDescription": "Répartition du nombre de réservations sur une année"
+        "trips": "Trajets",
+        "tripsDescription": "Répartition du nombre de trajets sur une année"
       }
     }
   }

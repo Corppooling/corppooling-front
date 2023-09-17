@@ -323,8 +323,8 @@
         "arrivalTownsDescription": "Top 5 of the most frequent arrival towns",
         "tripTypes": "Trip types",
         "tripTypesDescription": "Distribution of the number of trips by type",
-        "tripBookings": "Trip bookings",
-        "tripBookingsDescription": "Distribution of the number of bookings over a year"
+        "trips": "Trips",
+        "tripsDescription": "Number of trips per month"
       }
     }
   }

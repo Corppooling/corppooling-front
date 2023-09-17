@@ -105,7 +105,7 @@ const setTripsMembersData = async (): Promise<ChartData> => {
     labels: tripsMembersData.map((item) => item.month),
     datasets: [
       {
-        label: t('account.myManagement.statistics.bookingsNumber'),
+        label: t('account.myManagement.statistics.tripsNumber'),
         data: tripsMembersData.map((item) => item.members),
         fill: false,
         borderWidth: 2,
@@ -139,7 +139,24 @@ const pieChartOptions = ref<ChartOptions>({
   },
 });
 
-const lineChartOptions = ref<ChartOptions>({});
+const lineChartOptions = ref<ChartOptions>({
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        usePointStyle: true,
+      },
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        stepSize: 1,
+      },
+    },
+  },
+});
 </script>
 
 <template>
@@ -171,11 +188,16 @@ const lineChartOptions = ref<ChartOptions>({});
     <div class="w-full 2xl:w-1/3">
       <h3 class="text-lg">{{ t('account.myManagement.statistics.tripTypes') }}</h3>
       <p class="mb-2 text-sm">{{ t('account.myManagement.statistics.tripTypesDescription') }}</p>
-      <Chart type="pie" :data="tripsTypesData" class="h-72 w-full" :options="pieChartOptions" />
+      <Chart
+        type="pie"
+        :data="tripsTypesData"
+        class="h-72 w-full overflow-hidden"
+        :options="pieChartOptions"
+      />
     </div>
     <div class="w-full 2xl:w-1/3">
-      <h3 class="text-lg">{{ t('account.myManagement.statistics.tripBookings') }}</h3>
-      <p class="mb-2 text-sm">{{ t('account.myManagement.statistics.tripBookingsDescription') }}</p>
+      <h3 class="text-lg">{{ t('account.myManagement.statistics.trips') }}</h3>
+      <p class="mb-2 text-sm">{{ t('account.myManagement.statistics.tripsDescription') }}</p>
       <Chart type="line" :data="tripsMembersData" class="h-72 w-full" :options="lineChartOptions" />
     </div>
   </div>
